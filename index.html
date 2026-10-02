@@ -58,6 +58,20 @@
         radial-gradient(ellipse at 15% 20%, rgba(127,182,133,.28), transparent 45%),
         radial-gradient(ellipse at 85% 80%, rgba(232,164,156,.28), transparent 45%);
     }
+    .polaroid {
+      position: relative; display: inline-block; background: #fff;
+      padding: 12px 12px 6px; margin-bottom: 26px;
+      box-shadow: 0 18px 34px -18px rgba(0,0,0,.45);
+      transform: rotate(-4deg); transition: transform .4s;
+    }
+    .polaroid:hover { transform: rotate(0) scale(1.04); }
+    .polaroid img { display: block; width: clamp(170px, 24vw, 230px); height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+    .polaroid figcaption { font-family: "Caveat", cursive; font-size: 1.6rem; color: var(--ink); padding-top: 4px; }
+    .polaroid::before {
+      content: ""; position: absolute; top: -12px; left: 50%; width: 96px; height: 26px;
+      transform: translateX(-50%) rotate(3deg); background: rgba(127,182,133,.65);
+    }
+    .polaroid .sprout { position: absolute; font-size: 2.2rem; right: -22px; bottom: 26px; transform: rotate(14deg); }
     .hero .kicker { font-size: 1.9rem; color: var(--terracotta); }
     .hero h1 {
       font-size: clamp(3rem, 11vw, 7.5rem); font-weight: 800;
@@ -192,6 +206,12 @@
   <!-- Portada -->
   <header class="hero">
     <div>
+      <figure class="polaroid">
+        <img src="img/angela.jpg" alt="Ángela" width="800" height="1000">
+        <figcaption>La cumpleañera 🌿</figcaption>
+        <span class="sprout" aria-hidden="true">🪴</span>
+      </figure>
+      <br>
       <span class="kicker hand">Hoy es un día muy especial…</span>
       <h1>¡Feliz cumpleaños, <em>Ángela!</em></h1>
       <p>Que este nuevo año crezca como tus plantas y esté tan lleno de buenas historias como tus estanterías. 🌱📚</p>
