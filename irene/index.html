@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Casa nueva, Irene!</title>
+  <meta name="description" content="Una pequeña web para felicitar a Irene por su piso nuevo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,600&family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+  <style>
+    :root {
+      --cream: #fbf4ec;
+      --paper: #fffaf4;
+      --ink: #33261f;
+      --muted: #7b6a5e;
+      --clay: #c0623b;
+      --clay-dark: #8f4126;
+      --sky: #4a7fc1;
+      --sky-light: #cfe0f3;
+      --olive: #7c8f4e;
+      --sand: #e9d3b8;
+      --line: #eadccb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Nunito", system-ui, sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.1; letter-spacing: -0.01em; }
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    .hand { font-family: "Caveat", cursive; }
+
+    /* ---------- Portada ---------- */
+    .hero {
+      position: relative; min-height: 100vh; min-height: 100svh;
+      display: grid; place-items: center; text-align: center; padding: 70px 20px;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(74,127,193,.22), transparent 45%),
+        radial-gradient(ellipse at 85% 85%, rgba(192,98,59,.22), transparent 45%);
+    }
+    .polaroid {
+      position: relative; display: inline-block; background: #fff; padding: 12px 12px 6px; margin-bottom: 24px;
+      box-shadow: 0 18px 34px -18px rgba(51,38,31,.55); transform: rotate(-3deg); transition: transform .4s;
+    }
+    .polaroid:hover { transform: rotate(0) scale(1.04); }
+    .polaroid img { display: block; width: clamp(170px, 23vw, 230px); height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+    .polaroid figcaption { font-family: "Caveat", cursive; font-size: 1.6rem; padding-top: 4px; }
+    .polaroid::before {
+      content: ""; position: absolute; top: -12px; left: 50%; width: 96px; height: 26px;
+      transform: translateX(-50%) rotate(2deg); background: rgba(74,127,193,.5);
+    }
+    .polaroid .deco { position: absolute; font-size: 2.3rem; right: -26px; bottom: 30px; transform: rotate(10deg); }
+    .hero .kicker { font-size: 1.9rem; color: var(--clay); }
+    .hero h1 { font-size: clamp(2.8rem, 9vw, 6.4rem); font-weight: 800; color: var(--clay-dark); margin: 4px 0; }
+    .hero h1 em { font-style: italic; font-weight: 600; color: var(--sky); display: block; }
+    .hero p { font-size: clamp(1.08rem, 2.3vw, 1.3rem); color: var(--muted); max-width: 560px; margin: 20px auto 30px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; font: 700 1.05rem "Nunito", sans-serif;
+      background: var(--clay); color: #fff; border: 0; cursor: pointer; padding: 16px 30px; border-radius: 999px;
+      text-decoration: none; box-shadow: 0 10px 24px -12px rgba(143,65,38,.8); transition: transform .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px) scale(1.03); background: var(--clay-dark); }
+    .btn:active { transform: scale(.97); }
+    .btn.sky { background: var(--sky); box-shadow: 0 10px 24px -12px rgba(74,127,193,.8); }
+    .btn.sky:hover { background: #335f97; }
+
+    section { padding: 90px 0; }
+    section.alt { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .section-title { text-align: center; margin-bottom: 44px; }
+    .section-title .hand { font-size: 1.7rem; color: var(--clay); }
+    .section-title h2 { font-size: clamp(2.2rem, 5vw, 3.3rem); color: var(--clay-dark); }
+    .section-title p { color: var(--muted); max-width: 520px; margin: 10px auto 0; }
+    .two-col { display: grid; grid-template-columns: 1.1fr 1fr; gap: 44px; align-items: center; }
+
+    /* ---------- Casa ---------- */
+    .house { max-width: 440px; width: 100%; margin: 0 auto; }
+    .house svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .part { opacity: 0; transform: translateY(-50px); transition: opacity .5s, transform .7s cubic-bezier(.3,1.5,.5,1); }
+    .part.built { opacity: 1; transform: none; }
+    .window-light { transition: fill .8s; }
+    .lights-on .window-light { fill: #ffd77a; }
+    .smoke circle { opacity: 0; }
+    .part.built .smoke circle { animation: smoke 3s ease-out infinite; }
+    .part.built .smoke circle:nth-child(2) { animation-delay: 1s; }
+    .part.built .smoke circle:nth-child(3) { animation-delay: 2s; }
+    @keyframes smoke { 0% { opacity: .7; transform: translate(0, 0) scale(.6); } 100% { opacity: 0; transform: translate(18px, -50px) scale(1.6); } }
+    .build-info small { display: block; text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 700; color: var(--sky); }
+    .build-info h3 { font-size: 2rem; color: var(--clay-dark); margin: 4px 0 8px; }
+    .build-info p { color: var(--muted); min-height: 3.2em; }
+    .bar { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 18px 0 24px; }
+    .bar div { height: 100%; width: 0; background: linear-gradient(90deg, var(--sky), var(--clay)); transition: width .6s; }
+
+    /* ---------- Cerámica ---------- */
+    .studio { text-align: center; }
+    .wheel { max-width: 300px; width: 100%; margin: 0 auto; }
+    .wheel svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .spin { animation: spin 1.2s linear infinite; }
+    @keyframes spin { from { transform: translateX(-40px); } to { transform: translateX(40px); } }
+    #piece { transition: filter .4s; }
+    #piece.baking { animation: bake 1.4s ease-in-out; }
+    @keyframes bake { 50% { filter: brightness(1.5) sepia(1) saturate(4) hue-rotate(-20deg) drop-shadow(0 0 14px #ff8a3d); } }
+    .controls { text-align: left; }
+    .controls h4 { font: 700 .8rem "Nunito", sans-serif; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 0 0 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+    .chip {
+      border: 2px solid var(--line); background: var(--paper); border-radius: 999px; padding: 8px 16px; cursor: pointer;
+      font: 600 .95rem "Nunito", sans-serif; color: var(--ink); transition: border-color .2s, transform .2s;
+    }
+    .chip:hover { transform: translateY(-2px); }
+    .chip.on { border-color: var(--clay); background: #fbe7dc; }
+    .swatch { width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--line); cursor: pointer; transition: transform .2s, box-shadow .2s; }
+    .swatch:hover { transform: scale(1.1); }
+    .swatch.on { box-shadow: 0 0 0 3px var(--clay); }
+    .shelf-wrap { margin-top: 50px; }
+    .shelf { display: flex; justify-content: center; align-items: flex-end; gap: 6px; min-height: 90px; flex-wrap: wrap; padding: 0 10px; }
+    .shelf svg { width: 76px; height: 76px; animation: place .6s cubic-bezier(.3,1.7,.5,1); }
+    @keyframes place { from { transform: translateY(-40px) scale(.4); opacity: 0; } }
+    .board { height: 16px; background: #a8754d; border-radius: 4px; max-width: 560px; margin: 0 auto; box-shadow: 0 10px 18px -10px rgba(0,0,0,.45); }
+    .shelf-msg { color: var(--muted); margin-top: 14px; font-size: .95rem; }
+
+    /* ---------- Nota ---------- */
+    .note {
+      max-width: 620px; margin: 0 auto; background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+      padding: 46px 44px 38px; box-shadow: 0 30px 50px -35px rgba(51,38,31,.5); transform: rotate(-.6deg); position: relative;
+    }
+    .note::before { content: "🔑"; position: absolute; top: -26px; left: 50%; transform: translateX(-50%); font-size: 2.6rem; }
+    .note p { font-size: 1.12rem; margin-bottom: 16px; }
+    .note .hand { font-size: 2rem; color: var(--clay); line-height: 1.2; }
+    .note .sign { text-align: right; margin: 24px 0 0; }
+    footer { text-align: center; color: var(--muted); padding: 30px 20px 46px; font-size: .95rem; }
+    footer a { color: var(--clay-dark); }
+
+    .burst { position: fixed; pointer-events: none; z-index: 100; font-size: 26px; }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s, transform .8s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 800px) {
+      section { padding: 66px 0; }
+      .two-col { grid-template-columns: 1fr; gap: 36px; }
+      .build-info, .controls { text-align: center; }
+      .chips { justify-content: center; }
+      .note { padding: 42px 24px 32px; }
+      .polaroid .deco { right: -10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+      * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Portada -->
+  <header class="hero">
+    <div>
+      <figure class="polaroid">
+        <img src="img/irene.jpg" alt="Irene sonriendo en el campo" width="800" height="1000">
+        <figcaption>La nueva propietaria 🔑</figcaption>
+        <span class="deco" aria-hidden="true">🏡</span>
+      </figure>
+      <br>
+      <span class="kicker hand">¡Tenemos noticia!</span>
+      <h1>¡Enhorabuena por tu casa, <em>Irene!</em></h1>
+      <p>Por fin tienes un rincón que es solo tuyo. Que sea un hogar lleno de luz, de buenos momentos y de muchas piezas de cerámica hechas por ti.</p>
+      <a href="#casa" class="btn" id="start">🏡 Construir tu casa</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Casa -->
+    <section class="alt" id="casa">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="hand">Ladrillo a ladrillo</span>
+          <h2>Construye tu casa</h2>
+          <p>Pulsa el botón y ve levantando tu hogar, desde los cimientos hasta las llaves.</p>
+        </div>
+        <div class="two-col reveal">
+          <div class="house" id="house">
+            <svg viewBox="0 0 400 360" role="img" aria-label="Casa que se va construyendo">
+              <!-- suelo -->
+              <ellipse cx="200" cy="330" rx="190" ry="22" fill="#b9c98f"/>
+              <!-- 1 cimientos -->
+              <g class="part" data-step="1"><rect x="80" y="300" width="240" height="22" rx="4" fill="#9a8c80"/></g>
+              <!-- 2 paredes -->
+              <g class="part" data-step="2">
+                <rect x="92" y="170" width="216" height="132" fill="#f4e6d4"/>
+                <path d="M92 210 H308 M92 250 H308" stroke="#ead6bd" stroke-width="2"/>
+              </g>
+              <!-- 3 tejado -->
+              <g class="part" data-step="3">
+                <path d="M70 176 L200 78 L330 176 Z" fill="#c0623b"/>
+                <path d="M100 154 H300 M126 134 H274 M152 114 H248" stroke="#a9512e" stroke-width="3"/>
+              </g>
+              <!-- 4 puerta -->
+              <g class="part" data-step="4">
+                <rect x="178" y="226" width="48" height="76" rx="24" ry="24" fill="#4a7fc1"/>
+                <rect x="178" y="250" width="48" height="52" fill="#4a7fc1"/>
+                <circle cx="216" cy="268" r="3.5" fill="#f3c969"/>
+              </g>
+              <!-- 5 ventanas -->
+              <g class="part" data-step="5">
+                <rect x="112" y="200" width="46" height="46" rx="4" fill="#fff" />
+                <rect x="116" y="204" width="38" height="38" fill="#cfe0f3" class="window-light"/>
+                <path d="M135 204 V242 M116 223 H154" stroke="#fff" stroke-width="3"/>
+                <rect x="246" y="200" width="46" height="46" rx="4" fill="#fff"/>
+                <rect x="250" y="204" width="38" height="38" fill="#cfe0f3" class="window-light"/>
+                <path d="M269 204 V242 M250 223 H288" stroke="#fff" stroke-width="3"/>
+                <circle cx="200" cy="140" r="14" fill="#fff"/>
+                <circle cx="200" cy="140" r="10" fill="#cfe0f3" class="window-light"/>
+              </g>
+              <!-- 6 chimenea -->
+              <g class="part" data-step="6">
+                <rect x="252" y="92" width="26" height="50" fill="#8f4126"/>
+                <rect x="248" y="86" width="34" height="10" fill="#7a3720"/>
+                <g class="smoke"><circle cx="265" cy="78" r="8" fill="#e9e2da"/><circle cx="265" cy="78" r="8" fill="#e9e2da"/><circle cx="265" cy="78" r="8" fill="#e9e2da"/></g>
+              </g>
+              <!-- 7 plantas -->
+              <g class="part" data-step="7">
+                <rect x="108" y="246" width="54" height="12" rx="3" fill="#c0623b"/>
+                <rect x="242" y="246" width="54" height="12" rx="3" fill="#c0623b"/>
+                <text x="135" y="246" text-anchor="middle" font-size="22">🌿🌸</text>
+                <text x="269" y="246" text-anchor="middle" font-size="22">🌼🌿</text>
+                <text x="152" y="306" text-anchor="middle" font-size="34">🪴</text>
+                <text x="252" y="306" text-anchor="middle" font-size="34">🪴</text>
+              </g>
+              <!-- 8 llaves y bienvenida -->
+              <g class="part" data-step="8">
+                <rect x="170" y="304" width="64" height="12" rx="3" fill="#d9a066"/>
+                <text x="202" y="314" text-anchor="middle" font-family="Caveat, cursive" font-size="12" fill="#6b3b1f">¡Hola!</text>
+                <text x="330" y="70" text-anchor="middle" font-size="40">🔑</text>
+                <text x="70" y="70" text-anchor="middle" font-size="34">☀️</text>
+              </g>
+            </svg>
+          </div>
+          <div class="build-info" aria-live="polite">
+            <small id="stepLabel">Paso 0 de 8</small>
+            <h3 id="stepTitle">Un solar con muchas ganas</h3>
+            <p id="stepText">Aquí va a estar tu casa. ¿Empezamos?</p>
+            <div class="bar" aria-hidden="true"><div id="buildBar"></div></div>
+            <button class="btn sky" id="build">🧱 Construir</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cerámica -->
+    <section class="studio" id="ceramica">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="hand">Hecho a mano, como a ti te gusta</span>
+          <h2>Taller de cerámica</h2>
+          <p>Elige forma y esmalte, métela al horno y llena la estantería de tu casa nueva.</p>
+        </div>
+        <div class="two-col reveal">
+          <div class="wheel">
+            <svg viewBox="0 0 200 220" role="img" aria-label="Torno de cerámica con la pieza">
+              <ellipse cx="100" cy="196" rx="86" ry="16" fill="#7b6a5e"/>
+              <ellipse cx="100" cy="186" rx="80" ry="14" fill="#a89588"/>
+              <ellipse cx="100" cy="176" rx="70" ry="10" fill="#c9b8aa"/>
+              <g id="piece"></g>
+            </svg>
+          </div>
+          <div class="controls">
+            <h4>Forma</h4>
+            <div class="chips" id="shapes"></div>
+            <h4>Esmalte</h4>
+            <div class="chips" id="glazes"></div>
+            <button class="btn" id="bake">🔥 Al horno</button>
+          </div>
+        </div>
+        <div class="shelf-wrap reveal">
+          <div class="shelf" id="shelf"></div>
+          <div class="board"></div>
+          <p class="shelf-msg" id="shelfMsg">Tu estantería está vacía… ¡a por la primera pieza!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nota -->
+    <section class="alt">
+      <div class="container">
+        <article class="note reveal">
+          <p class="hand">Querida Irene:</p>
+          <p>¡Enhorabuena por tu piso! Sabemos lo que cuesta llegar hasta aquí, así que disfrútalo muchísimo.</p>
+          <p>Que tu casa nueva se llene de luz, de cenas con amigos, de tardes tranquilas y de un montón de tazas, cuencos y jarrones hechos con tus manos.</p>
+          <p>Y ya sabes: cuando quieras, nos invitas a estrenarla. 😉</p>
+          <p class="sign hand">Con mucho cariño 🏡</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hecho con cariño y un poco de barro para Irene. · <a href="../">Volver al índice</a></footer>
+
+  <script>
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---------- Explosión ---------- */
+    function burst(x, y, items = ["🏡", "🔑", "🎉", "🏺", "✨", "🌿"], count = 32) {
+      if (reduceMotion) return;
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("span");
+        el.className = "burst";
+        el.textContent = items[Math.floor(Math.random() * items.length)];
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+        document.body.appendChild(el);
+        const a = Math.random() * Math.PI * 2, d = 110 + Math.random() * 200;
+        const dx = Math.cos(a) * d, dy = Math.sin(a) * d - 110;
+        el.animate([
+          { transform: "translate(-50%, -50%) scale(.4)", opacity: 1 },
+          { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(1.1) rotate(${Math.random() * 360}deg)`, opacity: 1, offset: .6 },
+          { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy + 170}px)) scale(.9) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+        ], { duration: 1600 + Math.random() * 900, easing: "cubic-bezier(.2,.7,.4,1)" }).onfinish = () => el.remove();
+      }
+    }
+    const burstFrom = (el, items, n) => { const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, items, n); };
+    window.addEventListener("load", () => setTimeout(() => burst(innerWidth / 2, innerHeight / 2.4), 500));
+
+    /* ---------- Construye tu casa ---------- */
+    const steps = [
+      ["Los cimientos", "Toda buena casa empieza por una base firme. Como tú."],
+      ["Las paredes", "Ya empieza a tener forma… ¡y qué bonita!"],
+      ["El tejado", "Tejas de terracota, que combinan con tu cerámica."],
+      ["La puerta", "Azul, como el cielo de tu foto. Por aquí entrarán tus amigos."],
+      ["Las ventanas", "Para que entre mucha luz (y para cotillear un poquito)."],
+      ["La chimenea", "Para las tardes de invierno con manta y algo calentito."],
+      ["Las plantas", "Ninguna casa es un hogar sin un poco de verde."],
+      ["¡Las llaves!", "Ya es oficial: bienvenida a tu casa, Irene. 🔑"],
+    ];
+    const parts = [...document.querySelectorAll(".part")];
+    const house = document.getElementById("house");
+    const buildBtn = document.getElementById("build");
+    let built = 0;
+    buildBtn.addEventListener("click", () => {
+      if (built >= steps.length) {
+        burstFrom(house, ["🏡", "🔑", "💛", "✨"], 18);
+        return;
+      }
+      built++;
+      parts.filter((p) => +p.dataset.step === built).forEach((p) => p.classList.add("built"));
+      document.getElementById("stepLabel").textContent = `Paso ${built} de ${steps.length}`;
+      document.getElementById("stepTitle").textContent = steps[built - 1][0];
+      document.getElementById("stepText").textContent = steps[built - 1][1];
+      document.getElementById("buildBar").style.width = (built / steps.length) * 100 + "%";
+      if (built === steps.length) {
+        house.classList.add("lights-on");
+        buildBtn.textContent = "🎉 ¡Hogar, dulce hogar!";
+        burstFrom(house);
+      } else {
+        burstFrom(house, ["🧱", "🔨", "✨"], 10);
+      }
+    });
+
+    /* ---------- Taller de cerámica ---------- */
+    const shapes = {
+      Taza: {
+        body: "M62 96 H138 L132 160 Q130 172 118 172 H82 Q70 172 68 160 Z",
+        extra: (c) => `<path d="M136 108 C 164 108 164 150 132 150" stroke="${c}" stroke-width="10" fill="none" stroke-linecap="round"/>`,
+        rim: [100, 96, 38, 7],
+      },
+      Cuenco: { body: "M40 118 H160 Q154 172 100 172 Q46 172 40 118 Z", rim: [100, 118, 60, 10] },
+      Jarrón: { body: "M84 58 H116 L113 72 Q152 100 142 140 Q136 172 100 172 Q64 172 58 140 Q48 100 87 72 Z", rim: [100, 58, 16, 4] },
+      Maceta: {
+        body: "M60 100 H140 L130 172 H70 Z",
+        extra: (c) => `<rect x="54" y="90" width="92" height="16" rx="3" fill="${c}" stroke="rgba(0,0,0,.15)" stroke-width="2"/>
+          <path d="M100 90 C 96 70 80 62 70 60 C 80 76 90 84 100 90 Z M100 90 C 104 66 120 56 134 54 C 124 72 112 84 100 90 Z M100 90 V 70" fill="#7c8f4e" stroke="#5f7038" stroke-width="2"/>`,
+        rim: null,
+      },
+    };
+    const glazes = [
+      ["Barro", "#c99a74"],
+      ["Terracota", "#c0623b"],
+      ["Azul cielo", "#4a7fc1"],
+      ["Salvia", "#8fa36a"],
+      ["Crema", "#efe3cf"],
+      ["Mostaza", "#d9a63a"],
+    ];
+    let shape = "Taza", glaze = glazes[2][1];
+    const piece = document.getElementById("piece");
+    function pieceSVG(name, color, spinning) {
+      const s = shapes[name];
+      const rim = s.rim ? `<ellipse cx="${s.rim[0]}" cy="${s.rim[1]}" rx="${s.rim[2]}" ry="${s.rim[3]}" fill="rgba(0,0,0,.28)"/>` : "";
+      const shine = `<g clip-path="url(#clip-${name})"><rect class="${spinning ? "spin" : ""}" x="78" y="40" width="14" height="140" fill="rgba(255,255,255,.28)" rx="7"/></g>`;
+      return `<clipPath id="clip-${name}"><path d="${s.body}"/></clipPath>
+        ${s.extra ? s.extra(color) : ""}
+        <path d="${s.body}" fill="${color}"/>
+        <path d="${s.body}" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
+        ${spinning ? shine : `<rect x="72" y="90" width="10" height="60" rx="5" fill="rgba(255,255,255,.3)"/>`}
+        ${rim}`;
+    }
+    const render = () => (piece.innerHTML = pieceSVG(shape, glaze, true));
+    const shapesEl = document.getElementById("shapes");
+    Object.keys(shapes).forEach((name) => {
+      const b = document.createElement("button");
+      b.className = "chip" + (name === shape ? " on" : "");
+      b.textContent = name;
+      b.addEventListener("click", () => {
+        shape = name;
+        shapesEl.querySelectorAll(".chip").forEach((c) => c.classList.toggle("on", c === b));
+        render();
+      });
+      shapesEl.appendChild(b);
+    });
+    const glazesEl = document.getElementById("glazes");
+    glazes.forEach(([label, color]) => {
+      const b = document.createElement("button");
+      b.className = "swatch" + (color === glaze ? " on" : "");
+      b.style.background = color;
+      b.title = label;
+      b.setAttribute("aria-label", `Esmalte ${label}`);
+      b.addEventListener("click", () => {
+        glaze = color;
+        glazesEl.querySelectorAll(".swatch").forEach((c) => c.classList.toggle("on", c === b));
+        render();
+      });
+      glazesEl.appendChild(b);
+    });
+    render();
+
+    const shelf = document.getElementById("shelf");
+    const shelfMsg = document.getElementById("shelfMsg");
+    const bakeBtn = document.getElementById("bake");
+    const maxPieces = 6;
+    let made = 0;
+    bakeBtn.addEventListener("click", () => {
+      if (bakeBtn.disabled) return;
+      bakeBtn.disabled = true;
+      piece.classList.remove("baking"); void piece.getBBox(); piece.classList.add("baking");
+      setTimeout(() => {
+        piece.classList.remove("baking");
+        bakeBtn.disabled = false;
+        if (made >= maxPieces) shelf.firstElementChild.remove();
+        const mini = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        mini.setAttribute("viewBox", "30 40 140 140");
+        mini.innerHTML = pieceSVG(shape, glaze, false).replaceAll(`clip-${shape}`, `clip-${shape}-${made}`);
+        shelf.appendChild(mini);
+        made++;
+        burstFrom(mini, ["✨", "🏺", "🔥"], 12);
+        shelfMsg.textContent = made === 1
+          ? "¡Primera pieza! Queda preciosa en tu salón."
+          : made < maxPieces
+            ? `${made} piezas hechas a mano para tu casa nueva.`
+            : "¡Estantería llena! Tu casa ya tiene tu toque 🏺💛";
+      }, 1400);
+    });
+
+    /* ---------- Aparición al hacer scroll ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
