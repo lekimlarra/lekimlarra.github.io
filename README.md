@@ -1,8 +1,9 @@
-# Outstand Design
+# ¡Feliz cumpleaños, Ángela! 🌿📚
 
-Web estática del estudio **Outstand Design** (HTML + CSS + JS, sin dependencias).
+Web de felicitación con temática de libros y plantas, publicada en https://lekimlarra.github.io/
 
-- `index.html` — home principal con los seis servicios.
-- `servicios/*.html` — una página por servicio, todas con la misma estructura: cabecera, subservicios, preguntas frecuentes, llamada a la acción y navegación anterior/siguiente.
-  - `branding.html`, `diseno-web.html`, `ux-ui.html`, `grafico.html`, `marketing.html`, `audiovisual.html`
-- `assets/styles.css` y `assets/main.js` — estilos y scripts compartidos.
+Todo está en `index.html` (HTML, CSS y JS sin dependencias):
+- Portada con hojas cayendo.
+- Una planta que crece al regarla y acaba floreciendo.
+- Una estantería de libros con un deseo dentro de cada uno.
+- Una carta y un botón para soplar las velas.
