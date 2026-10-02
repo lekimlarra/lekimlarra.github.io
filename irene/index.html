@@ -92,11 +92,10 @@
 
     /* ---------- Cerámica ---------- */
     .studio { text-align: center; }
-    .wheel { max-width: 300px; width: 100%; margin: 0 auto; }
+    .wheel { max-width: 340px; width: 100%; margin: 0 auto; touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+    .wheel.dragging { cursor: grabbing; }
     .wheel svg { width: 100%; height: auto; display: block; overflow: visible; }
-    .spin { animation: spin 1.2s linear infinite; }
-    @keyframes spin { from { transform: translateX(-40px); } to { transform: translateX(40px); } }
-    #piece { transition: filter .4s; }
+    .wheel-hint { color: var(--muted); font-size: .95rem; margin-top: 6px; }
     #piece.baking { animation: bake 1.4s ease-in-out; }
     @keyframes bake { 50% { filter: brightness(1.5) sepia(1) saturate(4) hue-rotate(-20deg) drop-shadow(0 0 14px #ff8a3d); } }
     .controls { text-align: left; }
@@ -108,12 +107,20 @@
     }
     .chip:hover { transform: translateY(-2px); }
     .chip.on { border-color: var(--clay); background: #fbe7dc; }
-    .swatch { width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--line); cursor: pointer; transition: transform .2s, box-shadow .2s; }
-    .swatch:hover { transform: scale(1.1); }
+    .swatch { width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--line); cursor: pointer; transition: transform .2s, box-shadow .2s, opacity .2s; }
+    .swatch:hover:not(:disabled) { transform: scale(1.1); }
     .swatch.on { box-shadow: 0 0 0 3px var(--clay); }
+    .swatch:disabled, .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .shape-bar { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 4px 0 8px; }
+    .shape-bar div { height: 100%; width: 0; background: linear-gradient(90deg, #b9876a, var(--clay)); }
+    .status { font-family: "Caveat", cursive; font-size: 1.7rem; line-height: 1.2; color: var(--clay); min-height: 2.4em; margin-bottom: 14px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .pedal { touch-action: none; user-select: none; -webkit-user-select: none; background: #7b6a5e; box-shadow: 0 10px 24px -12px rgba(51,38,31,.8); }
+    .pedal:hover { background: #5f5148; }
+    .pedal.held { transform: scale(.96); background: #5f5148; }
     .shelf-wrap { margin-top: 50px; }
     .shelf { display: flex; justify-content: center; align-items: flex-end; gap: 6px; min-height: 90px; flex-wrap: wrap; padding: 0 10px; }
-    .shelf svg { width: 76px; height: 76px; animation: place .6s cubic-bezier(.3,1.7,.5,1); }
+    .shelf svg { width: 76px; height: 86px; animation: place .6s cubic-bezier(.3,1.7,.5,1); }
     @keyframes place { from { transform: translateY(-40px) scale(.4); opacity: 0; } }
     .board { height: 16px; background: #a8754d; border-radius: 4px; max-width: 560px; margin: 0 auto; box-shadow: 0 10px 18px -10px rgba(0,0,0,.45); }
     .shelf-msg { color: var(--muted); margin-top: 14px; font-size: .95rem; }
@@ -139,6 +146,7 @@
       .two-col { grid-template-columns: 1fr; gap: 36px; }
       .build-info, .controls { text-align: center; }
       .chips { justify-content: center; }
+      .actions { justify-content: center; }
       .note { padding: 42px 24px 32px; }
       .polaroid .deco { right: -10px; }
     }
@@ -249,23 +257,35 @@
         <div class="section-title reveal">
           <span class="hand">Hecho a mano, como a ti te gusta</span>
           <h2>Taller de cerámica</h2>
-          <p>Elige forma y esmalte, métela al horno y llena la estantería de tu casa nueva.</p>
+          <p>Elige qué quieres hacer, gira el torno para darle forma al barro, esmáltalo y al horno.</p>
         </div>
         <div class="two-col reveal">
-          <div class="wheel">
-            <svg viewBox="0 0 200 220" role="img" aria-label="Torno de cerámica con la pieza">
-              <ellipse cx="100" cy="196" rx="86" ry="16" fill="#7b6a5e"/>
-              <ellipse cx="100" cy="186" rx="80" ry="14" fill="#a89588"/>
-              <ellipse cx="100" cy="176" rx="70" ry="10" fill="#c9b8aa"/>
-              <g id="piece"></g>
-            </svg>
+          <div>
+            <div class="wheel" id="wheel">
+              <svg viewBox="0 44 200 176" role="img" aria-label="Torno de cerámica: arrastra en círculos para girarlo">
+                <ellipse cx="100" cy="200" rx="90" ry="16" fill="#6b5b50"/>
+                <rect x="10" y="186" width="180" height="14" fill="#6b5b50"/>
+                <ellipse cx="100" cy="186" rx="90" ry="16" fill="#8f7d70"/>
+                <ellipse cx="100" cy="180" rx="74" ry="12" fill="#a89588"/>
+                <ellipse cx="100" cy="176" rx="74" ry="12" fill="#c9b8aa"/>
+                <g id="marks"></g>
+                <g id="piece"></g>
+              </svg>
+            </div>
+            <p class="wheel-hint">👆 Arrastra en círculos sobre el torno (o mantén el pedal)</p>
           </div>
           <div class="controls">
-            <h4>Forma</h4>
+            <h4>1 · ¿Qué hacemos?</h4>
             <div class="chips" id="shapes"></div>
-            <h4>Esmalte</h4>
+            <h4>2 · Dale forma</h4>
+            <div class="shape-bar" aria-hidden="true"><div id="shapeBar"></div></div>
+            <div class="status" id="status" aria-live="polite">Una bola de barro esperando…</div>
+            <h4>3 · Esmalte</h4>
             <div class="chips" id="glazes"></div>
-            <button class="btn" id="bake">🔥 Al horno</button>
+            <div class="actions">
+              <button class="btn pedal" id="pedal">🦶 Pedal (mantén)</button>
+              <button class="btn" id="bake" disabled>🔥 Al horno</button>
+            </div>
           </div>
         </div>
         <div class="shelf-wrap reveal">
@@ -352,88 +372,225 @@
       }
     });
 
-    /* ---------- Taller de cerámica ---------- */
-    const shapes = {
-      Taza: {
-        body: "M62 96 H138 L132 160 Q130 172 118 172 H82 Q70 172 68 160 Z",
-        extra: (c) => `<path d="M136 108 C 164 108 164 150 132 150" stroke="${c}" stroke-width="10" fill="none" stroke-linecap="round"/>`,
-        rim: [100, 96, 38, 7],
-      },
-      Cuenco: { body: "M40 118 H160 Q154 172 100 172 Q46 172 40 118 Z", rim: [100, 118, 60, 10] },
-      Jarrón: { body: "M84 58 H116 L113 72 Q152 100 142 140 Q136 172 100 172 Q64 172 58 140 Q48 100 87 72 Z", rim: [100, 58, 16, 4] },
-      Maceta: {
-        body: "M60 100 H140 L130 172 H70 Z",
-        extra: (c) => `<rect x="54" y="90" width="92" height="16" rx="3" fill="${c}" stroke="rgba(0,0,0,.15)" stroke-width="2"/>
-          <path d="M100 90 C 96 70 80 62 70 60 C 80 76 90 84 100 90 Z M100 90 C 104 66 120 56 134 54 C 124 72 112 84 100 90 Z M100 90 V 70" fill="#7c8f4e" stroke="#5f7038" stroke-width="2"/>`,
-        rim: null,
-      },
+    /* ---------- Taller de cerámica (torno) ---------- */
+    // Cada forma es un perfil: puntos [altura 0..1, radio] y una altura total.
+    const LUMP = { h: 46, pts: [[0, 24], [0.3, 36], [0.7, 31], [1, 8]] };
+    const SHAPES = {
+      Taza:   { h: 76,  pts: [[0, 27], [0.07, 31], [1, 37]], handle: true },
+      Cuenco: { h: 52,  pts: [[0, 22], [0.35, 46], [1, 60]] },
+      Jarrón: { h: 116, pts: [[0, 22], [0.35, 42], [0.8, 13], [1, 18]] },
+      Maceta: { h: 74,  pts: [[0, 30], [0.8, 40], [0.83, 46], [1, 46]] },
     };
-    const glazes = [
-      ["Barro", "#c99a74"],
-      ["Terracota", "#c0623b"],
-      ["Azul cielo", "#4a7fc1"],
-      ["Salvia", "#8fa36a"],
-      ["Crema", "#efe3cf"],
-      ["Mostaza", "#d9a63a"],
+    const GLAZES = [
+      ["Terracota", "#c0623b"], ["Azul cielo", "#4a7fc1"], ["Salvia", "#8fa36a"],
+      ["Crema", "#efe3cf"], ["Mostaza", "#d9a63a"], ["Barro natural", "#c99a74"],
     ];
-    let shape = "Taza", glaze = glazes[2][1];
-    const piece = document.getElementById("piece");
-    function pieceSVG(name, color, spinning) {
-      const s = shapes[name];
-      const rim = s.rim ? `<ellipse cx="${s.rim[0]}" cy="${s.rim[1]}" rx="${s.rim[2]}" ry="${s.rim[3]}" fill="rgba(0,0,0,.28)"/>` : "";
-      const shine = `<g clip-path="url(#clip-${name})"><rect class="${spinning ? "spin" : ""}" x="78" y="40" width="14" height="140" fill="rgba(255,255,255,.28)" rx="7"/></g>`;
-      return `<clipPath id="clip-${name}"><path d="${s.body}"/></clipPath>
-        ${s.extra ? s.extra(color) : ""}
-        <path d="${s.body}" fill="${color}"/>
-        <path d="${s.body}" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="2"/>
-        ${spinning ? shine : `<rect x="72" y="90" width="10" height="60" rx="5" fill="rgba(255,255,255,.3)"/>`}
-        ${rim}`;
+    const RAW = "#b9876a", BASE_Y = 174, CX = 100;
+    const smooth = (x) => x * x * (3 - 2 * x);
+    function radiusAt(profile, t) {
+      const p = profile.pts;
+      if (t <= p[0][0]) return p[0][1];
+      for (let i = 1; i < p.length; i++) {
+        if (t <= p[i][0]) {
+          const k = (t - p[i - 1][0]) / (p[i][0] - p[i - 1][0]);
+          return p[i - 1][1] + (p[i][1] - p[i - 1][1]) * smooth(k);
+        }
+      }
+      return p[p.length - 1][1];
     }
-    const render = () => (piece.innerHTML = pieceSVG(shape, glaze, true));
+    // Perfil intermedio entre la bola de barro y la forma final (p = 0..1)
+    function outline(name, p) {
+      const target = SHAPES[name];
+      const e = smooth(Math.min(1, p));
+      const h = LUMP.h + (target.h - LUMP.h) * e;
+      const left = [], right = [];
+      const N = 28;
+      for (let i = 0; i <= N; i++) {
+        const t = i / N;
+        const r = radiusAt(LUMP, t) + (radiusAt(target, t) - radiusAt(LUMP, t)) * e;
+        const y = BASE_Y - t * h;
+        left.push([CX - r, y]);
+        right.push([CX + r, y]);
+      }
+      return { h, left, right, top: right[N][0] - CX, mid: radiusAt(target, 0.4) };
+    }
+    function pieceMarkup(name, p, color, angle, uid) {
+      const o = outline(name, p);
+      const pts = [...o.left, ...o.right.slice().reverse()];
+      const d = "M" + pts.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L") + " Z";
+      const topY = BASE_Y - o.h;
+      const rimRy = Math.max(2, o.top * 0.2);
+      // líneas de torneado y brillo que se mueve con el giro
+      let rings = "";
+      for (let i = 1; i < 6; i++) {
+        const t = i / 6, y = BASE_Y - t * o.h;
+        const r = (o.right[Math.round(t * 28)][0] - CX);
+        rings += `<path d="M${CX - r} ${y} Q ${CX} ${y + r * 0.14} ${CX + r} ${y}" stroke="rgba(0,0,0,.07)" stroke-width="1.5" fill="none"/>`;
+      }
+      const shineX = CX + Math.sin(angle) * o.mid * 0.55 - 5;
+      const handle = SHAPES[name].handle && p > 0.6
+        ? `<path d="M${CX + o.right[20][0] - CX - 2} ${BASE_Y - o.h * 0.75} C ${CX + 64} ${BASE_Y - o.h * 0.75}, ${CX + 64} ${BASE_Y - o.h * 0.22}, ${CX + o.right[6][0] - CX - 2} ${BASE_Y - o.h * 0.22}"
+             stroke="${color}" stroke-width="10" fill="none" stroke-linecap="round" opacity="${Math.min(1, (p - 0.6) * 2.5).toFixed(2)}"/>`
+        : "";
+      return `<clipPath id="clip-${uid}"><path d="${d}"/></clipPath>
+        ${handle}
+        <path d="${d}" fill="${color}"/>
+        <g clip-path="url(#clip-${uid})">
+          ${rings}
+          <rect x="${shineX.toFixed(1)}" y="${topY - 4}" width="10" height="${o.h + 8}" rx="5" fill="rgba(255,255,255,.25)"/>
+          <rect x="${(CX + o.mid * 0.55).toFixed(1)}" y="${topY}" width="${o.mid}" height="${o.h}" fill="rgba(0,0,0,.08)"/>
+        </g>
+        <ellipse cx="${CX}" cy="${topY.toFixed(1)}" rx="${o.top.toFixed(1)}" ry="${rimRy.toFixed(1)}" fill="rgba(0,0,0,.3)"/>`;
+    }
+
+    const pieceG = document.getElementById("piece");
+    const marksG = document.getElementById("marks");
+    const wheelEl = document.getElementById("wheel");
+    const statusEl = document.getElementById("status");
+    const shapeBar = document.getElementById("shapeBar");
+    const bakeBtn = document.getElementById("bake");
+    const pedal = document.getElementById("pedal");
+    let shape = "Taza", progress = 0, glaze = null, angle = 0, omega = 0, holding = false, dragging = false, baking = false;
+
     const shapesEl = document.getElementById("shapes");
-    Object.keys(shapes).forEach((name) => {
+    Object.keys(SHAPES).forEach((name) => {
       const b = document.createElement("button");
       b.className = "chip" + (name === shape ? " on" : "");
       b.textContent = name;
       b.addEventListener("click", () => {
+        if (baking) return;
         shape = name;
         shapesEl.querySelectorAll(".chip").forEach((c) => c.classList.toggle("on", c === b));
-        render();
+        if (progress >= 1) { progress = 0.6; glaze = null; updateUI(); }
+        draw();
       });
       shapesEl.appendChild(b);
     });
     const glazesEl = document.getElementById("glazes");
-    glazes.forEach(([label, color]) => {
+    GLAZES.forEach(([label, color]) => {
       const b = document.createElement("button");
-      b.className = "swatch" + (color === glaze ? " on" : "");
+      b.className = "swatch";
       b.style.background = color;
       b.title = label;
+      b.disabled = true;
       b.setAttribute("aria-label", `Esmalte ${label}`);
       b.addEventListener("click", () => {
         glaze = color;
         glazesEl.querySelectorAll(".swatch").forEach((c) => c.classList.toggle("on", c === b));
-        render();
+        updateUI();
+        draw();
       });
       glazesEl.appendChild(b);
     });
-    render();
 
+    function updateUI() {
+      const done = progress >= 1;
+      shapeBar.style.width = Math.min(100, progress * 100) + "%";
+      glazesEl.querySelectorAll(".swatch").forEach((b) => {
+        b.disabled = !done || baking;
+        if (!glaze) b.classList.remove("on");
+      });
+      bakeBtn.disabled = !done || !glaze || baking;
+      if (baking) return;
+      if (!done) {
+        statusEl.textContent = progress === 0 ? "Una bola de barro esperando…"
+          : progress < 0.35 ? "¡Eso es, sigue girando!"
+          : progress < 0.75 ? `Ya se intuye ${shape === "Taza" || shape === "Maceta" ? "una" : "un"} ${shape.toLowerCase()}…`
+          : "¡Casi está, unas vueltas más!";
+      } else {
+        statusEl.textContent = glaze ? "¡Preciosa! Ahora, al horno 🔥" : "¡Forma lista! Elige un esmalte 🎨";
+      }
+    }
+    function draw() {
+      pieceG.innerHTML = pieceMarkup(shape, progress, glaze || RAW, angle, "main");
+      let m = "";
+      for (let k = 0; k < 8; k++) {
+        const a = angle + (k * Math.PI) / 4;
+        const front = Math.sin(a) > 0;
+        m += `<circle cx="${(100 + Math.cos(a) * 62).toFixed(1)}" cy="${(176 + Math.sin(a) * 9).toFixed(1)}" r="2.6" fill="#8f7d70" opacity="${front ? .9 : .35}"/>`;
+      }
+      marksG.innerHTML = m;
+    }
+
+    // Arrastrar en círculos sobre el torno
+    let lastAngle = null, lastTime = 0;
+    const pointerAngle = (e) => {
+      const r = wheelEl.getBoundingClientRect();
+      return Math.atan2(e.clientY - (r.top + r.height * 0.75), e.clientX - (r.left + r.width / 2));
+    };
+    wheelEl.addEventListener("pointerdown", (e) => {
+      dragging = true; wheelEl.classList.add("dragging");
+      wheelEl.setPointerCapture(e.pointerId);
+      lastAngle = pointerAngle(e); lastTime = performance.now();
+    });
+    wheelEl.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const a = pointerAngle(e), now = performance.now();
+      let d = a - lastAngle;
+      if (d > Math.PI) d -= 2 * Math.PI;
+      if (d < -Math.PI) d += 2 * Math.PI;
+      const dt = Math.max(16, now - lastTime) / 1000;
+      omega = Math.min(14, Math.max(omega * 0.6, Math.abs(d) / dt * 0.6 + omega * 0.4));
+      lastAngle = a; lastTime = now;
+    });
+    const endDrag = () => { dragging = false; wheelEl.classList.remove("dragging"); };
+    wheelEl.addEventListener("pointerup", endDrag);
+    wheelEl.addEventListener("pointercancel", endDrag);
+
+    // Pedal: mantener pulsado
+    const pedalOn = (e) => {
+      e.preventDefault();
+      if (e.pointerId !== undefined) pedal.setPointerCapture(e.pointerId);
+      holding = true; pedal.classList.add("held");
+    };
+    const pedalOff = () => { holding = false; pedal.classList.remove("held"); };
+    pedal.addEventListener("pointerdown", pedalOn);
+    pedal.addEventListener("contextmenu", (e) => e.preventDefault());
+    ["pointerup", "pointercancel", "lostpointercapture"].forEach((ev) => pedal.addEventListener(ev, pedalOff));
+    window.addEventListener("blur", pedalOff);
+    pedal.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") pedalOn(e); });
+    pedal.addEventListener("keyup", pedalOff);
+
+    // Bucle de animación
+    let prev = performance.now();
+    function loop(now) {
+      const dt = Math.min(0.05, (now - prev) / 1000);
+      prev = now;
+      if (holding) omega = Math.min(11, omega + 18 * dt);
+      else if (!dragging) omega *= Math.pow(0.25, dt);
+      if (omega < 0.02) omega = 0;
+      if (omega > 0) {
+        angle += omega * dt;
+        if (!baking && progress < 1) {
+          progress = Math.min(1, progress + omega * dt * 0.03);
+          if (progress >= 1) burstFrom(wheelEl, ["✨", "🏺", "👏"], 14);
+          updateUI();
+        }
+        draw();
+      }
+      requestAnimationFrame(loop);
+    }
+    draw();
+    updateUI();
+    requestAnimationFrame(loop);
+
+    // Horno y estantería
     const shelf = document.getElementById("shelf");
     const shelfMsg = document.getElementById("shelfMsg");
-    const bakeBtn = document.getElementById("bake");
     const maxPieces = 6;
     let made = 0;
     bakeBtn.addEventListener("click", () => {
       if (bakeBtn.disabled) return;
-      bakeBtn.disabled = true;
-      piece.classList.remove("baking"); void piece.getBBox(); piece.classList.add("baking");
+      baking = true;
+      statusEl.textContent = "Horneando… 🔥";
+      updateUI();
+      pieceG.classList.remove("baking"); void pieceG.getBBox(); pieceG.classList.add("baking");
       setTimeout(() => {
-        piece.classList.remove("baking");
-        bakeBtn.disabled = false;
-        if (made >= maxPieces) shelf.firstElementChild.remove();
+        pieceG.classList.remove("baking");
+        if (shelf.children.length >= maxPieces) shelf.firstElementChild.remove();
         const mini = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        mini.setAttribute("viewBox", "30 40 140 140");
-        mini.innerHTML = pieceSVG(shape, glaze, false).replaceAll(`clip-${shape}`, `clip-${shape}-${made}`);
+        mini.setAttribute("viewBox", "30 50 140 130");
+        mini.innerHTML = pieceMarkup(shape, 1, glaze, 0.6, `shelf${made}`);
         shelf.appendChild(mini);
         made++;
         burstFrom(mini, ["✨", "🏺", "🔥"], 12);
@@ -442,6 +599,12 @@
           : made < maxPieces
             ? `${made} piezas hechas a mano para tu casa nueva.`
             : "¡Estantería llena! Tu casa ya tiene tu toque 🏺💛";
+        // nueva bola de barro
+        baking = false; progress = 0; glaze = null;
+        statusEl.textContent = "Otra bola de barro… ¿qué hacemos ahora?";
+        updateUI();
+        statusEl.textContent = "Otra bola de barro… ¿qué hacemos ahora?";
+        draw();
       }, 1400);
     });
 
