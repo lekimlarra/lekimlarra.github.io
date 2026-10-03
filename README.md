@@ -3,7 +3,7 @@
 Pequeñas webs hechas con cariño, una carpeta por persona:
 
 - `/` — índice con enlaces a cada web.
-- `/sonia/` — cumpleaños de Sonia (globo para capturar 15 países, lluvia de gatos con Lume y duelo de esgrima).
+- `/sonia/` — cumpleaños de Sonia (globo para capturar 15 países, lluvia de gatos con Lume, duelo de esgrima y minijuego para achicar el patio).
 - `/irene/` — felicitación por su piso nuevo (casa que se construye y taller de cerámica).
 - `/angela/` — felicitación de cumpleaños para Ángela (libros y plantas).
 - `404.html` — redirige `/Julia`, `/Ángela`, `/Irene`, `/Sonia`, etc. a su carpeta en minúsculas.
