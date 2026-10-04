@@ -931,6 +931,22 @@
       patioMsg.textContent = "¡Rápido, que sigue lloviendo!";
       updateHud();
     }
+    // Tras ganar o perder, el botón se bloquea unos segundos para no empezar otra partida sin querer
+    const RESTART_LOCK = 3;
+    let restartTimer = null;
+    function lockRestart(label) {
+      clearInterval(restartTimer);
+      let left = RESTART_LOCK;
+      bucketBtn.disabled = true;
+      bucketBtn.textContent = `⏳ Un momento… ${left}`;
+      restartTimer = setInterval(() => {
+        left--;
+        if (left > 0) { bucketBtn.textContent = `⏳ Un momento… ${left}`; return; }
+        clearInterval(restartTimer);
+        bucketBtn.disabled = false;
+        bucketBtn.textContent = label;
+      }, 1000);
+    }
     function winPatio() {
       level = 0; patioState = "won";
       updateHud();
@@ -940,7 +956,7 @@
         `Medalla de Achicadora Oficial para Sonia: ${buckets} cubazos en ${secs} segundos. Premio extra: una tarde de sofá bien seca con Lume. 🧡`;
       prize.classList.add("show");
       patioMsg.textContent = "☀️ ¡Ha salido el sol! El patio está seco.";
-      bucketBtn.textContent = "🔁 Jugar otra vez";
+      lockRestart("🔁 Jugar otra vez");
       toast("🏆 ¡Patio seco! Eres la reina del cubo", true);
       confetti(240);
       setTimeout(() => confettiAt(scene, 120), 300);
@@ -949,9 +965,10 @@
       level = 100; patioState = "lost";
       updateHud();
       patioMsg.textContent = "💦 ¡El agua ha entrado en casa! Lume se ha subido al armario… ¿Otra vez?";
-      bucketBtn.textContent = "🔁 Reintentar";
+      lockRestart("🔁 Reintentar");
     }
     bucketBtn.addEventListener("click", () => {
+      if (bucketBtn.disabled) return;
       if (patioState === "playing") scoop();
       else startPatio();
     });
