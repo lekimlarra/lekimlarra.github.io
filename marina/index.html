@@ -408,9 +408,15 @@
       // Manto en pirámide: 22 filas; la fila r tiene 2·round(r·12/21)+1 huecos (de 1 a 25).
       const ROWS = 22, CELL = 15, TOP = 78, CX = 200, PER_RAMO = 16;
       const half = (r) => Math.round((r * 12) / 21);
-      // Dibujo oculto: un corazón y una «M»
-      const HEART = [".##...##.", "####.####", "#########", ".#######.", "..#####..", "...###...", "....#...."];
-      const M = ["##.....##", "###...###", "##.#.#.##", "##..#..##", "##.....##", "##.....##"];
+      // Dibujo oculto: las iniciales «M L» (Marina López), 15 huecos de ancho
+      const ML = [
+        "#.....#...#....",
+        "##...##...#....",
+        "#.#.#.#...#....",
+        "#..#..#...#....",
+        "#.....#...#....",
+        "#.....#...#####",
+      ];
       const pick = (art, r0, r, c, mid) => {
         if (r < r0 || r >= r0 + art.length) return false;
         const row = art[r - r0], off = c - (mid - (row.length - 1) / 2);
@@ -422,7 +428,7 @@
         const width = 2 * half(r) + 1, mid = (width - 1) / 2;
         for (let c = 0; c < width; c++) {
           const x = CX + (c - mid) * CELL, y = TOP + r * CELL;
-          const color = pick(HEART, 7, r, c, mid) ? "#f6c443" : pick(M, 15, r, c, mid) ? "#ffffff" : REDS[(r * 7 + c * 3) % REDS.length];
+          const color = pick(ML, 14, r, c, mid) ? "#ffffff" : REDS[(r * 7 + c * 3) % REDS.length];
           cells.push({ r, x, y, color });
         }
       }
@@ -465,7 +471,7 @@
           btn.textContent = "💐 ¡Manto completo!";
           setTimeout(() => {
             manto.classList.add("done");
-            msgEl.textContent = "¡Ofrenda completada! Un manto con tu inicial y un corazón, de parte de todos. 💛❤️";
+            msgEl.textContent = "¡Ofrenda completada! Un manto con tus iniciales, M L, de parte de todos. 💐";
             confetti(240); confettiAt(manto, 120);
             toast("💐 ¡Ofrenda completada! ¡Viva el Pilar!");
           }, 500);
