@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz cumple, Marina!</title>
+  <meta name="description" content="Una web de cumpleaños para Marina: una montaña rusa y una persecución a Guille.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎢</text></svg>">
+  <style>
+    :root {
+      --bg: #fbf7f1;
+      --paper: #ffffff;
+      --ink: #1d2433;
+      --muted: #687086;
+      --blue: #0d99ff;
+      --blue-dark: #0a6fc2;
+      --gold: #e7b53c;
+      --tile: #2e8f7a;
+      --coral: #ff6f59;
+      --coral-dark: #db4f3a;
+      --line: #ece4d8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Fredoka", system-ui, sans-serif; line-height: 1.05; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    .hand { font-family: "Caveat", cursive; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font: 800 1.05rem "Inter", sans-serif; text-decoration: none;
+      background: var(--coral); color: #fff; border: 0; cursor: pointer;
+      padding: 15px 28px; border-radius: 14px;
+      box-shadow: 0 5px 0 var(--coral-dark); transition: transform .12s, box-shadow .12s, opacity .2s;
+      user-select: none; -webkit-user-select: none; touch-action: manipulation;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--coral-dark); }
+    .btn:active, .btn.held { transform: translateY(4px); box-shadow: 0 1px 0 var(--coral-dark); }
+    .btn.blue { background: var(--blue); box-shadow: 0 5px 0 var(--blue-dark); }
+    .btn.blue:hover { box-shadow: 0 7px 0 var(--blue-dark); }
+    .btn.blue:active, .btn.blue.held { box-shadow: 0 1px 0 var(--blue-dark); }
+    .btn.grey { background: #5b6478; box-shadow: 0 5px 0 #3d4456; }
+    .btn.grey:active, .btn.grey.held { box-shadow: 0 1px 0 #3d4456; }
+    .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    section { padding: 90px 0; position: relative; }
+    section.alt { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .section-title { text-align: center; margin-bottom: 36px; }
+    .section-title .num {
+      display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+      background: var(--blue); color: #fff; font: 700 1.3rem "Fredoka", sans-serif; margin-bottom: 10px;
+    }
+    .section-title h2 { font-size: clamp(2.2rem, 5.5vw, 3.5rem); }
+    .section-title p { color: var(--muted); max-width: 600px; margin: 10px auto 0; font-size: 1.06rem; }
+
+    /* ---------- Portada ---------- */
+    .hero {
+      min-height: 100vh; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 70px 20px;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(13,153,255,.18), transparent 40%),
+        radial-gradient(circle at 88% 80%, rgba(231,181,60,.25), transparent 42%),
+        radial-gradient(circle at 85% 15%, rgba(46,143,122,.15), transparent 35%);
+    }
+    .polaroid {
+      position: relative; display: inline-block; background: #fff; padding: 12px 12px 6px; margin-bottom: 30px;
+      box-shadow: 0 20px 36px -18px rgba(29,36,51,.5); transform: rotate(2.5deg); transition: transform .4s;
+    }
+    .polaroid:hover { transform: rotate(0) scale(1.03); }
+    .polaroid img { display: block; width: clamp(220px, 30vw, 320px); height: auto; }
+    .polaroid figcaption { font-family: "Caveat", cursive; font-size: 1.6rem; padding-top: 4px; }
+    .polaroid::before {
+      content: ""; position: absolute; top: -12px; left: 50%; width: 100px; height: 26px;
+      transform: translateX(-50%) rotate(3deg); background: rgba(13,153,255,.4);
+    }
+    .hero .kicker { font-size: 1.8rem; color: var(--tile); }
+    /* Selección estilo Figma alrededor del título */
+    .figma { position: relative; display: inline-block; max-width: min(820px, 100%); padding: 10px 22px; margin: 18px 0 6px; outline: 2px solid var(--blue); }
+    .figma i { position: absolute; width: 10px; height: 10px; background: #fff; border: 2px solid var(--blue); }
+    .figma i:nth-child(1) { left: -6px; top: -6px; } .figma i:nth-child(2) { right: -6px; top: -6px; }
+    .figma i:nth-child(3) { left: -6px; bottom: -6px; } .figma i:nth-child(4) { right: -6px; bottom: -6px; }
+    .figma .tag {
+      position: absolute; left: -2px; top: -30px; background: var(--blue); color: #fff; font: 600 .78rem "Inter", sans-serif;
+      padding: 3px 8px; border-radius: 4px 4px 0 0; white-space: nowrap;
+    }
+    .figma .size { position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%); background: var(--blue); color: #fff; font: 600 .72rem "Inter", sans-serif; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+    .hero h1 { font-size: clamp(2.5rem, 7.5vw, 5.2rem); }
+    .hero h1 span { color: var(--coral); }
+    .hero p { font-size: clamp(1.05rem, 2.3vw, 1.25rem); color: var(--muted); max-width: 600px; margin: 34px auto 28px; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -12px auto 26px; max-width: 600px; }
+    .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: .9rem; }
+
+    /* ---------- Montaña rusa ---------- */
+    .coaster { max-width: 900px; margin: 0 auto; }
+    .coaster-screen { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 40px -28px rgba(29,36,51,.6); background: #9fd7ff; }
+    #coasterCanvas { display: block; width: 100%; height: 320px; touch-action: manipulation; }
+    .overlay {
+      position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px;
+      background: rgba(29,36,51,.35); color: #fff; transition: opacity .3s;
+    }
+    .overlay.hidden { opacity: 0; pointer-events: none; }
+    .overlay h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); text-shadow: 0 2px 10px rgba(0,0,0,.35); }
+    .overlay p { max-width: 460px; margin: 8px auto 16px; text-shadow: 0 1px 6px rgba(0,0,0,.4); font-weight: 600; }
+    .hud { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 12px; margin: 14px 0; font-weight: 800; align-items: center; }
+    .hud > div { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; text-align: center; }
+    .hud small { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; }
+    .hud .warn { color: var(--coral-dark); }
+    .track-bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+    .track-bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--blue), var(--coral)); }
+    .pedals { display: grid; grid-template-columns: 1fr 1.4fr; gap: 14px; }
+    .pedals .btn { padding: 22px 10px; font-size: 1.2rem; touch-action: none; }
+    .coaster-msg { text-align: center; color: var(--muted); font-weight: 700; margin-top: 12px; min-height: 1.6em; }
+
+    /* ---------- Persigue a Guille ---------- */
+    .chase { max-width: 900px; margin: 0 auto; }
+    .room {
+      position: relative; height: 380px; border-radius: 20px; overflow: hidden; user-select: none; -webkit-user-select: none;
+      background:
+        linear-gradient(180deg, #fde9cf 0 34%, transparent 34%),
+        repeating-linear-gradient(90deg, #d9a978 0 58px, #cf9d6b 58px 60px);
+      box-shadow: 0 24px 40px -28px rgba(29,36,51,.6); touch-action: manipulation;
+    }
+    .room .decor { position: absolute; font-size: 2.6rem; pointer-events: none; }
+    .room .toy { position: absolute; font-size: 1.6rem; pointer-events: none; animation: drop .4s cubic-bezier(.3,1.8,.5,1); }
+    @keyframes drop { from { transform: translateY(-20px) scale(.3); opacity: 0; } }
+    #guille {
+      position: absolute; left: 0; top: 0; width: 72px; height: 72px; border: 0; background: none; cursor: pointer;
+      font-size: 3.2rem; line-height: 72px; text-align: center; padding: 0; touch-action: manipulation;
+      filter: drop-shadow(0 6px 4px rgba(0,0,0,.25));
+    }
+    #guille .body { display: inline-block; animation: toddle .28s ease-in-out infinite alternate; }
+    #guille.idle .body { animation: none; }
+    #guille.flip .body { transform: scaleX(-1); }
+    @keyframes toddle { from { translate: 0 0; rotate: -8deg; } to { translate: 0 -6px; rotate: 8deg; } }
+    .pop {
+      position: absolute; pointer-events: none; font: 800 1.1rem "Inter", sans-serif; color: var(--coral-dark); white-space: nowrap;
+      animation: rise .9s ease-out forwards; text-shadow: 0 1px 0 #fff;
+    }
+    @keyframes rise { to { transform: translateY(-50px); opacity: 0; } }
+    .chase-hud { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; font-weight: 800; }
+    .chase-hud > div { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px; text-align: center; }
+    .chase-hud small { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+    .chase-row { text-align: center; }
+    .chase-msg { text-align: center; color: var(--muted); font-weight: 700; margin-top: 12px; min-height: 1.6em; }
+
+    /* ---------- Carta ---------- */
+    .note {
+      max-width: 640px; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 18px;
+      padding: 44px 40px 36px; box-shadow: 0 30px 50px -35px rgba(29,36,51,.5); position: relative;
+    }
+    .note::before { content: "💙"; position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: 2.4rem; }
+    .note p { font-size: 1.08rem; margin-bottom: 14px; }
+    .note .hand { font-size: 2rem; color: var(--blue-dark); line-height: 1.2; }
+    .note .sign { text-align: right; margin: 22px 0 0; }
+    footer { text-align: center; color: var(--muted); padding: 20px 20px 46px; font-size: .95rem; }
+    footer a { color: var(--blue-dark); }
+
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 200; width: 100%; height: 100%; }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); z-index: 210;
+      background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-weight: 800;
+      box-shadow: 0 14px 30px -14px rgba(0,0,0,.6); transition: transform .4s cubic-bezier(.3,1.5,.5,1);
+      width: max-content; max-width: calc(100% - 32px); text-align: center;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 760px) {
+      section { padding: 66px 0; }
+      #coasterCanvas { height: 270px; }
+      .hud { grid-template-columns: 1fr 1fr; }
+      .hud > div:last-child { grid-column: 1 / -1; }
+      .room { height: 340px; }
+      .note { padding: 40px 22px 30px; }
+      .figma { padding: 8px 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Portada -->
+  <header class="hero">
+    <div>
+      <figure class="polaroid">
+        <img src="img/marina.jpg" alt="Marina de espaldas, con mantón, mirando la basílica del Pilar desde el puente" width="1000" height="1019">
+        <figcaption>Maña de corazón 🧡 Zaragoza</figcaption>
+      </figure>
+      <br>
+      <span class="kicker hand">Desde Zaragoza (y desde toda Europa) 💙</span>
+      <br>
+      <div class="figma">
+        <i></i><i></i><i></i><i></i>
+        <span class="tag">🎂 Marina_cumple_v2_FINAL_ahora_sí.fig</span>
+        <h1>¡Feliz cumple, <span>Marina!</span></h1>
+        <span class="size">100% fill · 0 bugs · UX aprobada ✓</span>
+      </div>
+      <p>Viajera incansable, diseñadora UX/UI, veterana de PortAventura y, desde hace poco más de un año, la mamá de Guille. Hoy toca celebrarte… ¡y jugar un poco!</p>
+      <div class="chips">
+        <span class="chip">✈️ Viajes</span><span class="chip">🎨 UX/UI</span><span class="chip">🎢 PortAventura</span><span class="chip">👶 Guille</span><span class="chip">💙 AEGEE</span>
+      </div>
+      <a href="#montana" class="btn blue" id="start">🎢 ¡Al lío!</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Montaña rusa -->
+    <section class="alt" id="montana">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">1</span>
+          <h2>Montaña rusa «Marina Khan» 🐉</h2>
+          <p>Marina y Diego se suben (Guille aún no llega al 1,20 m, así que espera en la salida). Acelera para subir las cuestas y frena antes de cada cima: si pasas por encima del límite… ¡descarrilas!</p>
+        </div>
+        <div class="coaster reveal">
+          <div class="coaster-screen">
+            <canvas id="coasterCanvas" aria-label="Montaña rusa"></canvas>
+            <div class="overlay" id="coasterOverlay">
+              <div>
+                <h3 id="ovTitle">🎢 ¿Lista para subir?</h3>
+                <p id="ovText">Mantén «Acelerar» para coger velocidad y «Frenar» antes de cada cima. Mira el cartel: es la velocidad máxima.</p>
+                <button class="btn" id="coasterStart">🎟️ ¡Subir al Marina Khan!</button>
+              </div>
+            </div>
+          </div>
+          <div class="hud">
+            <div><small>Velocidad</small><span id="speedTxt">0 km/h</span></div>
+            <div><small>Próxima cima</small><span id="limitTxt">máx 38 km/h</span></div>
+            <div><small>Recorrido</small><span id="screamTxt">0 gritos 😱</span><div class="track-bar"><span id="trackBar"></span></div></div>
+          </div>
+          <div class="pedals">
+            <button class="btn grey" id="brakeBtn">🛑 Frenar</button>
+            <button class="btn blue" id="accBtn">🚀 Acelerar</button>
+          </div>
+          <p class="coaster-msg" id="coasterMsg">En el ordenador también puedes usar las flechas ← (frenar) y → (acelerar).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Persigue a Guille -->
+    <section id="guille-sec">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">2</span>
+          <h2>¡Pilla a Guille!</h2>
+          <p>Guille ya camina… y es un terremoto. Tócalo 8 veces antes de que acabe el tiempo para que se eche la siesta. Cuidado: cada vez que lo pillas, corre más (y va dejando juguetes por todas partes).</p>
+        </div>
+        <div class="chase reveal">
+          <div class="room" id="room">
+            <span class="decor" style="left:4%; top:6%">🖼️</span>
+            <span class="decor" style="right:6%; top:4%">🕰️</span>
+            <span class="decor" style="left:3%; bottom:4%">🛋️</span>
+            <span class="decor" style="right:3%; bottom:4%">🪴</span>
+            <button id="guille" class="idle" aria-label="Guille"><span class="body">👶</span></button>
+          </div>
+          <div class="chase-hud">
+            <div><small>Pillado</small><span id="catchTxt">0 / 8</span></div>
+            <div><small>Tiempo</small><span id="timeTxt">30 s</span></div>
+          </div>
+          <div class="chase-row"><button class="btn" id="chaseStart">👟 ¡A por él!</button></div>
+          <p class="chase-msg" id="chaseMsg" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carta -->
+    <section class="alt">
+      <div class="container">
+        <article class="note reveal">
+          <p class="hand">¡Feliz cumpleaños, Marina!</p>
+          <p>Que este año venga lleno de viajes (ahora en versión familiar, con Diego y Guille), de diseños bonitos y bien pensados, y de muchos planes como los de AEGEE: gente de todas partes, risas y ganas de descubrir sitios nuevos.</p>
+          <p>Gracias por ser como eres: curiosa, creativa y con una energía que da gusto. Disfruta muchísimo tu día… aunque sea persiguiendo a un pequeño terremoto. 😄</p>
+          <p>Un abrazo enorme también para Diego y para Guille.</p>
+          <p class="sign hand">Con mucho cariño, tus amigos de AEGEE 💙</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hecho con cariño para Marina. · <a href="../">Volver al índice</a></footer>
+
+  <script>
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---------- Confeti y avisos ---------- */
+    const cv = document.getElementById("confetti");
+    const cx = cv.getContext("2d");
+    let pieces = [], confettiRunning = false;
+    function sizeConfetti() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+    sizeConfetti(); addEventListener("resize", sizeConfetti);
+    function confetti(n = 140, x = innerWidth / 2, y = innerHeight / 3) {
+      if (reduceMotion) return;
+      const colors = ["#0d99ff", "#ff6f59", "#e7b53c", "#2e8f7a", "#a78bfa", "#ff9fc0", "#ffffff"];
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9;
+        pieces.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+          w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, c: colors[i % colors.length], life: 0 });
+      }
+      if (!confettiRunning) { confettiRunning = true; requestAnimationFrame(tickConfetti); }
+    }
+    function tickConfetti() {
+      const d = devicePixelRatio;
+      cx.clearRect(0, 0, cv.width, cv.height);
+      pieces.forEach((p) => {
+        p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+        cx.save(); cx.translate(p.x * d, p.y * d); cx.rotate(p.r);
+        cx.fillStyle = p.c; cx.globalAlpha = Math.max(0, 1 - p.life / 220);
+        cx.fillRect(-p.w * d / 2, -p.h * d / 2, p.w * d, p.h * d * Math.abs(Math.cos(p.r * 2)) + d);
+        cx.restore();
+      });
+      pieces = pieces.filter((p) => p.y < innerHeight + 40 && p.life < 220);
+      if (pieces.length) requestAnimationFrame(tickConfetti);
+      else { confettiRunning = false; cx.clearRect(0, 0, cv.width, cv.height); }
+    }
+    const confettiAt = (el, n) => { const r = el.getBoundingClientRect(); confetti(n, r.left + r.width / 2, r.top + r.height / 2); };
+    let toastTimer;
+    function toast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
+    }
+    addEventListener("load", () => setTimeout(() => confetti(160), 400));
+    // Bloquea un botón unos segundos tras terminar una partida, para no reiniciar sin querer
+    function lockButton(btn, label, secs = 3) {
+      btn.disabled = true;
+      let left = secs;
+      btn.textContent = `⏳ Un momento… ${left}`;
+      const iv = setInterval(() => {
+        left--;
+        if (left > 0) { btn.textContent = `⏳ Un momento… ${left}`; return; }
+        clearInterval(iv); btn.disabled = false; btn.textContent = label;
+      }, 1000);
+    }
+    const inView = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+
+    /* ---------- 1. Montaña rusa ---------- */
+    // Perfil de la vía: puntos [x, altura]. Entre puntos se interpola con un coseno (cimas y valles suaves).
+    const PTS = [[0,40],[260,40],[700,280],[1000,30],[1300,190],[1560,40],[1900,230],[2200,30],[2450,130],[2700,40],[3050,210],[3400,40],[3900,40]];
+    const CRESTS = [2, 4, 6, 8, 10].map((i) => PTS[i][0]);
+    const LIMITS = [190, 320, 280, 340, 270]; // velocidad máxima en cada cima (px/s)
+    const END = 3700, TRACK_END = PTS[PTS.length - 1][0];
+    const G = 420, ACC = 340, BRAKE = 420, DRAG = 0.06, KMH = 5; // km/h = px/s ÷ 5
+    function h(x) {
+      x = Math.max(0, Math.min(TRACK_END, x));
+      for (let i = 1; i < PTS.length; i++) {
+        if (x <= PTS[i][0]) {
+          const [x0, h0] = PTS[i - 1], [x1, h1] = PTS[i], k = (x - x0) / (x1 - x0);
+          return h0 + (h1 - h0) * (1 - Math.cos(Math.PI * k)) / 2;
+        }
+      }
+      return PTS[PTS.length - 1][1];
+    }
+    const dh = (x) => (h(x + 1) - h(x - 1)) / 2;
+
+    const canvas = document.getElementById("coasterCanvas");
+    const ctx = canvas.getContext("2d");
+    let W = 0, H = 0, sx = 1, sy = 1;
+    function sizeCoaster() {
+      W = canvas.clientWidth; H = canvas.clientHeight;
+      canvas.width = W * devicePixelRatio; canvas.height = H * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      sx = Math.max(.5, Math.min(1, W / 820));
+      sy = (H - 100) / 280;
+    }
+    sizeCoaster(); addEventListener("resize", sizeCoaster);
+
+    const overlay = document.getElementById("coasterOverlay");
+    const ovTitle = document.getElementById("ovTitle"), ovText = document.getElementById("ovText");
+    const startBtn = document.getElementById("coasterStart");
+    const accBtn = document.getElementById("accBtn"), brakeBtn = document.getElementById("brakeBtn");
+    const speedTxt = document.getElementById("speedTxt"), limitTxt = document.getElementById("limitTxt");
+    const screamTxt = document.getElementById("screamTxt"), trackBar = document.getElementById("trackBar");
+    const coasterMsg = document.getElementById("coasterMsg");
+    let cState = "idle", cx0 = 100, v = 0, accel = false, brake = false, screams = 0, screaming = false, tStart = 0;
+    let flyer = null; // vagón descarrilado
+
+    function holdButton(btn, set) {
+      const on = (e) => { e.preventDefault(); if (e.pointerId !== undefined) btn.setPointerCapture(e.pointerId); set(true); btn.classList.add("held"); };
+      const off = () => { set(false); btn.classList.remove("held"); };
+      btn.addEventListener("pointerdown", on);
+      ["pointerup", "pointercancel", "lostpointercapture"].forEach((ev) => btn.addEventListener(ev, off));
+      btn.addEventListener("contextmenu", (e) => e.preventDefault());
+      addEventListener("blur", off);
+    }
+    holdButton(accBtn, (b) => (accel = b));
+    holdButton(brakeBtn, (b) => (brake = b));
+    addEventListener("keydown", (e) => {
+      if (cState !== "riding" || !inView(canvas)) return;
+      if (e.key === "ArrowRight" || e.key === "ArrowUp") { accel = true; e.preventDefault(); }
+      if (e.key === "ArrowLeft" || e.key === "ArrowDown") { brake = true; e.preventDefault(); }
+    });
+    addEventListener("keyup", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowUp") accel = false;
+      if (e.key === "ArrowLeft" || e.key === "ArrowDown") brake = false;
+    });
+
+    function startRide() {
+      cx0 = 100; v = 0; screams = 0; screaming = false; flyer = null;
+      cState = "riding"; tStart = performance.now();
+      overlay.classList.add("hidden");
+      coasterMsg.textContent = "¡Acelera para subir la primera cuesta!";
+    }
+    startBtn.addEventListener("click", () => { if (!startBtn.disabled) startRide(); });
+
+    function endRide(won) {
+      cState = won ? "won" : "crashed";
+      accel = brake = false;
+      setTimeout(() => {
+        overlay.classList.remove("hidden");
+        if (won) {
+          const secs = ((performance.now() - tStart) / 1000).toFixed(1);
+          ovTitle.textContent = "🎉 ¡Viaje completado!";
+          ovText.textContent = `${secs} s y ${screams} ${screams === 1 ? "grito" : "gritos"}. Guille os espera en la salida aplaudiendo. 👏`;
+          confetti(240); toast("🎢 ¡Marina Khan superado!");
+        } else {
+          ovTitle.textContent = "💥 ¡Habéis descarrilado!";
+          ovText.textContent = "Demasiado rápido en la cima. Marina y Diego han salido volando (están bien, han caído en la piscina de la zona Mediterrània 💦).";
+        }
+        lockButton(startBtn, won ? "🔁 Otra vuelta" : "🔁 Reintentar");
+      }, won ? 500 : 1300);
+    }
+
+    function physics(dt) {
+      if (cState === "crashed" && flyer) {
+        flyer.vy -= G * dt; flyer.x += flyer.vx * dt; flyer.y += flyer.vy * dt; flyer.rot += 6 * dt;
+        return;
+      }
+      if (cState !== "riding") return;
+      const th = Math.atan(dh(cx0));
+      let a = -G * Math.sin(th) - DRAG * v;
+      if (accel) a += ACC;
+      if (brake) a -= BRAKE * Math.sign(v);
+      if (brake && Math.abs(v) < 6 && Math.abs(Math.sin(th)) < .06) { v = 0; a = 0; }
+      v += a * dt;
+      const px = cx0;
+      cx0 += v * Math.cos(th) * dt;
+      if (cx0 < 60) { cx0 = 60; v = Math.max(0, v); }
+      for (let i = 0; i < CRESTS.length; i++) {
+        if (px < CRESTS[i] && cx0 >= CRESTS[i] && v > LIMITS[i]) {
+          flyer = { x: cx0, y: h(cx0), vx: v * .8, vy: v * .7, rot: 0 };
+          coasterMsg.textContent = `¡Ibas a ${Math.round(v / KMH)} km/h y el máximo era ${Math.round(LIMITS[i] / KMH)}!`;
+          endRide(false);
+          return;
+        }
+      }
+      // gritos en las bajadas rápidas
+      const fastDrop = v > 260 && dh(cx0) < -.35;
+      if (fastDrop && !screaming) { screams++; screaming = true; }
+      if (!fastDrop && dh(cx0) > -.1) screaming = false;
+      if (cx0 >= END) {
+        cx0 = END; v = 0;
+        coasterMsg.textContent = "¡Llegada! 🎉";
+        endRide(true);
+      }
+    }
+
+    function drawCoaster(t) {
+      const groundY = H - 34;
+      const camX = (cState === "crashed" && flyer ? Math.min(flyer.x, cx0 + 400) : cx0) - (W * .32) / sx;
+      const X = (wx) => (wx - camX) * sx;
+      const Y = (wh) => groundY - wh * sy;
+      // cielo
+      const sky = ctx.createLinearGradient(0, 0, 0, H);
+      sky.addColorStop(0, "#7cc8ff"); sky.addColorStop(1, "#d8f0ff");
+      ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#ffd75e"; ctx.beginPath(); ctx.arc(W - 60, 46, 24, 0, 7); ctx.fill();
+      // montañas lejanas (paralaje)
+      ctx.fillStyle = "#b9dcc0";
+      ctx.beginPath(); ctx.moveTo(0, groundY);
+      for (let i = 0; i <= W; i += 20) { const wx = i + camX * .3 * sx; ctx.lineTo(i, groundY - 50 - 30 * Math.sin(wx / 140) - 18 * Math.sin(wx / 53)); }
+      ctx.lineTo(W, groundY); ctx.fill();
+      // suelo
+      ctx.fillStyle = "#e9d3a6"; ctx.fillRect(0, groundY, W, H - groundY);
+      ctx.fillStyle = "#d6bc8a"; ctx.fillRect(0, groundY, W, 4);
+      // palmeras
+      ctx.font = "30px system-ui, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+      for (let wx = 150; wx < TRACK_END; wx += 330) { const px = X(wx + 160); if (px > -40 && px < W + 40) ctx.fillText("🌴", px, groundY + 4); }
+      // pilares
+      ctx.strokeStyle = "#7b8597"; ctx.lineWidth = 3;
+      for (let wx = 0; wx <= TRACK_END; wx += 36) {
+        const px = X(wx); if (px < -10 || px > W + 10) continue;
+        ctx.beginPath(); ctx.moveTo(px, Y(h(wx)) + 4); ctx.lineTo(px, groundY); ctx.stroke();
+      }
+      // vía
+      ctx.lineCap = "round";
+      const x0 = Math.max(0, camX - 20), x1 = Math.min(TRACK_END, camX + W / sx + 20);
+      ctx.strokeStyle = "#ff6f59"; ctx.lineWidth = 7;
+      ctx.beginPath();
+      for (let wx = x0; wx <= x1; wx += 6) { const px = X(wx), py = Y(h(wx)); wx === x0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); }
+      ctx.stroke();
+      ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let wx = x0; wx <= x1; wx += 6) { const px = X(wx), py = Y(h(wx)) - 1; wx === x0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py); }
+      ctx.stroke();
+      // estaciones
+      const station = (wx0, wx1, label) => {
+        const a = X(wx0), b = X(wx1); if (b < -10 || a > W + 10) return;
+        ctx.fillStyle = "#0d99ff"; ctx.fillRect(a, Y(40) - 70, b - a, 10);
+        ctx.fillStyle = "rgba(13,153,255,.25)"; ctx.fillRect(a, Y(40) - 60, b - a, 60);
+        ctx.fillStyle = "#fff"; ctx.font = "bold 13px Inter, sans-serif"; ctx.fillText(label, (a + b) / 2, Y(40) - 44);
+      };
+      station(40, 260, "SALIDA");
+      station(3580, 3880, "LLEGADA");
+      ctx.font = "30px system-ui, sans-serif";
+      const gx = X(3830); if (gx > -30 && gx < W + 30) { ctx.fillText("👶", gx, Y(40) - 8 + Math.sin(t / 200) * 3); ctx.fillText("🎈", gx + 22, Y(40) - 40); }
+      // carteles de velocidad máxima en las cimas
+      CRESTS.forEach((wx, i) => {
+        const px = X(wx); if (px < -40 || px > W + 40) return;
+        const py = Y(h(wx)) - 52;
+        const passed = cx0 > wx;
+        ctx.fillStyle = passed ? "rgba(255,255,255,.5)" : "#fff";
+        ctx.strokeStyle = passed ? "rgba(219,79,58,.4)" : "#db4f3a"; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.arc(px, py, 17, 0, 7); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = passed ? "rgba(29,36,51,.4)" : "#1d2433"; ctx.font = "bold 13px Inter, sans-serif"; ctx.textBaseline = "middle";
+        ctx.fillText(Math.round(LIMITS[i] / KMH), px, py + 1); ctx.textBaseline = "alphabetic";
+        ctx.strokeStyle = "rgba(29,36,51,.35)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(px, py + 17); ctx.lineTo(px, py + 40); ctx.stroke();
+      });
+      // vagón
+      let carX, carY, ang;
+      if (cState === "crashed" && flyer) { carX = X(flyer.x); carY = Y(flyer.y); ang = -flyer.rot; }
+      else { carX = X(cx0); carY = Y(h(cx0)); ang = Math.atan2(-dh(cx0) * sy, sx); }
+      ctx.save(); ctx.translate(carX, carY); ctx.rotate(ang);
+      ctx.font = "22px system-ui, sans-serif"; ctx.textAlign = "center";
+      ctx.fillText("👩", -10, -22); ctx.fillText("👨", 12, -22);
+      ctx.fillStyle = "#1d2433"; ctx.beginPath(); ctx.roundRect(-26, -26, 52, 22, 6); ctx.fill();
+      ctx.fillStyle = "#e7b53c"; ctx.beginPath(); ctx.roundRect(-24, -24, 48, 14, 5); ctx.fill();
+      ctx.fillStyle = "#1d2433"; ctx.beginPath(); ctx.arc(-15, -3, 4, 0, 7); ctx.arc(15, -3, 4, 0, 7); ctx.fill();
+      ctx.restore();
+      if (screaming && cState === "riding") {
+        ctx.font = "bold 16px Inter, sans-serif"; ctx.fillStyle = "#db4f3a";
+        ctx.fillText("¡¡AAAAH!!", carX + 6, carY - 56);
+      }
+      if (cState === "crashed" && flyer) { ctx.font = "26px system-ui"; ctx.fillText("💥", X(cx0), Y(h(cx0)) - 20); }
+    }
+
+    function updateCoasterHud() {
+      const kmh = Math.max(0, Math.round(v / KMH));
+      speedTxt.textContent = `${kmh} km/h`;
+      const i = CRESTS.findIndex((c) => c > cx0);
+      if (i >= 0) {
+        const lim = Math.round(LIMITS[i] / KMH);
+        limitTxt.textContent = `máx ${lim} km/h`;
+        speedTxt.className = kmh > lim * .9 ? "warn" : "";
+      } else { limitTxt.textContent = "¡Recta final!"; speedTxt.className = ""; }
+      screamTxt.textContent = `${screams} ${screams === 1 ? "grito" : "gritos"} 😱`;
+      trackBar.style.width = Math.min(100, ((cx0 - 100) / (END - 100)) * 100) + "%";
+    }
+    let lastC = 0;
+    function coasterLoop(t) {
+      const dt = Math.min(.033, (t - (lastC || t)) / 1000); lastC = t;
+      for (let i = 0; i < 4; i++) physics(dt / 4);
+      drawCoaster(t);
+      updateCoasterHud();
+      requestAnimationFrame(coasterLoop);
+    }
+    requestAnimationFrame(coasterLoop);
+
+    /* ---------- 2. Persigue a Guille ---------- */
+    const room = document.getElementById("room");
+    const guille = document.getElementById("guille");
+    const chaseStart = document.getElementById("chaseStart");
+    const catchTxt = document.getElementById("catchTxt"), timeTxt = document.getElementById("timeTxt"), chaseMsg = document.getElementById("chaseMsg");
+    const GOAL = 8, TIME = 30, TOYS = ["🧸", "🧦", "🥄", "📚", "🧩", "🍪", "🚗", "🦆", "🪀", "🍌"];
+    const LAUGHS = ["¡jijiji!", "¡otra vez!", "¡no me pillas!", "¡brrrum!", "¡aaajá!", "¡pa-pá!", "¡ma-má!"];
+    let gState = "idle", gx = 0, gy = 0, gvx = 0, gvy = 0, catches = 0, gEnd = 0, nextTurn = 0, nextToy = 0, safeUntil = 0, boostUntil = 0;
+    const roomSize = () => [room.clientWidth, room.clientHeight];
+    function placeGuille() { guille.style.transform = `translate(${gx}px, ${gy}px)`; }
+    function resetGuille() {
+      const [rw, rh] = roomSize();
+      gx = rw / 2 - 36; gy = rh * .55 - 36; placeGuille();
+    }
+    resetGuille(); addEventListener("resize", () => { if (gState !== "playing") resetGuille(); });
+    function randomDir(speed) {
+      const a = Math.random() * Math.PI * 2;
+      gvx = Math.cos(a) * speed; gvy = Math.sin(a) * speed;
+    }
+    const baseSpeed = () => { const [rw] = roomSize(); return (120 + catches * 28) * Math.max(.6, Math.min(1, rw / 760)); };
+    function popText(text, x, y) {
+      const el = document.createElement("span");
+      el.className = "pop"; el.textContent = text;
+      el.style.left = x + "px"; el.style.top = y + "px";
+      room.appendChild(el); setTimeout(() => el.remove(), 900);
+    }
+    function startChase() {
+      room.querySelectorAll(".toy").forEach((t) => t.remove());
+      catches = 0; gState = "playing"; gEnd = performance.now() + TIME * 1000;
+      resetGuille(); randomDir(baseSpeed());
+      guille.classList.remove("idle");
+      guille.querySelector(".body").textContent = "👶";
+      chaseStart.disabled = true; chaseStart.textContent = "🏃‍♀️ ¡Corre!";
+      chaseMsg.textContent = "¡Tócalo cuando puedas!";
+      catchTxt.textContent = `0 / ${GOAL}`;
+    }
+    chaseStart.addEventListener("click", () => { if (!chaseStart.disabled) startChase(); });
+    guille.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      if (gState !== "playing") return;
+      const now = performance.now();
+      if (now < safeUntil) return;
+      catches++; safeUntil = now + 450; boostUntil = now + 900;
+      catchTxt.textContent = `${catches} / ${GOAL}`;
+      popText(LAUGHS[Math.floor(Math.random() * LAUGHS.length)], gx, gy - 10);
+      confettiAt(guille, 18);
+      if (catches >= GOAL) return endChase(true);
+      // sale disparado en dirección contraria al dedo/ratón
+      const r = guille.getBoundingClientRect();
+      let dx = r.left + r.width / 2 - e.clientX, dy = r.top + r.height / 2 - e.clientY;
+      const len = Math.hypot(dx, dy) || 1, sp = baseSpeed() * 1.8;
+      gvx = (dx / len) * sp + (Math.random() - .5) * 60; gvy = (dy / len) * sp + (Math.random() - .5) * 60;
+      if (Math.hypot(dx, dy) < 4) randomDir(sp);
+    });
+    function endChase(won) {
+      gState = won ? "won" : "lost";
+      guille.classList.add("idle");
+      if (won) {
+        guille.querySelector(".body").textContent = "😴";
+        chaseMsg.textContent = "¡Guille atrapado! Por fin, hora de la siesta… 😴💤";
+        confetti(220); toast("👶 ¡Has pillado a Guille! Siesta asegurada");
+      } else {
+        guille.querySelector(".body").textContent = "😜";
+        chaseMsg.textContent = `Guille gana (te has quedado en ${catches} de ${GOAL}). ¡Es un terremoto! 🌪️`;
+      }
+      lockButton(chaseStart, "🔁 Otra vez");
+    }
+    let lastG = 0;
+    function chaseLoop(t) {
+      const dt = Math.min(.05, (t - (lastG || t)) / 1000); lastG = t;
+      if (gState === "playing") {
+        const [rw, rh] = roomSize();
+        const left = Math.max(0, Math.ceil((gEnd - t) / 1000));
+        timeTxt.textContent = `${left} s`;
+        if (t >= gEnd) { endChase(false); }
+        else {
+          if (t > nextTurn && t > boostUntil) { randomDir(baseSpeed() * (Math.random() < .25 ? 1.6 : 1)); nextTurn = t + 500 + Math.random() * 900; }
+          if (t < boostUntil) { gvx *= .995; gvy *= .995; }
+          gx += gvx * dt; gy += gvy * dt;
+          const minY = rh * .3, maxX = rw - 72, maxY = rh - 72;
+          if (gx < 0) { gx = 0; gvx = Math.abs(gvx); } if (gx > maxX) { gx = maxX; gvx = -Math.abs(gvx); }
+          if (gy < minY) { gy = minY; gvy = Math.abs(gvy); } if (gy > maxY) { gy = maxY; gvy = -Math.abs(gvy); }
+          guille.classList.toggle("flip", gvx > 0);
+          placeGuille();
+          if (t > nextToy) {
+            nextToy = t + 1400 + Math.random() * 900;
+            const toys = room.querySelectorAll(".toy");
+            if (toys.length > 14) toys[0].remove();
+            const toy = document.createElement("span");
+            toy.className = "toy"; toy.textContent = TOYS[Math.floor(Math.random() * TOYS.length)];
+            toy.style.left = gx + 20 + "px"; toy.style.top = gy + 40 + "px";
+            room.insertBefore(toy, guille);
+          }
+        }
+      }
+      requestAnimationFrame(chaseLoop);
+    }
+    requestAnimationFrame(chaseLoop);
+
+    /* ---------- Aparición al hacer scroll ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    document.getElementById("start").addEventListener("click", (e) => confettiAt(e.currentTarget, 50));
+  </script>
+</body>
+</html>
