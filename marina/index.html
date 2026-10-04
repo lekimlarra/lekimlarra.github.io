@@ -92,6 +92,27 @@
     .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -12px auto 26px; max-width: 600px; }
     .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: .9rem; }
 
+    /* ---------- Ofrenda de Flores ---------- */
+    .pilar { background: linear-gradient(180deg, #fff3e3, #ffe9e4 60%, var(--bg)); }
+    .ofrenda { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; max-width: 960px; margin: 0 auto; }
+    .manto { max-width: 470px; width: 100%; margin: 0 auto; }
+    .manto svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .flor { transform-box: fill-box; transform-origin: center; animation: florIn .45s cubic-bezier(.3,1.8,.5,1) both; }
+    @keyframes florIn { from { transform: scale(0) rotate(-60deg); } }
+    .manto.done .reveal-glow { opacity: 1; }
+    .reveal-glow { opacity: 0; transition: opacity 1.2s; }
+    .ofrenda-info h3 { font-size: 1.9rem; margin-bottom: 8px; }
+    .ofrenda-info p { color: var(--muted); }
+    .ofrenda-info .facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; }
+    .ofrenda-info .facts span { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: .88rem; }
+    .flor-bar { height: 10px; background: #f3e1d6; border-radius: 99px; overflow: hidden; margin: 6px 0 18px; }
+    .flor-bar span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #d62839, #f6c443); transition: width .3s; }
+    .flor-count { font-weight: 800; }
+    .ofrenda-msg { font-family: "Caveat", cursive; font-size: 1.7rem; color: #b51f30; min-height: 1.4em; margin-top: 14px; line-height: 1.2; }
+    .btn.red { background: #d62839; box-shadow: 0 5px 0 #9e1626; }
+    .btn.red:hover { box-shadow: 0 7px 0 #9e1626; }
+    .btn.red:active { box-shadow: 0 1px 0 #9e1626; }
+
     /* ---------- Montaña rusa ---------- */
     .coaster { max-width: 900px; margin: 0 auto; }
     .coaster-screen { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 40px -28px rgba(29,36,51,.6); background: #9fd7ff; }
@@ -169,6 +190,9 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     @media (max-width: 760px) {
+      .ofrenda { grid-template-columns: 1fr; gap: 24px; }
+      .ofrenda-info { text-align: center; }
+      .ofrenda-info .facts { justify-content: center; }
       section { padding: 66px 0; }
       #coasterCanvas { height: 270px; }
       .hud { grid-template-columns: 1fr 1fr; }
@@ -204,18 +228,57 @@
       </div>
       <p>Viajera incansable, diseñadora UX/UI, veterana de PortAventura y, desde hace poco más de un año, la mamá de Guille. Hoy toca celebrarte… ¡y jugar un poco!</p>
       <div class="chips">
-        <span class="chip">✈️ Viajes</span><span class="chip">🎨 UX/UI</span><span class="chip">🎢 PortAventura</span><span class="chip">👶 Guille</span><span class="chip">💙 AEGEE</span>
+        <span class="chip">💐 Pilar</span><span class="chip">✈️ Viajes</span><span class="chip">🎨 UX/UI</span><span class="chip">🎢 PortAventura</span><span class="chip">👶 Guille</span><span class="chip">💙 AEGEE</span>
       </div>
-      <a href="#montana" class="btn blue" id="start">🎢 ¡Al lío!</a>
+      <a href="#pilar" class="btn blue" id="start">💐 ¡Al lío!</a>
     </div>
   </header>
 
   <main>
+    <!-- 1. Ofrenda de Flores -->
+    <section class="pilar" id="pilar">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">1</span>
+          <h2>¡Ofrenda de Flores! 💐</h2>
+          <p>Octubre en Zaragoza huele a claveles. Cada 12 de octubre, miles de personas vestidas de baturras llevan flores a la Virgen del Pilar y entre todas forman un manto gigante. Ahora te toca a ti: lleva ramos hasta completarlo… y mira qué dibujo aparece.</p>
+        </div>
+        <div class="ofrenda reveal">
+          <div class="manto" id="manto">
+            <svg viewBox="0 0 400 430" role="img" aria-label="Manto de flores de la Virgen del Pilar">
+              <defs>
+                <radialGradient id="glow"><stop offset="0" stop-color="#ffe39a" stop-opacity=".9"/><stop offset="1" stop-color="#ffe39a" stop-opacity="0"/></radialGradient>
+              </defs>
+              <ellipse class="reveal-glow" cx="200" cy="230" rx="210" ry="210" fill="url(#glow)"/>
+              <!-- estructura del manto -->
+              <path id="mantoFrame" d="" fill="#7a5a3a" opacity=".18"/>
+              <g id="flores"></g>
+              <!-- columna y corona en lo alto -->
+              <rect x="190" y="18" width="20" height="40" rx="3" fill="#cfb27a"/>
+              <rect x="185" y="54" width="30" height="8" rx="2" fill="#b8955a"/>
+              <path d="M186 18 L190 6 L196 14 L200 2 L204 14 L210 6 L214 18 Z" fill="#f6c443" stroke="#c9952a" stroke-width="1.5"/>
+              <!-- suelo de la plaza -->
+              <rect x="0" y="412" width="400" height="18" rx="4" fill="#e3cfa9"/>
+            </svg>
+          </div>
+          <div class="ofrenda-info">
+            <h3>El manto de Marina</h3>
+            <p>Cada vez que pulses, llega un ramo de claveles y se coloca en el manto, de abajo arriba, como en la Ofrenda de verdad.</p>
+            <div class="facts"><span>🌺 Claveles</span><span>👗 Trajes de baturra</span><span>🎶 Jota</span><span>🗓️ 12 de octubre</span></div>
+            <div class="flor-count" id="florCount">0 / 0 flores</div>
+            <div class="flor-bar" aria-hidden="true"><span id="florBar"></span></div>
+            <button class="btn red" id="ramoBtn">💐 Llevar un ramo</button>
+            <div class="ofrenda-msg" id="ofrendaMsg" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 1. Montaña rusa -->
     <section class="alt" id="montana">
       <div class="container">
         <div class="section-title reveal">
-          <span class="num">1</span>
+          <span class="num">2</span>
           <h2>Montaña rusa «Marina Khan» 🐉</h2>
           <p>Marina y Diego se suben (Guille aún no llega al 1,20 m, así que espera en la salida). Acelera para subir las cuestas y frena antes de cada cima: si pasas por encima del límite… ¡descarrilas!</p>
         </div>
@@ -248,7 +311,7 @@
     <section id="guille-sec">
       <div class="container">
         <div class="section-title reveal">
-          <span class="num">2</span>
+          <span class="num">3</span>
           <h2>¡Pilla a Guille!</h2>
           <p>Guille ya camina… y es un terremoto. Tócalo 8 veces antes de que acabe el tiempo para que se eche la siesta. Cuidado: cada vez que lo pillas, corre más (y va dejando juguetes por todas partes).</p>
         </div>
@@ -339,6 +402,79 @@
       }, 1000);
     }
     const inView = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+
+    /* ---------- 0. Ofrenda de Flores ---------- */
+    (() => {
+      // Manto en pirámide: 22 filas; la fila r tiene 2·round(r·12/21)+1 huecos (de 1 a 25).
+      const ROWS = 22, CELL = 15, TOP = 78, CX = 200, PER_RAMO = 16;
+      const half = (r) => Math.round((r * 12) / 21);
+      // Dibujo oculto: un corazón y una «M»
+      const HEART = [".##...##.", "####.####", "#########", ".#######.", "..#####..", "...###...", "....#...."];
+      const M = ["##.....##", "###...###", "##.#.#.##", "##..#..##", "##.....##", "##.....##"];
+      const pick = (art, r0, r, c, mid) => {
+        if (r < r0 || r >= r0 + art.length) return false;
+        const row = art[r - r0], off = c - (mid - (row.length - 1) / 2);
+        return off >= 0 && off < row.length && row[off] === "#";
+      };
+      const REDS = ["#d62839", "#c81d33", "#e0384a", "#b81a2c"];
+      const cells = [];
+      for (let r = 0; r < ROWS; r++) {
+        const width = 2 * half(r) + 1, mid = (width - 1) / 2;
+        for (let c = 0; c < width; c++) {
+          const x = CX + (c - mid) * CELL, y = TOP + r * CELL;
+          const color = pick(HEART, 7, r, c, mid) ? "#f6c443" : pick(M, 15, r, c, mid) ? "#ffffff" : REDS[(r * 7 + c * 3) % REDS.length];
+          cells.push({ r, x, y, color });
+        }
+      }
+      // Se rellena de abajo arriba, y dentro de cada fila en orden aleatorio
+      const order = [...cells].sort((a, b) => b.r - a.r || Math.random() - .5);
+      const svgNS = "http://www.w3.org/2000/svg";
+      const flores = document.getElementById("flores");
+      const frame = document.getElementById("mantoFrame");
+      const last = cells[cells.length - 1];
+      frame.setAttribute("d", `M${CX} ${TOP - 16} L${CX + half(ROWS - 1) * CELL + 16} ${last.y + 14} L${CX - half(ROWS - 1) * CELL - 16} ${last.y + 14} Z`);
+      const btn = document.getElementById("ramoBtn"), countEl = document.getElementById("florCount"), bar = document.getElementById("florBar");
+      const msgEl = document.getElementById("ofrendaMsg"), manto = document.getElementById("manto");
+      const MSGS = ["¡Qué bonico!", "¡Viva la Pilarica!", "¡Más claveles!", "¡Arriba ese manto!", "¡Ole, maña!", "¡Que suene una jota!"];
+      let placed = 0;
+      const update = () => {
+        countEl.textContent = `${placed} / ${cells.length} flores`;
+        bar.style.width = (placed / cells.length) * 100 + "%";
+      };
+      function flower(cell, delay) {
+        const g = document.createElementNS(svgNS, "g");
+        g.setAttribute("class", "flor");
+        g.style.animationDelay = delay + "ms";
+        const r = 9;
+        let petals = "";
+        for (let k = 0; k < 6; k++) {
+          const a = (k / 6) * Math.PI * 2 + cell.r;
+          petals += `<circle cx="${(cell.x + Math.cos(a) * 4).toFixed(1)}" cy="${(cell.y + Math.sin(a) * 4).toFixed(1)}" r="${r * .55}" fill="${cell.color}"/>`;
+        }
+        g.innerHTML = petals + `<circle cx="${cell.x.toFixed(1)}" cy="${cell.y.toFixed(1)}" r="${r * .42}" fill="${cell.color}" stroke="rgba(0,0,0,.18)" stroke-width="1"/>`;
+        flores.appendChild(g);
+      }
+      btn.addEventListener("click", () => {
+        if (btn.disabled) return;
+        const n = Math.min(PER_RAMO, cells.length - placed);
+        for (let i = 0; i < n; i++) flower(order[placed + i], i * 35);
+        placed += n;
+        update();
+        if (placed >= cells.length) {
+          btn.disabled = true;
+          btn.textContent = "💐 ¡Manto completo!";
+          setTimeout(() => {
+            manto.classList.add("done");
+            msgEl.textContent = "¡Ofrenda completada! Un manto con tu inicial y un corazón, de parte de todos. 💛❤️";
+            confetti(240); confettiAt(manto, 120);
+            toast("💐 ¡Ofrenda completada! ¡Viva el Pilar!");
+          }, 500);
+        } else {
+          msgEl.textContent = MSGS[Math.floor(Math.random() * MSGS.length)];
+        }
+      });
+      update();
+    })();
 
     /* ---------- 1. Montaña rusa ---------- */
     // Perfil de la vía: puntos [x, altura]. Entre puntos se interpola con un coseno (cimas y valles suaves).
