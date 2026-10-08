@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz cumple, Berta!</title>
+  <meta name="description" content="Una web de cumpleaños para Berta: expedición naturalista y set en el Mainstage.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦋</text></svg>">
+  <style>
+    :root {
+      --bg: #f7f4ff;
+      --paper: #ffffff;
+      --ink: #1f1a33;
+      --muted: #6c6684;
+      --violet: #7b4dff;
+      --violet-dark: #5a2fe0;
+      --pink: #ff4fa3;
+      --teal: #1fbfa6;
+      --gold: #ffc847;
+      --leaf: #3d8b4f;
+      --leaf-dark: #2b6638;
+      --night: #150f2e;
+      --line: #e7e1f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Nunito", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Fredoka", system-ui, sans-serif; line-height: 1.05; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    .hand { font-family: "Caveat", cursive; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font: 800 1.05rem "Nunito", sans-serif; text-decoration: none;
+      background: var(--violet); color: #fff; border: 0; cursor: pointer;
+      padding: 15px 28px; border-radius: 999px;
+      box-shadow: 0 5px 0 var(--violet-dark); transition: transform .12s, box-shadow .12s, opacity .2s;
+      user-select: none; -webkit-user-select: none; touch-action: manipulation;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--violet-dark); }
+    .btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--violet-dark); }
+    .btn.green { background: var(--leaf); box-shadow: 0 5px 0 var(--leaf-dark); }
+    .btn.green:hover { box-shadow: 0 7px 0 var(--leaf-dark); }
+    .btn.green:active { box-shadow: 0 1px 0 var(--leaf-dark); }
+    .btn.pink { background: var(--pink); box-shadow: 0 5px 0 #c92a7a; }
+    .btn.pink:hover { box-shadow: 0 7px 0 #c92a7a; }
+    .btn.pink:active { box-shadow: 0 1px 0 #c92a7a; }
+    .btn.ghost { background: rgba(255,255,255,.12); box-shadow: none; border: 2px solid rgba(255,255,255,.35); padding: 10px 18px; font-size: .95rem; }
+    .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    section { padding: 90px 0; position: relative; }
+    .section-title { text-align: center; margin-bottom: 36px; }
+    .section-title .num {
+      display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gold); color: var(--ink); font: 700 1.3rem "Fredoka", sans-serif; margin-bottom: 10px;
+    }
+    .section-title h2 { font-size: clamp(2.2rem, 5.5vw, 3.5rem); }
+    .section-title p { color: var(--muted); max-width: 620px; margin: 10px auto 0; font-size: 1.06rem; }
+
+    /* ---------- Portada ---------- */
+    .hero {
+      min-height: 100vh; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 70px 20px; overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(123,77,255,.22), transparent 40%),
+        radial-gradient(circle at 88% 80%, rgba(31,191,166,.22), transparent 42%),
+        radial-gradient(circle at 85% 12%, rgba(255,79,163,.18), transparent 35%);
+    }
+    .polaroid {
+      position: relative; display: inline-block; background: #fff; padding: 12px 12px 6px; margin-bottom: 26px;
+      box-shadow: 0 20px 36px -18px rgba(31,26,51,.5); transform: rotate(-3deg); transition: transform .4s;
+    }
+    .polaroid:hover { transform: rotate(0) scale(1.03); }
+    .polaroid img { display: block; width: clamp(210px, 26vw, 290px); height: auto; }
+    .polaroid figcaption { font-family: "Caveat", cursive; font-size: 1.5rem; line-height: 1.15; padding: 6px 0 4px; max-width: clamp(210px, 26vw, 290px); margin: 0 auto; }
+    .polaroid::before {
+      content: ""; position: absolute; top: -12px; left: 50%; width: 100px; height: 26px;
+      transform: translateX(-50%) rotate(2deg); background: rgba(31,191,166,.55);
+    }
+    .polaroid .deco { position: absolute; font-size: 2.4rem; right: -26px; bottom: 34px; transform: rotate(12deg); }
+    .hero .kicker { font-size: 1.8rem; color: var(--violet); }
+    .hero h1 { font-size: clamp(3rem, 10vw, 6.8rem); margin: 2px 0; }
+    .hero h1 span { background: linear-gradient(90deg, var(--violet), var(--pink), var(--teal)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { font-size: clamp(1.05rem, 2.3vw, 1.25rem); color: var(--muted); max-width: 600px; margin: 16px auto 22px; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 26px; }
+    .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: .9rem; }
+
+    /* ---------- Cartel del festival ---------- */
+    .poster-sec { background: var(--night); color: #fff; overflow: hidden; }
+    .poster-sec .section-title p { color: #bdb6dc; }
+    .poster {
+      max-width: 640px; margin: 0 auto; text-align: center; border-radius: 26px; padding: 40px 28px 34px; position: relative;
+      background: linear-gradient(160deg, #2a1660, #4a1f7a 45%, #1b5b6b);
+      box-shadow: 0 30px 60px -30px rgba(123,77,255,.8), inset 0 0 0 2px rgba(255,255,255,.12);
+    }
+    .poster .fest { font: 800 clamp(2rem, 7vw, 3.2rem) "Unbounded", sans-serif; letter-spacing: .02em; background: linear-gradient(90deg, #ffd36e, #ff7ac3, #7ef0dd); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .poster .date { color: #d6cff5; font-weight: 700; margin: 6px 0 22px; letter-spacing: .14em; text-transform: uppercase; font-size: .85rem; }
+    .poster .headliner { font: 800 clamp(2.6rem, 10vw, 4.4rem) "Unbounded", sans-serif; line-height: 1; margin: 8px 0 18px; text-shadow: 0 0 30px rgba(255,79,163,.6); }
+    .poster .tier { color: #e9e4ff; font-weight: 800; font-size: 1.08rem; line-height: 1.9; }
+    .poster .tier span { color: #ffd36e; margin: 0 6px; }
+    .poster .tier.small { font-size: .9rem; font-weight: 700; color: #bdb6dc; margin-top: 8px; }
+    .wristband {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; padding: 10px 22px; border-radius: 999px; cursor: pointer;
+      background: repeating-linear-gradient(90deg, #ff4fa3 0 18px, #ff6db3 18px 36px); color: #fff; font-weight: 800; border: 0; font-family: inherit; font-size: 1rem;
+      box-shadow: 0 10px 24px -10px rgba(255,79,163,.9); transition: transform .2s;
+    }
+    .wristband:hover { transform: scale(1.05) rotate(-1deg); }
+    .wristband.on { background: repeating-linear-gradient(90deg, #1fbfa6 0 18px, #34d3ba 18px 36px); }
+
+    /* ---------- Expedición ---------- */
+    .nature { background: linear-gradient(180deg, #eef7ee, var(--bg)); }
+    .expedition { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; align-items: start; }
+    .landscape {
+      position: relative; aspect-ratio: 4 / 3; border-radius: 22px; overflow: hidden; user-select: none; -webkit-user-select: none;
+      box-shadow: 0 24px 40px -28px rgba(31,26,51,.6); touch-action: manipulation; cursor: crosshair;
+    }
+    .landscape svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .animal {
+      position: absolute; transform: translate(-50%, -50%); border: 0; background: none; cursor: pointer; padding: 6px;
+      font-size: clamp(1.7rem, 4.2vw, 2.6rem); line-height: 1; animation: peek .35s cubic-bezier(.3,1.7,.5,1);
+      filter: drop-shadow(0 4px 3px rgba(0,0,0,.25)); touch-action: manipulation;
+    }
+    .animal .em { display: inline-block; animation: bob 1s ease-in-out infinite alternate; }
+    .animal.flip .em { transform: scaleX(-1); }
+    .animal.leaving { animation: hide .35s forwards; pointer-events: none; }
+    .animal.caught { animation: snap .45s forwards; pointer-events: none; }
+    @keyframes peek { from { transform: translate(-50%, 0) scale(.2); opacity: 0; } }
+    @keyframes hide { to { transform: translate(-50%, -20%) scale(.2); opacity: 0; } }
+    @keyframes snap { 30% { transform: translate(-50%, -50%) scale(1.4); filter: brightness(2.2); } to { transform: translate(-50%, -90%) scale(.6); opacity: 0; } }
+    @keyframes bob { from { translate: 0 0; } to { translate: 0 -4px; } }
+    .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+    .flash.go { animation: flash .25s; }
+    @keyframes flash { 30% { opacity: .55; } }
+    .land-hud { position: absolute; left: 12px; right: 12px; top: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
+    .land-hud span { background: rgba(255,255,255,.85); border-radius: 999px; padding: 4px 12px; font-weight: 800; font-size: .9rem; }
+    .land-overlay {
+      position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px;
+      background: rgba(20,40,30,.35); color: #fff; transition: opacity .3s;
+    }
+    .land-overlay.hidden { opacity: 0; pointer-events: none; }
+    .land-overlay h3 { font-size: clamp(1.4rem, 3.6vw, 2rem); text-shadow: 0 2px 10px rgba(0,0,0,.4); }
+    .land-overlay p { max-width: 440px; margin: 6px auto 14px; font-weight: 700; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+    .notebook {
+      background: #fffdf4; border: 1px solid #ece3c8; border-radius: 18px; padding: 18px 16px;
+      box-shadow: 0 20px 34px -26px rgba(31,26,51,.6);
+      background-image: repeating-linear-gradient(#fffdf4 0 27px, #efe7cf 27px 28px);
+    }
+    .notebook h3 { font-size: 1.35rem; display: flex; justify-content: space-between; align-items: baseline; }
+    .notebook h3 small { font: 800 .95rem "Nunito", sans-serif; color: var(--leaf); }
+    .species { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+    .sp {
+      background: #fff; border: 1.5px dashed #d7cfb3; border-radius: 12px; padding: 6px 4px; text-align: center; min-height: 74px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;
+    }
+    .sp .e { font-size: 1.6rem; line-height: 1.1; filter: brightness(0) opacity(.18); }
+    .sp b { font-size: .68rem; line-height: 1.15; color: #b5ab8d; }
+    .sp i { font-size: .6rem; color: var(--muted); line-height: 1.1; display: none; }
+    .sp.seen { border: 1.5px solid var(--leaf); animation: stampIn .45s cubic-bezier(.3,1.8,.5,1); }
+    .sp.seen .e { filter: none; }
+    .sp.seen b { color: var(--ink); }
+    .sp.seen i { display: block; }
+    .sp .x { position: absolute; top: 2px; right: 5px; font-size: .62rem; font-weight: 800; color: var(--leaf); }
+    @keyframes stampIn { from { transform: scale(1.5) rotate(-8deg); opacity: 0; } }
+    .nature-msg { text-align: center; color: var(--muted); font-weight: 700; margin-top: 14px; min-height: 1.6em; }
+
+    /* ---------- Mainstage ---------- */
+    .stage-sec { background: var(--night); color: #fff; }
+    .stage-sec .section-title p { color: #bdb6dc; }
+    .stage { max-width: 760px; margin: 0 auto; position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(123,77,255,.9); }
+    #rhythm { display: block; width: 100%; height: 460px; touch-action: none; background: #0d0920; }
+    .stage-overlay {
+      position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px;
+      background: rgba(13,9,32,.72); transition: opacity .3s;
+    }
+    .stage-overlay.hidden { opacity: 0; pointer-events: none; }
+    .stage-overlay h3 { font: 800 clamp(1.4rem, 4vw, 2.1rem) "Unbounded", sans-serif; }
+    .stage-overlay p { color: #d6cff5; max-width: 460px; margin: 8px auto 16px; font-weight: 700; }
+    .stage-overlay .row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .grade { font: 800 4rem "Unbounded", sans-serif; background: linear-gradient(90deg, #ffd36e, #ff7ac3, #7ef0dd); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.1; }
+    .keys-hint { text-align: center; color: #bdb6dc; margin-top: 14px; font-weight: 700; }
+    .keys-hint kbd { background: #2a2350; border: 1px solid #4b4180; border-radius: 6px; padding: 2px 8px; font-family: inherit; color: #fff; }
+
+    /* ---------- Carta ---------- */
+    .note {
+      max-width: 640px; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 18px;
+      padding: 44px 40px 36px; box-shadow: 0 30px 50px -35px rgba(31,26,51,.5); position: relative;
+    }
+    .note::before { content: "💜"; position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: 2.4rem; }
+    .note p { font-size: 1.08rem; margin-bottom: 14px; }
+    .note .hand { font-size: 2rem; color: var(--violet); line-height: 1.2; }
+    .note .sign { text-align: right; margin: 22px 0 0; }
+    footer { text-align: center; color: var(--muted); padding: 20px 20px 46px; font-size: .95rem; }
+    footer a { color: var(--violet-dark); }
+
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 200; width: 100%; height: 100%; }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); z-index: 210;
+      background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 16px; font-weight: 800;
+      box-shadow: 0 14px 30px -14px rgba(0,0,0,.6); transition: transform .4s cubic-bezier(.3,1.5,.5,1);
+      width: max-content; max-width: calc(100% - 32px); text-align: center;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      section { padding: 66px 0; }
+      .expedition { grid-template-columns: 1fr; }
+      .species { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      #rhythm { height: 420px; }
+      .note { padding: 40px 22px 30px; }
+      .polaroid .deco { right: -10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Portada -->
+  <header class="hero">
+    <div>
+      <figure class="polaroid">
+        <img src="img/berta.jpg" alt="Berta con los brazos abiertos junto al lago de Tomorrowland" width="900" height="1125">
+        <figcaption>Bélgica, reencuentros y Tomorrowland 🩵</figcaption>
+        <span class="deco" aria-hidden="true">🎧</span>
+      </figure>
+      <br>
+      <span class="kicker hand">Bióloga, montañera y festivalera</span>
+      <h1>¡Feliz cumple, <span>Berta!</span></h1>
+      <p>Hoy se celebra a quien se sabe el nombre científico de cada bicho, sube montañas sin despeinarse (bueno, un poco) y aguanta un festival de principio a fin. ¡Que empiece la fiesta!</p>
+      <div class="chips">
+        <span class="chip">🏔️ Montaña</span><span class="chip">🔬 Biología</span><span class="chip">✈️ Viajes</span><span class="chip">🎧 Festivales</span>
+      </div>
+      <a href="#cartel" class="btn" id="start">🎉 ¡Que empiece la fiesta!</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Cartel -->
+    <section class="poster-sec" id="cartel">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">🎫</span>
+          <h2>El cartel de este año</h2>
+          <p>Un festival con una sola cabeza de cartel. Adivina quién.</p>
+        </div>
+        <div class="poster reveal">
+          <div class="fest">BERTA FEST</div>
+          <div class="date" id="festDate">Hoy · Todo el día · Entrada libre</div>
+          <div class="hand" style="font-size:1.6rem; color:#ffd36e">cabeza de cartel</div>
+          <div class="headliner">BERTA</div>
+          <div class="tier">Los Pirineos<span>✦</span>DJ Mochilera<span>✦</span>Bichos Raros</div>
+          <div class="tier">Las Auroras Boreales<span>✦</span>Amigas de Siempre<span>✦</span>The Rebecos</div>
+          <div class="tier small">Mañanas de ruta · Tardes de terraza · Noches de festival · Lineup sujeto a cambios por buen tiempo</div>
+          <button class="wristband" id="wristband">🎟️ Activar mi pulsera VIP</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. Expedición naturalista -->
+    <section class="nature" id="expedicion">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">1</span>
+          <h2>Expedición naturalista 🏔️</h2>
+          <p>Prismáticos y cámara en mano: en el valle irán asomando animales unos segundos. Tócalos para fotografiarlos y apuntarlos en tu cuaderno de campo. Hay 16 especies… y una es rarísima de ver.</p>
+        </div>
+        <div class="expedition reveal">
+          <div class="landscape" id="landscape">
+            <svg viewBox="0 0 1000 750" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#dff3ff"/></linearGradient>
+                <linearGradient id="lake" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6fc1e6"/><stop offset="1" stop-color="#3d93c4"/></linearGradient>
+              </defs>
+              <rect width="1000" height="750" fill="url(#sky)"/>
+              <circle cx="860" cy="90" r="42" fill="#fff3b0"/>
+              <g fill="#fff" opacity=".9"><ellipse cx="200" cy="90" rx="70" ry="22"/><ellipse cx="250" cy="76" rx="50" ry="22"/><ellipse cx="620" cy="60" rx="60" ry="18"/></g>
+              <!-- montañas -->
+              <path d="M-20 430 L180 210 L300 330 L470 150 L640 360 L760 230 L1020 440 Z" fill="#8a9bb5"/>
+              <path d="M180 210 L215 250 L195 245 L170 262 L150 245 Z M470 150 L520 205 L490 196 L462 214 L436 192 Z M760 230 L800 270 L776 266 L752 280 L730 262 Z" fill="#fff"/>
+              <path d="M-20 470 L120 360 L260 440 L420 330 L560 450 L720 360 L1020 480 L1020 520 L-20 520 Z" fill="#6f8f6a"/>
+              <!-- rocas -->
+              <g fill="#9b9488"><path d="M560 400 L620 360 L700 380 L760 410 L720 440 L600 440 Z"/><path d="M780 390 L840 365 L900 395 L880 430 L800 430 Z"/></g>
+              <!-- bosque -->
+              <g fill="#2f6b3e">
+                <path d="M20 520 L60 400 L100 520 Z"/><path d="M80 520 L125 380 L170 520 Z"/><path d="M150 520 L190 410 L230 520 Z"/>
+                <path d="M210 520 L255 370 L300 520 Z"/><path d="M280 520 L320 405 L360 520 Z"/><path d="M340 520 L385 390 L430 520 Z"/>
+              </g>
+              <g fill="#3d8b4f">
+                <path d="M0 540 L40 440 L80 540 Z"/><path d="M110 545 L150 430 L190 545 Z"/><path d="M240 545 L280 440 L320 545 Z"/><path d="M370 545 L410 450 L450 545 Z"/>
+              </g>
+              <!-- prado -->
+              <rect x="0" y="530" width="1000" height="220" fill="#8cc56b"/>
+              <path d="M0 530 Q 250 505 500 530 T 1000 525 L1000 560 L0 560 Z" fill="#7ab95b"/>
+              <!-- lago -->
+              <ellipse cx="710" cy="545" rx="250" ry="48" fill="url(#lake)"/>
+              <path d="M520 545 H600 M660 535 H760 M800 555 H880" stroke="#cdeefc" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+              <!-- flores -->
+              <g font-size="22">
+                <text x="60" y="660">🌼</text><text x="180" y="700">🌸</text><text x="330" y="640">🌼</text><text x="470" y="710">🌷</text>
+                <text x="600" y="650">🌼</text><text x="760" y="700">🌸</text><text x="900" y="655">🌼</text>
+              </g>
+            </svg>
+            <div class="flash" id="flash"></div>
+            <div class="land-hud"><span id="natTime">⏱ 45 s</span><span id="natRound">📸 0 fotos</span></div>
+            <div class="land-overlay" id="natOverlay">
+              <div>
+                <h3 id="natTitle">🔭 ¿Lista para la expedición?</h3>
+                <p id="natText">45 segundos en el valle. Fotografía todos los animales que puedas.</p>
+                <button class="btn green" id="natStart">🥾 ¡Empezar la ruta!</button>
+              </div>
+            </div>
+          </div>
+          <div class="notebook">
+            <h3>📓 Cuaderno de campo <small id="natCount">0 / 16</small></h3>
+            <div class="species" id="species"></div>
+          </div>
+        </div>
+        <p class="nature-msg" id="natMsg" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- 2. Mainstage -->
+    <section class="stage-sec" id="mainstage">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">2</span>
+          <h2>Pincha en el Mainstage 🎧</h2>
+          <p>Berta toma los platos. Las notas caen por 4 carriles: tócalas justo cuando lleguen a la línea para que el público salte. Sube el volumen (o no, tú decides).</p>
+        </div>
+        <div class="stage reveal">
+          <canvas id="rhythm" aria-label="Juego de ritmo"></canvas>
+          <div class="stage-overlay" id="stageOverlay">
+            <div>
+              <div class="grade" id="stageGrade" style="display:none"></div>
+              <h3 id="stageTitle">BERTA · LIVE @ MAINSTAGE</h3>
+              <p id="stageText">Toca cada carril cuando la nota pase por la línea. ¡Ojo al drop!</p>
+              <div class="row">
+                <button class="btn pink" id="stageStart">▶️ Empezar el set</button>
+                <button class="btn ghost" id="muteBtn">🔊 Sonido: sí</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="keys-hint">En móvil, toca los carriles. En el ordenador: <kbd>D</kbd> <kbd>F</kbd> <kbd>J</kbd> <kbd>K</kbd> o las flechas.</p>
+      </div>
+    </section>
+
+    <!-- Carta -->
+    <section>
+      <div class="container">
+        <article class="note reveal">
+          <p class="hand">¡Feliz cumpleaños, Berta!</p>
+          <p>Que este año venga lleno de rutas por la montaña, de bichos curiosos a los que poner nombre científico, de viajes a sitios nuevos y de festivales en los que bailar hasta que salga el sol.</p>
+          <p>Gracias por contagiar esas ganas de descubrirlo todo. Disfruta muchísimo de tu día… y de todo lo que venga después. 🦋🎶</p>
+          <p class="sign hand">Con muchísimo cariño 💜</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hecho con cariño para Berta. · <a href="../">Volver al índice</a></footer>
+
+  <script>
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---------- Confeti y avisos ---------- */
+    const cv = document.getElementById("confetti");
+    const cx = cv.getContext("2d");
+    let pieces = [], confettiRunning = false;
+    function sizeConfetti() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+    sizeConfetti(); addEventListener("resize", sizeConfetti);
+    function confetti(n = 140, x = innerWidth / 2, y = innerHeight / 3) {
+      if (reduceMotion) return;
+      const colors = ["#7b4dff", "#ff4fa3", "#1fbfa6", "#ffc847", "#3d8b4f", "#7ef0dd", "#ffffff"];
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9;
+        pieces.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+          w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, c: colors[i % colors.length], life: 0 });
+      }
+      if (!confettiRunning) { confettiRunning = true; requestAnimationFrame(tickConfetti); }
+    }
+    function tickConfetti() {
+      const d = devicePixelRatio;
+      cx.clearRect(0, 0, cv.width, cv.height);
+      pieces.forEach((p) => {
+        p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+        cx.save(); cx.translate(p.x * d, p.y * d); cx.rotate(p.r);
+        cx.fillStyle = p.c; cx.globalAlpha = Math.max(0, 1 - p.life / 220);
+        cx.fillRect(-p.w * d / 2, -p.h * d / 2, p.w * d, p.h * d * Math.abs(Math.cos(p.r * 2)) + d);
+        cx.restore();
+      });
+      pieces = pieces.filter((p) => p.y < innerHeight + 40 && p.life < 220);
+      if (pieces.length) requestAnimationFrame(tickConfetti);
+      else { confettiRunning = false; cx.clearRect(0, 0, cv.width, cv.height); }
+    }
+    const confettiAt = (el, n) => { const r = el.getBoundingClientRect(); confetti(n, r.left + r.width / 2, r.top + r.height / 2); };
+    let toastTimer, toastLockedUntil = 0;
+    function toast(msg, important = false) {
+      const now = performance.now();
+      if (!important && now < toastLockedUntil) return;
+      if (important) toastLockedUntil = now + 2600;
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
+    }
+    function lockButton(btn, label, secs = 3) {
+      btn.disabled = true;
+      let left = secs;
+      btn.textContent = `⏳ Un momento… ${left}`;
+      const iv = setInterval(() => {
+        left--;
+        if (left > 0) { btn.textContent = `⏳ Un momento… ${left}`; return; }
+        clearInterval(iv); btn.disabled = false; btn.textContent = label;
+      }, 1000);
+    }
+    const inView = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+    addEventListener("load", () => setTimeout(() => confetti(160), 400));
+    document.getElementById("start").addEventListener("click", (e) => confettiAt(e.currentTarget, 50));
+
+    /* ---------- Cartel ---------- */
+    document.getElementById("festDate").textContent =
+      `${new Date().toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })} · Todo el día · Entrada libre`;
+    const wristband = document.getElementById("wristband");
+    wristband.addEventListener("click", () => {
+      wristband.classList.add("on");
+      wristband.textContent = "✅ Pulsera VIP activada: acceso total a la fiesta";
+      confettiAt(wristband, 120);
+    });
+
+    /* ---------- 1. Expedición naturalista ---------- */
+    (() => {
+      // Hábitats: zonas (en % del paisaje) donde puede asomar cada animal
+      const HAB = {
+        sky:    { x: [12, 88], y: [10, 28] },
+        rocks:  { x: [58, 88], y: [50, 56] },
+        trees:  { x: [6, 40],  y: [56, 64] },
+        forest: { x: [6, 44],  y: [67, 72] },
+        lake:   { x: [55, 88], y: [71, 75] },
+        meadow: { x: [8, 92],  y: [80, 92] },
+      };
+      const SPECIES = [
+        { e: "🦌", n: "Ciervo", s: "Cervus elaphus", h: ["forest", "meadow"] },
+        { e: "🦊", n: "Zorro rojo", s: "Vulpes vulpes", h: ["forest", "meadow"] },
+        { e: "🐗", n: "Jabalí", s: "Sus scrofa", h: ["forest"] },
+        { e: "🐺", n: "Lobo", s: "Canis lupus", h: ["forest", "rocks"] },
+        { e: "🐻", n: "Oso pardo", s: "Ursus arctos", h: ["forest"], rare: true },
+        { e: "🐿️", n: "Ardilla roja", s: "Sciurus vulgaris", h: ["trees"] },
+        { e: "🦉", n: "Búho real", s: "Bubo bubo", h: ["trees"] },
+        { e: "🦅", n: "Águila real", s: "Aquila chrysaetos", h: ["sky"], fly: true },
+        { e: "🦋", n: "Mariposa apolo", s: "Parnassius apollo", h: ["meadow", "sky"], fly: true },
+        { e: "🐐", n: "Cabra montés", s: "Capra pyrenaica", h: ["rocks"] },
+        { e: "🦎", n: "Lagartija roquera", s: "Podarcis muralis", h: ["rocks"] },
+        { e: "🐸", n: "Rana bermeja", s: "Rana temporaria", h: ["lake"] },
+        { e: "🦆", n: "Ánade real", s: "Anas platyrhynchos", h: ["lake"] },
+        { e: "🐟", n: "Trucha común", s: "Salmo trutta", h: ["lake"] },
+        { e: "🦔", n: "Erizo europeo", s: "Erinaceus europaeus", h: ["meadow"] },
+        { e: "🐞", n: "Mariquita", s: "Coccinella septempunctata", h: ["meadow"] },
+      ];
+      const ROUND = 45;
+      const land = document.getElementById("landscape");
+      const flash = document.getElementById("flash");
+      const spEl = document.getElementById("species");
+      const overlay = document.getElementById("natOverlay"), startBtn = document.getElementById("natStart");
+      const natTitle = document.getElementById("natTitle"), natText = document.getElementById("natText");
+      const natTime = document.getElementById("natTime"), natRound = document.getElementById("natRound");
+      const natCount = document.getElementById("natCount"), natMsg = document.getElementById("natMsg");
+      const seen = new Map(); // nombre -> veces
+      let playing = false, endAt = 0, nextSpawn = 0, roundPhotos = 0, roundNew = 0, done = false;
+
+      SPECIES.forEach((sp, i) => {
+        const d = document.createElement("div");
+        d.className = "sp"; d.id = "sp" + i;
+        d.innerHTML = `<span class="x"></span><span class="e">${sp.e}</span><b>${sp.rare ? "¿?" : "?"}</b><i>${sp.s}</i>`;
+        d.title = "Sin avistar";
+        spEl.appendChild(d);
+      });
+      const rand = (a, b) => a + Math.random() * (b - a);
+      function spawn() {
+        const visible = land.querySelectorAll(".animal:not(.leaving):not(.caught)").length;
+        if (visible >= 4) return;
+        // el oso sale poco; las especies aún no vistas salen algo más
+        const weights = SPECIES.map((sp) => (sp.rare ? .25 : 1) * (seen.has(sp.n) ? 1 : 1.6));
+        let r = Math.random() * weights.reduce((a, b) => a + b, 0), idx = 0;
+        while ((r -= weights[idx]) > 0) idx++;
+        const sp = SPECIES[idx];
+        const hab = HAB[sp.h[Math.floor(Math.random() * sp.h.length)]];
+        const b = document.createElement("button");
+        b.className = "animal" + (Math.random() < .5 ? " flip" : "");
+        b.innerHTML = `<span class="em">${sp.e}</span>`;
+        b.setAttribute("aria-label", sp.n);
+        const x = rand(...hab.x), y = rand(...hab.y);
+        b.style.left = x + "%"; b.style.top = y + "%";
+        const life = (sp.rare ? 1400 : 1700) + Math.random() * 700;
+        if (sp.fly) {
+          const dx = (Math.random() < .5 ? -1 : 1) * rand(8, 16);
+          b.style.transition = `left ${life}ms linear`;
+          requestAnimationFrame(() => requestAnimationFrame(() => (b.style.left = x + dx + "%")));
+          b.classList.toggle("flip", dx > 0);
+        }
+        b.addEventListener("pointerdown", (e) => { e.preventDefault(); e.stopPropagation(); photo(b, sp); });
+        land.insertBefore(b, flash);
+        setTimeout(() => { if (!b.classList.contains("caught")) { b.classList.add("leaving"); setTimeout(() => b.remove(), 400); } }, life);
+      }
+      function photo(el, sp) {
+        if (!playing || el.classList.contains("caught")) return;
+        el.classList.add("caught");
+        setTimeout(() => el.remove(), 460);
+        flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go");
+        roundPhotos++;
+        natRound.textContent = `📸 ${roundPhotos} ${roundPhotos === 1 ? "foto" : "fotos"}`;
+        const idx = SPECIES.indexOf(sp), card = document.getElementById("sp" + idx);
+        const times = (seen.get(sp.n) || 0) + 1;
+        seen.set(sp.n, times);
+        card.querySelector(".x").textContent = "×" + times;
+        if (times === 1) {
+          roundNew++;
+          card.classList.add("seen");
+          card.querySelector("b").textContent = sp.n;
+          card.title = `${sp.n} (${sp.s})`;
+          natCount.textContent = `${seen.size} / ${SPECIES.length}`;
+          const r = el.getBoundingClientRect();
+          confetti(sp.rare ? 160 : 26, r.left + r.width / 2, r.top + r.height / 2);
+          if (sp.rare) toast("🐻 ¡Avistamiento rarísimo! Un oso pardo (Ursus arctos)", true);
+          else toast(`${sp.e} ¡Nueva especie! ${sp.n} · ${sp.s}`);
+          natMsg.textContent = `${sp.e} ${sp.n} — ${sp.s}`;
+          if (seen.size === SPECIES.length && !done) {
+            done = true;
+            setTimeout(() => {
+              confetti(260);
+              toast("🔬 ¡Cuaderno completo! Las 16 especies, doctora Berta", true);
+              natMsg.textContent = "📓 ¡Cuaderno de campo completo! Has visto las 16 especies del valle.";
+            }, 500);
+          }
+        }
+      }
+      function startRound() {
+        playing = true; roundPhotos = 0; roundNew = 0;
+        endAt = performance.now() + ROUND * 1000; nextSpawn = 0;
+        overlay.classList.add("hidden");
+        natRound.textContent = "📸 0 fotos";
+        natMsg.textContent = "Atenta a los árboles, al lago, al cielo y a las rocas…";
+      }
+      function endRound() {
+        playing = false;
+        land.querySelectorAll(".animal").forEach((a) => a.remove());
+        natTitle.textContent = "🏕️ Fin de la ruta";
+        const missing = SPECIES.length - seen.size;
+        natText.textContent = `${roundPhotos} ${roundPhotos === 1 ? "foto" : "fotos"} y ${roundNew} ${roundNew === 1 ? "especie nueva" : "especies nuevas"}. ` +
+          (missing ? `Te ${missing === 1 ? "falta" : "faltan"} ${missing} para completar el cuaderno.` : "¡Cuaderno completo! 🔬");
+        overlay.classList.remove("hidden");
+        if (roundNew >= 5) confettiAt(land, 80);
+        lockButton(startBtn, missing ? "🥾 Otra ruta" : "🥾 Repetir la ruta");
+      }
+      startBtn.addEventListener("click", () => { if (!startBtn.disabled) startRound(); });
+      function loop(t) {
+        if (playing) {
+          const left = Math.max(0, Math.ceil((endAt - t) / 1000));
+          natTime.textContent = `⏱ ${left} s`;
+          if (t >= endAt) endRound();
+          else if (t >= nextSpawn) { spawn(); nextSpawn = t + 650 + Math.random() * 500; }
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+
+    /* ---------- 2. Mainstage (juego de ritmo) ---------- */
+    (() => {
+      const canvas = document.getElementById("rhythm");
+      const g = canvas.getContext("2d");
+      const overlay = document.getElementById("stageOverlay");
+      const startBtn = document.getElementById("stageStart"), muteBtn = document.getElementById("muteBtn");
+      const titleEl = document.getElementById("stageTitle"), textEl = document.getElementById("stageText"), gradeEl = document.getElementById("stageGrade");
+      const LANES = 4, COLORS = ["#ff4fa3", "#9b6bff", "#1fbfa6", "#ffc847"], KEYS = ["KeyD", "KeyF", "KeyJ", "KeyK"];
+      const ARROWS = ["ArrowLeft", "ArrowDown", "ArrowUp", "ArrowRight"];
+      const BPM = 126, BEAT = 60 / BPM, COUNT_IN = 4, TOTAL_BEATS = 68, DROP = 36, TRAVEL = 1.45;
+      const PERFECT = .07, GOOD = .14, MISS = .17;
+      let W = 0, H = 0;
+      function size() {
+        W = canvas.clientWidth; H = canvas.clientHeight;
+        canvas.width = W * devicePixelRatio; canvas.height = H * devicePixelRatio;
+        g.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      }
+      size(); addEventListener("resize", size);
+
+      // ---- Audio (sintetizado en el navegador, sin archivos) ----
+      let ac = null, master = null, muted = false, noiseBuf = null;
+      function initAudio() {
+        if (ac) return;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        ac = new AC();
+        master = ac.createGain(); master.gain.value = muted ? 0 : .7; master.connect(ac.destination);
+        noiseBuf = ac.createBuffer(1, ac.sampleRate * .5, ac.sampleRate);
+        const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      }
+      function kick(t) {
+        const o = ac.createOscillator(), gn = ac.createGain();
+        o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(45, t + .12);
+        gn.gain.setValueAtTime(1, t); gn.gain.exponentialRampToValueAtTime(.001, t + .32);
+        o.connect(gn).connect(master); o.start(t); o.stop(t + .35);
+      }
+      function noise(t, dur, gain, type, freq) {
+        const s = ac.createBufferSource(), f = ac.createBiquadFilter(), gn = ac.createGain();
+        s.buffer = noiseBuf; f.type = type; f.frequency.value = freq;
+        gn.gain.setValueAtTime(gain, t); gn.gain.exponentialRampToValueAtTime(.001, t + dur);
+        s.connect(f).connect(gn).connect(master); s.start(t); s.stop(t + dur + .02);
+      }
+      function bass(t, freq) {
+        const o = ac.createOscillator(), f = ac.createBiquadFilter(), gn = ac.createGain();
+        o.type = "sawtooth"; o.frequency.value = freq; f.type = "lowpass"; f.frequency.value = 420;
+        gn.gain.setValueAtTime(.22, t); gn.gain.exponentialRampToValueAtTime(.001, t + .22);
+        o.connect(f).connect(gn).connect(master); o.start(t); o.stop(t + .25);
+      }
+      function blip(lane) {
+        if (!ac) return;
+        const t = ac.currentTime, o = ac.createOscillator(), gn = ac.createGain();
+        o.type = "triangle"; o.frequency.value = [523, 659, 784, 1047][lane];
+        gn.gain.setValueAtTime(.18, t); gn.gain.exponentialRampToValueAtTime(.001, t + .15);
+        o.connect(gn).connect(master); o.start(t); o.stop(t + .17);
+      }
+      function scheduleSong(t0) {
+        const BASS = [55, 55, 65.4, 49];
+        for (let b = 0; b < TOTAL_BEATS; b++) {
+          const t = t0 + b * BEAT;
+          kick(t);
+          if (b >= COUNT_IN) noise(t + BEAT / 2, .05, .25, "highpass", 7000);
+          if (b >= DROP) {
+            if (b % 2 === 1) noise(t, .16, .45, "bandpass", 1500);
+            bass(t + BEAT / 2, BASS[Math.floor(b / 4) % 4]);
+          }
+          if (b >= DROP - 4 && b < DROP) for (let k = 0; k < 4; k++) noise(t + k * BEAT / 4, .04, .12 + (b - DROP + 4) * .05, "highpass", 3000);
+        }
+        noise(t0 + TOTAL_BEATS * BEAT, 1.6, .5, "highpass", 2500); // platillo final
+      }
+      muteBtn.addEventListener("click", () => {
+        muted = !muted;
+        muteBtn.textContent = muted ? "🔇 Sonido: no" : "🔊 Sonido: sí";
+        if (master) master.gain.value = muted ? 0 : .7;
+      });
+
+      // ---- Partitura (generada con una semilla fija: siempre la misma canción) ----
+      function makeChart() {
+        let seed = 7;
+        const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+        const notes = [];
+        let last = 1;
+        const lane = () => { let l; do { l = Math.floor(rnd() * LANES); } while (l === last && rnd() < .7); last = l; return l; };
+        for (let b = COUNT_IN; b < TOTAL_BEATS; b++) {
+          notes.push({ t: b * BEAT, lane: lane() });
+          const build2 = b >= 20 && b < DROP && b % 2 === 1;
+          const drop = b >= DROP && b < TOTAL_BEATS - 2;
+          if (build2 || (drop && rnd() < .6)) notes.push({ t: (b + .5) * BEAT, lane: lane() });
+          if (drop && b % 8 === 0) { const l1 = notes[notes.length - (rnd() < .6 ? 1 : 2)].lane; notes.push({ t: b * BEAT, lane: (l1 + 2) % LANES }); }
+        }
+        return notes.sort((a, b) => a.t - b.t).map((n) => ({ ...n, state: "wait" }));
+      }
+
+      let notes = [], playing = false, t0 = 0, perfStart = 0, score = 0, combo = 0, maxCombo = 0, hype = 30;
+      let counts = { perfect: 0, good: 0, miss: 0 }, popups = [], flashes = [0, 0, 0, 0], sparks = [];
+      // El juego usa siempre el reloj de la página; la música se programa en paralelo (si el audio arranca tarde, el juego no se congela)
+      const now = () => (performance.now() - perfStart) / 1000;
+
+      function start() {
+        initAudio();
+        if (ac && ac.state === "suspended") ac.resume();
+        notes = makeChart(); score = 0; combo = 0; maxCombo = 0; hype = 30; popups = []; sparks = [];
+        counts = { perfect: 0, good: 0, miss: 0 };
+        perfStart = performance.now() + 250;
+        if (ac) { t0 = ac.currentTime + .25; scheduleSong(t0); }
+        playing = true;
+        overlay.classList.add("hidden");
+      }
+      startBtn.addEventListener("click", () => { if (!startBtn.disabled) start(); });
+
+      function judge(lane) {
+        if (!playing) return;
+        flashes[lane] = 1;
+        const t = now();
+        let best = null, bestD = 1;
+        for (const n of notes) {
+          if (n.state !== "wait" || n.lane !== lane) continue;
+          const d = Math.abs(n.t - t);
+          if (d < bestD) { bestD = d; best = n; }
+          if (n.t - t > GOOD) break;
+        }
+        if (!best || bestD > GOOD) return; // pulsación al aire: no penaliza
+        best.state = "hit";
+        const perfect = bestD <= PERFECT;
+        counts[perfect ? "perfect" : "good"]++;
+        combo++; maxCombo = Math.max(maxCombo, combo);
+        score += (perfect ? 300 : 100) * (1 + Math.min(3, Math.floor(combo / 10) * .5));
+        hype = Math.min(100, hype + (perfect ? 3 : 1.5));
+        popups.push({ text: perfect ? "PERFECT!" : "GOOD", lane, life: 1, color: perfect ? "#ffd36e" : "#7ef0dd" });
+        blip(lane);
+        const x = laneX(lane);
+        for (let i = 0; i < (perfect ? 12 : 6); i++) sparks.push({ x, y: hitY(), vx: (Math.random() - .5) * 6, vy: -Math.random() * 6 - 1, life: 1, c: COLORS[lane] });
+        if (combo > 0 && combo % 25 === 0) { toast(`🔥 ¡Combo de ${combo}! El público enloquece`); confettiAt(canvas, 60); }
+      }
+      const laneW = () => Math.min(110, W / 5.2);
+      const laneX = (l) => W / 2 + (l - 1.5) * laneW();
+      const hitY = () => H - 92;
+
+      // Controles: teclado y toques en los carriles
+      addEventListener("keydown", (e) => {
+        if (!playing || e.repeat || !inView(canvas)) return;
+        let l = KEYS.indexOf(e.code); if (l < 0) l = ARROWS.indexOf(e.code);
+        if (l >= 0) { e.preventDefault(); judge(l); }
+      });
+      canvas.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        const r = canvas.getBoundingClientRect(), x = e.clientX - r.left;
+        const l = Math.round((x - W / 2) / laneW() + 1.5);
+        judge(Math.max(0, Math.min(LANES - 1, l)));
+      });
+
+      function finish() {
+        playing = false;
+        const total = notes.length;
+        const acc = (counts.perfect + counts.good * .6) / total;
+        const grade = acc >= .95 ? "S" : acc >= .85 ? "A" : acc >= .7 ? "B" : "C";
+        const msgs = {
+          S: "¡Leyenda del Mainstage! 400.000 personas coreando tu nombre.",
+          A: "¡Brutal! El público pide otra canción.",
+          B: "¡Buen set! La fiesta está en marcha.",
+          C: "El público lo ha bailado igual 😅 ¿Otra?",
+        };
+        gradeEl.style.display = "block"; gradeEl.textContent = grade;
+        titleEl.textContent = msgs[grade];
+        textEl.textContent = `${Math.round(score).toLocaleString("es-ES")} puntos · ${counts.perfect} perfect · ${counts.good} good · ${counts.miss} fallos · combo máximo ${maxCombo}`;
+        overlay.classList.remove("hidden");
+        if (grade === "S" || grade === "A") { confetti(260); toast("🎆 ¡Bienvenida a Tomorrowland, Berta!", true); }
+        lockButton(startBtn, "🔁 Otro set");
+      }
+
+      // ---- Dibujo ----
+      function draw(ts) {
+        const t = playing ? now() : 0;
+        g.clearRect(0, 0, W, H);
+        const bg = g.createLinearGradient(0, 0, 0, H);
+        bg.addColorStop(0, "#1a0f3d"); bg.addColorStop(.6, "#0d0920"); bg.addColorStop(1, "#090616");
+        g.fillStyle = bg; g.fillRect(0, 0, W, H);
+        const pulse = playing && t > 0 ? Math.max(0, 1 - ((t % BEAT) / BEAT) * 2.5) : 0;
+        // escenario: arco y torres
+        g.save();
+        g.globalAlpha = .9;
+        g.strokeStyle = `rgba(155,107,255,${.35 + pulse * .4})`; g.lineWidth = 3;
+        g.beginPath(); g.arc(W / 2, 150, Math.min(W * .42, 260), Math.PI, 0); g.stroke();
+        g.strokeStyle = `rgba(255,79,163,${.25 + pulse * .4})`;
+        g.beginPath(); g.arc(W / 2, 150, Math.min(W * .34, 210), Math.PI, 0); g.stroke();
+        g.fillStyle = "#24164d";
+        g.beginPath(); g.moveTo(W / 2 - 40, 150); g.lineTo(W / 2, 60); g.lineTo(W / 2 + 40, 150); g.fill();
+        g.fillStyle = `rgba(255,200,71,${.5 + pulse * .5})`; g.beginPath(); g.arc(W / 2, 92, 9, 0, 7); g.fill();
+        g.restore();
+        // láseres cuando hay mucho ambiente
+        if (playing && hype > 55) {
+          g.save(); g.globalCompositeOperation = "lighter";
+          for (let i = 0; i < 6; i++) {
+            const a = Math.sin(ts / 700 + i) * .9 + (i - 2.5) * .25;
+            g.strokeStyle = `${COLORS[i % 4]}66`; g.lineWidth = 2;
+            g.beginPath(); g.moveTo(W / 2 + (i - 2.5) * 30, 150); g.lineTo(W / 2 + (i - 2.5) * 30 + Math.sin(a) * H, 150 + Math.cos(a) * H); g.stroke();
+          }
+          g.restore();
+        }
+        // carriles
+        const lw = laneW(), hy = hitY();
+        for (let l = 0; l < LANES; l++) {
+          const x = laneX(l);
+          g.fillStyle = `rgba(255,255,255,${.03 + flashes[l] * .12})`;
+          g.fillRect(x - lw / 2 + 3, 170, lw - 6, H - 170);
+          g.strokeStyle = COLORS[l]; g.lineWidth = 3 + flashes[l] * 3;
+          g.beginPath(); g.arc(x, hy, lw * .32, 0, 7); g.stroke();
+          flashes[l] *= .85;
+        }
+        g.fillStyle = "rgba(255,255,255,.25)"; g.fillRect(laneX(0) - lw / 2, hy - 1, lw * 4, 2);
+        // notas
+        if (playing) {
+          for (const n of notes) {
+            if (n.state === "wait" && t - n.t > MISS) {
+              n.state = "miss"; counts.miss++; combo = 0; hype = Math.max(0, hype - 6);
+              popups.push({ text: "MISS", lane: n.lane, life: 1, color: "#ff6b6b" });
+            }
+            if (n.state !== "wait") continue;
+            const dt = n.t - t;
+            if (dt > TRAVEL) break;
+            const y = hy - (dt / TRAVEL) * (hy - 170);
+            const x = laneX(n.lane), r = lw * .28;
+            g.fillStyle = COLORS[n.lane];
+            g.shadowColor = COLORS[n.lane]; g.shadowBlur = 16;
+            g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
+            g.shadowBlur = 0; g.fillStyle = "rgba(255,255,255,.7)"; g.beginPath(); g.arc(x - r * .3, y - r * .3, r * .3, 0, 7); g.fill();
+          }
+          if (t > TOTAL_BEATS * BEAT + .8 && notes.every((n) => n.state !== "wait")) finish();
+          // cuenta atrás
+          if (t < COUNT_IN * BEAT) {
+            const c = COUNT_IN - Math.floor(Math.max(0, t) / BEAT);
+            g.fillStyle = "#fff"; g.font = "800 46px Unbounded, sans-serif"; g.textAlign = "center";
+            g.fillText(c > 1 ? c - 1 : "¡YA!", W / 2, 260);
+          }
+          if (t > DROP * BEAT - .2 && t < DROP * BEAT + 1.2) {
+            g.fillStyle = "#ffd36e"; g.font = "800 34px Unbounded, sans-serif"; g.textAlign = "center";
+            g.fillText("DROP!", W / 2, 230);
+          }
+        }
+        // chispas y textos
+        sparks.forEach((s) => { s.x += s.vx; s.y += s.vy; s.vy += .25; s.life -= .03; g.globalAlpha = Math.max(0, s.life); g.fillStyle = s.c; g.fillRect(s.x, s.y, 4, 4); });
+        sparks = sparks.filter((s) => s.life > 0); g.globalAlpha = 1;
+        popups.forEach((p) => {
+          p.life -= .025;
+          g.globalAlpha = Math.max(0, p.life); g.fillStyle = p.color; g.font = "800 15px Nunito, sans-serif"; g.textAlign = "center";
+          g.fillText(p.text, laneX(p.lane), hy - 50 - (1 - p.life) * 30);
+        });
+        popups = popups.filter((p) => p.life > 0); g.globalAlpha = 1;
+        // público
+        g.font = "26px system-ui, sans-serif"; g.textAlign = "center";
+        const jump = hype / 100;
+        for (let i = 0; i < 12; i++) {
+          const x = (i + .5) * (W / 12);
+          const y = H - 14 - (playing ? Math.abs(Math.sin(ts / 180 + i)) * 14 * jump + pulse * 8 * jump : 0);
+          g.fillText(i % 3 === 0 ? "🙌" : i % 3 === 1 ? "🙋" : "🎉", x, y);
+        }
+        // marcador
+        g.textAlign = "left"; g.fillStyle = "#fff"; g.font = "800 16px Nunito, sans-serif";
+        g.fillText(`${Math.round(score).toLocaleString("es-ES")} pts`, 14, 26);
+        g.textAlign = "right"; g.fillStyle = combo >= 10 ? "#ffd36e" : "#fff";
+        g.fillText(combo > 1 ? `combo ×${combo}` : "", W - 14, 26);
+        g.fillStyle = "rgba(255,255,255,.15)"; g.fillRect(14, 36, W - 28, 6);
+        const hg = g.createLinearGradient(14, 0, W - 14, 0); hg.addColorStop(0, "#1fbfa6"); hg.addColorStop(1, "#ff4fa3");
+        g.fillStyle = hg; g.fillRect(14, 36, (W - 28) * (hype / 100), 6);
+        g.textAlign = "left"; g.fillStyle = "rgba(255,255,255,.6)"; g.font = "700 11px Nunito, sans-serif"; g.fillText("AMBIENTE", 14, 56);
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    /* ---------- Aparición al hacer scroll ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>

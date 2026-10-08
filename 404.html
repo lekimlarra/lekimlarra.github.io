@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página no encontrada</title>
   <script>
-    // Redirige /Julia, /Ángela, /Irene, /Sonia, /Marina… a su carpeta en minúsculas y sin tildes.
+    // Redirige /Julia, /Ángela, /Irene, /Sonia, /Marina, /Berta… a su carpeta en minúsculas y sin tildes.
     (function () {
       var first = decodeURIComponent(location.pathname).split("/").filter(Boolean)[0] || "";
       var slug = first.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-      if (["julia", "angela", "irene", "sonia", "marina"].indexOf(slug) !== -1 && first !== slug) location.replace("/" + slug + "/");
+      if (["julia", "angela", "irene", "sonia", "marina", "berta"].indexOf(slug) !== -1 && first !== slug) location.replace("/" + slug + "/");
     })();
   </script>
   <style>
