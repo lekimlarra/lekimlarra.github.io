@@ -108,61 +108,110 @@
     .wristband:hover { transform: scale(1.05) rotate(-1deg); }
     .wristband.on { background: repeating-linear-gradient(90deg, #1fbfa6 0 18px, #34d3ba 18px 36px); }
 
-    /* ---------- Expedición ---------- */
-    .nature { background: linear-gradient(180deg, #eef7ee, var(--bg)); }
-    .expedition { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; align-items: start; }
-    .landscape {
+    /* ---------- Festival de la cerveza ---------- */
+    .beer-sec { background: linear-gradient(180deg, #fff6e0, var(--bg)); }
+    .beerfest { display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px; align-items: start; }
+    .square {
       position: relative; aspect-ratio: 4 / 3; border-radius: 22px; overflow: hidden; user-select: none; -webkit-user-select: none;
-      box-shadow: 0 24px 40px -28px rgba(31,26,51,.6); touch-action: manipulation; cursor: crosshair;
+      box-shadow: 0 24px 40px -28px rgba(31,26,51,.6); touch-action: manipulation; background: #1d2346;
     }
-    .landscape svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .animal {
-      position: absolute; transform: translate(-50%, -50%); border: 0; background: none; cursor: pointer; padding: 6px;
-      font-size: clamp(1.7rem, 4.2vw, 2.6rem); line-height: 1; animation: peek .35s cubic-bezier(.3,1.7,.5,1);
-      filter: drop-shadow(0 4px 3px rgba(0,0,0,.25)); touch-action: manipulation;
+    .square svg.bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .glass {
+      position: absolute; transform: translate(-50%, -100%); border: 0; background: none; cursor: pointer; padding: 4px;
+      width: clamp(38px, 7.5vw, 62px); animation: serve .35s cubic-bezier(.3,1.7,.5,1); touch-action: manipulation;
+      filter: drop-shadow(0 4px 4px rgba(0,0,0,.35));
     }
-    .animal .em { display: inline-block; animation: bob 1s ease-in-out infinite alternate; }
-    .animal.flip .em { transform: scaleX(-1); }
-    .animal.leaving { animation: hide .35s forwards; pointer-events: none; }
-    .animal.caught { animation: snap .45s forwards; pointer-events: none; }
-    @keyframes peek { from { transform: translate(-50%, 0) scale(.2); opacity: 0; } }
-    @keyframes hide { to { transform: translate(-50%, -20%) scale(.2); opacity: 0; } }
-    @keyframes snap { 30% { transform: translate(-50%, -50%) scale(1.4); filter: brightness(2.2); } to { transform: translate(-50%, -90%) scale(.6); opacity: 0; } }
-    @keyframes bob { from { translate: 0 0; } to { translate: 0 -4px; } }
-    .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
-    .flash.go { animation: flash .25s; }
-    @keyframes flash { 30% { opacity: .55; } }
-    .land-hud { position: absolute; left: 12px; right: 12px; top: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
-    .land-hud span { background: rgba(255,255,255,.85); border-radius: 999px; padding: 4px 12px; font-weight: 800; font-size: .9rem; }
-    .land-overlay {
+    .glass svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .glass .liq { transform-box: fill-box; transform-origin: 50% 100%; transition: transform .45s ease-in; }
+    .glass.drunk .liq { transform: scaleY(0); }
+    .glass.drunk { pointer-events: none; animation: drunk .7s .25s forwards; }
+    .glass.leaving { pointer-events: none; animation: away .35s forwards; }
+    .glass .tag { position: absolute; left: 50%; bottom: -16px; transform: translateX(-50%); font: 800 .6rem "Nunito", sans-serif; color: #fff; white-space: nowrap; text-shadow: 0 1px 3px #000; pointer-events: none; }
+    @keyframes serve { from { transform: translate(-50%, -60%) scale(.3); opacity: 0; } }
+    @keyframes away { to { transform: translate(-50%, -100%) scale(.3); opacity: 0; } }
+    @keyframes drunk { to { transform: translate(-50%, -140%) rotate(-12deg); opacity: 0; } }
+    .cheers { position: absolute; transform: translate(-50%, -100%); pointer-events: none; font: 800 1rem "Nunito", sans-serif; color: #ffd36e; text-shadow: 0 2px 4px rgba(0,0,0,.6); animation: rise 1s ease-out forwards; white-space: nowrap; }
+    @keyframes rise { to { transform: translate(-50%, -260%); opacity: 0; } }
+    .sq-hud { position: absolute; left: 12px; right: 12px; top: 10px; display: flex; justify-content: space-between; gap: 8px; pointer-events: none; }
+    .sq-hud span { background: rgba(255,255,255,.88); border-radius: 999px; padding: 4px 12px; font-weight: 800; font-size: .9rem; }
+    .sq-overlay {
       position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px;
-      background: rgba(20,40,30,.35); color: #fff; transition: opacity .3s;
+      background: rgba(18,14,40,.55); color: #fff; transition: opacity .3s;
     }
-    .land-overlay.hidden { opacity: 0; pointer-events: none; }
-    .land-overlay h3 { font-size: clamp(1.4rem, 3.6vw, 2rem); text-shadow: 0 2px 10px rgba(0,0,0,.4); }
-    .land-overlay p { max-width: 440px; margin: 6px auto 14px; font-weight: 700; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
-    .notebook {
-      background: #fffdf4; border: 1px solid #ece3c8; border-radius: 18px; padding: 18px 16px;
+    .sq-overlay.hidden { opacity: 0; pointer-events: none; }
+    .sq-overlay h3 { font-size: clamp(1.4rem, 3.6vw, 2rem); text-shadow: 0 2px 10px rgba(0,0,0,.4); }
+    .sq-overlay p { max-width: 440px; margin: 6px auto 14px; font-weight: 700; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+    .passport {
+      background: #fff8e8; border: 1px solid #efdcae; border-radius: 18px; padding: 18px 16px;
       box-shadow: 0 20px 34px -26px rgba(31,26,51,.6);
-      background-image: repeating-linear-gradient(#fffdf4 0 27px, #efe7cf 27px 28px);
     }
-    .notebook h3 { font-size: 1.35rem; display: flex; justify-content: space-between; align-items: baseline; }
-    .notebook h3 small { font: 800 .95rem "Nunito", sans-serif; color: var(--leaf); }
-    .species { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
-    .sp {
-      background: #fff; border: 1.5px dashed #d7cfb3; border-radius: 12px; padding: 6px 4px; text-align: center; min-height: 74px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;
+    .passport h3 { font-size: 1.3rem; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+    .passport h3 small { font: 800 .95rem "Nunito", sans-serif; color: #b07a12; }
+    .beers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+    .bp {
+      background: #fff; border: 1.5px dashed #e3cf9c; border-radius: 12px; padding: 6px 3px 5px; text-align: center; min-height: 86px;
+      display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative;
     }
-    .sp .e { font-size: 1.6rem; line-height: 1.1; filter: brightness(0) opacity(.18); }
-    .sp b { font-size: .68rem; line-height: 1.15; color: #b5ab8d; }
-    .sp i { font-size: .6rem; color: var(--muted); line-height: 1.1; display: none; }
-    .sp.seen { border: 1.5px solid var(--leaf); animation: stampIn .45s cubic-bezier(.3,1.8,.5,1); }
-    .sp.seen .e { filter: none; }
-    .sp.seen b { color: var(--ink); }
-    .sp.seen i { display: block; }
-    .sp .x { position: absolute; top: 2px; right: 5px; font-size: .62rem; font-weight: 800; color: var(--leaf); }
+    .bp svg { width: 22px; height: auto; filter: grayscale(1) brightness(1.6) opacity(.35); }
+    .bp b { font-size: .64rem; line-height: 1.12; color: #c2ad7a; margin-top: 2px; }
+    .bp i { font-size: .56rem; color: var(--muted); line-height: 1.1; display: none; }
+    .bp.seen { border: 1.5px solid #d9a227; animation: stampIn .45s cubic-bezier(.3,1.8,.5,1); }
+    .bp.seen svg { filter: none; }
+    .bp.seen b { color: var(--ink); }
+    .bp.seen i { display: block; }
+    .bp .x { position: absolute; top: 2px; right: 5px; font-size: .62rem; font-weight: 800; color: #b07a12; }
     @keyframes stampIn { from { transform: scale(1.5) rotate(-8deg); opacity: 0; } }
-    .nature-msg { text-align: center; color: var(--muted); font-weight: 700; margin-top: 14px; min-height: 1.6em; }
+    .beer-msg { text-align: center; color: var(--muted); font-weight: 700; margin-top: 14px; min-height: 1.6em; }
+
+    /* ---------- Kebab ---------- */
+    .kebab-sec { background: linear-gradient(180deg, #fff1e6, var(--bg)); }
+    .modes { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .kebab-game { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; max-width: 980px; margin: 0 auto; }
+    .counter-top { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 16px; box-shadow: 0 20px 34px -26px rgba(31,26,51,.5); }
+    .ticket {
+      background: #fffef8; border: 1px dashed #d8c9a8; border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; min-height: 120px;
+      font-size: .95rem; position: relative;
+    }
+    .ticket .who { font-weight: 800; font-size: 1.05rem; }
+    .ticket ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .ticket li { background: #f4efe4; border-radius: 999px; padding: 3px 10px; font-weight: 700; font-size: .85rem; }
+    .ticket li.ok { background: #d6f5dc; color: #1e6b33; }
+    .ticket li.ok::before { content: "✓ "; }
+    .ticket .timer { position: absolute; top: 10px; right: 12px; font-weight: 800; }
+    .k-hud { display: flex; justify-content: space-between; font-weight: 800; color: var(--muted); margin-bottom: 8px; font-size: .92rem; }
+    .kebab-view { position: relative; background: radial-gradient(circle at 50% 55%, #fff, #f6efe6); border-radius: 14px; }
+    #kebabSvg { width: 100%; height: auto; display: block; }
+    #kebabFood { transform-box: fill-box; transform-origin: center; transition: transform .5s cubic-bezier(.5,0,.3,1), opacity .4s; }
+    #kebabFood.wrapped { transform: scale(.25, .9) rotate(-25deg); opacity: 0; }
+    .piece { animation: drop .35s cubic-bezier(.3,1.6,.5,1) both; transform-box: fill-box; transform-origin: center; }
+    @keyframes drop { from { transform: translateY(-30px) scale(.4); opacity: 0; } }
+    .kebab-result {
+      position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; pointer-events: none;
+      opacity: 0; transition: opacity .3s;
+    }
+    .kebab-result.show { opacity: 1; }
+    .kebab-result .big { font-size: 4.5rem; line-height: 1; animation: catPop .5s cubic-bezier(.3,1.7,.5,1); }
+    @keyframes catPop { from { transform: scale(.2); opacity: 0; } }
+    .kebab-result .verdict { font-weight: 800; margin-top: 6px; background: rgba(255,255,255,.9); border-radius: 10px; padding: 6px 10px; }
+    .pantry h4 { font: 800 .78rem "Nunito", sans-serif; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 10px 0 8px; }
+    .pantry h4:first-child { margin-top: 0; }
+    .ing { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .ing button {
+      border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: 7px 2px 6px; cursor: pointer; font: 700 .76rem "Nunito", sans-serif; color: var(--ink);
+      display: flex; flex-direction: column; align-items: center; gap: 2px; transition: transform .15s, border-color .15s, background .15s; touch-action: manipulation;
+    }
+    .ing button span { font-size: 1.5rem; line-height: 1; }
+    .ing button:hover { transform: translateY(-2px); }
+    .ing button.on { border-color: #e2702b; background: #fff1e4; }
+    .ing button:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .k-actions { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; margin-top: 14px; }
+    .k-actions .btn { padding: 14px 8px; }
+    .btn.orange { background: #e2702b; box-shadow: 0 5px 0 #b4521a; }
+    .btn.orange:hover { box-shadow: 0 7px 0 #b4521a; }
+    .btn.orange:active { box-shadow: 0 1px 0 #b4521a; }
+    .btn.light { background: #fff; color: var(--ink); box-shadow: 0 5px 0 #d9d2ea; border: 1px solid var(--line); }
+    .btn.light.on { background: #ffe7d3; }
+    .kebab-msg { text-align: center; color: var(--muted); font-weight: 700; margin-top: 14px; min-height: 1.6em; }
 
     /* ---------- Mainstage ---------- */
     .stage-sec { background: var(--night); color: #fff; }
@@ -206,8 +255,8 @@
 
     @media (max-width: 860px) {
       section { padding: 66px 0; }
-      .expedition { grid-template-columns: 1fr; }
-      .species { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .beerfest, .kebab-game { grid-template-columns: 1fr; }
+      .beers { grid-template-columns: repeat(4, 1fr); gap: 6px; }
       #rhythm { height: 420px; }
       .note { padding: 40px 22px 30px; }
       .polaroid .deco { right: -10px; }
@@ -234,7 +283,7 @@
       <h1>¡Feliz cumple, <span>Berta!</span></h1>
       <p>Hoy se celebra a quien se sabe el nombre científico de cada bicho, sube montañas sin despeinarse (bueno, un poco) y aguanta un festival de principio a fin. ¡Que empiece la fiesta!</p>
       <div class="chips">
-        <span class="chip">🏔️ Montaña</span><span class="chip">🔬 Biología</span><span class="chip">✈️ Viajes</span><span class="chip">🎧 Festivales</span>
+        <span class="chip">🏔️ Montaña</span><span class="chip">🔬 Biología</span><span class="chip">✈️ Viajes</span><span class="chip">🎧 Festivales</span><span class="chip">🍺 Cerveza belga</span><span class="chip">🥙 Kebab</span>
       </div>
       <a href="#cartel" class="btn" id="start">🎉 ¡Que empiece la fiesta!</a>
     </div>
@@ -255,73 +304,65 @@
           <div class="hand" style="font-size:1.6rem; color:#ffd36e">cabeza de cartel</div>
           <div class="headliner">BERTA</div>
           <div class="tier">Los Pirineos<span>✦</span>DJ Mochilera<span>✦</span>Bichos Raros</div>
-          <div class="tier">Las Auroras Boreales<span>✦</span>Amigas de Siempre<span>✦</span>The Rebecos</div>
+          <div class="tier">Las Auroras Boreales<span>✦</span>Amigas de Siempre<span>✦</span>Kebab Samurái</div>
           <div class="tier small">Mañanas de ruta · Tardes de terraza · Noches de festival · Lineup sujeto a cambios por buen tiempo</div>
           <button class="wristband" id="wristband">🎟️ Activar mi pulsera VIP</button>
         </div>
       </div>
     </section>
 
-    <!-- 1. Expedición naturalista -->
-    <section class="nature" id="expedicion">
+    <!-- 1. Festival de la cerveza belga -->
+    <section class="beer-sec" id="cerveza">
       <div class="container">
         <div class="section-title reveal">
           <span class="num">1</span>
-          <h2>Expedición naturalista 🏔️</h2>
-          <p>Prismáticos y cámara en mano: en el valle irán asomando animales unos segundos. Tócalos para fotografiarlos y apuntarlos en tu cuaderno de campo. Hay 16 especies… y una es rarísima de ver.</p>
+          <h2>Belgian Beer Festival 🍺</h2>
+          <p>Cuatro barras, dieciséis cervezas belgas. En cada barra irán sirviendo cervezas que solo duran unos segundos en la barra: tócalas para bebértelas y sellarlas en tu pasaporte cervecero. Hay una casi imposible de conseguir…</p>
         </div>
-        <div class="expedition reveal">
-          <div class="landscape" id="landscape">
-            <svg viewBox="0 0 1000 750" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <div class="beerfest reveal">
+          <div class="square" id="square">
+            <svg class="bg" viewBox="0 0 1000 750" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <defs>
-                <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8fd3ff"/><stop offset="1" stop-color="#dff3ff"/></linearGradient>
-                <linearGradient id="lake" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6fc1e6"/><stop offset="1" stop-color="#3d93c4"/></linearGradient>
+                <linearGradient id="nightSky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#141a3c"/><stop offset="1" stop-color="#2f2a5a"/></linearGradient>
+                <pattern id="awning" width="40" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#c8102e"/><rect x="20" width="20" height="10" fill="#fff4dc"/></pattern>
+                <pattern id="awning2" width="40" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#1b1b1b"/><rect x="20" width="20" height="10" fill="#fdda24"/></pattern>
               </defs>
-              <rect width="1000" height="750" fill="url(#sky)"/>
-              <circle cx="860" cy="90" r="42" fill="#fff3b0"/>
-              <g fill="#fff" opacity=".9"><ellipse cx="200" cy="90" rx="70" ry="22"/><ellipse cx="250" cy="76" rx="50" ry="22"/><ellipse cx="620" cy="60" rx="60" ry="18"/></g>
-              <!-- montañas -->
-              <path d="M-20 430 L180 210 L300 330 L470 150 L640 360 L760 230 L1020 440 Z" fill="#8a9bb5"/>
-              <path d="M180 210 L215 250 L195 245 L170 262 L150 245 Z M470 150 L520 205 L490 196 L462 214 L436 192 Z M760 230 L800 270 L776 266 L752 280 L730 262 Z" fill="#fff"/>
-              <path d="M-20 470 L120 360 L260 440 L420 330 L560 450 L720 360 L1020 480 L1020 520 L-20 520 Z" fill="#6f8f6a"/>
-              <!-- rocas -->
-              <g fill="#9b9488"><path d="M560 400 L620 360 L700 380 L760 410 L720 440 L600 440 Z"/><path d="M780 390 L840 365 L900 395 L880 430 L800 430 Z"/></g>
-              <!-- bosque -->
-              <g fill="#2f6b3e">
-                <path d="M20 520 L60 400 L100 520 Z"/><path d="M80 520 L125 380 L170 520 Z"/><path d="M150 520 L190 410 L230 520 Z"/>
-                <path d="M210 520 L255 370 L300 520 Z"/><path d="M280 520 L320 405 L360 520 Z"/><path d="M340 520 L385 390 L430 520 Z"/>
+              <rect width="1000" height="750" fill="url(#nightSky)"/>
+              <g fill="#fff" opacity=".7"><circle cx="80" cy="40" r="1.6"/><circle cx="300" cy="22" r="1.2"/><circle cx="520" cy="50" r="1.5"/><circle cx="760" cy="28" r="1.2"/><circle cx="930" cy="60" r="1.6"/></g>
+              <!-- casas gremiales de la Grand-Place -->
+              <path d="M0 230 V140 L30 140 L30 120 L50 120 L50 100 L70 100 L70 80 L90 80 L90 100 L110 100 L110 120 L130 120 L130 140 L160 140 L160 110 L200 70 L240 110 L240 140 L280 140 L280 95 L300 95 L300 75 L320 75 L320 55 L340 55 L340 75 L360 75 L360 95 L380 95 L380 140 L420 140 L420 120 L470 60 L478 20 L486 60 L536 120 L536 140 L580 140 L580 100 L600 100 L600 80 L620 80 L620 60 L640 60 L640 80 L660 80 L660 100 L680 100 L680 140 L720 140 L720 105 L760 65 L800 105 L800 140 L840 140 L840 115 L860 115 L860 95 L880 95 L880 75 L900 75 L900 95 L920 95 L920 115 L940 115 L940 140 L1000 140 V230 Z" fill="#c9a24a" opacity=".85"/>
+              <g fill="#ffe7a3" opacity=".9">
+                <rect x="40" y="160" width="14" height="22"/><rect x="80" y="160" width="14" height="22"/><rect x="190" y="150" width="14" height="22"/><rect x="310" y="150" width="14" height="22"/>
+                <rect x="460" y="150" width="14" height="22"/><rect x="490" y="150" width="14" height="22"/><rect x="610" y="150" width="14" height="22"/><rect x="750" y="150" width="14" height="22"/><rect x="880" y="160" width="14" height="22"/>
               </g>
-              <g fill="#3d8b4f">
-                <path d="M0 540 L40 440 L80 540 Z"/><path d="M110 545 L150 430 L190 545 Z"/><path d="M240 545 L280 440 L320 545 Z"/><path d="M370 545 L410 450 L450 545 Z"/>
+              <!-- banderines belgas -->
+              <path d="M0 40 Q 250 90 500 40 T 1000 40" fill="none" stroke="#333" stroke-width="2"/>
+              <g>
+                <path d="M40 48 l14 0 l-7 18 Z" fill="#1b1b1b"/><path d="M100 60 l14 0 l-7 18 Z" fill="#fdda24"/><path d="M160 67 l14 0 l-7 18 Z" fill="#c8102e"/>
+                <path d="M220 70 l14 0 l-7 18 Z" fill="#1b1b1b"/><path d="M280 68 l14 0 l-7 18 Z" fill="#fdda24"/><path d="M340 62 l14 0 l-7 18 Z" fill="#c8102e"/>
+                <path d="M400 54 l14 0 l-7 18 Z" fill="#1b1b1b"/><path d="M460 45 l14 0 l-7 18 Z" fill="#fdda24"/><path d="M540 36 l14 0 l-7 18 Z" fill="#c8102e"/>
+                <path d="M600 28 l14 0 l-7 18 Z" fill="#1b1b1b"/><path d="M660 22 l14 0 l-7 18 Z" fill="#fdda24"/><path d="M720 18 l14 0 l-7 18 Z" fill="#c8102e"/>
+                <path d="M780 18 l14 0 l-7 18 Z" fill="#1b1b1b"/><path d="M840 22 l14 0 l-7 18 Z" fill="#fdda24"/><path d="M900 28 l14 0 l-7 18 Z" fill="#c8102e"/>
               </g>
-              <!-- prado -->
-              <rect x="0" y="530" width="1000" height="220" fill="#8cc56b"/>
-              <path d="M0 530 Q 250 505 500 530 T 1000 525 L1000 560 L0 560 Z" fill="#7ab95b"/>
-              <!-- lago -->
-              <ellipse cx="710" cy="545" rx="250" ry="48" fill="url(#lake)"/>
-              <path d="M520 545 H600 M660 535 H760 M800 555 H880" stroke="#cdeefc" stroke-width="3" stroke-linecap="round" opacity=".7"/>
-              <!-- flores -->
-              <g font-size="22">
-                <text x="60" y="660">🌼</text><text x="180" y="700">🌸</text><text x="330" y="640">🌼</text><text x="470" y="710">🌷</text>
-                <text x="600" y="650">🌼</text><text x="760" y="700">🌸</text><text x="900" y="655">🌼</text>
-              </g>
+              <rect x="0" y="230" width="1000" height="520" fill="#3a3157"/>
+              <!-- 4 barras -->
+              <g id="stands"></g>
             </svg>
-            <div class="flash" id="flash"></div>
-            <div class="land-hud"><span id="natTime">⏱ 45 s</span><span id="natRound">📸 0 fotos</span></div>
-            <div class="land-overlay" id="natOverlay">
+            <div class="sq-hud"><span id="beerTime">⏱ 45 s</span><span id="beerRound">🍺 0 cervezas</span></div>
+            <div class="sq-overlay" id="beerOverlay">
               <div>
-                <h3 id="natTitle">🔭 ¿Lista para la expedición?</h3>
-                <p id="natText">45 segundos en el valle. Fotografía todos los animales que puedas.</p>
-                <button class="btn green" id="natStart">🥾 ¡Empezar la ruta!</button>
+                <h3 id="beerTitle">🍻 ¡Bienvenida al festival!</h3>
+                <p id="beerText">45 segundos para recorrer las barras. Pilla todas las cervezas que puedas antes de que se las lleve otro.</p>
+                <button class="btn orange" id="beerStart">🍺 ¡A por la primera ronda!</button>
               </div>
             </div>
           </div>
-          <div class="notebook">
-            <h3>📓 Cuaderno de campo <small id="natCount">0 / 16</small></h3>
-            <div class="species" id="species"></div>
+          <div class="passport">
+            <h3>🎫 Pasaporte cervecero <small id="beerCount">0 / 16</small></h3>
+            <div class="beers" id="beers"></div>
           </div>
         </div>
-        <p class="nature-msg" id="natMsg" aria-live="polite"></p>
+        <p class="beer-msg" id="beerMsg" aria-live="polite">🥨 Recuerda: es un juego. En la vida real, una de agua entre cerveza y cerveza. 😉</p>
       </div>
     </section>
 
@@ -351,12 +392,45 @@
       </div>
     </section>
 
+    <!-- 3. Kebab -->
+    <section class="kebab-sec" id="kebab">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">3</span>
+          <h2>Kebab Berta 🥙</h2>
+          <p>Después del festival, lo que toca es un buen kebab. Atiende el turno de noche (los clientes tienen prisa) o monta el tuyo a tu gusto y descubre qué nota le da el kebabómetro.</p>
+        </div>
+        <div class="modes reveal">
+          <button class="btn orange" id="modeOrders">🧑‍🍳 Turno de pedidos</button>
+          <button class="btn light" id="modeFree">🥙 Monta el tuyo</button>
+        </div>
+        <div class="kebab-game reveal">
+          <div class="counter-top">
+            <div class="k-hud"><span id="kOrder">Elige un modo</span><span id="kScore"></span></div>
+            <div class="ticket" id="ticket">
+              <div class="who">👋 ¡Bienvenida al Kebab Berta!</div>
+              <p style="margin-top:6px">Elige <b>Turno de pedidos</b> para atender 6 clientes contrarreloj, o <b>Monta el tuyo</b> para crear tu kebab ideal.</p>
+            </div>
+            <div class="kebab-view">
+              <svg id="kebabSvg" viewBox="0 0 400 260" aria-label="Tu kebab">
+                <ellipse cx="200" cy="232" rx="160" ry="14" fill="rgba(0,0,0,.08)"/>
+                <g id="kebabFood"></g>
+              </svg>
+              <div class="kebab-result" id="kebabResult"><div><div class="big" id="kebabBig">🌯</div><div class="verdict" id="kebabVerdict"></div></div></div>
+            </div>
+          </div>
+          <div class="counter-top pantry" id="pantry"></div>
+        </div>
+        <p class="kebab-msg" id="kebabMsg" aria-live="polite"></p>
+      </div>
+    </section>
+
     <!-- Carta -->
     <section>
       <div class="container">
         <article class="note reveal">
           <p class="hand">¡Feliz cumpleaños, Berta!</p>
-          <p>Que este año venga lleno de rutas por la montaña, de bichos curiosos a los que poner nombre científico, de viajes a sitios nuevos y de festivales en los que bailar hasta que salga el sol.</p>
+          <p>Que este año venga lleno de rutas por la montaña, de bichos curiosos a los que poner nombre científico, de viajes a sitios nuevos, de cervezas belgas bien servidas, de kebabs a deshoras y de festivales en los que bailar hasta que salga el sol.</p>
           <p>Gracias por contagiar esas ganas de descubrirlo todo. Disfruta muchísimo de tu día… y de todo lo que venga después. 🦋🎶</p>
           <p class="sign hand">Con muchísimo cariño 💜</p>
         </article>
@@ -433,137 +507,174 @@
       confettiAt(wristband, 120);
     });
 
-    /* ---------- 1. Expedición naturalista ---------- */
-    (() => {
-      // Hábitats: zonas (en % del paisaje) donde puede asomar cada animal
-      const HAB = {
-        sky:    { x: [12, 88], y: [10, 28] },
-        rocks:  { x: [58, 88], y: [50, 56] },
-        trees:  { x: [6, 40],  y: [56, 64] },
-        forest: { x: [6, 44],  y: [67, 72] },
-        lake:   { x: [55, 88], y: [71, 75] },
-        meadow: { x: [8, 92],  y: [80, 92] },
+    /* ---------- 1. Belgian Beer Festival ---------- */
+    // Copa de cerveza en SVG según su forma (vaso típico de cada cerveza)
+    function glassSVG(shape, color, cls = "") {
+      const foam = "#fffaf0", glassStroke = "rgba(255,255,255,.75)";
+      const shapes = {
+        chalice: { body: "M6 10 H34 Q34 34 20 38 Q6 34 6 10 Z", liq: "M7 15 H33 Q32 33 20 36.5 Q8 33 7 15 Z", foam: [20, 13, 13.5, 3.5], extra: `<rect x="18.5" y="37" width="3" height="20" fill="${glassStroke}"/><ellipse cx="20" cy="58" rx="9" ry="2.6" fill="${glassStroke}"/>` },
+        tulip:   { body: "M10 6 Q3 24 9 38 Q12 47 20 49 Q28 47 31 38 Q37 24 30 6 Z", liq: "M9 13 Q5 26 10 37 Q13 45 20 47 Q27 45 30 37 Q35 26 31 13 Z", foam: [20, 11, 11, 4], extra: `<rect x="18.5" y="48" width="3" height="10" fill="${glassStroke}"/><ellipse cx="20" cy="59" rx="8" ry="2.4" fill="${glassStroke}"/>` },
+        wit:     { body: "M6 10 L34 10 L31 62 L9 62 Z", liq: "M7 16 L33 16 L30.5 61 L9.5 61 Z", foam: [20, 13, 13.5, 4], extra: "" },
+        flute:   { body: "M13 3 L27 3 L25.5 48 Q20 52 14.5 48 Z", liq: "M13.5 10 L26.5 10 L25 47 Q20 50.5 15 47 Z", foam: [20, 7.5, 6.5, 3], extra: `<rect x="18.8" y="50" width="2.4" height="8" fill="${glassStroke}"/><ellipse cx="20" cy="59" rx="7" ry="2.2" fill="${glassStroke}"/>` },
+        stange:  { body: "M11 6 L29 6 L28 63 L12 63 Z", liq: "M11.5 12 L28.5 12 L27.6 62 L12.4 62 Z", foam: [20, 9.5, 8.5, 3.2], extra: "" },
+        kwak:    { body: "M15 3 L25 3 L25 28 Q35 42 27 55 Q20 62 13 55 Q5 42 15 28 Z", liq: "M15.4 9 L24.6 9 L24.6 28.5 Q33.8 42 26.4 54 Q20 60 13.6 54 Q6.2 42 15.4 28.5 Z", foam: [20, 7, 4.6, 2.5],
+                   extra: `<path d="M4 40 H36 M8 40 V64 M32 40 V64 M5 64 H35" stroke="#a0662f" stroke-width="2.6" fill="none" stroke-linecap="round"/>` },
       };
-      const SPECIES = [
-        { e: "🦌", n: "Ciervo", s: "Cervus elaphus", h: ["forest", "meadow"] },
-        { e: "🦊", n: "Zorro rojo", s: "Vulpes vulpes", h: ["forest", "meadow"] },
-        { e: "🐗", n: "Jabalí", s: "Sus scrofa", h: ["forest"] },
-        { e: "🐺", n: "Lobo", s: "Canis lupus", h: ["forest", "rocks"] },
-        { e: "🐻", n: "Oso pardo", s: "Ursus arctos", h: ["forest"], rare: true },
-        { e: "🐿️", n: "Ardilla roja", s: "Sciurus vulgaris", h: ["trees"] },
-        { e: "🦉", n: "Búho real", s: "Bubo bubo", h: ["trees"] },
-        { e: "🦅", n: "Águila real", s: "Aquila chrysaetos", h: ["sky"], fly: true },
-        { e: "🦋", n: "Mariposa apolo", s: "Parnassius apollo", h: ["meadow", "sky"], fly: true },
-        { e: "🐐", n: "Cabra montés", s: "Capra pyrenaica", h: ["rocks"] },
-        { e: "🦎", n: "Lagartija roquera", s: "Podarcis muralis", h: ["rocks"] },
-        { e: "🐸", n: "Rana bermeja", s: "Rana temporaria", h: ["lake"] },
-        { e: "🦆", n: "Ánade real", s: "Anas platyrhynchos", h: ["lake"] },
-        { e: "🐟", n: "Trucha común", s: "Salmo trutta", h: ["lake"] },
-        { e: "🦔", n: "Erizo europeo", s: "Erinaceus europaeus", h: ["meadow"] },
-        { e: "🐞", n: "Mariquita", s: "Coccinella septempunctata", h: ["meadow"] },
+      const g = shapes[shape];
+      return `<svg viewBox="0 0 40 66" class="${cls}" aria-hidden="true">
+        ${shape === "kwak" ? "" : g.extra}
+        <path d="${g.body}" fill="rgba(255,255,255,.18)" stroke="${glassStroke}" stroke-width="1.4"/>
+        <g class="liq"><path d="${g.liq}" fill="${color}"/>
+        <ellipse cx="${g.foam[0]}" cy="${g.foam[1]}" rx="${g.foam[2]}" ry="${g.foam[3]}" fill="${foam}"/></g>
+        <path d="M11 14 Q10 24 12 32" stroke="rgba(255,255,255,.55)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        ${shape === "kwak" ? g.extra : ""}
+      </svg>`;
+    }
+    (() => {
+      const GOLD = "#f2b632", WIT = "#f3d886", AMBER = "#d4822a", DARK = "#4a2412", KRIEK = "#b3152f", GUEUZE = "#e6a83c", FLANDERS = "#8c2a1e";
+      // Barras: posición (en % del recuadro) y huecos donde se sirven las cervezas
+      const STANDS = [
+        { name: "Trapenses",       awn: "awning",  x: 4,  y: 30, slots: [[14, 54], [25, 54], [36, 54]] },
+        { name: "Lambic & Kriek",  awn: "awning2", x: 54, y: 30, slots: [[64, 54], [75, 54], [86, 54]] },
+        { name: "Rubias fuertes",  awn: "awning2", x: 4,  y: 64, slots: [[14, 88], [25, 88], [36, 88]] },
+        { name: "Abadía",          awn: "awning",  x: 54, y: 64, slots: [[64, 88], [75, 88], [86, 88]] },
       ];
+      const BEERS = [
+        { n: "Chimay Azul", s: "Trapense oscura", c: DARK, g: "chalice", st: 0 },
+        { n: "Westmalle Tripel", s: "Tripel trapense", c: GOLD, g: "chalice", st: 0 },
+        { n: "Orval", s: "Trapense ámbar", c: AMBER, g: "chalice", st: 0 },
+        { n: "Rochefort 10", s: "Quadrupel trapense", c: DARK, g: "chalice", st: 0 },
+        { n: "Westvleteren 12", s: "Quadrupel trapense", c: DARK, g: "chalice", st: 0, rare: true },
+        { n: "Boon Kriek", s: "Lambic de cereza", c: KRIEK, g: "flute", st: 1 },
+        { n: "Cantillon Gueuze", s: "Gueuze lambic", c: GUEUZE, g: "flute", st: 1 },
+        { n: "Rodenbach", s: "Roja de Flandes", c: FLANDERS, g: "stange", st: 1 },
+        { n: "Hoegaarden", s: "Witbier", c: WIT, g: "wit", st: 1 },
+        { n: "Duvel", s: "Rubia fuerte", c: GOLD, g: "tulip", st: 2 },
+        { n: "Delirium Tremens", s: "Rubia fuerte", c: GOLD, g: "tulip", st: 2 },
+        { n: "La Chouffe", s: "Rubia de las Ardenas", c: GOLD, g: "tulip", st: 2 },
+        { n: "Tripel Karmeliet", s: "Tripel de tres cereales", c: GOLD, g: "tulip", st: 2 },
+        { n: "Leffe Blonde", s: "Rubia de abadía", c: GOLD, g: "chalice", st: 3 },
+        { n: "Kwak", s: "Ámbar fuerte", c: AMBER, g: "kwak", st: 3 },
+        { n: "St. Bernardus Abt 12", s: "Quadrupel de abadía", c: DARK, g: "chalice", st: 3 },
+      ];
+      const CHEERS = ["¡Santé!", "Proost!", "Schol!", "¡Salud!", "Gezondheid!", "¡Chin chin!"];
       const ROUND = 45;
-      const land = document.getElementById("landscape");
-      const flash = document.getElementById("flash");
-      const spEl = document.getElementById("species");
-      const overlay = document.getElementById("natOverlay"), startBtn = document.getElementById("natStart");
-      const natTitle = document.getElementById("natTitle"), natText = document.getElementById("natText");
-      const natTime = document.getElementById("natTime"), natRound = document.getElementById("natRound");
-      const natCount = document.getElementById("natCount"), natMsg = document.getElementById("natMsg");
-      const seen = new Map(); // nombre -> veces
-      let playing = false, endAt = 0, nextSpawn = 0, roundPhotos = 0, roundNew = 0, done = false;
+      const sq = document.getElementById("square");
+      const overlay = document.getElementById("beerOverlay"), startBtn = document.getElementById("beerStart");
+      const titleEl = document.getElementById("beerTitle"), textEl = document.getElementById("beerText");
+      const timeEl = document.getElementById("beerTime"), roundEl = document.getElementById("beerRound");
+      const countEl = document.getElementById("beerCount"), msgEl = document.getElementById("beerMsg");
 
-      SPECIES.forEach((sp, i) => {
+      // Dibuja las 4 barras en el fondo
+      const W = 1000, H = 750;
+      document.getElementById("stands").innerHTML = STANDS.map((st) => {
+        const x = st.x * 10, y = st.y * 7.5, w = 420, cy = y + 0.24 * H;
+        return `
+          <rect x="${x}" y="${y + 40}" width="${w}" height="${cy - y - 40}" fill="#2a2244"/>
+          <g fill="#6b4a2b">${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<rect x="${x + 30 + i * 48}" y="${y + 70}" width="12" height="34" rx="3"/>`).join("")}</g>
+          <rect x="${x + 20}" y="${y + 104}" width="${w - 40}" height="6" fill="#8a6a45"/>
+          <rect x="${x - 6}" y="${y + 10}" width="${w + 12}" height="34" fill="url(#${st.awn})"/>
+          <path d="M${x - 6} ${y + 44} ${Array.from({ length: 11 }, (_, i) => `q ${(w + 12) / 22} 12 ${(w + 12) / 11} 0`).join(" ")}" fill="${st.awn === "awning" ? "#c8102e" : "#fdda24"}"/>
+          <rect x="${x + w / 2 - 95}" y="${y - 16}" width="190" height="30" rx="8" fill="#1b1430" stroke="#ffd36e" stroke-width="2"/>
+          <text x="${x + w / 2}" y="${y + 5}" text-anchor="middle" fill="#ffd36e" font-family="Fredoka, sans-serif" font-weight="700" font-size="20">${st.name}</text>
+          <rect x="${x - 6}" y="${cy}" width="${w + 12}" height="22" rx="4" fill="#9b6a3c"/>
+          <rect x="${x}" y="${cy + 22}" width="${w}" height="${0.1 * H}" fill="#6e4726"/>`;
+      }).join("");
+
+      // Pasaporte
+      const beersEl = document.getElementById("beers");
+      BEERS.forEach((b, i) => {
         const d = document.createElement("div");
-        d.className = "sp"; d.id = "sp" + i;
-        d.innerHTML = `<span class="x"></span><span class="e">${sp.e}</span><b>${sp.rare ? "¿?" : "?"}</b><i>${sp.s}</i>`;
-        d.title = "Sin avistar";
-        spEl.appendChild(d);
+        d.className = "bp"; d.id = "bp" + i;
+        d.innerHTML = `<span class="x"></span>${glassSVG(b.g, b.c)}<b>${b.rare ? "¿¿??" : "?"}</b><i>${b.s}</i>`;
+        beersEl.appendChild(d);
       });
-      const rand = (a, b) => a + Math.random() * (b - a);
+
+      const seen = new Map();
+      const busy = new Set();
+      let playing = false, endAt = 0, nextSpawn = 0, roundCount = 0, roundNew = 0, complete = false;
       function spawn() {
-        const visible = land.querySelectorAll(".animal:not(.leaving):not(.caught)").length;
-        if (visible >= 4) return;
-        // el oso sale poco; las especies aún no vistas salen algo más
-        const weights = SPECIES.map((sp) => (sp.rare ? .25 : 1) * (seen.has(sp.n) ? 1 : 1.6));
+        if (sq.querySelectorAll(".glass:not(.leaving):not(.drunk)").length >= 5) return;
+        const weights = BEERS.map((b) => (b.rare ? .22 : 1) * (seen.has(b.n) ? 1 : 1.7));
         let r = Math.random() * weights.reduce((a, b) => a + b, 0), idx = 0;
         while ((r -= weights[idx]) > 0) idx++;
-        const sp = SPECIES[idx];
-        const hab = HAB[sp.h[Math.floor(Math.random() * sp.h.length)]];
-        const b = document.createElement("button");
-        b.className = "animal" + (Math.random() < .5 ? " flip" : "");
-        b.innerHTML = `<span class="em">${sp.e}</span>`;
-        b.setAttribute("aria-label", sp.n);
-        const x = rand(...hab.x), y = rand(...hab.y);
-        b.style.left = x + "%"; b.style.top = y + "%";
-        const life = (sp.rare ? 1400 : 1700) + Math.random() * 700;
-        if (sp.fly) {
-          const dx = (Math.random() < .5 ? -1 : 1) * rand(8, 16);
-          b.style.transition = `left ${life}ms linear`;
-          requestAnimationFrame(() => requestAnimationFrame(() => (b.style.left = x + dx + "%")));
-          b.classList.toggle("flip", dx > 0);
-        }
-        b.addEventListener("pointerdown", (e) => { e.preventDefault(); e.stopPropagation(); photo(b, sp); });
-        land.insertBefore(b, flash);
-        setTimeout(() => { if (!b.classList.contains("caught")) { b.classList.add("leaving"); setTimeout(() => b.remove(), 400); } }, life);
+        const beer = BEERS[idx];
+        const free = STANDS[beer.st].slots.map((s, i) => [beer.st, i]).filter(([a, i]) => !busy.has(a + "-" + i));
+        if (!free.length) return;
+        const [stIdx, slot] = free[Math.floor(Math.random() * free.length)];
+        const key = stIdx + "-" + slot;
+        busy.add(key);
+        const [x, y] = STANDS[stIdx].slots[slot];
+        const el = document.createElement("button");
+        el.className = "glass";
+        el.style.left = x + "%"; el.style.top = y + "%";
+        el.setAttribute("aria-label", beer.n);
+        el.innerHTML = glassSVG(beer.g, beer.c) + `<span class="tag">${beer.rare ? "✨ " + beer.n : beer.n}</span>`;
+        const life = (beer.rare ? 1500 : 1900) + Math.random() * 800;
+        const free_ = () => busy.delete(key);
+        el.addEventListener("pointerdown", (e) => { e.preventDefault(); drink(el, beer, x, y, free_); });
+        sq.insertBefore(el, overlay);
+        setTimeout(() => { if (!el.classList.contains("drunk")) { el.classList.add("leaving"); setTimeout(() => { el.remove(); free_(); }, 400); } }, life);
       }
-      function photo(el, sp) {
-        if (!playing || el.classList.contains("caught")) return;
-        el.classList.add("caught");
-        setTimeout(() => el.remove(), 460);
-        flash.classList.remove("go"); void flash.offsetWidth; flash.classList.add("go");
-        roundPhotos++;
-        natRound.textContent = `📸 ${roundPhotos} ${roundPhotos === 1 ? "foto" : "fotos"}`;
-        const idx = SPECIES.indexOf(sp), card = document.getElementById("sp" + idx);
-        const times = (seen.get(sp.n) || 0) + 1;
-        seen.set(sp.n, times);
+      function drink(el, beer, x, y, free_) {
+        if (!playing || el.classList.contains("drunk")) return;
+        el.classList.add("drunk");
+        setTimeout(() => { el.remove(); free_(); }, 1000);
+        const c = document.createElement("span");
+        c.className = "cheers"; c.textContent = CHEERS[Math.floor(Math.random() * CHEERS.length)];
+        c.style.left = x + "%"; c.style.top = y - 10 + "%";
+        sq.insertBefore(c, overlay); setTimeout(() => c.remove(), 1000);
+        roundCount++;
+        roundEl.textContent = `🍺 ${roundCount} ${roundCount === 1 ? "cerveza" : "cervezas"}`;
+        const i = BEERS.indexOf(beer), card = document.getElementById("bp" + i);
+        const times = (seen.get(beer.n) || 0) + 1;
+        seen.set(beer.n, times);
         card.querySelector(".x").textContent = "×" + times;
         if (times === 1) {
           roundNew++;
           card.classList.add("seen");
-          card.querySelector("b").textContent = sp.n;
-          card.title = `${sp.n} (${sp.s})`;
-          natCount.textContent = `${seen.size} / ${SPECIES.length}`;
+          card.querySelector("b").textContent = beer.n;
+          countEl.textContent = `${seen.size} / ${BEERS.length}`;
           const r = el.getBoundingClientRect();
-          confetti(sp.rare ? 160 : 26, r.left + r.width / 2, r.top + r.height / 2);
-          if (sp.rare) toast("🐻 ¡Avistamiento rarísimo! Un oso pardo (Ursus arctos)", true);
-          else toast(`${sp.e} ¡Nueva especie! ${sp.n} · ${sp.s}`);
-          natMsg.textContent = `${sp.e} ${sp.n} — ${sp.s}`;
-          if (seen.size === SPECIES.length && !done) {
-            done = true;
+          confetti(beer.rare ? 180 : 24, r.left + r.width / 2, r.top + r.height / 2);
+          if (beer.rare) toast("✨ ¡Una Westvleteren 12! La cerveza más difícil de conseguir de Bélgica", true);
+          else toast(`🍺 ¡Nueva en el pasaporte! ${beer.n} · ${beer.s}`);
+          msgEl.textContent = `🍺 ${beer.n} — ${beer.s}`;
+          if (seen.size === BEERS.length && !complete) {
+            complete = true;
             setTimeout(() => {
               confetti(260);
-              toast("🔬 ¡Cuaderno completo! Las 16 especies, doctora Berta", true);
-              natMsg.textContent = "📓 ¡Cuaderno de campo completo! Has visto las 16 especies del valle.";
+              toast("🏆 ¡Pasaporte completo! Maestra cervecera de Bélgica", true);
+              msgEl.textContent = "🎫 ¡Pasaporte cervecero completo! Las 16 cervezas belgas probadas. Santé, Berta!";
             }, 500);
           }
         }
       }
       function startRound() {
-        playing = true; roundPhotos = 0; roundNew = 0;
+        playing = true; roundCount = 0; roundNew = 0;
         endAt = performance.now() + ROUND * 1000; nextSpawn = 0;
         overlay.classList.add("hidden");
-        natRound.textContent = "📸 0 fotos";
-        natMsg.textContent = "Atenta a los árboles, al lago, al cielo y a las rocas…";
+        roundEl.textContent = "🍺 0 cervezas";
+        msgEl.textContent = "Atenta a las cuatro barras… ¡que vuelan!";
       }
       function endRound() {
         playing = false;
-        land.querySelectorAll(".animal").forEach((a) => a.remove());
-        natTitle.textContent = "🏕️ Fin de la ruta";
-        const missing = SPECIES.length - seen.size;
-        natText.textContent = `${roundPhotos} ${roundPhotos === 1 ? "foto" : "fotos"} y ${roundNew} ${roundNew === 1 ? "especie nueva" : "especies nuevas"}. ` +
-          (missing ? `Te ${missing === 1 ? "falta" : "faltan"} ${missing} para completar el cuaderno.` : "¡Cuaderno completo! 🔬");
+        sq.querySelectorAll(".glass").forEach((g) => g.remove());
+        busy.clear();
+        const missing = BEERS.length - seen.size;
+        titleEl.textContent = "🍻 ¡Última ronda!";
+        textEl.textContent = `${roundCount} ${roundCount === 1 ? "cerveza" : "cervezas"} y ${roundNew} ${roundNew === 1 ? "nueva" : "nuevas"} en el pasaporte. ` +
+          (missing ? `Te ${missing === 1 ? "falta" : "faltan"} ${missing} para completarlo.` : "¡Pasaporte completo! 🏆");
         overlay.classList.remove("hidden");
-        if (roundNew >= 5) confettiAt(land, 80);
-        lockButton(startBtn, missing ? "🥾 Otra ruta" : "🥾 Repetir la ruta");
+        if (roundNew >= 5) confettiAt(sq, 80);
+        lockButton(startBtn, missing ? "🍺 Otra ronda" : "🍺 Otra ronda, por gusto");
       }
       startBtn.addEventListener("click", () => { if (!startBtn.disabled) startRound(); });
       function loop(t) {
         if (playing) {
-          const left = Math.max(0, Math.ceil((endAt - t) / 1000));
-          natTime.textContent = `⏱ ${left} s`;
+          timeEl.textContent = `⏱ ${Math.max(0, Math.ceil((endAt - t) / 1000))} s`;
           if (t >= endAt) endRound();
-          else if (t >= nextSpawn) { spawn(); nextSpawn = t + 650 + Math.random() * 500; }
+          else if (t >= nextSpawn) { spawn(); nextSpawn = t + 600 + Math.random() * 450; }
         }
         requestAnimationFrame(loop);
       }
@@ -837,6 +948,262 @@
         requestAnimationFrame(draw);
       }
       requestAnimationFrame(draw);
+    })();
+
+    /* ---------- 3. Kebab Berta ---------- */
+    (() => {
+      const ING = {
+        pita:     { g: "base",  l: "Pan de pita", e: "🫓" },
+        durum:    { g: "base",  l: "Durum",       e: "🌯" },
+        pollo:    { g: "meat",  l: "Pollo",       e: "🍗" },
+        ternera:  { g: "meat",  l: "Ternera",     e: "🥩" },
+        mixto:    { g: "meat",  l: "Mixto",       e: "🍖" },
+        falafel:  { g: "meat",  l: "Falafel",     e: "🧆" },
+        lechuga:  { g: "veg",   l: "Lechuga",     e: "🥬" },
+        tomate:   { g: "veg",   l: "Tomate",      e: "🍅" },
+        cebolla:  { g: "veg",   l: "Cebolla",     e: "🧅" },
+        lombarda: { g: "veg",   l: "Lombarda",    e: "🟣" },
+        pepino:   { g: "veg",   l: "Pepino",      e: "🥒" },
+        maiz:     { g: "veg",   l: "Maíz",        e: "🌽" },
+        feta:     { g: "veg",   l: "Queso feta",  e: "🧀" },
+        patatas:  { g: "veg",   l: "Patatas",     e: "🍟" },
+        yogur:    { g: "sauce", l: "Salsa yogur", e: "🥛" },
+        picante:  { g: "sauce", l: "Picante",     e: "🌶️" },
+        ajo:      { g: "sauce", l: "Ajo",         e: "🧄" },
+        samurai:  { g: "sauce", l: "Samurái",     e: "🔥" },
+      };
+      const GROUPS = [["base", "1 · Pan"], ["meat", "2 · Relleno"], ["veg", "3 · Ingredientes"], ["sauce", "4 · Salsas"]];
+      const CUSTOMERS = [
+        ["🎧", "Un DJ que sale del Mainstage"], ["🧗‍♀️", "Una montañera muerta de hambre"], ["🔬", "Un colega del laboratorio"],
+        ["🇧🇪", "Un belga muy serio"], ["🐻", "Un oso pardo (no preguntes)"], ["🎒", "Un mochilero recién llegado"], ["🦉", "Un búho trasnochador"],
+      ];
+      const BERTA_ORDER = { who: ["🎂", "¡Berta, la cumpleañera!"], base: "durum", meat: "mixto", veg: ["lechuga", "tomate", "cebolla", "lombarda", "patatas"], sauce: ["picante", "samurai"] };
+      const ORDERS = 6, ORDER_TIME = 25;
+
+      const pantry = document.getElementById("pantry");
+      const ticket = document.getElementById("ticket");
+      const food = document.getElementById("kebabFood");
+      const result = document.getElementById("kebabResult"), big = document.getElementById("kebabBig"), verdict = document.getElementById("kebabVerdict");
+      const kOrder = document.getElementById("kOrder"), kScore = document.getElementById("kScore"), msg = document.getElementById("kebabMsg");
+      const modeOrders = document.getElementById("modeOrders"), modeFree = document.getElementById("modeFree");
+      let mode = "idle", cur = { base: null, meat: null, veg: new Set(), sauce: new Set() };
+      let order = null, orderIdx = 0, score = 0, perfect = 0, orderEnd = 0, busy = false;
+
+      // ---- Despensa ----
+      const buttons = {};
+      pantry.innerHTML = GROUPS.map(([g, title]) => `<h4>${title}</h4><div class="ing" data-g="${g}"></div>`).join("") +
+        `<div class="k-actions"><button class="btn light" id="kTrash">🗑️ Tirar</button><button class="btn orange" id="kServe">🥙 Servir</button></div>`;
+      Object.entries(ING).forEach(([id, it]) => {
+        const b = document.createElement("button");
+        b.innerHTML = `<span>${it.e}</span>${it.l}`;
+        b.addEventListener("click", () => add(id));
+        pantry.querySelector(`.ing[data-g="${it.g}"]`).appendChild(b);
+        buttons[id] = b;
+      });
+      const trashBtn = document.getElementById("kTrash"), serveBtn = document.getElementById("kServe");
+      const setEnabled = (on) => { Object.values(buttons).forEach((b) => (b.disabled = !on)); trashBtn.disabled = serveBtn.disabled = !on; };
+      setEnabled(false);
+
+      // ---- Dibujo del kebab ----
+      function rng(seed) { let s = 0; for (const ch of seed) s = (s * 31 + ch.charCodeAt(0)) % 2147483647; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+      function spots(id, n, rx = 120, ry = 62) {
+        const r = rng(id), out = [];
+        for (let i = 0; i < n; i++) { const a = r() * Math.PI * 2, d = Math.sqrt(r()); out.push([200 + Math.cos(a) * rx * d, 140 + Math.sin(a) * ry * d, r()]); }
+        return out;
+      }
+      const DRAW = {
+        pollo: () => spots("pollo", 14).map(([x, y, k]) => `<g class="piece"><rect x="${x - 13}" y="${y - 4}" width="26" height="8" rx="4" fill="#d9a066" transform="rotate(${k * 180 - 90} ${x} ${y})"/></g>`).join(""),
+        ternera: () => spots("ternera", 14).map(([x, y, k]) => `<g class="piece"><rect x="${x - 13}" y="${y - 4}" width="26" height="8" rx="4" fill="#7a4326" transform="rotate(${k * 180 - 90} ${x} ${y})"/></g>`).join(""),
+        mixto: () => spots("mixto", 16).map(([x, y, k], i) => `<g class="piece"><rect x="${x - 13}" y="${y - 4}" width="26" height="8" rx="4" fill="${i % 2 ? "#7a4326" : "#d9a066"}" transform="rotate(${k * 180 - 90} ${x} ${y})"/></g>`).join(""),
+        falafel: () => spots("falafel", 9).map(([x, y]) => `<g class="piece"><circle cx="${x}" cy="${y}" r="10" fill="#8a5a2b"/><circle cx="${x - 3}" cy="${y - 2}" r="2" fill="#6fae3d"/><circle cx="${x + 3}" cy="${y + 3}" r="1.6" fill="#6fae3d"/></g>`).join(""),
+        lechuga: () => spots("lechuga", 11).map(([x, y, k]) => `<g class="piece"><ellipse cx="${x}" cy="${y}" rx="14" ry="7" fill="#6dbb4a" transform="rotate(${k * 180} ${x} ${y})"/></g>`).join(""),
+        tomate: () => spots("tomate", 7).map(([x, y]) => `<g class="piece"><circle cx="${x}" cy="${y}" r="10" fill="#e2453a"/><circle cx="${x}" cy="${y}" r="5" fill="#f37a6c"/></g>`).join(""),
+        cebolla: () => spots("cebolla", 8).map(([x, y]) => `<g class="piece"><circle cx="${x}" cy="${y}" r="8" fill="none" stroke="#b07ab8" stroke-width="3"/></g>`).join(""),
+        lombarda: () => spots("lombarda", 14).map(([x, y, k]) => `<g class="piece"><path d="M${x - 10} ${y} q 10 ${k * 10 - 5} 20 0" stroke="#7d3c8c" stroke-width="3" fill="none" stroke-linecap="round"/></g>`).join(""),
+        pepino: () => spots("pepino", 7).map(([x, y]) => `<g class="piece"><circle cx="${x}" cy="${y}" r="9" fill="#3f7d2e"/><circle cx="${x}" cy="${y}" r="7" fill="#b9e08f"/></g>`).join(""),
+        maiz: () => spots("maiz", 16).map(([x, y]) => `<g class="piece"><circle cx="${x}" cy="${y}" r="3.5" fill="#ffd43b" stroke="#e0a800"/></g>`).join(""),
+        feta: () => spots("feta", 9).map(([x, y, k]) => `<g class="piece"><rect x="${x - 5}" y="${y - 5}" width="10" height="10" rx="2" fill="#fdfbf2" stroke="#d8d2c0" transform="rotate(${k * 90} ${x} ${y})"/></g>`).join(""),
+        patatas: () => spots("patatas", 10).map(([x, y, k]) => `<g class="piece"><rect x="${x - 14}" y="${y - 3}" width="28" height="6" rx="2" fill="#f4c542" stroke="#d9a520" transform="rotate(${k * 180} ${x} ${y})"/></g>`).join(""),
+      };
+      const SAUCE = { yogur: ["#fffaf0", 6, ""], picante: ["#d7261e", 4, ""], ajo: ["#f3ead2", 5, "2 6"], samurai: ["#f08a3c", 5, ""] };
+      function sauceLine(id, i) {
+        const [col, w, dash] = SAUCE[id];
+        let d = `M${90} ${108 + i * 14}`;
+        for (let k = 0; k < 9; k++) d += ` q 12 ${k % 2 ? 22 : -22} 25 0`;
+        return `<g class="piece"><path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round" ${dash ? `stroke-dasharray="${dash}"` : ""} opacity=".95"/></g>`;
+      }
+      function render() {
+        let h = "";
+        if (cur.base === "pita") h += `<ellipse cx="200" cy="145" rx="160" ry="90" fill="#e2b571"/><ellipse cx="200" cy="140" rx="148" ry="80" fill="#f0cf93"/>`;
+        if (cur.base === "durum") h += `<ellipse cx="200" cy="142" rx="172" ry="96" fill="#f3dcab"/>` +
+          spots("durumspots", 18, 160, 85).map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4" fill="#d9ad66" opacity=".7"/>`).join("");
+        if (!cur.base) h += `<ellipse cx="200" cy="142" rx="160" ry="88" fill="none" stroke="#d9cbb4" stroke-width="3" stroke-dasharray="10 8"/><text x="200" y="148" text-anchor="middle" fill="#b3a487" font-family="Nunito, sans-serif" font-weight="800" font-size="16">Empieza por el pan 🫓</text>`;
+        if (cur.meat) h += DRAW[cur.meat]();
+        ["lechuga", "lombarda", "tomate", "pepino", "cebolla", "maiz", "feta", "patatas"].forEach((v) => { if (cur.veg.has(v)) h += DRAW[v](); });
+        [...cur.sauce].forEach((sId, i) => (h += sauceLine(sId, i)));
+        food.innerHTML = h;
+        Object.entries(buttons).forEach(([id, b]) => {
+          const it = ING[id];
+          b.classList.toggle("on", it.g === "base" ? cur.base === id : it.g === "meat" ? cur.meat === id : cur[it.g].has(id));
+        });
+        if (mode === "orders" && order) drawTicket();
+        if (mode === "free") drawFreeTicket();
+      }
+      function add(id) {
+        if (busy) return;
+        const it = ING[id];
+        if (it.g === "base") cur.base = id;
+        else if (!cur.base) { msg.textContent = "Primero el pan, ¡que se cae todo! 🫓"; return; }
+        else if (it.g === "meat") cur.meat = id;
+        else cur[it.g].has(id) ? cur[it.g].delete(id) : cur[it.g].add(id); // volver a pulsar lo quita
+        msg.textContent = "";
+        render();
+      }
+      const reset = () => { cur = { base: null, meat: null, veg: new Set(), sauce: new Set() }; food.classList.remove("wrapped"); result.classList.remove("show"); render(); };
+      trashBtn.addEventListener("click", () => { if (!busy) { reset(); msg.textContent = "🗑️ A la basura. ¡Otra vez desde el pan!"; } });
+
+      // ---- Modo pedidos ----
+      const pick = (arr, n) => [...arr].sort(() => Math.random() - .5).slice(0, n);
+      function newOrder() {
+        if (orderIdx === ORDERS - 1) return { ...BERTA_ORDER, veg: [...BERTA_ORDER.veg], sauce: [...BERTA_ORDER.sauce] };
+        const who = CUSTOMERS[Math.floor(Math.random() * CUSTOMERS.length)];
+        return {
+          who, base: Math.random() < .5 ? "pita" : "durum",
+          meat: pick(["pollo", "ternera", "mixto", "falafel"], 1)[0],
+          veg: pick(["lechuga", "tomate", "cebolla", "lombarda", "pepino", "maiz", "feta", "patatas"], 2 + Math.floor(Math.random() * 3)),
+          sauce: pick(["yogur", "picante", "ajo", "samurai"], 1 + (Math.random() < .4 ? 1 : 0)),
+        };
+      }
+      const orderItems = (o) => [o.base, o.meat, ...o.veg, ...o.sauce];
+      const has = (id) => { const g = ING[id].g; return g === "base" ? cur.base === id : g === "meat" ? cur.meat === id : cur[g].has(id); };
+      function drawTicket() {
+        const left = Math.max(0, Math.ceil((orderEnd - performance.now()) / 1000));
+        ticket.innerHTML = `<span class="timer" id="kTimer">⏱ ${left} s</span><div class="who">${order.who[0]} ${order.who[1]}</div>` +
+          `<ul>${orderItems(order).map((id) => `<li class="${has(id) ? "ok" : ""}">${ING[id].e} ${ING[id].l}</li>`).join("")}</ul>`;
+      }
+      function startOrders() {
+        mode = "orders"; orderIdx = 0; score = 0; perfect = 0;
+        modeOrders.classList.add("on"); modeFree.classList.remove("on");
+        serveBtn.textContent = "🥙 Servir";
+        setEnabled(true); nextOrder();
+      }
+      function nextOrder() {
+        busy = false; reset();
+        order = newOrder();
+        orderEnd = performance.now() + ORDER_TIME * 1000;
+        kOrder.textContent = `Pedido ${orderIdx + 1} / ${ORDERS}`;
+        kScore.textContent = `💶 ${score} pts`;
+        msg.textContent = orderIdx === ORDERS - 1 ? "🎂 ¡Último pedido! Y es el de la cumpleañera…" : "";
+        render();
+      }
+      function evaluate() {
+        const want = new Set(orderItems(order)), got = new Set([cur.base, cur.meat, ...cur.veg, ...cur.sauce].filter(Boolean));
+        const missing = [...want].filter((x) => !got.has(x)), extra = [...got].filter((x) => !want.has(x));
+        return { ok: !missing.length && !extra.length, missing, extra };
+      }
+      function serveOrder(timeout = false) {
+        busy = true;
+        const r = timeout ? { ok: false, missing: [], extra: [] } : evaluate();
+        const secs = Math.max(0, Math.ceil((orderEnd - performance.now()) / 1000));
+        let text;
+        if (r.ok) {
+          const pts = 100 + secs * 5; score += pts; perfect++;
+          text = `😋 ¡Perfecto! +${pts} pts`;
+          big.textContent = "🌯";
+          if (orderIdx === ORDERS - 1) confetti(160);
+        } else if (timeout) {
+          text = "⌛ ¡Se ha cansado de esperar!"; big.textContent = "😤";
+        } else {
+          const parts = [];
+          if (r.missing.length) parts.push("faltaba " + r.missing.map((x) => ING[x].l.toLowerCase()).join(", "));
+          if (r.extra.length) parts.push("sobraba " + r.extra.map((x) => ING[x].l.toLowerCase()).join(", "));
+          score += 20; text = `😕 Casi… ${parts.join(" y ")}. +20 pts`; big.textContent = "🌯";
+        }
+        kScore.textContent = `💶 ${score} pts`;
+        food.classList.add("wrapped");
+        verdict.textContent = text;
+        setTimeout(() => result.classList.add("show"), 350);
+        orderIdx++;
+        setTimeout(() => (orderIdx < ORDERS ? nextOrder() : finishOrders()), 1900);
+      }
+      function finishOrders() {
+        mode = "done"; order = null; busy = false;
+        setEnabled(false); result.classList.remove("show"); reset();
+        const stars = perfect >= 6 ? "⭐⭐⭐" : perfect >= 4 ? "⭐⭐" : perfect >= 2 ? "⭐" : "";
+        const title = perfect >= 6 ? "¡Kebabera del año!" : perfect >= 4 ? "¡Turno bordado!" : perfect >= 2 ? "Turno superado" : "Mañana será otro día…";
+        ticket.innerHTML = `<div class="who">🏁 Fin del turno ${stars}</div><p style="margin-top:6px"><b>${title}</b> ${perfect} de ${ORDERS} pedidos perfectos y ${score} puntos.</p>`;
+        kOrder.textContent = "Turno terminado";
+        msg.textContent = perfect >= 4 ? "🥙 ¡Los clientes ya hacen cola por tus kebabs!" : "¿Repetimos turno?";
+        if (perfect >= 4) { confetti(240); toast("🥙 ¡Turno completado! Kebabera del año", true); }
+        modeOrders.classList.remove("on");
+        lockButton(modeOrders, "🧑‍🍳 Otro turno");
+      }
+
+      // ---- Modo libre ----
+      function drawFreeTicket() {
+        const items = [cur.base, cur.meat, ...cur.veg, ...cur.sauce].filter(Boolean);
+        ticket.innerHTML = `<div class="who">🥙 Tu kebab</div>` +
+          (items.length ? `<ul>${items.map((id) => `<li class="ok">${ING[id].e} ${ING[id].l}</li>`).join("")}</ul>` : `<p style="margin-top:6px">Elige pan, relleno, ingredientes y salsas. Pulsa otra vez un ingrediente para quitarlo.</p>`);
+      }
+      function startFree() {
+        mode = "free"; busy = false;
+        modeFree.classList.add("on"); modeOrders.classList.remove("on");
+        kOrder.textContent = "Modo libre"; kScore.textContent = "";
+        serveBtn.textContent = "🌯 ¡Enrollar y probar!";
+        setEnabled(true); reset();
+        msg.textContent = "Tómate tu tiempo: aquí no hay prisas.";
+      }
+      function rateFree() {
+        if (!cur.base || !cur.meat) { msg.textContent = "Un kebab sin pan o sin relleno… es una ensalada. 😅"; return; }
+        busy = true;
+        const veg = cur.veg.size, sauces = cur.sauce.size;
+        let pts = 40 + Math.min(veg, 6) * 7 + Math.min(sauces, 2) * 8;
+        const notes = [];
+        if (cur.veg.has("patatas")) { pts += 6; notes.push("patatas dentro: aprobado por Bélgica 🇧🇪"); }
+        if (cur.sauce.has("samurai")) { pts += 4; notes.push("con samurái, como en Bruselas"); }
+        if (cur.meat === "falafel") notes.push("versión veggie 🌱");
+        if (!sauces) { pts -= 15; notes.push("¿sin salsa? atrevida"); }
+        if (veg >= 7 && sauces >= 3) notes.push("esto ya no se cierra 😂");
+        pts = Math.max(10, Math.min(100, pts));
+        const name = [
+          cur.base === "durum" ? "Durum" : "Pita",
+          { pollo: "de pollo", ternera: "de ternera", mixto: "mixto", falafel: "de falafel" }[cur.meat],
+          cur.sauce.has("samurai") ? "Samurái" : cur.sauce.has("picante") ? "Infernal" : cur.sauce.has("ajo") ? "Antivampiros" : cur.sauce.has("yogur") ? "Cremoso" : "",
+          veg >= 6 ? "con todo" : veg <= 1 ? "minimalista" : "",
+          cur.veg.has("patatas") ? "a la belga" : "",
+        ].filter(Boolean).join(" ");
+        food.classList.add("wrapped");
+        big.textContent = pts >= 85 ? "🤩" : pts >= 65 ? "😋" : "🙂";
+        verdict.innerHTML = `«${name}»<br>Kebabómetro: ${pts}/100${notes.length ? `<br><small>${notes.join(" · ")}</small>` : ""}`;
+        setTimeout(() => result.classList.add("show"), 350);
+        msg.textContent = pts >= 85 ? "🎉 ¡Kebab de autora! Esto hay que ponerlo en la carta." : "¿Probamos otra combinación? Pulsa «Tirar» para empezar uno nuevo.";
+        if (pts >= 85) confetti(160);
+        serveBtn.disabled = true;
+        setTimeout(() => { busy = false; serveBtn.disabled = false; }, 1500);
+      }
+      serveBtn.addEventListener("click", () => {
+        if (busy) return;
+        if (mode === "orders") {
+          if (!cur.base) { msg.textContent = "¡Falta todo! Empieza por el pan 🫓"; return; }
+          serveOrder();
+        } else if (mode === "free") {
+          if (result.classList.contains("show")) { reset(); return; }
+          rateFree();
+        }
+      });
+      modeOrders.addEventListener("click", () => { if (!modeOrders.disabled) startOrders(); });
+      modeFree.addEventListener("click", startFree);
+      function loop() {
+        if (mode === "orders" && order && !busy) {
+          const left = Math.max(0, Math.ceil((orderEnd - performance.now()) / 1000));
+          const t = document.getElementById("kTimer");
+          if (t) t.textContent = `⏱ ${left} s`;
+          if (left <= 0) serveOrder(true);
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+      render();
     })();
 
     /* ---------- Aparición al hacer scroll ---------- */
