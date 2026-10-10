@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz cumple, Brage!</title>
+  <meta name="description" content="Una web de cumpleaños para Brage: skate, pisos en Barcelona, moto, la furgo de Alex y Lola.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛹</text></svg>">
+  <style>
+    :root {
+      --bg: #f1efe9;
+      --paper: #ffffff;
+      --ink: #151515;
+      --muted: #66625a;
+      --lime: #c6ff3d;
+      --pink: #ff3d7f;
+      --blue: #2f6bff;
+      --orange: #ff8a1f;
+      --line: #e2ded4;
+      --night: #10131c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Archivo Black", system-ui, sans-serif; line-height: 1.02; letter-spacing: -.01em; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    .hand { font-family: "Caveat", cursive; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font: 800 1.02rem "Inter", sans-serif; text-decoration: none;
+      background: var(--ink); color: #fff; border: 0; cursor: pointer;
+      padding: 14px 24px; border-radius: 12px;
+      box-shadow: 4px 4px 0 var(--pink); transition: transform .12s, box-shadow .12s, opacity .2s;
+      user-select: none; -webkit-user-select: none; touch-action: manipulation;
+    }
+    .btn:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--pink); }
+    .btn:active, .btn.held { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--pink); }
+    .btn.lime { background: var(--lime); color: var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+    .btn.lime:active, .btn.lime.held { box-shadow: 1px 1px 0 var(--ink); }
+    .btn.blue { background: var(--blue); box-shadow: 4px 4px 0 var(--ink); }
+    .btn.blue:active, .btn.blue.held { box-shadow: 1px 1px 0 var(--ink); }
+    .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    section { padding: 90px 0; position: relative; }
+    section.alt { background: var(--paper); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    section.dark { background: var(--night); color: #fff; }
+    section.dark .section-title p { color: #b8bdcb; }
+    .section-title { text-align: center; margin-bottom: 34px; }
+    .section-title .num {
+      display: inline-grid; place-items: center; min-width: 44px; height: 44px; border-radius: 10px; padding: 0 10px;
+      background: var(--lime); color: var(--ink); font: 1.2rem "Archivo Black", sans-serif; margin-bottom: 10px; border: 2px solid var(--ink);
+    }
+    .section-title h2 { font-size: clamp(2rem, 5.4vw, 3.4rem); }
+    .section-title p { color: var(--muted); max-width: 640px; margin: 10px auto 0; font-size: 1.05rem; }
+
+    /* ---------- Portada ---------- */
+    .hero > div { max-width: 100%; }
+    .hero { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 70px 20px; overflow: hidden;
+      background: radial-gradient(circle at 12% 18%, rgba(198,255,61,.35), transparent 40%), radial-gradient(circle at 88% 80%, rgba(255,61,127,.2), transparent 42%), var(--bg); }
+    .collage { display: flex; justify-content: center; align-items: flex-end; margin-bottom: 26px; }
+    .pol { background: #fff; padding: 9px 9px 4px; box-shadow: 0 18px 30px -16px rgba(0,0,0,.5); transition: transform .3s; position: relative; }
+    .pol img { display: block; width: clamp(110px, 17vw, 190px); height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+    .pol figcaption { font-family: "Caveat", cursive; font-size: 1.15rem; line-height: 1.2; padding-top: 3px; }
+    .pol:nth-child(1) { transform: rotate(-8deg) translate(22px, 10px); }
+    .pol:nth-child(2) { transform: rotate(1deg) scale(1.12); z-index: 2; }
+    .pol:nth-child(3) { transform: rotate(7deg) translate(-22px, 12px); }
+    .pol:hover { transform: scale(1.16) rotate(0); z-index: 3; }
+    .hero .kicker { font-size: 1.7rem; color: var(--pink); }
+    .hero h1 { font-size: clamp(2.8rem, 9vw, 5.8rem); margin: 4px 0; }
+    .hero h1 span { background: var(--lime); padding: 0 .15em; border: 3px solid var(--ink); display: inline-block; transform: rotate(-2deg); }
+    .hero p { font-size: clamp(1.03rem, 2.3vw, 1.2rem); color: var(--muted); max-width: 620px; margin: 18px auto 20px; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 26px; }
+    .chip { background: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 5px 13px; font-weight: 800; font-size: .88rem; }
+
+    /* ---------- 1. Skate ---------- */
+    .skate { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: start; }
+    .park {
+      position: relative; height: 300px; border-radius: 16px; overflow: hidden; border: 2px solid var(--ink); perspective: 700px;
+      background: linear-gradient(#9fd4ff, #e3f3ff 65%, #bdb6aa 65%, #a39c90);
+    }
+    .park .graffiti { position: absolute; left: 0; right: 0; top: 38%; text-align: center; font: 2.4rem "Archivo Black", sans-serif; color: rgba(255,61,127,.22); transform: rotate(-4deg); letter-spacing: .05em; }
+    .skater { position: absolute; left: 50%; bottom: 34%; width: 150px; margin-left: -75px; }
+    .rider { display: block; width: 80px; margin: 0 auto -6px; }
+    .board { width: 150px; height: 34px; transform-style: preserve-3d; }
+    .board svg { width: 100%; height: 100%; display: block; }
+    .trick-name { position: absolute; left: 0; right: 0; top: 12px; text-align: center; font: 1.6rem "Archivo Black", sans-serif; color: var(--ink); text-shadow: 2px 2px 0 var(--lime); opacity: 0; transition: opacity .2s; }
+    .trick-name.show { opacity: 1; }
+    .deck-pad { background: #fff; border: 2px solid var(--ink); border-radius: 16px; padding: 14px; }
+    .deck-pad h4, .tricks h4 { font: 800 .76rem "Inter", sans-serif; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
+    #deckSvg { width: 100%; height: auto; display: block; touch-action: manipulation; user-select: none; }
+    #deckSvg .zone { cursor: pointer; transition: fill .1s; }
+    #deckSvg .zone:hover { fill: rgba(198,255,61,.35); }
+    #deckSvg .zone.hit { fill: rgba(255,61,127,.45); }
+    .combo { display: flex; gap: 6px; min-height: 30px; margin: 8px 0; flex-wrap: wrap; }
+    .combo span { background: var(--ink); color: var(--lime); border-radius: 8px; padding: 2px 10px; font-weight: 800; font-size: .85rem; }
+    .tricks { margin-top: 12px; }
+    .tricklist { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .trick { border: 2px solid var(--line); border-radius: 10px; padding: 5px 8px; font-size: .82rem; display: flex; justify-content: space-between; gap: 6px; align-items: center; }
+    .trick b { font-size: .86rem; }
+    .trick small { color: var(--muted); font-size: .72rem; white-space: nowrap; }
+    .trick.done { border-color: var(--ink); background: var(--lime); }
+    .trick.target { border-color: var(--pink); box-shadow: 0 0 0 2px var(--pink); }
+    .skate-msg { text-align: center; font-weight: 800; margin-top: 12px; min-height: 1.6em; color: var(--muted); }
+
+    /* ---------- 2. Barcelona ---------- */
+    .bcn { max-width: 760px; margin: 0 auto; }
+    .bcn-hud { display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+    .scene-card { background: #fff; border: 2px solid var(--ink); border-radius: 16px; padding: 22px; box-shadow: 6px 6px 0 var(--ink); }
+    .who { display: flex; align-items: center; gap: 12px; }
+    .who .face { font-size: 2.6rem; }
+    .who b { display: block; font-size: 1.05rem; }
+    .who small { color: var(--muted); }
+    .quote { background: #f7f5f0; border-radius: 12px; padding: 12px 14px; margin: 12px 0; font-weight: 600; position: relative; }
+    .answers { display: grid; gap: 8px; }
+    .answers button { text-align: left; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 11px 14px; cursor: pointer; font: 600 .98rem "Inter", sans-serif; color: var(--ink); transition: border-color .15s; }
+    .answers button:hover { border-color: var(--ink); }
+    .answers button.good { background: #eaffc2; border-color: #6ea80f; }
+    .answers button.bad { background: #ffe0ea; border-color: var(--pink); }
+    .answers button.meh { background: #fff2dc; border-color: var(--orange); }
+    .result { margin-top: 12px; font-weight: 700; display: none; }
+    .result.show { display: block; }
+
+    /* ---------- 3. Moto ---------- */
+    .moto-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 24px; align-items: center; }
+    .moto-photo { background: #fff; padding: 10px 10px 4px; transform: rotate(-3deg); box-shadow: 0 18px 30px -16px rgba(0,0,0,.6); max-width: 300px; margin: 0 auto; }
+    .moto-photo img { width: 100%; height: auto; display: block; }
+    .moto-photo figcaption { font-family: "Caveat", cursive; font-size: 1.25rem; color: var(--ink); text-align: center; }
+    .road { position: relative; border-radius: 16px; overflow: hidden; border: 2px solid #2b3040; }
+    #motoCanvas { display: block; width: 100%; height: 360px; touch-action: none; }
+    .overlay {
+      position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px;
+      background: rgba(16,19,28,.72); color: #fff; transition: opacity .3s;
+    }
+    .overlay.hidden { opacity: 0; pointer-events: none; }
+    .overlay h3 { font-size: clamp(1.3rem, 3.6vw, 1.9rem); }
+    .overlay p { max-width: 440px; margin: 8px auto 14px; font-weight: 600; color: #e3e6ee; }
+    .overlay .big { font-size: 3rem; }
+    .lean-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .lean-btns .btn { padding: 20px 8px; font-size: 1.25rem; touch-action: none; }
+    .hint { text-align: center; color: #b8bdcb; font-weight: 600; margin-top: 10px; font-size: .92rem; }
+
+    /* ---------- 4. Furgo ---------- */
+    .stealth { max-width: 820px; margin: 0 auto; }
+    .street { position: relative; height: 300px; border-radius: 16px; overflow: hidden; border: 2px solid #2b3040;
+      background: linear-gradient(#0d1530, #1d2a55 60%, #2c2f3a 60%, #22252e); }
+    .street .moon { position: absolute; right: 8%; top: 10%; font-size: 2.4rem; }
+    .street .lamp { position: absolute; left: 40%; top: 18%; width: 6px; height: 46%; background: #555b6b; }
+    .street .lamp::after { content: ""; position: absolute; left: -16px; top: -8px; width: 38px; height: 14px; border-radius: 8px; background: #ffd56b; box-shadow: 0 0 40px 16px rgba(255,213,107,.35); }
+    .van { position: absolute; right: 4%; bottom: 22%; width: 240px; }
+    .alex, .agent, .face, .collage, .deco-emoji { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+    .van svg { width: 100%; height: auto; display: block; }
+    .alex { position: absolute; left: 58%; top: 14%; font-size: 1.7rem; line-height: 1; transition: transform .2s; }
+    .alex.awake { transform: scale(1.25); }
+    .bubble { position: absolute; left: 30%; top: -34%; white-space: nowrap; background: #fff; color: var(--ink); border-radius: 12px; padding: 4px 10px; font-weight: 800; font-size: .9rem; opacity: 0; transition: opacity .2s; }
+    .bubble.show { opacity: 1; }
+    .agent { position: absolute; bottom: 20%; font-size: 2.3rem; transform: translateX(-50%); transition: left .05s linear; text-align: center; }
+    .agent small { display: block; font: 800 .7rem "Inter", sans-serif; color: #fff; background: rgba(0,0,0,.5); border-radius: 6px; padding: 0 5px; margin-top: -4px; }
+    .agent.moving { animation: sneak .35s ease-in-out infinite alternate; }
+    @keyframes sneak { to { translate: 0 -4px; } }
+    .s-hud { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+    .meter small { display: block; font: 800 .72rem "Inter", sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #b8bdcb; margin-bottom: 4px; }
+    .bar { height: 14px; border-radius: 99px; background: #2c3240; overflow: hidden; }
+    .bar div { height: 100%; width: 0; transition: width .08s linear; }
+    #noiseBar { background: linear-gradient(90deg, #5be39b, #ffd166 50%, #ff3d7f); }
+    #alexBar { background: linear-gradient(90deg, #7aa7ff, #ff3d7f); }
+    .s-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .s-btns .btn { padding: 18px 8px; touch-action: none; }
+
+    /* ---------- 5. Lola ---------- */
+    .house {
+      position: relative; height: 380px; border-radius: 16px; overflow: hidden; border: 2px solid var(--ink); user-select: none; -webkit-user-select: none; touch-action: manipulation;
+      background:
+        linear-gradient(90deg, transparent 33%, #8b6b4a 33%, #8b6b4a 34%, transparent 34%, transparent 66%, #8b6b4a 66%, #8b6b4a 67%, transparent 67%),
+        linear-gradient(180deg, #ffe9d6 0 30%, transparent 30%),
+        linear-gradient(90deg, #e9cfa9 0 33.5%, #d7e6f0 33.5% 66.5%, #f3d9e6 66.5%);
+    }
+    .house .door { position: absolute; bottom: 0; width: 1%; height: 46%; background: transparent; }
+    .house .room { position: absolute; top: 8px; font: 800 .8rem "Inter", sans-serif; color: rgba(0,0,0,.45); letter-spacing: .1em; text-transform: uppercase; }
+    .house .decor { position: absolute; font-size: 2.3rem; pointer-events: none; }
+    .house .toy { position: absolute; font-size: 1.5rem; pointer-events: none; animation: drop .4s cubic-bezier(.3,1.8,.5,1); }
+    @keyframes drop { from { transform: translateY(-20px) scale(.3); opacity: 0; } }
+    #lola { position: absolute; left: 0; top: 0; width: 72px; height: 72px; border: 0; background: none; cursor: pointer; font-size: 3rem; line-height: 72px; text-align: center; padding: 0; touch-action: manipulation; filter: drop-shadow(0 6px 4px rgba(0,0,0,.25)); }
+    #lola .body { display: inline-block; position: relative; animation: toddle .28s ease-in-out infinite alternate; }
+    #lola .body::after { content: "🎀"; position: absolute; font-size: 1.3rem; left: 52%; top: -6px; }
+    #lola.idle .body { animation: none; }
+    #lola.flip .body { transform: scaleX(-1); }
+    @keyframes toddle { from { translate: 0 0; rotate: -8deg; } to { translate: 0 -6px; rotate: 8deg; } }
+    .pop { position: absolute; pointer-events: none; font: 800 1.05rem "Inter", sans-serif; color: var(--pink); white-space: nowrap; animation: rise .9s ease-out forwards; text-shadow: 0 1px 0 #fff; }
+    @keyframes rise { to { transform: translateY(-50px); opacity: 0; } }
+    .l-hud { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; font-weight: 800; text-align: center; }
+    .l-hud > div { background: #fff; border: 2px solid var(--ink); border-radius: 12px; padding: 8px; }
+    .l-hud small { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+
+    /* ---------- Final ---------- */
+    .final { text-align: center; }
+    .final figure { display: inline-block; background: #fff; padding: 12px 12px 6px; border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--lime); transform: rotate(-1.5deg); max-width: 720px; width: 100%; }
+    .final img { width: 100%; height: auto; display: block; }
+    .final figcaption { font-family: "Caveat", cursive; font-size: 1.5rem; }
+    .final p { max-width: 560px; margin: 26px auto 0; font-size: 1.12rem; }
+    .final .sign { font-family: "Caveat", cursive; font-size: 1.8rem; margin-top: 8px; color: var(--pink); }
+    .center-msg { text-align: center; font-weight: 700; margin-top: 12px; min-height: 1.6em; }
+    footer { text-align: center; color: var(--muted); padding: 20px 20px 46px; font-size: .95rem; }
+    footer a { color: var(--ink); }
+
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 200; width: 100%; height: 100%; }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); z-index: 210;
+      background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-weight: 800; border: 2px solid var(--lime);
+      transition: transform .4s cubic-bezier(.3,1.5,.5,1); width: max-content; max-width: calc(100% - 32px); text-align: center;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      section { padding: 66px 0; }
+      .skate, .moto-wrap { grid-template-columns: 1fr; }
+      .skate > div, .moto-wrap > div { min-width: 0; }
+      .pol img { width: 92px; }
+      .pol figcaption { font-size: .95rem; }
+      .pol:nth-child(1) { transform: rotate(-8deg) translate(16px, 8px); }
+      .pol:nth-child(3) { transform: rotate(7deg) translate(-16px, 10px); }
+      .trick small { white-space: normal; text-align: right; }
+      .tricklist { grid-template-columns: 1fr; }
+      .moto-photo { max-width: 220px; }
+      .van { width: 170px; }
+      .alex { font-size: 1.2rem; }
+      .agent { font-size: 1.8rem; }
+      .bubble { top: -48%; font-size: .8rem; }
+      .house { height: 340px; }
+      .house .room { font-size: .62rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Portada -->
+  <header class="hero">
+    <div>
+      <div class="collage">
+        <figure class="pol"><img src="img/ski.jpg" alt="Brage de jovencito en la nieve" width="800" height="1067"><figcaption>Versión beta</figcaption></figure>
+        <figure class="pol"><img src="img/boina.jpg" alt="Brage con una boina azul" width="800" height="1000"><figcaption>Con boina, claro</figcaption></figure>
+        <figure class="pol"><img src="img/dunas.jpg" alt="Brage en las dunas" width="800" height="1000"><figcaption>Modo explorador</figcaption></figure>
+      </div>
+      <span class="kicker hand">Skater, motero, padre de Lola y amigo de los de siempre</span>
+      <h1>¡Feliz cumple, <span>Brage!</span></h1>
+      <p>Cinco minijuegos con lo mejor de tu vida: trucos de skate, caseros de Barcelona con mucha jeta, una moto que no se sujeta sola, la furgo de Alex y una Lola que no para quieta.</p>
+      <div class="chips"><span class="chip">🛹 Skate</span><span class="chip">🏙️ Barcelona</span><span class="chip">🏍️ Moto</span><span class="chip">🚐 Furgo</span><span class="chip">👧 Lola</span></div>
+      <a href="#skate" class="btn lime" id="start">🛹 ¡Dale!</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Skate -->
+    <section class="alt" id="skate">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">1</span>
+          <h2>Sesión de skate 🛹</h2>
+          <p>Toca las zonas de la tabla en orden para hacer trucos: cola, morro, centro y canto. Consulta el libro de trucos y complétalo… o acepta los retos del colega.</p>
+        </div>
+        <div class="skate reveal">
+          <div>
+            <div class="park" id="park">
+              <div class="graffiti">BRAGE</div>
+              <div class="trick-name" id="trickName"></div>
+              <div class="skater" id="skater">
+                <svg class="rider" id="rider" viewBox="0 0 80 110" aria-hidden="true">
+                  <g stroke="#151515" stroke-width="6" stroke-linecap="round" fill="none">
+                    <path d="M40 46 L38 74"/><path d="M38 74 L22 104 M38 74 L58 104"/>
+                    <path d="M40 54 L18 46 M40 54 L64 62"/>
+                  </g>
+                  <circle cx="41" cy="28" r="14" fill="#f1c7a5" stroke="#151515" stroke-width="3"/>
+                  <path d="M27 24 C 28 8 56 8 55 24 Z" fill="#2f6bff"/>
+                </svg>
+                <div class="board" id="board">
+                  <svg viewBox="0 0 150 34" aria-hidden="true">
+                    <path d="M8 10 Q 2 4 10 4 L 140 4 Q 148 4 142 10 L 138 14 L 12 14 Z" fill="#ff3d7f" stroke="#151515" stroke-width="2"/>
+                    <rect x="28" y="14" width="10" height="6" fill="#888"/><rect x="112" y="14" width="10" height="6" fill="#888"/>
+                    <circle cx="26" cy="24" r="7" fill="#c6ff3d" stroke="#151515" stroke-width="2"/><circle cx="40" cy="24" r="7" fill="#c6ff3d" stroke="#151515" stroke-width="2"/>
+                    <circle cx="110" cy="24" r="7" fill="#c6ff3d" stroke="#151515" stroke-width="2"/><circle cx="124" cy="24" r="7" fill="#c6ff3d" stroke="#151515" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <p class="skate-msg" id="skateMsg">Prueba: toca la <b>cola</b> para un ollie.</p>
+          </div>
+          <div>
+            <div class="deck-pad">
+              <h4>La tabla (vista desde arriba): toca las zonas</h4>
+              <svg id="deckSvg" viewBox="0 0 400 150" aria-label="Tabla de skate con zonas">
+                <rect x="10" y="20" width="380" height="110" rx="55" fill="#1d1d1d"/>
+                <g fill="#2a2a2a"><circle cx="110" cy="50" r="3"/><circle cx="110" cy="100" r="3"/><circle cx="290" cy="50" r="3"/><circle cx="290" cy="100" r="3"/></g>
+                <rect class="zone" data-z="T" x="10" y="20" width="85" height="85" rx="40" fill="rgba(255,255,255,0)"/>
+                <rect class="zone" data-z="N" x="305" y="20" width="85" height="85" rx="40" fill="rgba(255,255,255,0)"/>
+                <rect class="zone" data-z="C" x="100" y="20" width="200" height="85" fill="rgba(255,255,255,0)"/>
+                <rect class="zone" data-z="E" x="40" y="105" width="320" height="25" rx="12" fill="rgba(255,255,255,0)"/>
+                <g fill="#c6ff3d" font-family="Inter, sans-serif" font-weight="800" font-size="15" text-anchor="middle" pointer-events="none">
+                  <text x="55" y="68">COLA</text><text x="345" y="68">MORRO</text><text x="200" y="68">CENTRO</text><text x="200" y="124" fill="#ff3d7f" font-size="13">CANTO (flip)</text>
+                </g>
+              </svg>
+              <div class="combo" id="combo"></div>
+              <button class="btn lime" id="challengeBtn" style="width:100%">🎯 Reto del colega</button>
+            </div>
+            <div class="tricks">
+              <h4>Libro de trucos <span id="trickCount">0 / 8</span></h4>
+              <div class="tricklist" id="tricklist"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Barcelona -->
+    <section id="barcelona">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">2</span>
+          <h2>Barcelona con Mikel 🏙️</h2>
+          <p>Compartir piso en Barcelona es un deporte de riesgo: caseros, agencias y vecinos. Elige bien qué contestar para que no os timen… y sin acabar a gritos en la escalera.</p>
+        </div>
+        <div class="bcn reveal">
+          <div class="bcn-hud"><span id="bcnStep">Situación 1 / 6</span><span id="bcnSaved">💶 0 € salvados</span><span id="bcnVibe">🤝 Buen rollo: 3/3</span></div>
+          <div class="scene-card" id="bcnCard"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Moto -->
+    <section class="dark" id="moto">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">3</span>
+          <h2>La moto nueva 🏍️</h2>
+          <p>Moto recién comprada y rumbo al mirador con Barcelona a los pies. Solo hay un problema: la moto no se sujeta sola. Corrige la inclinación (y el viento) para no caerte… porque si te caes, pierna rota.</p>
+        </div>
+        <div class="moto-wrap reveal">
+          <figure class="moto-photo"><img src="img/moto.jpg" alt="Brage con su moto y Barcelona al fondo" width="900" height="1200" loading="lazy"><figcaption>El día del estreno ✌️</figcaption></figure>
+          <div>
+            <div class="road">
+              <canvas id="motoCanvas" aria-label="Carretera con la moto"></canvas>
+              <div class="overlay" id="motoOverlay">
+                <div>
+                  <div class="big" id="motoBig">🏍️</div>
+                  <h3 id="motoTitle">¿Arrancamos?</h3>
+                  <p id="motoText">Mantén pulsado ⬅️ o ➡️ para enderezar la moto. Si se inclina demasiado… al suelo.</p>
+                  <button class="btn lime" id="motoStart">🔑 Arrancar</button>
+                </div>
+              </div>
+            </div>
+            <div class="lean-btns"><button class="btn" id="leftBtn">⬅️</button><button class="btn" id="rightBtn">➡️</button></div>
+            <p class="hint">En el ordenador también valen las flechas ← →.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Furgo de Alex -->
+    <section class="dark" id="furgo" style="background:#0b0e16">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">4</span>
+          <h2>Operación Furgo 🚐</h2>
+          <p>Alex duerme en su furgo. Mikel y Brage tienen que colarse dentro sin despertarle. Mueve a cada uno manteniendo pulsado su botón… y quédate quieto cuando Alex abra un ojo.</p>
+        </div>
+        <div class="stealth reveal">
+          <div class="street" id="street">
+            <span class="moon">🌙</span>
+            <span class="lamp"></span>
+            <div class="van">
+              <svg viewBox="0 0 240 120" aria-hidden="true">
+                <path d="M10 30 Q 10 10 30 10 H 170 Q 200 10 215 40 L 232 70 V 98 H 10 Z" fill="#f2efe6" stroke="#151515" stroke-width="3"/>
+                <rect x="10" y="60" width="222" height="10" fill="#ff8a1f"/>
+                <rect x="130" y="20" width="60" height="32" rx="6" fill="#26304d" stroke="#151515" stroke-width="2"/>
+                <path d="M196 20 H 205 L 222 50 H 196 Z" fill="#26304d" stroke="#151515" stroke-width="2"/>
+                <rect x="30" y="20" width="80" height="62" rx="4" fill="none" stroke="#151515" stroke-width="2"/>
+                <circle cx="55" cy="100" r="16" fill="#222" stroke="#151515" stroke-width="3"/><circle cx="55" cy="100" r="6" fill="#999"/>
+                <circle cx="190" cy="100" r="16" fill="#222" stroke="#151515" stroke-width="3"/><circle cx="190" cy="100" r="6" fill="#999"/>
+              </svg>
+              <span class="alex" id="alex">😴</span>
+              <span class="bubble" id="bubble">¿Eh…?</span>
+            </div>
+            <div class="agent" id="agentM" style="left:6%">🕵️<small>Mikel</small></div>
+            <div class="agent" id="agentB" style="left:22%">🥷<small>Brage</small></div>
+            <div class="overlay" id="sOverlay">
+              <div>
+                <div class="big" id="sBig">🤫</div>
+                <h3 id="sTitle">Misión: colarse en la furgo</h3>
+                <p id="sText">Llevad a los dos hasta la puerta de la furgo. Si Alex abre los ojos (👀) mientras alguien se mueve… misión fallida.</p>
+                <button class="btn lime" id="sStart">🌙 Empezar la misión</button>
+              </div>
+            </div>
+          </div>
+          <div class="s-hud">
+            <div class="meter"><small>Ruido</small><div class="bar"><div id="noiseBar"></div></div></div>
+            <div class="meter"><small id="alexLabel">Alex: dormido 😴</small><div class="bar"><div id="alexBar"></div></div></div>
+          </div>
+          <div class="s-btns"><button class="btn blue" id="moveM">🕵️ Mover a Mikel</button><button class="btn" id="moveB" style="background:#ff3d7f; box-shadow: 4px 4px 0 #fff">🥷 Mover a Brage</button></div>
+          <p class="hint">En el ordenador: mantén <b>M</b> para Mikel y <b>B</b> para Brage.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Lola -->
+    <section class="alt" id="lola-sec">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">5</span>
+          <h2>¡Pilla a Lola! 👧</h2>
+          <p>Lola ya camina… y no hay quien la pare. Recorre la casa detrás de ella y tócala 8 veces en 30 segundos. Cada vez que la pillas, se ríe y corre más.</p>
+        </div>
+        <div class="reveal" style="max-width:900px; margin:0 auto">
+          <div class="house" id="house">
+            <span class="room" style="left:2%">Salón</span><span class="room" style="left:35.5%">Cocina</span><span class="room" style="left:68.5%">Habitación</span>
+            <span class="decor" style="left:3%; bottom:4%">🛋️</span><span class="decor" style="left:20%; top:12%">📺</span>
+            <span class="decor" style="left:43%; top:12%">🍳</span><span class="decor" style="left:56%; bottom:4%">🧺</span>
+            <span class="decor" style="right:16%; top:12%">🖼️</span><span class="decor" style="right:3%; bottom:4%">🛏️</span>
+            <button id="lola" class="idle" aria-label="Lola"><span class="body">👶</span></button>
+          </div>
+          <div class="l-hud"><div><small>Pillada</small><span id="lolaCount">0 / 8</span></div><div><small>Tiempo</small><span id="lolaTime">30 s</span></div></div>
+          <div style="text-align:center"><button class="btn" id="lolaStart">👟 ¡A por ella!</button></div>
+          <p class="center-msg" id="lolaMsg" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final -->
+    <section class="final">
+      <div class="container reveal">
+        <figure><img src="img/furgo.jpg" alt="Brage y Mikel con camisas hawaianas" width="1200" height="900" loading="lazy"><figcaption>Los de siempre 🌴</figcaption></figure>
+        <p>Unos cuantos años ya: pisos en Barcelona, motos, furgos, caseros con jeta y camisas que nadie más se pondría. Que vengan muchos más.</p>
+        <p style="margin-top:6px"><b>¡Feliz cumple, Brage!</b></p>
+        <div class="sign">— Mikel</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hecho para Brage. · <a href="../">Volver al índice</a></footer>
+
+  <script>
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---------- Utilidades: confeti, avisos, bloqueo de botones ---------- */
+    const cv = document.getElementById("confetti");
+    const cx = cv.getContext("2d");
+    let pieces = [], confettiRunning = false;
+    function sizeConfetti() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+    sizeConfetti(); addEventListener("resize", sizeConfetti);
+    function confetti(n = 140, x = innerWidth / 2, y = innerHeight / 3) {
+      if (reduceMotion) return;
+      const colors = ["#c6ff3d", "#ff3d7f", "#2f6bff", "#ff8a1f", "#151515", "#ffffff"];
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9;
+        pieces.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+          w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, c: colors[i % colors.length], life: 0 });
+      }
+      if (!confettiRunning) { confettiRunning = true; requestAnimationFrame(tickConfetti); }
+    }
+    function tickConfetti() {
+      const d = devicePixelRatio;
+      cx.clearRect(0, 0, cv.width, cv.height);
+      pieces.forEach((p) => {
+        p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+        cx.save(); cx.translate(p.x * d, p.y * d); cx.rotate(p.r);
+        cx.fillStyle = p.c; cx.globalAlpha = Math.max(0, 1 - p.life / 220);
+        cx.fillRect(-p.w * d / 2, -p.h * d / 2, p.w * d, p.h * d * Math.abs(Math.cos(p.r * 2)) + d);
+        cx.restore();
+      });
+      pieces = pieces.filter((p) => p.y < innerHeight + 40 && p.life < 220);
+      if (pieces.length) requestAnimationFrame(tickConfetti);
+      else { confettiRunning = false; cx.clearRect(0, 0, cv.width, cv.height); }
+    }
+    const confettiAt = (el, n) => { const r = el.getBoundingClientRect(); confetti(n, r.left + r.width / 2, r.top + r.height / 2); };
+    let toastTimer, toastLockedUntil = 0;
+    function toast(msg, important = false) {
+      const now = performance.now();
+      if (!important && now < toastLockedUntil) return;
+      if (important) toastLockedUntil = now + 2600;
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
+    }
+    function lockButton(btn, label, secs = 3) {
+      btn.disabled = true;
+      let left = secs;
+      btn.textContent = `⏳ Un momento… ${left}`;
+      const iv = setInterval(() => {
+        left--;
+        if (left > 0) { btn.textContent = `⏳ Un momento… ${left}`; return; }
+        clearInterval(iv); btn.disabled = false; btn.textContent = label;
+      }, 1000);
+    }
+    const inView = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+    // Botón que funciona mientras se mantiene pulsado (ratón, dedo)
+    function holdButton(btn, set) {
+      const on = (e) => { e.preventDefault(); if (btn.disabled) return; if (e.pointerId !== undefined) btn.setPointerCapture(e.pointerId); set(true); btn.classList.add("held"); };
+      const off = () => { set(false); btn.classList.remove("held"); };
+      btn.addEventListener("pointerdown", on);
+      ["pointerup", "pointercancel", "lostpointercapture"].forEach((ev) => btn.addEventListener(ev, off));
+      btn.addEventListener("contextmenu", (e) => e.preventDefault());
+      addEventListener("blur", off);
+    }
+    addEventListener("load", () => setTimeout(() => confetti(150), 400));
+    document.getElementById("start").addEventListener("click", (e) => confettiAt(e.currentTarget, 50));
+
+    /* ---------- 1. Skate ---------- */
+    (() => {
+      const ZN = { T: "Cola", N: "Morro", C: "Centro", E: "Canto" };
+      const TRICKS = [
+        { k: "T", n: "Ollie" },
+        { k: "N", n: "Nollie" },
+        { k: "TE", n: "Kickflip" },
+        { k: "NE", n: "Nollie heelflip" },
+        { k: "TC", n: "Pop shove-it" },
+        { k: "TCE", n: "360 flip" },
+        { k: "TT", n: "Manual" },
+        { k: "TNT", n: "Impossible" },
+      ];
+      const skater = document.getElementById("skater"), board = document.getElementById("board"), rider = document.getElementById("rider");
+      const nameEl = document.getElementById("trickName"), msg = document.getElementById("skateMsg"), comboEl = document.getElementById("combo");
+      const list = document.getElementById("tricklist"), countEl = document.getElementById("trickCount"), chBtn = document.getElementById("challengeBtn");
+      const done = new Set();
+      let buf = "", timer = null, busy = false, target = null, streak = 0;
+      list.innerHTML = TRICKS.map((t, i) => `<div class="trick" id="tr${i}"><b>${t.n}</b><small>${[...t.k].map((z) => ZN[z]).join(" → ")}</small></div>`).join("");
+      const ease = "cubic-bezier(.3,.7,.4,1)";
+      function jump(dur = 650, height = 95) {
+        skater.animate([{ transform: "translateY(0)" }, { transform: `translateY(-${height}px)`, offset: .45 }, { transform: "translateY(0)" }], { duration: dur, easing: ease });
+      }
+      function animate(trick) {
+        const D = 650;
+        switch (trick) {
+          case "Ollie": jump(); board.animate([{ transform: "rotate(0)" }, { transform: "rotate(-14deg)", offset: .25 }, { transform: "rotate(6deg)", offset: .6 }, { transform: "rotate(0)" }], { duration: D }); break;
+          case "Nollie": jump(); board.animate([{ transform: "rotate(0)" }, { transform: "rotate(14deg)", offset: .25 }, { transform: "rotate(-6deg)", offset: .6 }, { transform: "rotate(0)" }], { duration: D }); break;
+          case "Kickflip": jump(); board.animate([{ transform: "rotateX(0)" }, { transform: "rotateX(360deg)", offset: .8 }, { transform: "rotateX(360deg)" }], { duration: D }); break;
+          case "Nollie heelflip": jump(); board.animate([{ transform: "rotateX(0)" }, { transform: "rotateX(-360deg)", offset: .8 }, { transform: "rotateX(-360deg)" }], { duration: D }); break;
+          case "Pop shove-it": jump(); board.animate([{ transform: "rotateY(0)" }, { transform: "rotateY(180deg)", offset: .8 }, { transform: "rotateY(180deg)" }], { duration: D }); break;
+          case "360 flip": jump(750, 110); board.animate([{ transform: "rotateY(0) rotateX(0)" }, { transform: "rotateY(360deg) rotateX(360deg)", offset: .82 }, { transform: "rotateY(360deg) rotateX(360deg)" }], { duration: 750 }); break;
+          case "Manual": board.animate([{ transform: "rotate(0)" }, { transform: "rotate(-13deg)", offset: .2 }, { transform: "rotate(-13deg)", offset: .85 }, { transform: "rotate(0)" }], { duration: 1100 });
+            skater.animate([{ transform: "translateX(0)" }, { transform: "translateX(60px)", offset: .85 }, { transform: "translateX(0)" }], { duration: 1100, easing: "ease-in-out" }); break;
+          case "Impossible": jump(); board.animate([{ transform: "rotate(0)" }, { transform: "rotate(-360deg)", offset: .8 }, { transform: "rotate(-360deg)" }], { duration: D }); break;
+          default: // slam
+            rider.animate([{ transform: "rotate(0)" }, { transform: "translate(40px, 30px) rotate(95deg)", offset: .5 }, { transform: "translate(40px, 30px) rotate(95deg)", offset: .85 }, { transform: "rotate(0)" }], { duration: 1300 });
+            board.animate([{ transform: "translateX(0)" }, { transform: "translateX(-90px) rotate(-20deg)", offset: .5 }, { transform: "translateX(-90px)", offset: .85 }, { transform: "translateX(0)" }], { duration: 1300 });
+        }
+      }
+      function showName(t, color) {
+        nameEl.textContent = t; nameEl.style.color = color || "";
+        nameEl.classList.add("show"); setTimeout(() => nameEl.classList.remove("show"), 1100);
+      }
+      function resolve() {
+        const combo = buf; buf = ""; comboEl.innerHTML = "";
+        const t = TRICKS.find((x) => x.k === combo);
+        busy = true; setTimeout(() => (busy = false), 750);
+        if (!t) { animate("slam"); showName("¡SLAM! 💥", "#ff3d7f"); msg.textContent = `«${[...combo].map((z) => ZN[z]).join(" → ")}» no es ningún truco… al suelo. Mira el libro de trucos.`; streak = 0; return; }
+        animate(t.n); showName(t.n + "!");
+        const i = TRICKS.indexOf(t);
+        if (!done.has(t.n)) {
+          done.add(t.n); document.getElementById("tr" + i).classList.add("done");
+          countEl.textContent = `${done.size} / ${TRICKS.length}`;
+          confettiAt(document.getElementById("park"), 25);
+          if (done.size === TRICKS.length) setTimeout(() => { confetti(240); toast("🛹 ¡Libro de trucos completo! Skater de los de antes", true); }, 600);
+        }
+        if (target) {
+          if (t === target) { streak++; msg.textContent = `✅ ¡Clavado! Racha de retos: ${streak}. Otro…`; confettiAt(document.getElementById("park"), 40); setTimeout(newChallenge, 1100); }
+          else { msg.textContent = `😅 Eso era un ${t.n}, el colega pedía ${target.n}. ¡Otra!`; streak = 0; }
+        } else msg.textContent = `🔥 ${t.n}. ${done.size < TRICKS.length ? "¿Siguiente truco?" : "Ya los tienes todos. Prueba los retos."}`;
+      }
+      function newChallenge() {
+        document.querySelectorAll(".trick.target").forEach((x) => x.classList.remove("target"));
+        target = TRICKS[Math.floor(Math.random() * TRICKS.length)];
+        document.getElementById("tr" + TRICKS.indexOf(target)).classList.add("target");
+        msg.innerHTML = `🎯 El colega pide: <b>${target.n}</b>`;
+      }
+      chBtn.addEventListener("click", newChallenge);
+      document.querySelectorAll("#deckSvg .zone").forEach((z) => z.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        if (busy) return;
+        const k = z.dataset.z;
+        z.classList.add("hit"); setTimeout(() => z.classList.remove("hit"), 150);
+        buf += k;
+        comboEl.innerHTML = [...buf].map((x) => `<span>${ZN[x]}</span>`).join("");
+        clearTimeout(timer);
+        if (buf.length >= 3) resolve(); else timer = setTimeout(resolve, 620);
+      }));
+    })();
+
+    /* ---------- 2. Barcelona con Mikel ---------- */
+    (() => {
+      const SC = [
+        { face: "🧓", who: "El casero", where: "Al renovar el contrato", q: "«Este año os subo el alquiler un 20 %, que Barcelona está carísima.»", money: 2400,
+          a: [["good", "«Enséñanos dónde pone eso en el contrato: la actualización anual va según el índice que marca la ley, no un 20 % porque sí.»", "El casero carraspea y se queda con la subida legal. Timo evitado."],
+              ["bad", "«Vale, vale… es lo que hay.»", "Acabáis de regalarle 2.400 € al año. Mikel te mira con decepción."],
+              ["meh", "«¡Pues no pagamos y punto!»", "Ahora tenéis un burofax y un casero enfadado. No era la idea."]] },
+        { face: "🕴️", who: "La agencia", where: "Firmando el piso", q: "«Son 1.500 € de honorarios de la agencia. Los pagáis vosotros, claro.»", money: 1500,
+          a: [["good", "«Desde la Ley de Vivienda de 2023, los gastos de gestión inmobiliaria los paga el propietario.»", "El de la agencia se va a «consultarlo con el propietario». No vuelve a sacar el tema."],
+              ["bad", "«Bueno, si hay que pagar…»", "1.500 € menos para cervezas. Y encima os cobra el IVA aparte."],
+              ["meh", "«¿Y no lo podemos dejar en 1.000?»", "Habéis negociado… algo que no teníais que pagar. Medio timo."]] },
+        { face: "🔧", who: "El vecino de arriba", where: "Sábado, 9:00", q: "«Estoy de obras, sí. ¿Algún problema? Tengo licencia.»", money: 0,
+          a: [["good", "«Ningún problema, solo pedirte que el taladro empiece un poco más tarde los findes. ¿Te subimos un café?»", "Ahora es vuestro colega del taladro. Las obras empiezan a las 11."],
+              ["bad", "«Nada, nada, perdona por molestar.»", "El taladro sigue a las 9 en punto. Todo el mes."],
+              ["meh", "«¡Como sigas, llamamos a la Guardia Urbana!»", "Taladro a las 8:30 a partir de ahora. Por listos."]] },
+        { face: "🧓", who: "El casero (otra vez)", where: "Un martes cualquiera", q: "«Mañana paso a ver el piso, que tengo llaves.»", money: 0,
+          a: [["good", "«Mientras dure el contrato es nuestra vivienda: sin nuestro permiso no puede entrar. Si quiere, quedamos un día.»", "Lo entiende. Viene el jueves, avisando y con cruasanes (bueno, sin cruasanes)."],
+              ["bad", "«Claro, pase cuando quiera.»", "Aparece el domingo a las 10 y os pilla en calzoncillos. A Mikel también."],
+              ["meh", "«Cambiamos la cerradura y ya está.»", "Técnicamente… no. Y ahora tenéis una discusión más."]] },
+        { face: "👵", who: "La señora Montse, del 2.º", where: "23:05, en la escalera", q: "«¿Lavadora a estas horas? ¡Que tengo el sueño muy ligero!»", money: 0,
+          a: [["good", "«Tiene razón, Montse, perdone. ¿Le subimos unos panellets el domingo?»", "Montse os adopta. Ahora os guarda los paquetes de Amazon."],
+              ["bad", "«Lo que usted diga, no volverá a pasar…» (y vuelve a pasar)", "La nota en el ascensor ya tiene vuestro número de piso."],
+              ["meh", "«¡Es nuestra lavadora y la ponemos cuando queremos!»", "Montse es la presidenta de la comunidad. Mala jugada."]] },
+        { face: "🧓", who: "El casero (la última)", where: "Al devolver las llaves", q: "«La fianza me la quedo: hay un agujerito de un cuadro en la pared.»", money: 900,
+          a: [["good", "«El desgaste normal por uso no se descuenta. Y si no la devuelves en un mes, encima genera intereses.»", "Fianza devuelta íntegra. Brindis con Mikel en el bar de abajo."],
+              ["bad", "«Bueno, quédatela, ya está…»", "900 € de despedida. Barcelona, siempre tan cara."],
+              ["meh", "«Te tapamos el agujero con pasta de dientes.»", "Clásico. Pero el casero se queda la mitad igualmente."]] },
+      ];
+      const card = document.getElementById("bcnCard"), stepEl = document.getElementById("bcnStep"), savedEl = document.getElementById("bcnSaved"), vibeEl = document.getElementById("bcnVibe");
+      let i = 0, saved = 0, vibe = 3, goods = 0;
+      const shuffle = (a) => [...a].sort(() => Math.random() - .5);
+      function show() {
+        const s = SC[i];
+        stepEl.textContent = `Situación ${i + 1} / ${SC.length}`;
+        card.innerHTML = `<div class="who"><span class="face">${s.face}</span><div><b>${s.who}</b><small>${s.where}</small></div></div>
+          <div class="quote">${s.q}</div><div class="answers">${shuffle(s.a).map(([k, t, r]) => `<button data-k="${k}" data-r="${r.replace(/"/g, "&quot;")}">${t}</button>`).join("")}</div>
+          <div class="result" id="bcnRes"></div>`;
+        card.querySelectorAll(".answers button").forEach((b) => b.addEventListener("click", () => pick(b)));
+      }
+      function pick(b) {
+        const s = SC[i], k = b.dataset.k;
+        card.querySelectorAll(".answers button").forEach((x) => (x.disabled = true));
+        b.classList.add(k);
+        const res = card.querySelector("#bcnRes");
+        if (k === "good") { goods++; saved += s.money; confettiAt(b, 20); }
+        if (k === "meh") { vibe = Math.max(0, vibe - 1); if (s.money) saved += Math.round(s.money / 2); }
+        savedEl.textContent = `💶 ${saved.toLocaleString("es-ES")} € salvados`;
+        vibeEl.textContent = `🤝 Buen rollo: ${vibe}/3`;
+        res.innerHTML = `${k === "good" ? "✅" : k === "bad" ? "💸" : "😬"} ${b.dataset.r}<div style="margin-top:12px"><button class="btn lime" id="bcnNext">${i + 1 < SC.length ? "Siguiente →" : "Ver resultado"}</button></div>`;
+        res.classList.add("show");
+        res.querySelector("#bcnNext").addEventListener("click", () => { i++; i < SC.length ? show() : end(); });
+      }
+      function end() {
+        const title = goods === SC.length ? "Abogados del pueblo" : goods >= 4 ? "Inquilinos curtidos" : goods >= 2 ? "Supervivientes de Barcelona" : "Carne de timo";
+        card.innerHTML = `<div class="who"><span class="face">🏆</span><div><b>${title}</b><small>${goods} de ${SC.length} bien resueltas</small></div></div>
+          <div class="quote">Brage y Mikel han salvado <b>${saved.toLocaleString("es-ES")} €</b> y les queda un buen rollo vecinal de <b>${vibe}/3</b>. ${vibe === 3 ? "Montse os sigue guardando los paquetes. 📦" : "Alguna nota en el ascensor ha caído. 📝"}</div>
+          <button class="btn" id="bcnAgain">🔁 Otra vez</button>`;
+        if (goods >= 4) { confetti(200); toast("🏙️ ¡Nadie os ha timado! Inquilinos de élite", true); }
+        const again = card.querySelector("#bcnAgain");
+        lockButton(again, "🔁 Otra vez");
+        again.addEventListener("click", () => { if (again.disabled) return; i = 0; saved = 0; vibe = 3; goods = 0; savedEl.textContent = "💶 0 € salvados"; vibeEl.textContent = "🤝 Buen rollo: 3/3"; show(); });
+      }
+      show();
+    })();
+
+    /* ---------- 3. La moto ---------- */
+    (() => {
+      const canvas = document.getElementById("motoCanvas"), g = canvas.getContext("2d");
+      const overlay = document.getElementById("motoOverlay"), startBtn = document.getElementById("motoStart");
+      const bigEl = document.getElementById("motoBig"), titleEl = document.getElementById("motoTitle"), textEl = document.getElementById("motoText");
+      let W = 0, H = 0;
+      function size() { W = canvas.clientWidth; H = canvas.clientHeight; canvas.width = W * devicePixelRatio; canvas.height = H * devicePixelRatio; g.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); }
+      size(); addEventListener("resize", size);
+      const DIST = 900, SPEED = 26, FALL = .85; // metros, m/s, radianes (~49°)
+      let state = "idle", ang = 0, angV = 0, wind = 0, gust = 0, dist = 0, left = false, right = false, scroll = 0, crashT = 0, lastT = 0;
+      holdButton(document.getElementById("leftBtn"), (v) => (left = v));
+      holdButton(document.getElementById("rightBtn"), (v) => (right = v));
+      addEventListener("keydown", (e) => {
+        if (state !== "ride" || !inView(canvas)) return;
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") { left = true; e.preventDefault(); }
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") { right = true; e.preventDefault(); }
+      });
+      addEventListener("keyup", (e) => {
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") left = false;
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") right = false;
+      });
+      function start() {
+        state = "ride"; ang = (Math.random() - .5) * .1; angV = 0; wind = 0; gust = 0; dist = 0;
+        overlay.classList.add("hidden");
+      }
+      startBtn.addEventListener("click", () => { if (!startBtn.disabled) start(); });
+      function physics(dt) {
+        if (state === "ride") {
+          wind += (Math.random() - .5) * 2.4 * dt; wind = Math.max(-.7, Math.min(.7, wind)) * .995;
+          if (Math.random() < dt * .25) gust = (Math.random() < .5 ? -1 : 1) * (.9 + Math.random() * .6);
+          gust *= Math.pow(.2, dt);
+          const ctl = (right ? 1 : 0) - (left ? 1 : 0);
+          const acc = 1.7 * Math.sin(ang) + wind + gust + ctl * 3.4 - 1.6 * angV;
+          angV += acc * dt; ang += angV * dt;
+          dist += SPEED * dt; scroll += SPEED * dt;
+          if (Math.abs(ang) > FALL) { state = "crash"; crashT = 0; }
+          if (dist >= DIST) { state = "won"; end(true); }
+        } else if (state === "crash") {
+          crashT += dt;
+          ang += Math.sign(ang) * 3 * dt; if (Math.abs(ang) > Math.PI / 2) ang = Math.sign(ang) * Math.PI / 2;
+          if (crashT > .9 && crashT - dt <= .9) end(false);
+        }
+      }
+      function end(won) {
+        left = right = false;
+        overlay.classList.remove("hidden");
+        if (won) { bigEl.textContent = "🌇"; titleEl.textContent = "¡En el mirador!"; textEl.textContent = "Barcelona a tus pies, la moto en una pieza y las dos piernas también. Foto de rigor ✌️"; confetti(220); toast("🏍️ ¡Llegaste entero al mirador!", true); }
+        else { bigEl.textContent = "🦴🩼"; titleEl.textContent = "¡Te has roto la pierna!"; textEl.textContent = `Caída a ${Math.round(dist)} m. Diagnóstico: seis semanas de escayola y muletas. Mikel ya ha firmado en la escayola. ✍️`; }
+        lockButton(startBtn, won ? "🔁 Otra vuelta" : "🔁 Volver a intentarlo");
+      }
+      function draw() {
+        const hor = H * .4;
+        const sky = g.createLinearGradient(0, 0, 0, hor);
+        sky.addColorStop(0, "#9cc7ff"); sky.addColorStop(1, "#ffd9b0");
+        g.fillStyle = sky; g.fillRect(0, 0, W, hor);
+        // skyline de Barcelona al fondo
+        g.fillStyle = "#b9a7a0";
+        const sk = [[.1, 18], [.16, 30], [.22, 14], [.3, 26], [.36, 48], [.4, 22], [.48, 34], [.55, 20], [.6, 54], [.63, 54], [.7, 24], [.78, 36], [.86, 16]];
+        sk.forEach(([x, h]) => g.fillRect(x * W, hor - h, W * .035, h));
+        g.fillStyle = "#7fb0d8"; g.fillRect(0, hor - 4, W, 4);
+        // tierra y carretera
+        g.fillStyle = "#6f8f5a"; g.fillRect(0, hor, W, H - hor);
+        g.fillStyle = "#3a3d46";
+        g.beginPath(); g.moveTo(W * .47, hor); g.lineTo(W * .53, hor); g.lineTo(W * .98, H); g.lineTo(W * .02, H); g.closePath(); g.fill();
+        // líneas discontinuas con perspectiva
+        g.fillStyle = "#f2f2f2";
+        for (let k = 0; k < 14; k++) {
+          const z = ((k * 10 - scroll) % 140 + 140) % 140 / 140; // 0 lejos → 1 cerca
+          const p = z * z, y = hor + p * (H - hor), w = 2 + p * 8, h = 4 + p * 26;
+          if (k % 2) continue;
+          g.fillRect(W / 2 - w / 2, y, w, h);
+        }
+        // moto desde atrás
+        const bx = W / 2, by = H - 18;
+        g.save(); g.translate(bx, by); g.rotate(ang);
+        g.fillStyle = "rgba(0,0,0,.25)"; g.beginPath(); g.ellipse(0, 4, 34, 7, 0, 0, 7); g.fill();
+        g.fillStyle = "#111"; g.beginPath(); g.roundRect(-9, -46, 18, 50, 8); g.fill(); // rueda
+        g.fillStyle = "#1c1c1c"; g.beginPath(); g.roundRect(-26, -86, 52, 44, 10); g.fill(); // cuerpo
+        g.fillStyle = "#e33"; g.fillRect(-20, -60, 10, 6); g.fillRect(10, -60, 10, 6); // pilotos
+        g.fillStyle = "#2f6bff"; g.beginPath(); g.roundRect(-22, -140, 44, 58, 14); g.fill(); // camisa azul
+        g.fillStyle = "#2a3a6a"; g.fillRect(-26, -96, 14, 26); g.fillRect(12, -96, 14, 26); // piernas
+        g.strokeStyle = "#2f6bff"; g.lineWidth = 9; g.lineCap = "round";
+        g.beginPath(); g.moveTo(-18, -128); g.lineTo(-40, -104); g.moveTo(18, -128); g.lineTo(40, -104); g.stroke(); // brazos
+        g.fillStyle = "#cfd3da"; g.beginPath(); g.arc(0, -156, 21, 0, 7); g.fill(); // casco
+        g.fillStyle = "#2b2f38"; g.beginPath(); g.arc(0, -150, 13, Math.PI * 1.05, Math.PI * 1.95); g.fill();
+        g.restore();
+        // inclinómetro
+        const gx = 70, gy = 64, r = 46;
+        g.lineWidth = 8;
+        g.strokeStyle = "rgba(0,0,0,.25)"; g.beginPath(); g.arc(gx, gy, r, Math.PI, 0); g.stroke();
+        g.strokeStyle = "#5be39b"; g.beginPath(); g.arc(gx, gy, r, Math.PI * 1.5 - .5, Math.PI * 1.5 + .5); g.stroke();
+        g.strokeStyle = "#ff3d7f"; g.beginPath(); g.arc(gx, gy, r, Math.PI, Math.PI * 1.5 - FALL * .9); g.stroke(); g.beginPath(); g.arc(gx, gy, r, Math.PI * 1.5 + FALL * .9, 0); g.stroke();
+        g.strokeStyle = "#151515"; g.lineWidth = 3; g.beginPath(); g.moveTo(gx, gy); g.lineTo(gx + Math.sin(ang) * (r - 4), gy - Math.cos(ang) * (r - 4)); g.stroke();
+        g.fillStyle = "#151515"; g.font = "800 12px Inter, sans-serif"; g.textAlign = "center"; g.fillText(`${Math.round(Math.abs(ang) * 57.3)}°`, gx, gy + 16);
+        // distancia y viento
+        g.textAlign = "right"; g.font = "800 14px Inter, sans-serif"; g.fillStyle = "#151515";
+        g.fillText(`🏁 ${Math.max(0, Math.round(DIST - dist))} m al mirador`, W - 12, 24);
+        const w = wind + gust;
+        if (Math.abs(w) > .35 && state === "ride") g.fillText(w > 0 ? "💨 viento →" : "← viento 💨", W - 12, 44);
+      }
+      function loop(t) {
+        const dt = Math.min(.033, (t - (lastT || t)) / 1000); lastT = t;
+        physics(dt); draw();
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+
+    /* ---------- 4. Operación Furgo ---------- */
+    (() => {
+      const street = document.getElementById("street"), alexEl = document.getElementById("alex"), bubble = document.getElementById("bubble");
+      const agents = { M: document.getElementById("agentM"), B: document.getElementById("agentB") };
+      const overlay = document.getElementById("sOverlay"), startBtn = document.getElementById("sStart");
+      const bigEl = document.getElementById("sBig"), titleEl = document.getElementById("sTitle"), textEl = document.getElementById("sText");
+      const noiseBar = document.getElementById("noiseBar"), alexBar = document.getElementById("alexBar"), alexLabel = document.getElementById("alexLabel");
+      const START = { M: 6, B: 22 }, GOAL = 66, SPEED = 9; // % del ancho, % por segundo
+      let state = "idle", pos = { ...START }, moving = { M: false, B: false }, noise = 0, alex = "sleep", alexT = 0, alexDur = 3, lastT = 0;
+      holdButton(document.getElementById("moveM"), (v) => (moving.M = v));
+      holdButton(document.getElementById("moveB"), (v) => (moving.B = v));
+      addEventListener("keydown", (e) => {
+        if (state !== "play" || !inView(street)) return;
+        if (e.key === "m" || e.key === "M") { moving.M = true; e.preventDefault(); }
+        if (e.key === "b" || e.key === "B") { moving.B = true; e.preventDefault(); }
+      });
+      addEventListener("keyup", (e) => { if (e.key === "m" || e.key === "M") moving.M = false; if (e.key === "b" || e.key === "B") moving.B = false; });
+      const sleepFor = () => 1.6 + Math.random() * 2.2;
+      function setAlex(s) {
+        alex = s; alexT = 0;
+        alexDur = s === "sleep" ? sleepFor() * (1 - noise / 160) : s === "stir" ? .75 : 1.5 + Math.random() * .6;
+        alexEl.textContent = s === "sleep" ? "😴" : s === "stir" ? "😪" : "👀";
+        alexEl.classList.toggle("awake", s === "awake");
+        bubble.classList.toggle("show", s !== "sleep");
+        bubble.textContent = s === "stir" ? "¿Eh…?" : "¿Hay alguien?";
+        alexLabel.textContent = s === "sleep" ? "Alex: dormido 😴" : s === "stir" ? "Alex: se está moviendo… 😪" : "Alex: ¡DESPIERTO! 👀";
+      }
+      function start() {
+        state = "play"; pos = { ...START }; noise = 0; setAlex("sleep");
+        overlay.classList.add("hidden");
+        Object.entries(agents).forEach(([k, el]) => (el.style.left = pos[k] + "%"));
+      }
+      startBtn.addEventListener("click", () => { if (!startBtn.disabled) start(); });
+      function end(won) {
+        state = won ? "won" : "lost";
+        moving.M = moving.B = false;
+        overlay.classList.remove("hidden");
+        if (won) { bigEl.textContent = "🌺"; titleEl.textContent = "¡Dentro de la furgo!"; textEl.textContent = "Misión cumplida: le habéis dejado a Alex una camisa hawaiana doblada en la almohada. Mañana no va a entender nada."; confetti(220); toast("🚐 ¡Operación Furgo completada!", true); }
+        else { bigEl.textContent = "😠"; titleEl.textContent = "¡Alex se ha despertado!"; textEl.textContent = "«¿Se puede saber qué hacéis en mi furgo a las 3 de la mañana?» Misión fallida."; }
+        lockButton(startBtn, won ? "🔁 Repetir la misión" : "🔁 Volver a intentarlo");
+      }
+      function loop(t) {
+        const dt = Math.min(.05, (t - (lastT || t)) / 1000); lastT = t;
+        if (state === "play") {
+          const anyMoving = (moving.M && pos.M < GOAL) || (moving.B && pos.B < GOAL);
+          ["M", "B"].forEach((k) => {
+            const m = moving[k] && pos[k] < GOAL;
+            agents[k].classList.toggle("moving", m);
+            if (m) { pos[k] = Math.min(GOAL, pos[k] + SPEED * dt); agents[k].style.left = pos[k] + "%"; }
+          });
+          noise = Math.max(0, Math.min(100, noise + (anyMoving ? (moving.M && moving.B ? 55 : 30) : -22) * dt));
+          noiseBar.style.width = noise + "%";
+          alexT += dt;
+          if (alex === "sleep") { if (alexT >= alexDur || noise >= 100) setAlex("stir"); }
+          else if (alex === "stir") { if (alexT >= alexDur) setAlex("awake"); }
+          else if (alex === "awake") { if (anyMoving) return end(false), requestAnimationFrame(loop); if (alexT >= alexDur) setAlex("sleep"); }
+          alexBar.style.width = (alex === "sleep" ? Math.min(100, (alexT / alexDur) * 60) : alex === "stir" ? 80 : 100) + "%";
+          if (pos.M >= GOAL && pos.B >= GOAL) end(true);
+        } else { ["M", "B"].forEach((k) => agents[k].classList.remove("moving")); }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+
+    /* ---------- 5. Pilla a Lola ---------- */
+    (() => {
+      const house = document.getElementById("house"), lola = document.getElementById("lola"), startBtn = document.getElementById("lolaStart");
+      const countEl = document.getElementById("lolaCount"), timeEl = document.getElementById("lolaTime"), msg = document.getElementById("lolaMsg");
+      const GOAL = 8, TIME = 30, TOYS = ["🧸", "🧦", "🥄", "📚", "🧩", "🍪", "🚗", "🦆", "🪀", "🍌", "🥤"];
+      const LAUGHS = ["¡jijiji!", "¡papá!", "¡no!", "¡otra!", "¡aaajá!", "¡pa-pá!", "¡brrr!"];
+      let state = "idle", x = 0, y = 0, vx = 0, vy = 0, catches = 0, endAt = 0, nextTurn = 0, nextToy = 0, safeUntil = 0, boostUntil = 0, lastT = 0;
+      const size = () => [house.clientWidth, house.clientHeight];
+      const place = () => (lola.style.transform = `translate(${x}px, ${y}px)`);
+      function reset() { const [w, h] = size(); x = w / 2 - 36; y = h * .6 - 36; place(); }
+      reset(); addEventListener("resize", () => { if (state !== "play") reset(); });
+      const speed = () => (130 + catches * 28) * Math.max(.6, Math.min(1, size()[0] / 800));
+      const dir = (s) => { const a = Math.random() * Math.PI * 2; vx = Math.cos(a) * s; vy = Math.sin(a) * s; };
+      function pop(text) { const el = document.createElement("span"); el.className = "pop"; el.textContent = text; el.style.left = x + "px"; el.style.top = y - 10 + "px"; house.appendChild(el); setTimeout(() => el.remove(), 900); }
+      function start() {
+        house.querySelectorAll(".toy").forEach((t) => t.remove());
+        catches = 0; state = "play"; endAt = performance.now() + TIME * 1000;
+        reset(); dir(speed());
+        lola.classList.remove("idle"); lola.querySelector(".body").textContent = "👶";
+        startBtn.disabled = true; startBtn.textContent = "🏃 ¡Corre!";
+        msg.textContent = "¡Que se escapa!"; countEl.textContent = `0 / ${GOAL}`;
+      }
+      startBtn.addEventListener("click", () => { if (!startBtn.disabled) start(); });
+      lola.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        if (state !== "play") return;
+        const now = performance.now(); if (now < safeUntil) return;
+        catches++; safeUntil = now + 450; boostUntil = now + 900;
+        countEl.textContent = `${catches} / ${GOAL}`;
+        pop(LAUGHS[Math.floor(Math.random() * LAUGHS.length)]); confettiAt(lola, 16);
+        if (catches >= GOAL) return end(true);
+        const r = lola.getBoundingClientRect();
+        let dx = r.left + r.width / 2 - e.clientX, dy = r.top + r.height / 2 - e.clientY;
+        const len = Math.hypot(dx, dy) || 1, sp = speed() * 1.8;
+        vx = (dx / len) * sp + (Math.random() - .5) * 60; vy = (dy / len) * sp + (Math.random() - .5) * 60;
+        if (len < 4) dir(sp);
+      });
+      function end(won) {
+        state = won ? "won" : "lost"; lola.classList.add("idle");
+        if (won) { lola.querySelector(".body").textContent = "😴"; msg.textContent = "¡Lola atrapada! Bañito, cuento… y a dormir. 😴💤"; confetti(220); toast("👧 ¡Has pillado a Lola!", true); }
+        else { lola.querySelector(".body").textContent = "😜"; msg.textContent = `Lola gana (${catches} de ${GOAL}). Ya corre más que tú. 🏃‍♀️`; }
+        lockButton(startBtn, "🔁 Otra vez");
+      }
+      function loop(t) {
+        const dt = Math.min(.05, (t - (lastT || t)) / 1000); lastT = t;
+        if (state === "play") {
+          const [w, h] = size();
+          timeEl.textContent = `${Math.max(0, Math.ceil((endAt - t) / 1000))} s`;
+          if (t >= endAt) end(false);
+          else {
+            if (t > nextTurn && t > boostUntil) { dir(speed() * (Math.random() < .25 ? 1.6 : 1)); nextTurn = t + 500 + Math.random() * 900; }
+            x += vx * dt; y += vy * dt;
+            const minY = h * .3, maxX = w - 72, maxY = h - 72;
+            if (x < 0) { x = 0; vx = Math.abs(vx); } if (x > maxX) { x = maxX; vx = -Math.abs(vx); }
+            if (y < minY) { y = minY; vy = Math.abs(vy); } if (y > maxY) { y = maxY; vy = -Math.abs(vy); }
+            lola.classList.toggle("flip", vx > 0); place();
+            if (t > nextToy) {
+              nextToy = t + 1400 + Math.random() * 900;
+              const toys = house.querySelectorAll(".toy"); if (toys.length > 14) toys[0].remove();
+              const toy = document.createElement("span"); toy.className = "toy"; toy.textContent = TOYS[Math.floor(Math.random() * TOYS.length)];
+              toy.style.left = x + 20 + "px"; toy.style.top = y + 40 + "px"; house.insertBefore(toy, lola);
+            }
+          }
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+
+    /* ---------- Aparición al hacer scroll ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
