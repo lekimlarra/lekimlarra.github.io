@@ -494,6 +494,8 @@
       const hook = document.getElementById("hook"), hookTip = document.getElementById("hookTip"), tree = document.getElementById("tree");
       const cert = document.getElementById("cert"), certText = document.getElementById("certText");
       let step = 0, score = 0, retries = 0, grade = null, prof = null, busy = false;
+      let lastVerdict = null; // mensaje del último elemento colocado: se mantiene hasta colocar el siguiente
+      const verdictHTML = () => lastVerdict ? `<div class="verdict show ${lastVerdict.cls}" id="verdict"><small style="display:block;opacity:.75">${lastVerdict.name}</small>${lastVerdict.text}</div>` : `<div class="verdict" id="verdict"></div>`;
       const GRADE_COLOR = { S235: "#9aa5b5", S275: "#7d8a9c", S355: "#5f6d82", Aluminio: "#c9ced6" };
       const WIDTH = { HEB: 12, IPE: 8, UPN: 7, L: 6, SHS: 10 };
 
@@ -552,7 +554,7 @@
           <h4>1 · Material</h4><div class="opts" id="gOpts"></div>
           <h4>2 · Perfil</h4><div class="opts five" id="pOpts"></div>
           <div class="obra-actions"><button class="btn" id="placeBtn" disabled>🏗️ Colocar</button></div>
-          <div class="verdict" id="verdict"></div>`;
+          ${verdictHTML()}`;
         GRADES.forEach((g) => panel.querySelector("#gOpts").appendChild(optButton("grade", g)));
         PROFILES.forEach((p) => panel.querySelector("#pOpts").appendChild(optButton("prof", p)));
         panel.querySelector("#placeBtn").addEventListener("click", place);
@@ -587,6 +589,7 @@
         if (fit === "ok") cls = "meh";
         verdict.className = "verdict show " + cls;
         verdict.textContent = (cls === "good" ? "✅ " : "👍 ") + notes.join(" ") + ` (+${pts})`;
+        lastVerdict = { cls, name: `${s.name} · ${grade} + ${prof}`, text: verdict.textContent };
         confettiAt(document.querySelector(".site"), cls === "good" ? 30 : 10);
         setTimeout(() => {
           step++; busy = false;
@@ -601,12 +604,12 @@
         const rating = score >= 560 ? "Proyecto de matrícula: seguro, eficiente y barato." : score >= 460 ? "Proyecto aprobado: alguna pieza un pelín sobredimensionada." : "Aprobado… pero el cliente revisará el presupuesto con lupa.";
         certText.textContent = `Se certifica que la estructura, dirigida por el ingeniero Mark, ha sido terminada con ${score}/${max} puntos y ${retries} ${retries === 1 ? "cálculo repetido" : "cálculos repetidos"}. ${rating} Como manda la tradición, ya luce el árbol en lo alto. 🌲`;
         cert.classList.add("show");
-        panel.innerHTML = `<div class="step">Fin de obra</div><h3>¡Estructura terminada! 🎉</h3><p class="desc">Ya se puede celebrar el «topping out». Si quieres, empieza otra obra y afina el presupuesto.</p><div class="obra-actions"><button class="btn blue" id="againBtn">🔁 Otra obra</button></div>`;
+        panel.innerHTML = `<div class="step">Fin de obra</div><h3>¡Estructura terminada! 🎉</h3><p class="desc">Ya se puede celebrar el «topping out». Si quieres, empieza otra obra y afina el presupuesto.</p><div class="obra-actions"><button class="btn blue" id="againBtn">🔁 Otra obra</button></div>${verdictHTML()}`;
         const again = panel.querySelector("#againBtn");
         lockButton(again, "🔁 Otra obra");
         again.addEventListener("click", () => {
           if (again.disabled) return;
-          step = 0; score = 0; retries = 0; structure.innerHTML = ""; tree.setAttribute("opacity", "0");
+          step = 0; score = 0; retries = 0; lastVerdict = null; structure.innerHTML = ""; tree.setAttribute("opacity", "0");
           scoreEl.textContent = "📐 0 pts"; cert.classList.remove("show"); showStep();
         });
         confetti(240); toast("🏗️ ¡Fin de obra! Estructura certificada", true);
