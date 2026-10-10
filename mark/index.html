@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz cumple, Mark!</title>
+  <meta name="description" content="Una web de cumpleaños para Mark: estructuras metálicas, mundos de ciencia ficción y un WOD de CrossFit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+  <style>
+    :root {
+      --bg: #f3f5f9;
+      --paper: #ffffff;
+      --ink: #16202e;
+      --muted: #5f6b7d;
+      --blue: #1e4fa8;
+      --blue-dark: #153a7d;
+      --orange: #ff7a1a;
+      --orange-dark: #d65d05;
+      --steel: #8a96a8;
+      --green: #1f9d63;
+      --red: #e0443a;
+      --line: #dfe4ec;
+      --space: #0b1026;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Space Grotesk", system-ui, sans-serif; line-height: 1.05; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    .hand { font-family: "Caveat", cursive; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font: 800 1.02rem "Inter", sans-serif; text-decoration: none;
+      background: var(--orange); color: #fff; border: 0; cursor: pointer;
+      padding: 14px 26px; border-radius: 12px;
+      box-shadow: 0 5px 0 var(--orange-dark); transition: transform .12s, box-shadow .12s, opacity .2s;
+      user-select: none; -webkit-user-select: none; touch-action: manipulation;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--orange-dark); }
+    .btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--orange-dark); }
+    .btn.blue { background: var(--blue); box-shadow: 0 5px 0 var(--blue-dark); }
+    .btn.blue:hover { box-shadow: 0 7px 0 var(--blue-dark); }
+    .btn.blue:active { box-shadow: 0 1px 0 var(--blue-dark); }
+    .btn.dark { background: #232a3a; box-shadow: 0 5px 0 #0f131c; }
+    .btn.dark:active { box-shadow: 0 1px 0 #0f131c; }
+    .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    section { padding: 90px 0; position: relative; }
+    .section-title { text-align: center; margin-bottom: 36px; }
+    .section-title .num {
+      display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 10px;
+      background: var(--orange); color: #fff; font: 700 1.3rem "Space Grotesk", sans-serif; margin-bottom: 10px;
+    }
+    .section-title h2 { font-size: clamp(2.1rem, 5.4vw, 3.4rem); }
+    .section-title p { color: var(--muted); max-width: 640px; margin: 10px auto 0; font-size: 1.05rem; }
+
+    /* ---------- Portada ---------- */
+    .hero {
+      min-height: 100vh; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 70px 20px;
+      background-color: #eaf0fb;
+      background-image:
+        linear-gradient(rgba(30,79,168,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30,79,168,.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .polaroid {
+      position: relative; display: inline-block; background: #fff; padding: 12px 12px 6px; margin-bottom: 26px;
+      box-shadow: 0 20px 36px -18px rgba(22,32,46,.5); transform: rotate(-2.5deg); transition: transform .4s;
+    }
+    .polaroid:hover { transform: rotate(0) scale(1.03); }
+    .polaroid img { display: none; width: clamp(220px, 28vw, 300px); height: auto; }
+    .polaroid img.ok { display: block; }
+    .polaroid .ph {
+      width: clamp(220px, 28vw, 300px); aspect-ratio: 4 / 5; display: grid; place-items: center; text-align: center;
+      background: repeating-linear-gradient(45deg, #f0f3f8 0 14px, #e6ebf3 14px 28px); color: var(--muted); font-weight: 700; padding: 20px;
+    }
+    .polaroid img.ok + .ph { display: none; }
+    .polaroid .ph span { font-size: 3rem; display: block; }
+    .polaroid figcaption { font-family: "Caveat", cursive; font-size: 1.55rem; padding-top: 4px; }
+    .polaroid::before {
+      content: ""; position: absolute; top: -12px; left: 50%; width: 100px; height: 26px;
+      transform: translateX(-50%) rotate(2deg);
+      background: repeating-linear-gradient(45deg, #ffc400 0 10px, #1d1d1d 10px 20px); opacity: .85;
+    }
+    .polaroid .deco { position: absolute; font-size: 2.3rem; right: -24px; bottom: 34px; transform: rotate(12deg); }
+    .hero .kicker { font-size: 1.75rem; color: var(--blue); }
+    .hero h1 { font-size: clamp(2.8rem, 8.5vw, 5.4rem); margin: 4px 0; }
+    .hero h1 span { color: var(--orange); }
+    .hero p { font-size: clamp(1.05rem, 2.3vw, 1.22rem); color: var(--muted); max-width: 620px; margin: 16px auto 22px; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 26px; }
+    .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: .9rem; }
+
+    /* ---------- 1. Obra ---------- */
+    .obra-sec { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .obra { display: grid; grid-template-columns: 1.05fr 1fr; gap: 26px; align-items: start; }
+    .site {
+      position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 40px -28px rgba(22,32,46,.6);
+      background: linear-gradient(#bfe0ff, #eaf5ff 70%);
+    }
+    .site svg { width: 100%; height: auto; display: block; }
+    .el { animation: place .55s cubic-bezier(.3,1.5,.5,1) both; }
+    @keyframes place { from { transform: translateY(-60px); opacity: 0; } }
+    .el.fail { animation: wobble .5s ease-in-out 2; }
+    @keyframes wobble { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+    .site-hud { position: absolute; left: 10px; right: 10px; top: 10px; display: flex; justify-content: space-between; pointer-events: none; }
+    .site-hud span { background: rgba(255,255,255,.92); border-radius: 999px; padding: 4px 12px; font-weight: 800; font-size: .85rem; }
+    .panel { background: #f8fafd; border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+    .panel .step { font: 700 .78rem "Inter", sans-serif; text-transform: uppercase; letter-spacing: .12em; color: var(--orange-dark); }
+    .panel h3 { font-size: 1.5rem; margin: 4px 0 6px; }
+    .panel .desc { color: var(--muted); font-size: .95rem; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 4px; }
+    .tags span { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 3px 10px; font-weight: 700; font-size: .85rem; }
+    .panel h4 { font: 800 .76rem "Inter", sans-serif; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 14px 0 8px; }
+    .opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .opts.five { grid-template-columns: repeat(5, 1fr); }
+    .opt {
+      border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: 8px 4px; cursor: pointer; text-align: center;
+      font: 700 .78rem "Inter", sans-serif; color: var(--ink); transition: border-color .15s, transform .15s; touch-action: manipulation;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+    }
+    .opt b { font: 700 .95rem "Space Grotesk", sans-serif; }
+    .opt small { color: var(--muted); font-size: .66rem; line-height: 1.15; }
+    .opt svg { width: 30px; height: 30px; }
+    .opt:hover { transform: translateY(-2px); }
+    .opt.on { border-color: var(--orange); background: #fff4ea; }
+    .opt:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+    .obra-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .verdict { margin-top: 12px; border-radius: 12px; padding: 10px 14px; font-weight: 700; display: none; }
+    .verdict.show { display: block; }
+    .verdict.good { background: #e3f6ec; color: #136b42; }
+    .verdict.meh { background: #fff4e0; color: #8a5a00; }
+    .verdict.bad { background: #fde8e6; color: #9b231b; }
+    .cert {
+      display: none; margin: 26px auto 0; max-width: 620px; text-align: center; padding: 26px 24px; border-radius: 16px;
+      background: #fffdf5; border: 3px double #b89b5e; box-shadow: 0 20px 34px -24px rgba(22,32,46,.5);
+    }
+    .cert.show { display: block; animation: pop .5s cubic-bezier(.3,1.7,.5,1); }
+    @keyframes pop { from { transform: scale(.4); opacity: 0; } }
+    .cert h3 { font-size: 1.6rem; }
+    .cert .seal { font-size: 2.6rem; }
+    .cert p { color: var(--muted); margin-top: 6px; }
+
+    /* ---------- 2. Mundos ---------- */
+    .worlds-sec { background: radial-gradient(ellipse at 50% 0%, #1b2459, var(--space) 70%); color: #fff; overflow: hidden; }
+    .worlds-sec .section-title p { color: #b9c1e6; }
+    .worlds-sec .stars { position: absolute; inset: 0; pointer-events: none; opacity: .7;
+      background-image: radial-gradient(1.5px 1.5px at 8% 12%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 22% 64%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 55% 20%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 78% 44%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 92% 82%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 35% 88%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 66% 70%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 12% 40%, #fff 50%, transparent 51%); }
+    .route { display: flex; justify-content: center; align-items: center; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; position: relative; }
+    .planet {
+      width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; border: 2px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.06); opacity: .45; transition: .3s;
+    }
+    .planet.current { opacity: 1; border-color: #7fd3ff; box-shadow: 0 0 24px rgba(127,211,255,.6); transform: scale(1.1); }
+    .planet.done { opacity: 1; border-color: #5be39b; }
+    .route i { width: 26px; height: 2px; background: rgba(255,255,255,.25); }
+    .world {
+      max-width: 760px; margin: 0 auto; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 22px; padding: 26px 24px; position: relative; backdrop-filter: blur(4px);
+    }
+    .world .book { font: 700 .78rem "Inter", sans-serif; text-transform: uppercase; letter-spacing: .14em; color: #7fd3ff; }
+    .world h3 { font: 800 clamp(1.3rem, 3.6vw, 1.9rem) "Orbitron", sans-serif; margin: 6px 0 10px; }
+    .world .story { color: #d5dbf5; margin-bottom: 18px; }
+    .game { background: rgba(0,0,0,.25); border-radius: 16px; padding: 18px; text-align: center; }
+    .gauge { height: 26px; background: rgba(255,255,255,.1); border-radius: 999px; overflow: hidden; position: relative; margin: 10px 0 16px; }
+    .gauge div { height: 100%; width: 100%; background: linear-gradient(90deg, #ff5d5d, #ffd166 35%, #5be39b 60%); transition: width .05s linear; }
+    .gauge .zone { position: absolute; top: 0; bottom: 0; left: 10%; width: 25%; border: 2px dashed rgba(255,255,255,.75); border-radius: 6px; pointer-events: none; }
+    .gmsg { min-height: 1.6em; font-weight: 700; color: #ffd166; margin-top: 12px; }
+    .choice { display: grid; gap: 10px; margin-top: 10px; }
+    .choice button {
+      background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 12px; padding: 12px 14px; cursor: pointer;
+      font: 600 1rem "Inter", sans-serif; text-align: left; transition: background .15s;
+    }
+    .choice button:hover { background: rgba(255,255,255,.16); }
+    .choice button.right { background: rgba(91,227,155,.25); border-color: #5be39b; }
+    .choice button.wrong { background: rgba(255,93,93,.22); border-color: #ff5d5d; }
+    .sky { height: 140px; border-radius: 12px; position: relative; overflow: hidden; background: linear-gradient(#2b1a4a, #5b2e3a); margin-bottom: 14px; transition: background .3s; }
+    .sky .sun { position: absolute; font-size: 2.4rem; transform: translate(-50%, -50%); transition: left .4s, top .4s; }
+    .sky.stable { background: linear-gradient(#5aa9e6, #b9e2ff); }
+    .sky.chaos { background: linear-gradient(#5a0f12, #c2410c); }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .rocky { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+    .rocky button { height: 70px; border-radius: 14px; border: 0; cursor: pointer; font-size: 1.6rem; opacity: .75; transition: transform .1s, opacity .1s, box-shadow .1s; touch-action: manipulation; }
+    .rocky button.lit { opacity: 1; transform: scale(1.08); box-shadow: 0 0 26px currentColor; }
+    .readlist { display: none; margin-top: 18px; }
+    .readlist.show { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; animation: pop .5s; }
+    .bookcard { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 14px; }
+    .bookcard b { display: block; font-family: "Space Grotesk", sans-serif; font-size: 1.05rem; }
+    .bookcard small { color: #b9c1e6; }
+    .bookcard em { display: block; color: #ffd166; font-style: normal; font-weight: 700; font-size: .85rem; margin-top: 6px; }
+
+    /* ---------- 3. CrossFit ---------- */
+    .cf-sec { background: #111318; color: #fff; }
+    .cf-sec .section-title p { color: #b4b9c6; }
+    .box { max-width: 760px; margin: 0 auto; background: #1b1f28; border: 1px solid #2c3240; border-radius: 22px; padding: 22px; }
+    .cf-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .level { font: 800 1rem "Space Grotesk", sans-serif; color: #ffd166; }
+    .whiteboard { background: #f4f4f0; color: #1b1f28; border-radius: 14px; padding: 16px 18px; position: relative; min-height: 210px; }
+    .whiteboard .wod { font: 700 .75rem "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+    .whiteboard .ex-emoji { font-size: 3rem; line-height: 1; margin: 8px 0; }
+    .whiteboard .ex-desc { font-size: 1.02rem; font-weight: 600; }
+    .whiteboard .learned { font-family: "Caveat", cursive; font-size: 2rem; color: var(--blue); }
+    .names { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .names button {
+      background: #262c39; color: #fff; border: 2px solid #3a4253; border-radius: 12px; padding: 12px 6px; cursor: pointer;
+      font: 800 .95rem "Space Grotesk", sans-serif; touch-action: manipulation;
+    }
+    .names button.right { border-color: #5be39b; background: #1d3a2c; }
+    .names button.wrong { border-color: #ff5d5d; background: #3a1d1d; }
+    .reps { display: none; margin-top: 14px; }
+    .reps.show { display: block; }
+    .meters { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .meter small { display: block; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #9aa1b2; font-weight: 800; margin-bottom: 4px; }
+    .bar { height: 14px; border-radius: 99px; background: #2c3240; overflow: hidden; }
+    .bar div { height: 100%; width: 0; transition: width .08s linear; }
+    #repBar { background: linear-gradient(90deg, #5be39b, #22c55e); }
+    #fatBar { background: linear-gradient(90deg, #ffd166, #ff7a1a 60%, #e0443a); }
+    .rep-btn { width: 100%; font-size: 1.3rem; padding: 22px 10px; }
+    .cf-msg { text-align: center; color: #c9cedb; font-weight: 700; margin-top: 12px; min-height: 1.6em; }
+    .puke { position: absolute; inset: 0; background: rgba(44,120,44,.92); color: #fff; display: grid; place-items: center; text-align: center; border-radius: 14px; font-weight: 800; padding: 16px; }
+    .puke span { font-size: 3.4rem; display: block; }
+    .summary { display: none; text-align: center; }
+    .summary.show { display: block; }
+    .summary .title { font: 800 1.6rem "Space Grotesk", sans-serif; color: #1b1f28; }
+    .summary ul { list-style: none; margin: 10px 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+    .summary li { background: #e5e7ee; border-radius: 999px; padding: 3px 10px; font-weight: 700; font-size: .85rem; }
+
+    /* ---------- Carta ---------- */
+    .note {
+      max-width: 640px; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 16px;
+      padding: 44px 40px 36px; box-shadow: 0 30px 50px -35px rgba(22,32,46,.5); position: relative;
+      background-image: linear-gradient(rgba(30,79,168,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(30,79,168,.06) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .note::before { content: "📐"; position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: 2.4rem; }
+    .note p { font-size: 1.06rem; margin-bottom: 14px; }
+    .note .hand { font-size: 2rem; color: var(--blue); line-height: 1.2; }
+    .note .sign { text-align: right; margin: 22px 0 0; }
+    footer { text-align: center; color: var(--muted); padding: 20px 20px 46px; font-size: .95rem; }
+    footer a { color: var(--blue); }
+
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 200; width: 100%; height: 100%; }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); z-index: 210;
+      background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-weight: 800;
+      box-shadow: 0 14px 30px -14px rgba(0,0,0,.6); transition: transform .4s cubic-bezier(.3,1.5,.5,1);
+      width: max-content; max-width: calc(100% - 32px); text-align: center;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 860px) {
+      section { padding: 66px 0; }
+      .obra { grid-template-columns: 1fr; }
+      .opts.five { grid-template-columns: repeat(3, 1fr); }
+      .readlist.show { grid-template-columns: 1fr; }
+      .names { grid-template-columns: 1fr; }
+      .planet { width: 48px; height: 48px; font-size: 1.4rem; }
+      .route i { width: 12px; }
+      .note { padding: 40px 22px 30px; }
+      .polaroid .deco { right: -10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Portada -->
+  <header class="hero">
+    <div>
+      <figure class="polaroid">
+        <!-- Para poner la foto: guardarla como mark/img/mark.jpg -->
+        <img src="img/mark.jpg" alt="Mark" onload="this.classList.add('ok')" onerror="this.remove()">
+        <div class="ph"><div><span>📷</span>Aquí va la foto de Mark</div></div>
+        <figcaption>El ingeniero del cumpleaños 📐</figcaption>
+        <span class="deco" aria-hidden="true">🏗️</span>
+      </figure>
+      <br>
+      <span class="kicker hand">Ingeniero, lector de ciencia ficción y CrossFitter en prácticas</span>
+      <h1>¡Feliz cumple, <span>Mark!</span></h1>
+      <p>Hoy toca celebrar al que calcula estructuras, viaja a otros mundos en cada libro y está descubriendo que el CrossFit duele… pero engancha. Hemos preparado una obra, un viaje interestelar y un WOD. ¿Empezamos?</p>
+      <div class="chips">
+        <span class="chip">🏗️ Estructuras</span><span class="chip">📚 Ciencia ficción</span><span class="chip">🏋️ CrossFit</span><span class="chip">🍺 Cerveza belga</span>
+      </div>
+      <a href="#obra" class="btn blue" id="start">👷 ¡A la obra!</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. La obra -->
+    <section class="obra-sec" id="obra">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">1</span>
+          <h2>La obra: estructura metálica 🏗️</h2>
+          <p>Levanta un edificio de dos plantas elemento a elemento. Para cada uno elige primero el material y después el perfil. Si te quedas corto, pandeo; si te pasas, el cliente se queja del presupuesto.</p>
+        </div>
+        <div class="obra reveal">
+          <div class="site">
+            <svg viewBox="0 0 420 380" id="siteSvg" aria-label="Edificio en construcción">
+              <!-- grúa -->
+              <g stroke="#f2b705" stroke-width="4" fill="none">
+                <path d="M392 352 V40 M392 40 H150 M392 40 L410 70 M392 60 L372 40"/>
+                <path d="M386 352 V40 M386 80 L392 100 M386 140 L392 160 M386 200 L392 220 M386 260 L392 280" stroke-width="2"/>
+              </g>
+              <line id="hook" x1="210" y1="40" x2="210" y2="90" stroke="#333" stroke-width="1.5"/>
+              <path id="hookTip" d="M204 90 h12 l-6 8 z" fill="#333"/>
+              <!-- terreno y cimentación -->
+              <rect x="0" y="350" width="420" height="30" fill="#b7a58a"/>
+              <rect x="60" y="342" width="300" height="10" fill="#9b9b9b"/>
+              <g id="structure"></g>
+              <text id="tree" x="210" y="150" text-anchor="middle" font-size="26" opacity="0">🌲</text>
+            </svg>
+            <div class="site-hud"><span id="obraStep">Paso 1 / 6</span><span id="obraScore">📐 0 pts</span></div>
+          </div>
+          <div class="panel" id="panel"></div>
+        </div>
+        <div class="cert" id="cert">
+          <div class="seal">🏅</div>
+          <h3>Certificado final de obra</h3>
+          <p id="certText"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Viaje por los mundos -->
+    <section class="worlds-sec" id="mundos">
+      <div class="stars"></div>
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">2</span>
+          <h2>Viaje por cuatro mundos 🚀</h2>
+          <p>Una pequeña odisea por los mundos de algunos de sus libros favoritos de ciencia ficción dura. Supera la prueba de cada mundo para saltar al siguiente.</p>
+        </div>
+        <div class="route reveal" id="route"></div>
+        <div class="world reveal" id="world"></div>
+      </div>
+    </section>
+
+    <!-- 3. CrossFit -->
+    <section class="cf-sec" id="crossfit">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">3</span>
+          <h2>El WOD del novato 🏋️</h2>
+          <p>Primero aprende cómo se llama cada ejercicio (en inglés, como en el box). Luego, haz las repeticiones… pero dosifica: si te pasas de intensidad, ya sabes cómo acaba. 🤢</p>
+        </div>
+        <div class="box reveal">
+          <div class="cf-top"><span class="level" id="cfLevel">Nivel: Novato con agujetas</span><span id="cfProgress" style="color:#9aa1b2;font-weight:800"></span></div>
+          <div class="whiteboard" id="board">
+            <div class="wod">WOD de hoy · For time</div>
+            <div class="ex-emoji">🏋️</div>
+            <p class="ex-desc">Seis ejercicios, de menos a más. Para cada uno: adivina su nombre y haz 10 repeticiones sin que el cuerpo diga basta.</p>
+          </div>
+          <div class="names" id="names"></div>
+          <div class="reps" id="reps">
+            <div class="meters">
+              <div class="meter"><small id="repLabel">Repeticiones 0 / 10</small><div class="bar"><div id="repBar"></div></div></div>
+              <div class="meter"><small id="fatLabel">Fatiga</small><div class="bar"><div id="fatBar"></div></div></div>
+            </div>
+            <button class="btn rep-btn" id="repBtn">💪 ¡Repetición!</button>
+          </div>
+          <div style="text-align:center; margin-top:14px"><button class="btn" id="cfStart">⏱️ ¡Empezar el WOD!</button></div>
+          <p class="cf-msg" id="cfMsg" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carta -->
+    <section>
+      <div class="container">
+        <article class="note reveal">
+          <p class="hand">¡Feliz cumpleaños, Mark!</p>
+          <p>Que este año venga con estructuras bien calculadas (y sin pandeos), con libros que te vuelen la cabeza como el primer día y con WODs que cada vez duelan un poquito menos… aunque las agujetas sigan siendo parte del plan.</p>
+          <p>Gracias por las buenas recomendaciones: algunos de esos mundos ya son también un poco nuestros. Disfruta muchísimo tu día, con Berta, con amigos y, por qué no, con una buena cerveza belga. 🍺</p>
+          <p class="sign hand">Con mucho cariño 💙</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hecho con cariño (y algún que otro cálculo) para Mark. · <a href="../">Volver al índice</a></footer>
+
+  <script>
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---------- Confeti y avisos ---------- */
+    const cv = document.getElementById("confetti");
+    const cx = cv.getContext("2d");
+    let pieces = [], confettiRunning = false;
+    function sizeConfetti() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+    sizeConfetti(); addEventListener("resize", sizeConfetti);
+    function confetti(n = 140, x = innerWidth / 2, y = innerHeight / 3) {
+      if (reduceMotion) return;
+      const colors = ["#ff7a1a", "#1e4fa8", "#ffc400", "#1f9d63", "#7fd3ff", "#e0443a", "#ffffff"];
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9;
+        pieces.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+          w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, c: colors[i % colors.length], life: 0 });
+      }
+      if (!confettiRunning) { confettiRunning = true; requestAnimationFrame(tickConfetti); }
+    }
+    function tickConfetti() {
+      const d = devicePixelRatio;
+      cx.clearRect(0, 0, cv.width, cv.height);
+      pieces.forEach((p) => {
+        p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+        cx.save(); cx.translate(p.x * d, p.y * d); cx.rotate(p.r);
+        cx.fillStyle = p.c; cx.globalAlpha = Math.max(0, 1 - p.life / 220);
+        cx.fillRect(-p.w * d / 2, -p.h * d / 2, p.w * d, p.h * d * Math.abs(Math.cos(p.r * 2)) + d);
+        cx.restore();
+      });
+      pieces = pieces.filter((p) => p.y < innerHeight + 40 && p.life < 220);
+      if (pieces.length) requestAnimationFrame(tickConfetti);
+      else { confettiRunning = false; cx.clearRect(0, 0, cv.width, cv.height); }
+    }
+    const confettiAt = (el, n) => { const r = el.getBoundingClientRect(); confetti(n, r.left + r.width / 2, r.top + r.height / 2); };
+    let toastTimer, toastLockedUntil = 0;
+    function toast(msg, important = false) {
+      const now = performance.now();
+      if (!important && now < toastLockedUntil) return;
+      if (important) toastLockedUntil = now + 2600;
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
+    }
+    function lockButton(btn, label, secs = 3) {
+      btn.disabled = true;
+      let left = secs;
+      btn.textContent = `⏳ Un momento… ${left}`;
+      const iv = setInterval(() => {
+        left--;
+        if (left > 0) { btn.textContent = `⏳ Un momento… ${left}`; return; }
+        clearInterval(iv); btn.disabled = false; btn.textContent = label;
+      }, 1000);
+    }
+    addEventListener("load", () => setTimeout(() => confetti(150), 400));
+    document.getElementById("start").addEventListener("click", (e) => confettiAt(e.currentTarget, 50));
+
+    /* ---------- 1. La obra ---------- */
+    (() => {
+      const GRADES = [
+        { id: "S235", sub: "fy = 235 MPa", cap: 1 },
+        { id: "S275", sub: "fy = 275 MPa", cap: 2 },
+        { id: "S355", sub: "fy = 355 MPa", cap: 3 },
+        { id: "Aluminio", sub: "6061-T6", cap: 0 },
+      ];
+      // Sección de cada perfil (icono)
+      const SEC = {
+        IPE: '<path d="M6 4 H24 V7 H16.5 V23 H24 V26 H6 V23 H13.5 V7 H6 Z" fill="currentColor"/>',
+        HEB: '<path d="M3 3 H27 V7 H17 V23 H27 V27 H3 V23 H13 V7 H3 Z" fill="currentColor"/>',
+        UPN: '<path d="M8 4 H22 V7.5 H12 V22.5 H22 V26 H8 Z" fill="currentColor"/>',
+        L: '<path d="M7 4 H11 V22 H25 V26 H7 Z" fill="currentColor"/>',
+        SHS: '<path d="M5 5 H25 V25 H5 Z M8.5 8.5 V21.5 H21.5 V8.5 Z" fill="currentColor" fill-rule="evenodd"/>',
+      };
+      const PROFILES = [
+        { id: "IPE", sub: "doble T estrecha" }, { id: "HEB", sub: "doble T ancha" }, { id: "UPN", sub: "en U" },
+        { id: "L", sub: "angular" }, { id: "SHS", sub: "tubo cuadrado" },
+      ];
+      const LOAD = ["", "baja", "media", "alta"];
+      // fit: best / ok / bad (+ explicación)
+      const STEPS = [
+        { name: "Columnas de planta baja", kind: "column", load: 3, work: "Compresión (+ pandeo)", desc: "Recogen el peso de todo el edificio y lo bajan a la cimentación.",
+          fit: { HEB: ["best", "Las HEB tienen alas anchas: resisten el pandeo en los dos ejes. Perfil de columna de manual."], SHS: ["ok", "El tubo trabaja bien a compresión, aunque complica las uniones con las vigas."],
+                 IPE: ["bad", "¡Pandeo! La IPE es muy esbelta en su eje débil: como columna se dobla."], UPN: ["bad", "¡Pandeo y torsión! Una U sola no es una columna seria."], L: ["bad", "¡Pandeo! Un angular solo para una columna principal… ni de broma."] } },
+        { name: "Vigas del forjado (planta 1)", kind: "beam", load: 2, work: "Flexión", desc: "Soportan el forjado y lo llevan a las columnas. Lo que importa es el canto.",
+          fit: { IPE: ["best", "La IPE es la reina de la flexión: mucho canto y poco peso."], HEB: ["ok", "Aguanta de sobra, pero pesa (y cuesta) bastante más de lo necesario."],
+                 SHS: ["ok", "Funciona, aunque para flexión pura es menos eficiente que una IPE."], UPN: ["bad", "¡Flecha excesiva! La U se tuerce y el forjado baila."], L: ["bad", "¡Flecha excesiva! Un angular como viga de forjado… el suelo parece una cama elástica."] } },
+        { name: "Arriostramiento (cruces de San Andrés)", kind: "brace", load: 1, work: "Tracción", desc: "Las diagonales que impiden que el edificio se tumbe con el viento.",
+          fit: { L: ["best", "Angulares en cruz de San Andrés: ligeros, baratos y perfectos a tracción."], SHS: ["best", "Tubo: trabaja a tracción y a compresión. Elegante."],
+                 UPN: ["ok", "Vale, aunque es más pesado de lo que hace falta."], IPE: ["ok", "Aguanta, pero es matar moscas a cañonazos."], HEB: ["ok", "Una HEB como diagonal… el presupuesto llora."] } },
+        { name: "Columnas de planta 1", kind: "column", load: 2, work: "Compresión (+ pandeo)", desc: "Llevan menos carga que las de abajo: solo la cubierta.",
+          fit: { HEB: ["best", "HEB otra vez: estable en los dos ejes."], SHS: ["ok", "El tubo cumple sin problema."], IPE: ["bad", "¡Pandeo en el eje débil! La IPE no es para columnas."],
+                 UPN: ["bad", "¡Pandeo! Esa U se tuerce."], L: ["bad", "¡Pandeo! El angular se dobla como un clip."] } },
+        { name: "Vigas de cubierta", kind: "beam", load: 1, work: "Flexión", desc: "La cubierta pesa poco: aquí hay que afinar el presupuesto.",
+          fit: { IPE: ["best", "IPE: ligera y eficiente a flexión."], SHS: ["ok", "El tubo cumple."], HEB: ["ok", "Aguanta, pero está sobradísima para una cubierta."],
+                 UPN: ["bad", "¡Flecha excesiva! La cubierta hace barriga."], L: ["bad", "¡Flecha excesiva! Con un angular la cubierta se hunde."] } },
+        { name: "Correas de cubierta", kind: "purlin", load: 1, work: "Flexión ligera", desc: "Los perfiles pequeños que sujetan la chapa de la cubierta.",
+          fit: { UPN: ["best", "Perfil en U (o C): lo típico en correas."], IPE: ["best", "IPE pequeña: también es habitual en correas."], SHS: ["ok", "Funciona, aunque es algo caro para una correa."],
+                 HEB: ["ok", "¿Una HEB como correa? Aguanta, pero el cliente ya no te coge el teléfono."], L: ["bad", "El angular se tuerce con el viento sobre la chapa."] } },
+      ];
+      const panel = document.getElementById("panel"), structure = document.getElementById("structure");
+      const stepEl = document.getElementById("obraStep"), scoreEl = document.getElementById("obraScore");
+      const hook = document.getElementById("hook"), hookTip = document.getElementById("hookTip"), tree = document.getElementById("tree");
+      const cert = document.getElementById("cert"), certText = document.getElementById("certText");
+      let step = 0, score = 0, retries = 0, grade = null, prof = null, busy = false;
+      const GRADE_COLOR = { S235: "#9aa5b5", S275: "#7d8a9c", S355: "#5f6d82", Aluminio: "#c9ced6" };
+      const WIDTH = { HEB: 12, IPE: 8, UPN: 7, L: 6, SHS: 10 };
+
+      // Geometría de cada elemento en el dibujo
+      function geom(i, g, p, failed) {
+        const col = GRADE_COLOR[g] || "#7d8a9c", w = WIDTH[p] || 8, red = "#e0443a";
+        const stroke = failed ? red : col;
+        const colLine = (x, y1, y2) => failed
+          ? `<path d="M${x} ${y2} Q ${x + 22} ${(y1 + y2) / 2} ${x} ${y1}" stroke="${red}" stroke-width="${w}" fill="none"/>`
+          : `<rect x="${x - w / 2}" y="${y1}" width="${w}" height="${y2 - y1}" fill="${col}"/>${p === "SHS" ? `<rect x="${x - w / 2 + 2.5}" y="${y1}" width="${w - 5}" height="${y2 - y1}" fill="rgba(255,255,255,.35)"/>` : `<rect x="${x - 1}" y="${y1}" width="2" height="${y2 - y1}" fill="rgba(0,0,0,.18)"/>`}`;
+        const beamLine = (y, x1, x2) => failed
+          ? `<path d="M${x1} ${y} Q ${(x1 + x2) / 2} ${y + 30} ${x2} ${y}" stroke="${red}" stroke-width="${w * .9}" fill="none"/>`
+          : `<rect x="${x1}" y="${y - w / 2}" width="${x2 - x1}" height="${w}" fill="${col}"/><rect x="${x1}" y="${y - 1}" width="${x2 - x1}" height="2" fill="rgba(0,0,0,.18)"/>`;
+        switch (i) {
+          case 0: return [80, 210, 340].map((x) => colLine(x, 250, 342)).join("");
+          case 1: return beamLine(250, 74, 346) + `<rect x="74" y="244" width="272" height="4" fill="#c9c3b8" opacity=".8"/>`;
+          case 2: return `<g stroke="${stroke}" stroke-width="${Math.max(3, w / 2)}" ${failed ? 'stroke-dasharray="6 4"' : ""}><line x1="86" y1="256" x2="204" y2="340"/><line x1="204" y1="256" x2="86" y2="340"/></g>`;
+          case 3: return [80, 210, 340].map((x) => colLine(x, 160, 246)).join("");
+          case 4: return beamLine(160, 74, 346);
+          case 5: return failed
+            ? `<path d="M74 146 Q 210 175 346 146" stroke="${red}" stroke-width="4" fill="none"/>`
+            : [96, 130, 164, 198, 232, 266, 300, 334].map((x) => `<rect x="${x - 4}" y="146" width="8" height="8" fill="${col}"/>`).join("") + `<rect x="70" y="140" width="280" height="6" fill="#b9c2cf"/>`;
+        }
+      }
+      const HOOK_X = [210, 210, 145, 210, 210, 210], HOOK_Y = [235, 238, 290, 150, 150, 132];
+      function moveHook(i) {
+        const x = HOOK_X[i] || 210, y = HOOK_Y[i] || 90;
+        hook.setAttribute("x1", x); hook.setAttribute("x2", x); hook.setAttribute("y2", y - 16);
+        hookTip.setAttribute("d", `M${x - 6} ${y - 16} h12 l-6 8 z`);
+      }
+
+      function optButton(kind, item) {
+        const b = document.createElement("button");
+        b.className = "opt";
+        b.innerHTML = kind === "grade"
+          ? `<b>${item.id}</b><small>${item.sub}</small>`
+          : `<svg viewBox="0 0 30 30" aria-hidden="true">${SEC[item.id]}</svg><b>${item.id}</b><small>${item.sub}</small>`;
+        b.addEventListener("click", () => {
+          if (busy) return;
+          if (kind === "grade") grade = item.id; else prof = item.id;
+          panel.querySelectorAll(`.opt[data-k="${kind}"]`).forEach((o) => o.classList.toggle("on", o === b));
+          panel.querySelector("#placeBtn").disabled = !(grade && prof);
+        });
+        b.dataset.k = kind;
+        return b;
+      }
+      function showStep() {
+        const s = STEPS[step];
+        grade = null; prof = null;
+        stepEl.textContent = `Paso ${step + 1} / ${STEPS.length}`;
+        panel.innerHTML = `
+          <div class="step">Paso ${step + 1} de ${STEPS.length}</div>
+          <h3>${s.name}</h3>
+          <p class="desc">${s.desc}</p>
+          <div class="tags"><span>⚙️ Trabaja a: ${s.work}</span><span>🏋️ Carga: ${LOAD[s.load]}</span></div>
+          <h4>1 · Material</h4><div class="opts" id="gOpts"></div>
+          <h4>2 · Perfil</h4><div class="opts five" id="pOpts"></div>
+          <div class="obra-actions"><button class="btn" id="placeBtn" disabled>🏗️ Colocar</button></div>
+          <div class="verdict" id="verdict"></div>`;
+        GRADES.forEach((g) => panel.querySelector("#gOpts").appendChild(optButton("grade", g)));
+        PROFILES.forEach((p) => panel.querySelector("#pOpts").appendChild(optButton("prof", p)));
+        panel.querySelector("#placeBtn").addEventListener("click", place);
+        moveHook(step);
+      }
+      function place() {
+        if (busy || !grade || !prof) return;
+        busy = true;
+        const s = STEPS[step], g = GRADES.find((x) => x.id === grade);
+        const [fit, why] = s.fit[prof];
+        const verdict = panel.querySelector("#verdict");
+        let ok = true, msgs = [], pts = 0, cls = "good";
+        if (g.cap === 0) { ok = false; msgs.push("El aluminio tiene un módulo elástico unas tres veces menor que el acero: para esta estructura, flechas y pandeos asegurados."); }
+        else if (g.cap < s.load) { ok = false; msgs.push(`Con ${g.id} el acero se plastifica: para una carga ${LOAD[s.load]} hace falta más límite elástico.`); }
+        if (fit === "bad") { ok = false; msgs.push(why); }
+        const el = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        el.setAttribute("class", "el" + (ok ? "" : " fail"));
+        el.innerHTML = geom(step, grade, prof, !ok);
+        structure.appendChild(el);
+        if (!ok) {
+          retries++;
+          verdict.className = "verdict show bad";
+          verdict.textContent = "❌ " + msgs.join(" ");
+          setTimeout(() => { el.remove(); busy = false; panel.querySelectorAll(".opt").forEach((o) => o.classList.remove("on")); grade = prof = null; panel.querySelector("#placeBtn").disabled = true; }, 1600);
+          return;
+        }
+        pts = (fit === "best" ? 50 : 30) + (g.cap === s.load ? 50 : 25);
+        score += pts;
+        scoreEl.textContent = `📐 ${score} pts`;
+        const notes = [why];
+        if (g.cap > s.load) { notes.push(`Eso sí, ${g.id} está sobredimensionado para una carga ${LOAD[s.load]}.`); cls = "meh"; }
+        if (fit === "ok") cls = "meh";
+        verdict.className = "verdict show " + cls;
+        verdict.textContent = (cls === "good" ? "✅ " : "👍 ") + notes.join(" ") + ` (+${pts})`;
+        confettiAt(document.querySelector(".site"), cls === "good" ? 30 : 10);
+        setTimeout(() => {
+          step++; busy = false;
+          if (step < STEPS.length) showStep(); else finish();
+        }, 1900);
+      }
+      function finish() {
+        stepEl.textContent = "¡Fin de obra!";
+        tree.setAttribute("opacity", "1");
+        moveHook(-1);
+        const max = STEPS.length * 100;
+        const rating = score >= 560 ? "Proyecto de matrícula: seguro, eficiente y barato." : score >= 460 ? "Proyecto aprobado: alguna pieza un pelín sobredimensionada." : "Aprobado… pero el cliente revisará el presupuesto con lupa.";
+        certText.textContent = `Se certifica que la estructura, dirigida por el ingeniero Mark, ha sido terminada con ${score}/${max} puntos y ${retries} ${retries === 1 ? "cálculo repetido" : "cálculos repetidos"}. ${rating} Como manda la tradición, ya luce el árbol en lo alto. 🌲`;
+        cert.classList.add("show");
+        panel.innerHTML = `<div class="step">Fin de obra</div><h3>¡Estructura terminada! 🎉</h3><p class="desc">Ya se puede celebrar el «topping out». Si quieres, empieza otra obra y afina el presupuesto.</p><div class="obra-actions"><button class="btn blue" id="againBtn">🔁 Otra obra</button></div>`;
+        const again = panel.querySelector("#againBtn");
+        lockButton(again, "🔁 Otra obra");
+        again.addEventListener("click", () => {
+          if (again.disabled) return;
+          step = 0; score = 0; retries = 0; structure.innerHTML = ""; tree.setAttribute("opacity", "0");
+          scoreEl.textContent = "📐 0 pts"; cert.classList.remove("show"); showStep();
+        });
+        confetti(240); toast("🏗️ ¡Fin de obra! Estructura certificada", true);
+      }
+      showStep();
+    })();
+
+    /* ---------- 2. Viaje por cuatro mundos ---------- */
+    (() => {
+      const route = document.getElementById("route"), world = document.getElementById("world");
+      let ac = null;
+      function tone(freq, dur = .35) {
+        try {
+          if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+          const t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
+          o.type = "triangle"; o.frequency.value = freq;
+          g.gain.setValueAtTime(.22, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+          o.connect(g).connect(ac.destination); o.start(t); o.stop(t + dur + .02);
+        } catch (e) { /* sin audio, no pasa nada */ }
+      }
+      const WORLDS = [
+        { icon: "🫁", book: "Exhalación · Ted Chiang", title: "El anatomista mecánico",
+          story: "En un universo de seres mecánicos, la vida depende del aire a presión: cada día cambias tus pulmones vacíos por unos llenos. Un anatomista decidió mirar dentro de su propio cerebro… y descubrió que pensar es aire fluyendo. Mantén el aire en movimiento.",
+          play: playExhalation },
+        { icon: "🚪", book: "El mercader y la puerta del alquimista · Ted Chiang", title: "La Puerta de los Años",
+          story: "En Bagdad, un alquimista enseña a un mercader una puerta muy especial: según el lado por el que la cruces, viajas veinte años hacia un lado o hacia el otro del tiempo. Antes de cruzarla, el alquimista te hace dos preguntas.",
+          play: playGate },
+        { icon: "☀️", book: "El problema de los tres cuerpos · Liu Cixin", title: "Trisolaris",
+          story: "Tres soles y ninguna órbita estable. En las Eras Estables se vive; en las Eras Caóticas toca deshidratarse y esperar. Lee el cielo y decide a tiempo, o tu civilización tendrá que empezar otra vez.",
+          play: playThreeBody },
+        { icon: "🎵", book: "Proyecto Hail Mary · Andy Weir", title: "Hablar con Rocky",
+          story: "Lejos de casa, un científico conoce a un ingeniero de otro mundo que habla con acordes musicales. Para entenderos, repite sus secuencias de notas. Si lo consigues… amaze, amaze, amaze.",
+          play: playRocky },
+      ];
+      let idx = 0;
+      function drawRoute() {
+        route.innerHTML = WORLDS.map((w, i) => `${i ? "<i></i>" : ""}<div class="planet ${i < idx ? "done" : i === idx ? "current" : ""}" title="${w.book}">${i < idx ? "✅" : w.icon}</div>`).join("") +
+          `<i></i><div class="planet ${idx >= WORLDS.length ? "done current" : ""}">🌌</div>`;
+      }
+      function showWorld() {
+        drawRoute();
+        if (idx >= WORLDS.length) return showEnd();
+        const w = WORLDS[idx];
+        world.innerHTML = `<div class="book">Mundo ${idx + 1} de ${WORLDS.length} · ${w.book}</div><h3>${w.title}</h3><p class="story">${w.story}</p><div class="game" id="game"></div>`;
+        w.play(world.querySelector("#game"), () => {
+          const g = world.querySelector("#game");
+          const next = document.createElement("div");
+          next.style.marginTop = "14px";
+          next.innerHTML = `<button class="btn blue" id="nextWorld">🚀 ${idx + 1 < WORLDS.length ? "Saltar al siguiente mundo" : "Volver a casa"}</button>`;
+          g.appendChild(next);
+          confettiAt(g, 60);
+          next.querySelector("button").addEventListener("click", () => { idx++; showWorld(); world.scrollIntoView({ behavior: "smooth", block: "center" }); });
+        });
+      }
+      function showEnd() {
+        world.innerHTML = `<div class="book">Fin del viaje</div><h3>Has cruzado los cuatro mundos 🌌</h3>
+          <p class="story">Aire que se agota, puertas en el tiempo, tres soles caprichosos y un amigo que habla en acordes. Para seguir viajando, aquí tienes la biblioteca de este viaje:</p>
+          <div class="readlist show">
+            <div class="bookcard"><b>Exhalación</b><small>Ted Chiang · relatos</small><em>⭐ La recomendación de Mark (y acertó)</em></div>
+            <div class="bookcard"><b>El problema de los tres cuerpos</b><small>Liu Cixin</small><em>Para no mirar igual al cielo</em></div>
+            <div class="bookcard"><b>Proyecto Hail Mary</b><small>Andy Weir</small><em>Ciencia, humor y un gran amigo</em></div>
+          </div>
+          <div style="margin-top:16px"><button class="btn dark" id="restartWorlds">🔁 Volver a viajar</button></div>`;
+        confetti(220); toast("🌌 ¡Viaje completado! Amaze, amaze, amaze", true);
+        const b = world.querySelector("#restartWorlds");
+        lockButton(b, "🔁 Volver a viajar");
+        b.addEventListener("click", () => { if (!b.disabled) { idx = 0; showWorld(); } });
+      }
+
+      // Mundo 1: cambiar pulmones en el momento justo
+      function playExhalation(el, done) {
+        el.innerHTML = `<div style="font-weight:700">Aire en tus pulmones</div>
+          <div class="gauge"><div id="air"></div><span class="zone" title="momento ideal"></span></div>
+          <button class="btn blue" id="swap">🫁 Cambiar pulmón</button>
+          <div class="gmsg" id="exMsg">Cambia el pulmón cuando el aire esté en la zona marcada (ni muy pronto ni demasiado tarde). Necesitas 5 cambios buenos.</div>`;
+        const air = el.querySelector("#air"), msg = el.querySelector("#exMsg"), btn = el.querySelector("#swap");
+        let level = 100, good = 0, running = true, last = performance.now();
+        function frame(t) {
+          if (!running) return;
+          const dt = (t - last) / 1000; last = t;
+          level -= dt * 28;
+          if (level <= 0) { level = 100; good = Math.max(0, good - 1); msg.textContent = "😵 Te has quedado sin aire y te has detenido… un compañero te reanima. ¡Atento!"; }
+          air.style.width = Math.max(0, level) + "%";
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame((t) => { last = t; frame(t); });
+        btn.addEventListener("click", () => {
+          if (!running) return;
+          if (level <= 35 && level >= 10) { good++; msg.textContent = `✅ Cambio perfecto (${good}/5). El aire vuelve a fluir.`; tone(440 + good * 60, .2); }
+          else if (level > 35) msg.textContent = "💨 Demasiado pronto: estás desperdiciando aire.";
+          else { good = Math.max(0, good - 1); msg.textContent = "⚠️ ¡Por los pelos! Casi te detienes."; }
+          level = 100;
+          if (good >= 5) { running = false; btn.disabled = true; msg.textContent = "🫁 Has entendido el secreto: la vida es aire en movimiento. Aprecia cada respiración."; done(); }
+        });
+      }
+
+      // Mundo 2: preguntas del alquimista
+      function playGate(el, done) {
+        const QS = [
+          { q: "Si cruzas la puerta por un lado viajas veinte años al futuro. ¿Y por el otro lado?", a: ["Veinte años al pasado", "Cuarenta años al futuro", "A otra ciudad, en el mismo año"], ok: 0 },
+          { q: "Viajas al pasado. ¿Qué puedes hacer allí?", a: ["Cambiar lo que ocurrió", "Conocerlo mejor… y entenderlo", "Quedarte a vivir y borrar el futuro"], ok: 1,
+            why: "«Nada puede borrar el pasado», dice el relato: pero se puede comprender, y eso ya lo cambia todo." },
+        ];
+        let qi = 0;
+        function ask() {
+          const Q = QS[qi];
+          el.innerHTML = `<div style="font-weight:700; text-align:left">🧙 «${Q.q}»</div><div class="choice">${Q.a.map((a, i) => `<button data-i="${i}">${a}</button>`).join("")}</div><div class="gmsg" id="gMsg"></div>`;
+          el.querySelectorAll(".choice button").forEach((b) => b.addEventListener("click", () => {
+            const i = +b.dataset.i;
+            if (i === Q.ok) {
+              b.classList.add("right"); tone(660, .25);
+              el.querySelector("#gMsg").textContent = Q.why || "✅ Eso es.";
+              el.querySelectorAll(".choice button").forEach((x) => (x.disabled = true));
+              setTimeout(() => { qi++; if (qi < QS.length) ask(); else { el.innerHTML = `<div class="gmsg" style="font-size:1.1rem">🚪 El alquimista sonríe y te deja cruzar la Puerta de los Años.</div>`; done(); } }, Q.why ? 2600 : 1000);
+            } else { b.classList.add("wrong"); tone(180, .3); el.querySelector("#gMsg").textContent = "🧙 «Piénsalo otra vez, viajero.»"; }
+          }));
+        }
+        ask();
+      }
+
+      // Mundo 3: ¿era estable o caótica?
+      function playThreeBody(el, done) {
+        el.innerHTML = `<div class="sky" id="sky"></div>
+          <div class="row2"><button class="btn blue" id="stable">☀️ Era Estable: ¡rehidratarse!</button><button class="btn" id="chaos">🔥 Era Caótica: ¡deshidratarse!</button></div>
+          <div class="gmsg" id="tbMsg">Si en el cielo hay un solo sol tranquilo, es una Era Estable. Si aparecen varios soles o se mueven sin control, es una Era Caótica. Acierta 6 de 8.</div>
+          <div style="margin-top:10px"><button class="btn dark" id="tbStart">🌍 Empezar</button></div>`;
+        const sky = el.querySelector("#sky"), msg = el.querySelector("#tbMsg"), startB = el.querySelector("#tbStart");
+        const bStable = el.querySelector("#stable"), bChaos = el.querySelector("#chaos");
+        bStable.disabled = bChaos.disabled = true;
+        let round = 0, hits = 0, answer = null, timer = null, open = false;
+        function next() {
+          if (round >= 8) return end();
+          round++; open = true;
+          answer = Math.random() < .5 ? "stable" : "chaos";
+          sky.className = "sky";
+          const n = answer === "stable" ? 1 : 2 + Math.floor(Math.random() * 2);
+          sky.innerHTML = Array.from({ length: n }, () => `<span class="sun" style="left:${15 + Math.random() * 70}%; top:${25 + Math.random() * 50}%">☀️</span>`).join("");
+          if (answer === "chaos") {
+            const suns = [...sky.querySelectorAll(".sun")];
+            let k = 0; const iv = setInterval(() => { if (!open || ++k > 6) return clearInterval(iv); suns.forEach((s) => { s.style.left = 10 + Math.random() * 80 + "%"; s.style.top = 15 + Math.random() * 70 + "%"; }); }, 280);
+          }
+          timer = setTimeout(() => judge(null), 2200);
+        }
+        function judge(pick) {
+          if (!open) return;
+          open = false; clearTimeout(timer);
+          const ok = pick === answer;
+          if (ok) hits++;
+          sky.className = "sky " + answer;
+          tone(ok ? 620 : 160, .2);
+          msg.textContent = `${ok ? "✅" : pick ? "❌" : "⌛"} ${answer === "stable" ? "Era Estable" : "Era Caótica"} · Aciertos: ${hits}/${round}`;
+          setTimeout(next, 900);
+        }
+        function end() {
+          bStable.disabled = bChaos.disabled = true;
+          if (hits >= 6) { msg.textContent = `🌞 ${hits}/8: tu civilización sobrevive para ver otra Era Estable.`; done(); }
+          else { msg.textContent = `💀 ${hits}/8: la civilización número ${190 + Math.floor(Math.random() * 20)} ha caído. Toca empezar de nuevo.`; startB.style.display = ""; startB.textContent = "🔁 Otra civilización"; }
+        }
+        startB.addEventListener("click", () => { round = 0; hits = 0; startB.style.display = "none"; bStable.disabled = bChaos.disabled = false; next(); });
+        bStable.addEventListener("click", () => judge("stable"));
+        bChaos.addEventListener("click", () => judge("chaos"));
+      }
+
+      // Mundo 4: Simon musical con Rocky
+      function playRocky(el, done) {
+        const NOTES = [[262, "#ff6b6b", "♩"], [330, "#ffd166", "♪"], [392, "#5be39b", "♫"], [523, "#7fd3ff", "♬"]];
+        el.innerHTML = `<div style="font-size:2.6rem">🕷️🪨</div><div style="font-weight:700">Rocky dice algo… repítelo.</div>
+          <div class="rocky">${NOTES.map(([f, c, s], i) => `<button data-i="${i}" style="background:${c}; color:${c}"><span style="color:#16202e">${s}</span></button>`).join("")}</div>
+          <div class="gmsg" id="rkMsg">Pulsa «Escuchar» y repite la secuencia. Tres frases y seréis amigos.</div>
+          <div style="margin-top:10px"><button class="btn dark" id="rkStart">👂 Escuchar a Rocky</button></div>`;
+        const btns = [...el.querySelectorAll(".rocky button")], msg = el.querySelector("#rkMsg"), startB = el.querySelector("#rkStart");
+        let seq = [], pos = 0, level = 0, listening = false;
+        const flash = (i, ms = 380) => { btns[i].classList.add("lit"); tone(NOTES[i][0], ms / 1000); setTimeout(() => btns[i].classList.remove("lit"), ms - 60); };
+        function play() {
+          listening = false; pos = 0;
+          seq = Array.from({ length: 3 + level }, () => Math.floor(Math.random() * 4));
+          msg.textContent = `🎵 Rocky habla… (frase ${level + 1}/3)`;
+          seq.forEach((n, k) => setTimeout(() => flash(n), 550 * k + 300));
+          setTimeout(() => { listening = true; msg.textContent = "Tu turno: repite las notas."; }, 550 * seq.length + 400);
+        }
+        btns.forEach((b) => b.addEventListener("click", () => {
+          if (!listening) return;
+          const i = +b.dataset.i; flash(i, 260);
+          if (i !== seq[pos]) { listening = false; msg.textContent = "🤔 Rocky ladea el caparazón: «¿Pregunta?». Prueba otra vez."; startB.style.display = ""; startB.textContent = "👂 Escuchar otra vez"; return; }
+          pos++;
+          if (pos === seq.length) {
+            listening = false; level++;
+            if (level >= 3) { msg.textContent = "🎶 «¡Amaze! ¡Amaze! ¡Amaze!» Rocky te ofrece el puño… fist my bump. 🤜🤛"; startB.style.display = "none"; done(); }
+            else { msg.textContent = "✅ ¡Rocky te ha entendido!"; setTimeout(play, 1100); }
+          }
+        }));
+        startB.addEventListener("click", () => { startB.style.display = "none"; play(); });
+      }
+      showWorld();
+    })();
+
+    /* ---------- 3. El WOD del novato ---------- */
+    (() => {
+      const EX = {
+        easy: [
+          { n: "Air squat", e: "🦵", d: "Sentadilla sin peso: bajas con la cadera por debajo de las rodillas y subes." },
+          { n: "Burpee", e: "🤸", d: "Al suelo con el pecho tocando, te levantas de un salto y palmada por encima de la cabeza." },
+          { n: "Box jump", e: "📦", d: "Saltas con los dos pies encima del cajón y extiendes la cadera arriba del todo." },
+          { n: "Kettlebell swing", e: "🔔", d: "Balanceas la pesa rusa entre las piernas y la subes con un golpe de cadera." },
+        ],
+        mid: [
+          { n: "Wall ball", e: "⚽", d: "Sentadilla con balón medicinal y, al subir, lo lanzas a una diana alta en la pared." },
+          { n: "Pull-up", e: "🧗", d: "Colgado de la barra, subes hasta pasar la barbilla por encima." },
+          { n: "Deadlift", e: "🏋️", d: "Levantas la barra desde el suelo con la espalda recta hasta quedar de pie." },
+          { n: "Thruster", e: "🚀", d: "Sentadilla frontal con la barra en los hombros y, al subir, la empujas por encima de la cabeza en un solo gesto." },
+        ],
+        hard: [
+          { n: "Squat clean", e: "🎯", d: "Llevas la barra del suelo a los hombros de un tirón y la recibes en sentadilla profunda." },
+          { n: "Hang snatch", e: "⚡", d: "Con la barra colgando a la altura de los muslos, la subes en un solo movimiento hasta arriba con los brazos estirados." },
+          { n: "Double-unders", e: "🪢", d: "Saltas a la comba y la cuerda pasa dos veces por debajo en cada salto." },
+          { n: "Toes-to-bar", e: "🦶", d: "Colgado de la barra, subes los pies hasta tocarla con las puntas." },
+        ],
+      };
+      const ALL = [...EX.easy, ...EX.mid, ...EX.hard];
+      const LEVELS = ["Novato con agujetas", "Ya sabe dónde está el box", "Ya no vomita (casi)", "Scaled con dignidad", "Casi Rx", "Rx", "Bestia del box 🦍"];
+      const REPS = 10, TIME = 9;
+      const board = document.getElementById("board"), namesEl = document.getElementById("names"), repsEl = document.getElementById("reps");
+      const repBtn = document.getElementById("repBtn"), startBtn = document.getElementById("cfStart"), msg = document.getElementById("cfMsg");
+      const levelEl = document.getElementById("cfLevel"), progEl = document.getElementById("cfProgress");
+      const repBar = document.getElementById("repBar"), fatBar = document.getElementById("fatBar"), repLabel = document.getElementById("repLabel");
+      let wod = [], i = 0, learned = [], pukes = 0, level = 0, reps = 0, fatigue = 0, endAt = 0, phase = "idle", lastTap = 0, restUntil = 0, perfectSets = 0;
+      const pick = (arr, n) => [...arr].sort(() => Math.random() - .5).slice(0, n);
+      function setLevel() { levelEl.textContent = "Nivel: " + LEVELS[Math.min(level, LEVELS.length - 1)]; }
+      function start() {
+        wod = [...pick(EX.easy, 2), ...pick(EX.mid, 2), ...pick(EX.hard, 2)];
+        i = 0; learned = []; pukes = 0; level = 0; perfectSets = 0; setLevel();
+        startBtn.style.display = "none"; msg.textContent = "";
+        quiz();
+      }
+      function quiz() {
+        phase = "quiz";
+        const ex = wod[i];
+        progEl.textContent = `Ejercicio ${i + 1} / ${wod.length}`;
+        repsEl.classList.remove("show");
+        board.innerHTML = `<div class="wod">Ejercicio ${i + 1} · ¿Cómo se llama esto?</div><div class="ex-emoji">${ex.e}</div><p class="ex-desc">${ex.d}</p>`;
+        const opts = pick([ex, ...pick(ALL.filter((x) => x !== ex), 2)], 3);
+        namesEl.innerHTML = opts.map((o) => `<button>${o.n}</button>`).join("");
+        let tries = 0;
+        namesEl.querySelectorAll("button").forEach((b, k) => b.addEventListener("click", () => {
+          if (phase !== "quiz") return;
+          if (opts[k] === ex) {
+            b.classList.add("right");
+            if (tries === 0) { learned.push(ex.n); }
+            msg.textContent = tries === 0 ? `✅ ¡Exacto! ${ex.n}.` : `✅ Eso es: ${ex.n}. A la próxima a la primera.`;
+            phase = "wait";
+            setTimeout(sets, 900);
+          } else { tries++; b.classList.add("wrong"); b.disabled = true; msg.textContent = "❌ Nope. El coach te mira con cara rara."; }
+        }));
+      }
+      function sets() {
+        phase = "reps";
+        const ex = wod[i];
+        namesEl.innerHTML = "";
+        board.innerHTML = `<div class="wod">Ejercicio ${i + 1} · ${REPS} reps</div><div class="ex-emoji">${ex.e}</div><div class="learned">${ex.n}</div><p class="ex-desc">¡Vamos! Pulsa para cada repetición… pero si machacas el botón sin parar, la fatiga se dispara.</p>`;
+        repsEl.classList.add("show");
+        reps = 0; fatigue = 0; endAt = performance.now() + TIME * 1000; restUntil = 0;
+        update();
+      }
+      function update() {
+        repBar.style.width = (reps / REPS) * 100 + "%";
+        fatBar.style.width = Math.min(100, fatigue) + "%";
+        repLabel.textContent = `Repeticiones ${reps} / ${REPS} · ⏱ ${Math.max(0, Math.ceil((endAt - performance.now()) / 1000))} s`;
+      }
+      repBtn.addEventListener("click", () => {
+        if (phase !== "reps") return;
+        const now = performance.now();
+        if (now < restUntil) return;
+        const gap = now - lastTap; lastTap = now;
+        fatigue += gap < 170 ? 22 : gap < 260 ? 12 : 7; // machacar sin ritmo cansa muchísimo
+        reps++;
+        if (fatigue >= 100) return puke();
+        if (reps >= REPS) return finishSet(true);
+        update();
+      });
+      function puke() {
+        pukes++;
+        restUntil = performance.now() + 2600;
+        endAt += 2600;
+        fatigue = 45;
+        const p = document.createElement("div");
+        p.className = "puke";
+        p.innerHTML = `<div><span>🤢</span>Has ido demasiado fuerte… y ha pasado lo que tenía que pasar.<br>Agua, respira y seguimos.</div>`;
+        board.appendChild(p);
+        setTimeout(() => p.remove(), 2500);
+        msg.textContent = `🤢 Visita al baño número ${pukes}. Dosifica, campeón.`;
+        update();
+      }
+      function finishSet(ok) {
+        phase = "wait";
+        repsEl.classList.remove("show");
+        if (ok) { level++; if (fatigue < 70) perfectSets++; msg.textContent = `💪 ¡Hecho! ${REPS} ${wod[i].n}. Subes de nivel.`; confettiAt(board, 30); }
+        else msg.textContent = `😮‍💨 No has llegado a tiempo… ¡pero en CrossFit se escala! Hecho en versión «scaled».`;
+        setLevel();
+        i++;
+        setTimeout(() => (i < wod.length ? quiz() : end()), 1300);
+      }
+      function end() {
+        phase = "done";
+        progEl.textContent = "WOD terminado";
+        const days = 1 + Math.min(2, pukes) + (perfectSets < 3 ? 1 : 0);
+        board.innerHTML = `<div class="summary show"><div class="wod">WOD completado</div><div class="ex-emoji">🏆</div>
+          <div class="title">${LEVELS[Math.min(level, LEVELS.length - 1)]}</div>
+          <p>Nombres aprendidos a la primera:</p><ul>${learned.length ? learned.map((n) => `<li>${n}</li>`).join("") : "<li>Ninguno… ¡a repasar!</li>"}</ul>
+          <p>Visitas al baño: <b>${pukes}</b> ${pukes ? "🤢" : "(¡milagro!)"} · Agujetas previstas: <b>${days} ${days === 1 ? "día" : "días"}</b> 😅</p></div>`;
+        msg.textContent = learned.length >= 5 ? "🗣️ Ya hablas CrossFit con fluidez. ¡Nos vemos mañana en el box!" : "Cada día un poco mejor. ¡Mañana más (y con menos agujetas)!";
+        if (level >= 5) { confetti(220); toast("🏋️ ¡WOD completado! Nivel " + LEVELS[Math.min(level, LEVELS.length - 1)], true); }
+        startBtn.style.display = "";
+        lockButton(startBtn, "🔁 Otro WOD");
+      }
+      startBtn.addEventListener("click", () => { if (!startBtn.disabled) start(); });
+      function loop() {
+        if (phase === "reps") {
+          const now = performance.now();
+          if (now >= restUntil) fatigue = Math.max(0, fatigue - 0.45);
+          update();
+          if (now >= endAt) finishSet(false);
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+      setLevel();
+    })();
+
+    /* ---------- Aparición al hacer scroll ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
