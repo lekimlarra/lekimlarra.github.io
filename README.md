@@ -9,7 +9,8 @@ Pequeñas webs hechas con cariño, una carpeta por persona:
 - `/berta/` — cumpleaños de Berta (cartel de festival, Belgian Beer Festival, juego de ritmo en el Mainstage y Kebab Berta).
 - `/brage/` — web para Brage (skate, Barcelona con Mikel, moto, Operación Furgo y Lola).
 - `/marc/` — cumpleaños de Marc (obra de estructura metálica, viaje por mundos de ciencia ficción y WOD de CrossFit). La foto va en `marc/img/marc.jpg`.
+- `/wendolaine/` — portfolio profesional de Wendolaine Santiago Cruz (inmunología), en inglés, castellano y catalán. Estilo inspirado en scienceforchange.eu.
 - `/marina/` — cumpleaños de Marina (Ofrenda de Flores del Pilar, montaña rusa y persecución a Guille).
-- `404.html` — redirige `/Julia`, `/Ángela`, `/Irene`, `/Sonia`, `/Marina`, `/Berta`, `/Marc`, `/Brage`, etc. a su carpeta en minúsculas.
+- `404.html` — redirige `/Julia`, `/Ángela`, `/Irene`, `/Sonia`, `/Marina`, `/Berta`, `/Marc`, `/Brage`, `/Wendolaine`, etc. a su carpeta en minúsculas.
 
 Cada web es un `index.html` autónomo con sus fotos en `img/`. La de Sonia incluye en `sonia/lib/` d3-geo, d3-array, topojson-client y world-atlas (licencia ISC; datos de Natural Earth, dominio público).

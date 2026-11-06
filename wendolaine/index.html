@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wendolaine Santiago Cruz · Immunology</title>
+  <meta name="description" content="Wendolaine Santiago Cruz, PhD. Postdoctoral researcher in immunology at Stony Brook University, studying memory CD4+ T cells in the lung during respiratory viral infections.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%2317706B'/><circle cx='58' cy='44' r='18' fill='%231C1B2E'/></svg>">
+  <style>
+    :root {
+      --cream: #F6F1E7;
+      --paper: #FFFCF6;
+      --ink: #1C1B2E;
+      --ink-soft: #4A4860;
+      --tomato: #E4572E;
+      --teal: #17706B;
+      --butter: #F3C94B;
+      --blush: #F4C7BE;
+      --mist: #D6E6E0;
+      --line: rgba(28,27,46,.14);
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "DM Sans", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--ink); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    svg { display: block; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    @media (max-width: 600px) { .wrap { padding: 0 18px; } }
+    em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+    /* ---------- HEADER ---------- */
+    header.top { position: sticky; top: 0; z-index: 60; background: rgba(246,241,231,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    header.top.scrolled { border-bottom-color: var(--line); }
+    .top-inner { height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+    .brand svg { width: 42px; height: 42px; flex: none; }
+    .brand b { font-family: var(--serif); font-weight: 500; font-size: 1.12rem; line-height: 1.15; display: block; }
+    .brand small { display: block; font-size: .78rem; color: var(--ink-soft); font-weight: 500; }
+    .links { display: flex; gap: 26px; }
+    .links a { text-decoration: none; font-weight: 500; font-size: .97rem; position: relative; padding: 4px 0; }
+    .links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--tomato); border-radius: 2px; transform: scaleX(0); transform-origin: right; transition: transform .3s; }
+    .links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .right { display: flex; align-items: center; gap: 10px; flex: none; }
+    .seg { display: flex; border: 1.5px solid var(--ink); border-radius: 12px; overflow: hidden; }
+    .seg button { border: 0; background: transparent; font: 700 .78rem var(--sans); letter-spacing: .06em; padding: 8px 11px; cursor: pointer; color: var(--ink); }
+    .seg button + button { border-left: 1.5px solid var(--ink); }
+    .seg button[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
+    .menu { display: none; width: 44px; height: 44px; border-radius: 12px; background: var(--ink); border: 0; cursor: pointer; position: relative; flex: none; }
+    .menu i { position: absolute; left: 12px; right: 12px; height: 2px; background: var(--cream); border-radius: 2px; transition: transform .25s, opacity .2s; }
+    .menu i:nth-child(1) { top: 16px; } .menu i:nth-child(2) { top: 21px; } .menu i:nth-child(3) { top: 26px; }
+    body.open .menu i:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+    body.open .menu i:nth-child(2) { opacity: 0; }
+    body.open .menu i:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+    @media (max-width: 980px) {
+      .links { display: none; position: absolute; top: 84px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--cream); border-bottom: 1px solid var(--line); padding: 8px 18px 18px; }
+      body.open .links { display: flex; }
+      .links a { font-family: var(--serif); font-size: 1.6rem; padding: 12px 0; border-bottom: 1px solid var(--line); }
+      .links a:last-child { border-bottom: 0; }
+      .links a::after { display: none; }
+      .menu { display: block; }
+    }
+    @media (max-width: 560px) { .brand small { display: none; } .brand b { font-size: .98rem; } .brand svg { width: 34px; height: 34px; } .seg button { padding: 7px 7px; } }
+    @media (max-width: 400px) { .brand b { width: 7.5em; } }
+
+    /* ---------- BUTTONS ---------- */
+    .btn { display: inline-flex; align-items: center; gap: 12px; font: 700 1rem/1 var(--sans); text-decoration: none; padding: 17px 26px; border-radius: 999px; border: 1.5px solid var(--ink); transition: background .2s, color .2s, transform .2s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn .ar { transition: transform .2s; }
+    .btn:hover .ar { transform: translateX(4px); }
+    .btn-ink { background: var(--ink); color: var(--cream); }
+    .btn-ink:hover { background: var(--teal); border-color: var(--teal); }
+    .btn-line { background: transparent; color: var(--ink); }
+    .btn-line:hover { background: var(--ink); color: var(--cream); }
+
+    /* ---------- HERO ---------- */
+    .hero { padding: 60px 0 70px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; align-items: center; }
+    .badge { display: inline-flex; align-items: center; gap: 10px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 8px 16px 8px 12px; font-size: .9rem; font-weight: 500; }
+    .badge i { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px var(--mist); flex: none; }
+    .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.9rem, 7.4vw, 6.4rem); line-height: .98; letter-spacing: -.035em; margin: 26px 0; }
+    .hero h1 span { display: block; }
+    .hero h1 span:last-child { font-style: italic; font-weight: 400; color: var(--teal); }
+    .hero .sub { font-family: var(--serif); font-size: clamp(1.3rem, 2.2vw, 1.75rem); line-height: 1.35; max-width: 30ch; }
+    .hero .sub em { color: var(--tomato); }
+    .hero .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .dish { position: relative; width: 100%; max-width: 500px; justify-self: end; aspect-ratio: 1; }
+    .dish svg { width: 100%; height: 100%; overflow: visible; }
+    .ring-text { font: 700 15px var(--sans); letter-spacing: .1em; text-transform: uppercase; fill: var(--ink); }
+    .rot { transform-origin: 250px 250px; animation: rot 40s linear infinite; }
+    .rot-rev { transform-origin: 250px 250px; animation: rot 70s linear infinite reverse; }
+    @keyframes rot { to { transform: rotate(360deg); } }
+    .drift { animation: drift 7s ease-in-out infinite; }
+    @keyframes drift { 50% { transform: translate(6px, -8px); } }
+    @media (max-width: 900px) {
+      .hero { padding: 36px 0 50px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .dish { justify-self: center; max-width: 340px; }
+    }
+
+    .facts { margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1.5px solid var(--ink); }
+    .fact { padding: 22px 22px 0 0; }
+    .fact + .fact { padding-left: 22px; border-left: 1px solid var(--line); }
+    .fact small { display: block; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+    .fact b { display: block; font-family: var(--serif); font-weight: 500; font-size: 1.25rem; line-height: 1.25; margin-top: 6px; }
+    @media (max-width: 900px) { .facts { grid-template-columns: 1fr 1fr; margin-top: 40px; } .fact:nth-child(3) { border-left: 0; padding-left: 0; } .fact { padding-bottom: 18px; } }
+    @media (max-width: 420px) { .facts { grid-template-columns: 1fr; } .fact + .fact { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); } }
+
+    /* ---------- TICKER ---------- */
+    .ticker { background: var(--ink); color: var(--cream); overflow: hidden; padding: 22px 0; }
+    .ticker-track { display: flex; width: max-content; animation: tick 45s linear infinite; }
+    .ticker-track span { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 2.6vw, 2rem); white-space: nowrap; display: inline-flex; align-items: center; }
+    .ticker-track span::after { content: "✳"; font-style: normal; color: var(--butter); margin: 0 34px; font-size: .8em; }
+    @keyframes tick { to { transform: translateX(-50%); } }
+
+    /* ---------- SECTION HEAD ---------- */
+    section.sec { padding: 120px 0; }
+    @media (max-width: 700px) { section.sec { padding: 80px 0; } }
+    .num { font: 700 .82rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; }
+    .num::before { content: ""; width: 26px; height: 1.5px; background: currentColor; }
+    h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.02; letter-spacing: -.03em; margin-top: 14px; }
+    h2 em { color: var(--teal); }
+    .head-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+    .head-row p { color: var(--ink-soft); font-size: 1.1rem; max-width: 480px; justify-self: end; }
+    @media (max-width: 800px) { .head-row { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; } .head-row p { justify-self: start; } }
+
+    /* ---------- ABOUT ---------- */
+    .about { display: grid; grid-template-columns: 300px 1fr; gap: 60px; }
+    .about-side { position: sticky; top: 120px; align-self: start; }
+    .about-main .big { font-family: var(--serif); font-size: clamp(1.55rem, 3vw, 2.5rem); line-height: 1.28; letter-spacing: -.015em; }
+    .about-main .big em { color: var(--teal); }
+    .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; margin-top: 44px; }
+    .about-cols p { font-size: 1.05rem; color: var(--ink-soft); }
+    .pull { margin-top: 44px; padding: 26px 30px; background: var(--paper); border-left: 5px solid var(--tomato); border-radius: 0 18px 18px 0; font-family: var(--serif); font-style: italic; font-size: 1.3rem; line-height: 1.45; }
+    @media (max-width: 900px) { .about { grid-template-columns: 1fr; gap: 26px; } .about-side { position: static; } .about-cols { grid-template-columns: 1fr; gap: 16px; margin-top: 30px; } .pull { font-size: 1.15rem; padding: 22px; } }
+
+    /* ---------- RESEARCH (bento) ---------- */
+    .research { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(240px, auto); gap: 18px; }
+    .tile { border-radius: 26px; padding: 70px 30px 30px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; transition: transform .3s; }
+    .tile:hover { transform: translateY(-4px); }
+    .tile .tag { position: absolute; top: 24px; left: 30px; font: 700 .78rem var(--sans); letter-spacing: .12em; text-transform: uppercase; opacity: .7; }
+    .tile h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.15; letter-spacing: -.01em; margin-bottom: 10px; }
+    .tile p { font-size: 1rem; max-width: 46ch; }
+    .t-big { grid-column: span 2; grid-row: span 2; background: var(--teal); color: var(--cream); padding: 36px; }
+    .t-big h3 { font-size: clamp(1.9rem, 3vw, 2.6rem); }
+    .t-big p { color: #d7ebe6; font-size: 1.08rem; }
+    .t-big .art { position: absolute; top: 30px; right: 30px; width: 46%; max-width: 250px; }
+    .t-big .tag { left: 36px; top: 30px; }
+    .t-butter { background: var(--butter); }
+    .t-blush { background: var(--blush); }
+    .t-mist { grid-column: span 2; background: var(--mist); }
+    .t-ink { grid-column: 1 / -1; background: var(--ink); color: var(--cream); min-height: 0; }
+    .t-ink p { max-width: 70ch; }
+    .t-ink p { color: #c9c7d8; }
+    @media (max-width: 900px) {
+      .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: minmax(200px, auto); }
+      .t-big { grid-column: span 2; grid-row: span 1; padding-top: 210px; }
+      .t-big .art { width: 170px; }
+    }
+    @media (max-width: 560px) {
+      .bento { grid-template-columns: 1fr; }
+      .t-big, .t-mist, .t-ink { grid-column: span 1; }
+      .tile { padding: 64px 24px 26px; }
+      .tile .tag, .t-big .tag { left: 24px; }
+      .t-big { padding-top: 200px; }
+    }
+
+    /* ---------- CAREER (timeline) ---------- */
+    .tl { position: relative; padding-left: 46px; }
+    .tl::before { content: ""; position: absolute; left: 11px; top: 10px; bottom: 10px; width: 2px; background: repeating-linear-gradient(var(--ink) 0 6px, transparent 6px 12px); }
+    .step { position: relative; display: grid; grid-template-columns: 210px 1fr; gap: 40px; padding: 0 0 64px; }
+    .step:last-child { padding-bottom: 0; }
+    .step::before { content: ""; position: absolute; left: -46px; top: 4px; width: 24px; height: 24px; border-radius: 50%; background: var(--dot); border: 2px solid var(--ink); }
+    .when { font-family: var(--serif); font-size: 1.5rem; line-height: 1.2; font-weight: 500; }
+    .when small { display: block; font-family: var(--sans); font-size: .85rem; color: var(--ink-soft); font-weight: 500; margin-top: 6px; }
+    .when .chip-now { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font: 700 .75rem var(--sans); letter-spacing: .1em; text-transform: uppercase; background: var(--ink); color: var(--cream); padding: 6px 12px; border-radius: 999px; }
+    .when .chip-now::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--butter); animation: blink 1.6s infinite; }
+    @keyframes blink { 50% { opacity: .2; } }
+    .what { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 32px 34px; }
+    .what h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.4rem, 2.2vw, 1.85rem); line-height: 1.2; letter-spacing: -.01em; }
+    .what .org { font-weight: 700; color: var(--teal); margin: 6px 0 16px; }
+    .what p { font-size: 1.04rem; }
+    .what ul { list-style: none; margin-top: 16px; display: grid; gap: 9px; }
+    .what li { position: relative; padding-left: 22px; color: var(--ink-soft); }
+    .what li::before { content: ""; position: absolute; left: 0; top: .72em; width: 10px; height: 2px; background: var(--tomato); }
+    @media (max-width: 860px) {
+      .tl { padding-left: 34px; } .tl::before { left: 8px; }
+      .step { grid-template-columns: 1fr; gap: 14px; padding-bottom: 46px; }
+      .step::before { left: -34px; width: 20px; height: 20px; }
+      .what { padding: 24px 22px; }
+    }
+
+    /* ---------- TOOLBOX ---------- */
+    .toolbox { background: var(--mist); }
+    .groups { border-top: 1.5px solid var(--ink); }
+    .group { display: grid; grid-template-columns: 300px 1fr; gap: 30px; padding: 30px 0; border-bottom: 1px solid rgba(28,27,46,.2); align-items: center; }
+    .group h3 { font-family: var(--serif); font-weight: 500; font-size: 1.55rem; display: flex; align-items: center; gap: 14px; }
+    .group h3 i { width: 14px; height: 14px; border-radius: 4px; transform: rotate(45deg); flex: none; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chips span { border: 1.5px solid var(--ink); border-radius: 999px; padding: 9px 18px; font-weight: 500; background: var(--paper); transition: background .2s, color .2s; }
+    .chips span:hover { background: var(--ink); color: var(--cream); }
+    @media (max-width: 800px) { .group { grid-template-columns: 1fr; gap: 16px; } .chips span { padding: 8px 14px; font-size: .95rem; } }
+
+    /* ---------- OUTREACH (dark) ---------- */
+    .outreach { background: var(--ink); color: var(--cream); }
+    .outreach .num { color: #a9a7bd; }
+    .outreach h2 em { color: var(--butter); }
+    .outreach .head-row p { color: #c9c7d8; }
+    .o-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.18); }
+    .o-item { padding: 34px 30px 10px 0; }
+    .o-item + .o-item { padding-left: 30px; border-left: 1px solid rgba(255,255,255,.18); }
+    .o-ico { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 26px; }
+    .o-ico svg { width: 28px; height: 28px; }
+    .o-item h3 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; line-height: 1.2; margin-bottom: 10px; }
+    .o-item p { color: #c9c7d8; }
+    .hl { margin-top: 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .hl-card { border: 1px solid rgba(255,255,255,.22); border-radius: 22px; padding: 26px 28px; display: flex; gap: 20px; align-items: flex-start; }
+    .hl-card .yr { font-family: var(--serif); font-style: italic; font-size: 2.2rem; line-height: 1; color: var(--butter); flex: none; }
+    .hl-card small { display: block; font: 700 .75rem var(--sans); letter-spacing: .12em; text-transform: uppercase; color: #a9a7bd; margin-bottom: 6px; }
+    .hl-card b { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; line-height: 1.3; }
+    @media (max-width: 900px) {
+      .o-grid { grid-template-columns: 1fr; }
+      .o-item, .o-item + .o-item { padding: 28px 0; border-left: 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+      .hl { grid-template-columns: 1fr; margin-top: 44px; }
+      .hl-card { padding: 22px; }
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact { background: var(--tomato); color: var(--ink); padding: 120px 0 0; overflow: hidden; }
+    .contact-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 40px; align-items: end; }
+    .contact h2 { font-size: clamp(2.5rem, 6.6vw, 5.8rem); margin-top: 16px; }
+    .contact h2 em { color: var(--cream); }
+    .contact .num { color: var(--ink); }
+    .contact p { font-size: 1.15rem; max-width: 520px; margin-top: 26px; }
+    .contact .btns { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+    .contact .btn-ink:hover { background: var(--cream); color: var(--ink); border-color: var(--ink); }
+    .big-name { font-family: var(--serif); font-weight: 500; font-size: clamp(3rem, 15vw, 14rem); line-height: .8; letter-spacing: -.05em; white-space: nowrap; margin-top: 90px; color: var(--ink); transform: translateY(.14em); }
+    footer { background: var(--ink); color: #a9a7bd; font-size: .9rem; position: relative; }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 26px; padding-bottom: 30px; }
+    @media (max-width: 800px) { .contact { padding-top: 80px; } .contact-grid { grid-template-columns: 1fr; } .contact .btns { align-items: flex-start; } .big-name { margin-top: 60px; } }
+
+    /* ---------- MOTION ---------- */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 42 42" aria-hidden="true"><circle cx="21" cy="21" r="20" fill="#17706B"/><circle cx="25" cy="18" r="8.5" fill="#1C1B2E"/><circle cx="27.5" cy="15.5" r="2.4" fill="#F3C94B"/></svg>
+      <span><b>Wendolaine Santiago Cruz</b><small data-i18n="brandSub">PhD · Immunology</small></span>
+    </a>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#about" data-i18n="navAbout">About</a>
+      <a href="#research" data-i18n="navResearch">Research</a>
+      <a href="#career" data-i18n="navCareer">Career</a>
+      <a href="#outreach" data-i18n="navOutreach">Outreach</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+    </nav>
+    <div class="right">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false">ES</button>
+        <button type="button" data-lang="ca" aria-pressed="false">CA</button>
+      </div>
+      <button class="menu" id="menu" aria-label="Menu" aria-expanded="false" aria-controls="links"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="badge"><i></i><span data-i18n="badge">Postdoctoral researcher · Stony Brook University</span></span>
+          <h1><span>Wendolaine</span><span>Santiago Cruz</span></h1>
+          <p class="sub" data-i18n-html="heroSub">Immunologist studying how memory T cells <em>protect the lung</em> after viral infection.</p>
+          <div class="btns">
+            <a class="btn btn-ink" href="#research"><span data-i18n="ctaResearch">See my research</span><span class="ar">→</span></a>
+            <a class="btn btn-line" href="#contact"><span data-i18n="ctaContact">Contact</span></a>
+          </div>
+        </div>
+
+        <div class="dish" aria-hidden="true">
+          <svg viewBox="0 0 500 500">
+            <defs>
+              <path id="ringPath" d="M250 250 m-226 0 a226 226 0 1 1 452 0 a226 226 0 1 1 -452 0"/>
+              <clipPath id="dishClip"><circle cx="250" cy="250" r="188"/></clipPath>
+            </defs>
+            <g class="rot">
+              <text class="ring-text"><textPath href="#ringPath" textLength="1405" lengthAdjust="spacing" data-i18n="ring">Immunology ✳ Research ✳ Science communication ✳ Immune memory ✳</textPath></text>
+            </g>
+            <circle cx="250" cy="250" r="196" fill="none" stroke="#1C1B2E" stroke-width="2"/>
+            <circle cx="250" cy="250" r="188" fill="#D6E6E0"/>
+            <g clip-path="url(#dishClip)">
+              <g class="rot-rev">
+                <circle cx="150" cy="170" r="34" fill="#F4C7BE"/><circle cx="158" cy="162" r="13" fill="#E4572E"/>
+                <circle cx="360" cy="150" r="26" fill="#F3C94B"/><circle cx="365" cy="146" r="9" fill="#1C1B2E"/>
+                <circle cx="380" cy="330" r="38" fill="#F4C7BE"/><circle cx="388" cy="322" r="14" fill="#E4572E"/>
+                <circle cx="130" cy="340" r="22" fill="#F3C94B"/>
+                <circle cx="250" cy="90" r="14" fill="#fff"/>
+                <circle cx="250" cy="420" r="18" fill="#fff"/>
+                <circle cx="96" cy="250" r="10" fill="#17706B"/>
+                <circle cx="410" cy="240" r="8" fill="#17706B"/>
+                <circle cx="300" cy="410" r="7" fill="#1C1B2E"/>
+                <circle cx="190" cy="420" r="6" fill="#E4572E"/>
+              </g>
+              <g class="drift">
+                <g stroke="#1C1B2E" stroke-width="5" stroke-linecap="round">
+                  <path d="M250 172v-18M250 154l-8-9M250 154l8-9"/>
+                  <path d="M328 250h18M346 250l9-8M346 250l9 8"/>
+                  <path d="M250 328v18M250 346l-8 9M250 346l8 9"/>
+                  <path d="M172 250h-18M154 250l-9-8M154 250l-9 8"/>
+                  <path d="M305 195l12-12M317 183v-12M317 183h12"/>
+                  <path d="M195 305l-12 12M183 317v12M183 317h-12"/>
+                  <path d="M305 305l12 12M317 317v12M317 317h12"/>
+                  <path d="M195 195l-12-12M183 183v-12M183 183h-12"/>
+                </g>
+                <circle cx="250" cy="250" r="80" fill="#17706B" stroke="#1C1B2E" stroke-width="3"/>
+                <circle cx="266" cy="236" r="36" fill="#1C1B2E"/>
+                <circle cx="278" cy="224" r="9" fill="#F3C94B"/>
+              </g>
+            </g>
+            <g stroke="#1C1B2E" stroke-width="2"><path d="M250 54v12M250 434v12M54 250h12M434 250h12"/></g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="facts">
+        <div class="fact reveal"><small data-i18n="f1k">Now</small><b data-i18n="f1v">Postdoc, Stony Brook University</b></div>
+        <div class="fact reveal"><small data-i18n="f2k">Focus</small><b data-i18n="f2v">CD4⁺ T cell memory in the lung</b></div>
+        <div class="fact reveal"><small data-i18n="f3k">Training</small><b data-i18n="f3v">PhD &amp; MSc, Universidad Veracruzana</b></div>
+        <div class="fact reveal"><small data-i18n="f4k">Also</small><b data-i18n="f4v">Science communication &amp; teaching</b></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+  <!-- ABOUT -->
+  <section class="sec" id="about">
+    <div class="wrap about">
+      <div class="about-side reveal">
+        <div class="num">01</div>
+        <h2 data-i18n="aboutTitle">About</h2>
+      </div>
+      <div class="about-main">
+        <p class="big reveal" data-i18n-html="aboutBig">I'm a postdoctoral research fellow with a strong interest in <em>adaptive immunity</em>, particularly the biology of memory CD4⁺ T cells during viral infections.</p>
+        <div class="about-cols reveal">
+          <p data-i18n="about1">My research focuses on understanding how tissue-resident memory T cells are generated and maintained in the lung, and how they contribute to long-term protection.</p>
+          <p data-i18n="about2">I hold a PhD in Biomedical Sciences and have experience with mouse models, flow cytometry, immunological assays and molecular biology techniques. I value interdisciplinary collaboration, scientific rigor and mentorship.</p>
+        </div>
+        <blockquote class="pull reveal" data-i18n="pull">“I'm passionate about dissecting immune mechanisms and translating findings into meaningful insights for vaccine design and immunotherapy.”</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="sec research" id="research">
+    <div class="wrap">
+      <div class="head-row">
+        <div class="reveal"><div class="num">02</div><h2 data-i18n-html="resTitle">Research <em>focus</em></h2></div>
+        <p class="reveal" data-i18n="resIntro">How T cells remember, where they live, how they protect us, and how age changes the response.</p>
+      </div>
+      <div class="bento">
+        <article class="tile t-big reveal">
+          <svg class="art" viewBox="0 0 240 220" aria-hidden="true" fill="none" stroke="#F6F1E7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M120 20v70M120 90l-22 22M120 90l22 22"/>
+            <path d="M96 60C60 50 24 100 22 150c-2 40 20 58 50 52 26-5 32-30 32-60V90"/>
+            <path d="M144 60c36-10 72 40 74 90 2 40-20 58-50 52-26-5-32-30-32-60V90"/>
+            <circle cx="62" cy="140" r="9" fill="#F3C94B" stroke="none"/>
+            <circle cx="86" cy="168" r="6" fill="#F4C7BE" stroke="none"/>
+            <circle cx="176" cy="134" r="7" fill="#F4C7BE" stroke="none"/>
+            <circle cx="160" cy="170" r="10" fill="#F3C94B" stroke="none"/>
+            <circle cx="188" cy="168" r="4" fill="#F6F1E7" stroke="none"/>
+          </svg>
+          <span class="tag">01</span>
+          <h3 data-i18n="r1t">Tissue-resident memory in the lung</h3>
+          <p data-i18n="r1d">How CD4 T effector cells become tissue-resident memory (TRM) cells, how they are maintained in the lung after infection and how they contribute to protective immunity.</p>
+        </article>
+        <article class="tile t-butter reveal">
+          <span class="tag">02</span>
+          <h3 data-i18n="r2t">Cytotoxic CD4 T cells</h3>
+          <p data-i18n="r2d">The biology of ThCTL cells and their role against respiratory viruses.</p>
+        </article>
+        <article class="tile t-blush reveal">
+          <span class="tag">03</span>
+          <h3 data-i18n="r3t">Influenza &amp; vaccines</h3>
+          <p data-i18n="r3d">Infection models to inform vaccine design and immunotherapy.</p>
+        </article>
+        <article class="tile t-mist reveal">
+          <span class="tag">04</span>
+          <h3 data-i18n="r4t">Aging &amp; inflammation</h3>
+          <p data-i18n="r4d">Aging-associated inflammation and its impact on T cell responses, the focus of my doctoral research in aged murine models.</p>
+        </article>
+        <article class="tile t-ink reveal">
+          <span class="tag">05</span>
+          <h3 data-i18n="r5t">Immune profiling in tissues</h3>
+          <p data-i18n="r5d">Multicolor flow cytometry, cell sorting and phenotyping with transgenic mouse systems.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section class="sec" id="career">
+    <div class="wrap">
+      <div class="head-row">
+        <div class="reveal"><div class="num">03</div><h2 data-i18n-html="careerTitle">Career <em>path</em></h2></div>
+        <p class="reveal" data-i18n="careerIntro">From inflammation models in Veracruz, Mexico, to respiratory immunity in New York.</p>
+      </div>
+      <div class="tl">
+        <div class="step reveal" style="--dot: var(--butter)">
+          <div class="when">2024 — <span data-i18n="present">today</span><small>Stony Brook, New York</small><span class="chip-now" data-i18n="now">Current</span></div>
+          <div class="what">
+            <h3 data-i18n="j1t">Postdoctoral Research Associate in Immunology</h3>
+            <div class="org">Stony Brook University</div>
+            <p data-i18n="j1d">Investigating the mechanisms that drive CD4 T effector cells towards tissue-resident memory, and protective immunity during respiratory viral infections.</p>
+            <ul>
+              <li data-i18n="j1a">Design and lead research projects using murine models, multicolor flow cytometry, cell sorting and immune profiling.</li>
+              <li data-i18n="j1b">Experimental design, data interpretation, scientific communication and cross-disciplinary collaborations.</li>
+              <li data-i18n="j1c">Mentoring trainees and presenting findings in academic and scientific forums.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step reveal" style="--dot: var(--teal)">
+          <div class="when">2020 — 2024<small>Universidad Veracruzana, México</small></div>
+          <div class="what">
+            <h3 data-i18n="e1t">PhD in Health Sciences, Biomedicine &amp; Immunology</h3>
+            <div class="org">Universidad Veracruzana</div>
+            <p data-i18n="e1d">Doctoral research on aging-associated inflammation and its impact on T cell responses, using aged murine models with acute inflammation.</p>
+            <ul>
+              <li data-i18n="e1a">Experimental immunology, scientific writing and data interpretation.</li>
+              <li data-i18n="e1b">Presentations at national and international forums, international specialized courses and science dissemination.</li>
+              <li data-i18n="e1c">Grant writing workshop, Immuno-Mexico 2024.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step reveal" style="--dot: var(--blush)">
+          <div class="when">2018 — 2020<small>Universidad Veracruzana, México</small></div>
+          <div class="what">
+            <h3 data-i18n="e2t">MSc in Health Sciences, Biomedicine</h3>
+            <div class="org">Universidad Veracruzana</div>
+            <p data-i18n="e2d">A strong foundation in biomedical research: chronic inflammation murine models, in vitro cell culture and flow cytometry.</p>
+            <ul>
+              <li data-i18n="e2a">Literature analysis, database research, data interpretation and statistical software.</li>
+              <li data-i18n="e2b">Oral presentation at the 17th International Congress of Immunology.</li>
+              <li data-i18n="e2c">Collaborative review writing, seminars and laboratory animal care.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLBOX -->
+  <section class="sec toolbox" id="toolbox">
+    <div class="wrap">
+      <div class="head-row">
+        <div class="reveal"><div class="num">04</div><h2 data-i18n-html="toolTitle">Lab <em>toolbox</em></h2></div>
+        <p class="reveal" data-i18n="toolIntro">Techniques and skills built over eight years of research, at the bench and beyond.</p>
+      </div>
+      <div class="groups">
+        <div class="group reveal">
+          <h3><i style="background:var(--teal)"></i><span data-i18n="g1">In vivo models</span></h3>
+          <div class="chips"><span data-i18n="g1a">Murine infection models</span><span data-i18n="g1b">Influenza</span><span data-i18n="g1c">Transgenic mice</span><span data-i18n="g1d">Aged mice</span><span data-i18n="g1e">Inflammation models</span><span data-i18n="g1f">Animal care</span></div>
+        </div>
+        <div class="group reveal">
+          <h3><i style="background:var(--tomato)"></i><span data-i18n="g2">Immune profiling</span></h3>
+          <div class="chips"><span data-i18n="g2a">Multicolor flow cytometry</span><span data-i18n="g2b">Cell sorting</span><span data-i18n="g2c">Immunophenotyping</span><span data-i18n="g2d">Immunological assays</span><span data-i18n="g2e">Cell culture</span><span data-i18n="g2f">Molecular biology</span></div>
+        </div>
+        <div class="group reveal">
+          <h3><i style="background:var(--butter)"></i><span data-i18n="g3">Beyond the bench</span></h3>
+          <div class="chips"><span data-i18n="g3a">Experimental design</span><span data-i18n="g3b">Data analysis &amp; statistics</span><span data-i18n="g3c">Scientific writing</span><span data-i18n="g3d">Grant writing</span><span data-i18n="g3e">Mentoring</span><span data-i18n="g3f">Teaching</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTREACH -->
+  <section class="sec outreach" id="outreach">
+    <div class="wrap">
+      <div class="head-row">
+        <div class="reveal"><div class="num">05</div><h2 data-i18n-html="scTitle">Science, <em>shared</em></h2></div>
+        <p class="reveal" data-i18n="scIntro">Translating complex ideas for diverse audiences is part of how I do science.</p>
+      </div>
+      <div class="o-grid">
+        <div class="o-item reveal">
+          <div class="o-ico" style="background:var(--butter)"><svg viewBox="0 0 28 28" fill="none" stroke="#1C1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h20v12H12l-6 5v-5H4z"/><path d="M9 11h10M9 14h6"/></svg></div>
+          <h3 data-i18n="sc1t">Scientific &amp; clinical communication</h3>
+          <p data-i18n="sc1d">Talks at institutional, national and international meetings, and clear writing for specialist and general audiences.</p>
+        </div>
+        <div class="o-item reveal">
+          <div class="o-ico" style="background:var(--blush)"><svg viewBox="0 0 28 28" fill="none" stroke="#1C1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10l12-5 12 5-12 5z"/><path d="M7 12v6c0 2 3 4 7 4s7-2 7-4v-6M26 10v7"/></svg></div>
+          <h3 data-i18n="sc2t">Immunology &amp; biology education</h3>
+          <p data-i18n="sc2d">A science educator at heart: explaining how the immune system works to students and non-specialists.</p>
+        </div>
+        <div class="o-item reveal">
+          <div class="o-ico" style="background:var(--mist)"><svg viewBox="0 0 28 28" fill="none" stroke="#1C1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="9" r="4"/><circle cx="20" cy="11" r="3"/><path d="M3 23c0-4 3-7 7-7s7 3 7 7M17 18c1-1 2-2 4-2 3 0 5 2 5 5"/></svg></div>
+          <h3 data-i18n="sc3t">Mentoring</h3>
+          <p data-i18n="sc3d">Supporting trainees in the lab, from experimental design to presenting their own results.</p>
+        </div>
+      </div>
+      <div class="hl">
+        <div class="hl-card reveal"><span class="yr">17th</span><div><small data-i18n="hl1k">Oral presentation</small><b data-i18n="hl1v">International Congress of Immunology</b></div></div>
+        <div class="hl-card reveal"><span class="yr">2024</span><div><small data-i18n="hl2k">Grant writing workshop</small><b>Immuno-Mexico 2024</b></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="num">06</div>
+          <h2 data-i18n-html="ctTitle">Let's talk about <em>immune memory</em>.</h2>
+          <p data-i18n="ctText">Open to collaborations, conferences, teaching and science communication projects on inflammation, infection and immunity.</p>
+        </div>
+        <div class="btns reveal">
+          <a class="btn btn-ink" href="https://www.linkedin.com/search/results/people/?keywords=Wendolaine%20Santiago%20Cruz" target="_blank" rel="noopener"><span>LinkedIn</span><span class="ar">↗</span></a>
+        </div>
+      </div>
+      <div class="big-name" aria-hidden="true">Wendolaine</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Wendolaine Santiago Cruz</span>
+    <span data-i18n="footer">Immunology · Stony Brook University</span>
+  </div>
+</footer>
+
+<script>
+  var I18N = {
+    en: {
+      title: "Wendolaine Santiago Cruz · Immunology",
+      brandSub: "PhD · Immunology",
+      navAbout: "About", navResearch: "Research", navCareer: "Career", navOutreach: "Outreach", navContact: "Contact",
+      badge: "Postdoctoral researcher · Stony Brook University",
+      heroSub: "Immunologist studying how memory T cells <em>protect the lung</em> after viral infection.",
+      ctaResearch: "See my research", ctaContact: "Contact",
+      ring: "Immunology ✳ Research ✳ Science communication ✳ Immune memory ✳",
+      f1k: "Now", f1v: "Postdoc, Stony Brook University",
+      f2k: "Focus", f2v: "CD4⁺ T cell memory in the lung",
+      f3k: "Training", f3v: "PhD & MSc, Universidad Veracruzana",
+      f4k: "Also", f4v: "Science communication & teaching",
+      ticker: ["Adaptive immunity", "Immunological memory", "Tissue-resident T cells", "Respiratory infections", "Aging", "Inflammation", "Vaccine responses", "Translational immunology"],
+      aboutTitle: "About",
+      aboutBig: "I'm a postdoctoral research fellow with a strong interest in <em>adaptive immunity</em>, particularly the biology of memory CD4⁺ T cells during viral infections.",
+      about1: "My research focuses on understanding how tissue-resident memory T cells are generated and maintained in the lung, and how they contribute to long-term protection.",
+      about2: "I hold a PhD in Biomedical Sciences and have experience with mouse models, flow cytometry, immunological assays and molecular biology techniques. I value interdisciplinary collaboration, scientific rigor and mentorship.",
+      pull: "“I'm passionate about dissecting immune mechanisms and translating findings into meaningful insights for vaccine design and immunotherapy.”",
+      resTitle: "Research <em>focus</em>",
+      resIntro: "How T cells remember, where they live, how they protect us, and how age changes the response.",
+      r1t: "Tissue-resident memory in the lung", r1d: "How CD4 T effector cells become tissue-resident memory (TRM) cells, how they are maintained in the lung after infection and how they contribute to protective immunity.",
+      r2t: "Cytotoxic CD4 T cells", r2d: "The biology of ThCTL cells and their role against respiratory viruses.",
+      r3t: "Influenza & vaccines", r3d: "Infection models to inform vaccine design and immunotherapy.",
+      r4t: "Aging & inflammation", r4d: "Aging-associated inflammation and its impact on T cell responses, the focus of my doctoral research in aged murine models.",
+      r5t: "Immune profiling in tissues", r5d: "Multicolor flow cytometry, cell sorting and phenotyping with transgenic mouse systems.",
+      careerTitle: "Career <em>path</em>", careerIntro: "From inflammation models in Veracruz, Mexico, to respiratory immunity in New York.",
+      present: "today", now: "Current",
+      j1t: "Postdoctoral Research Associate in Immunology",
+      j1d: "Investigating the mechanisms that drive CD4 T effector cells towards tissue-resident memory, and protective immunity during respiratory viral infections.",
+      j1a: "Design and lead research projects using murine models, multicolor flow cytometry, cell sorting and immune profiling.",
+      j1b: "Experimental design, data interpretation, scientific communication and cross-disciplinary collaborations.",
+      j1c: "Mentoring trainees and presenting findings in academic and scientific forums.",
+      e1t: "PhD in Health Sciences, Biomedicine & Immunology",
+      e1d: "Doctoral research on aging-associated inflammation and its impact on T cell responses, using aged murine models with acute inflammation.",
+      e1a: "Experimental immunology, scientific writing and data interpretation.",
+      e1b: "Presentations at national and international forums, international specialized courses and science dissemination.",
+      e1c: "Grant writing workshop, Immuno-Mexico 2024.",
+      e2t: "MSc in Health Sciences, Biomedicine",
+      e2d: "A strong foundation in biomedical research: chronic inflammation murine models, in vitro cell culture and flow cytometry.",
+      e2a: "Literature analysis, database research, data interpretation and statistical software.",
+      e2b: "Oral presentation at the 17th International Congress of Immunology.",
+      e2c: "Collaborative review writing, seminars and laboratory animal care.",
+      toolTitle: "Lab <em>toolbox</em>", toolIntro: "Techniques and skills built over eight years of research, at the bench and beyond.",
+      g1: "In vivo models", g1a: "Murine infection models", g1b: "Influenza", g1c: "Transgenic mice", g1d: "Aged mice", g1e: "Inflammation models", g1f: "Animal care",
+      g2: "Immune profiling", g2a: "Multicolor flow cytometry", g2b: "Cell sorting", g2c: "Immunophenotyping", g2d: "Immunological assays", g2e: "Cell culture", g2f: "Molecular biology",
+      g3: "Beyond the bench", g3a: "Experimental design", g3b: "Data analysis & statistics", g3c: "Scientific writing", g3d: "Grant writing", g3e: "Mentoring", g3f: "Teaching",
+      scTitle: "Science, <em>shared</em>", scIntro: "Translating complex ideas for diverse audiences is part of how I do science.",
+      sc1t: "Scientific & clinical communication", sc1d: "Talks at institutional, national and international meetings, and clear writing for specialist and general audiences.",
+      sc2t: "Immunology & biology education", sc2d: "A science educator at heart: explaining how the immune system works to students and non-specialists.",
+      sc3t: "Mentoring", sc3d: "Supporting trainees in the lab, from experimental design to presenting their own results.",
+      hl1k: "Oral presentation", hl1v: "International Congress of Immunology", hl2k: "Grant writing workshop",
+      ctTitle: "Let's talk about <em>immune memory</em>.",
+      ctText: "Open to collaborations, conferences, teaching and science communication projects on inflammation, infection and immunity.",
+      footer: "Immunology · Stony Brook University"
+    },
+    es: {
+      title: "Wendolaine Santiago Cruz · Inmunología",
+      brandSub: "PhD · Inmunología",
+      navAbout: "Sobre mí", navResearch: "Investigación", navCareer: "Trayectoria", navOutreach: "Divulgación", navContact: "Contacto",
+      badge: "Investigadora posdoctoral · Stony Brook University",
+      heroSub: "Inmunóloga. Estudio cómo los linfocitos T de memoria <em>protegen el pulmón</em> tras una infección vírica.",
+      ctaResearch: "Ver mi investigación", ctaContact: "Contacto",
+      ring: "Inmunología ✳ Investigación ✳ Comunicación científica ✳ Memoria inmune ✳",
+      f1k: "Ahora", f1v: "Posdoc, Stony Brook University",
+      f2k: "Enfoque", f2v: "Memoria de linfocitos T CD4⁺ en el pulmón",
+      f3k: "Formación", f3v: "Doctorado y máster, Universidad Veracruzana",
+      f4k: "Además", f4v: "Divulgación científica y docencia",
+      ticker: ["Inmunidad adaptativa", "Memoria inmunológica", "Linfocitos T residentes", "Infecciones respiratorias", "Envejecimiento", "Inflamación", "Respuesta a vacunas", "Inmunología traslacional"],
+      aboutTitle: "Sobre mí",
+      aboutBig: "Soy investigadora posdoctoral, con un gran interés en la <em>inmunidad adaptativa</em> y, en particular, en la biología de los linfocitos T CD4⁺ de memoria durante las infecciones víricas.",
+      about1: "Mi investigación busca entender cómo se generan y se mantienen en el pulmón los linfocitos T de memoria residentes en tejido, y cómo contribuyen a la protección a largo plazo.",
+      about2: "Soy doctora en Ciencias Biomédicas y tengo experiencia con modelos murinos, citometría de flujo, ensayos inmunológicos y técnicas de biología molecular. Valoro la colaboración interdisciplinar, el rigor científico y la mentoría.",
+      pull: "«Me apasiona desentrañar los mecanismos inmunes y convertir los resultados en conocimiento útil para el diseño de vacunas y la inmunoterapia.»",
+      resTitle: "Líneas de <em>investigación</em>",
+      resIntro: "Cómo recuerdan los linfocitos T, dónde viven, cómo nos protegen y cómo cambia la respuesta con la edad.",
+      r1t: "Memoria residente en el pulmón", r1d: "Cómo los linfocitos T CD4 efectores se convierten en células de memoria residentes en tejido (TRM), cómo se mantienen en el pulmón tras la infección y cómo contribuyen a la inmunidad protectora.",
+      r2t: "Linfocitos T CD4 citotóxicos", r2d: "La biología de las células ThCTL y su papel frente a los virus respiratorios.",
+      r3t: "Gripe y vacunas", r3d: "Modelos de infección para orientar el diseño de vacunas y la inmunoterapia.",
+      r4t: "Envejecimiento e inflamación", r4d: "La inflamación asociada al envejecimiento y su impacto en la respuesta de los linfocitos T, eje de mi tesis doctoral en modelos murinos envejecidos.",
+      r5t: "Perfilado inmune en tejidos", r5d: "Citometría de flujo multicolor, separación celular y fenotipado con ratones transgénicos.",
+      careerTitle: "Mi <em>trayectoria</em>", careerIntro: "De los modelos de inflamación en Veracruz (México) a la inmunidad respiratoria en Nueva York.",
+      present: "hoy", now: "Actual",
+      j1t: "Investigadora posdoctoral en Inmunología",
+      j1d: "Investigo los mecanismos que llevan a los linfocitos T CD4 efectores hacia la memoria residente en tejido, y la inmunidad protectora en infecciones víricas respiratorias.",
+      j1a: "Diseño y dirijo proyectos con modelos murinos, citometría de flujo multicolor, separación celular y perfilado inmunológico.",
+      j1b: "Diseño experimental, interpretación de datos, comunicación científica y colaboraciones interdisciplinares.",
+      j1c: "Mentoría de estudiantes y presentación de resultados en foros académicos y científicos.",
+      e1t: "Doctorado en Ciencias de la Salud, Biomedicina e Inmunología",
+      e1d: "Tesis sobre la inflamación asociada al envejecimiento y su impacto en la respuesta de los linfocitos T, con modelos murinos envejecidos con inflamación aguda.",
+      e1a: "Inmunología experimental, redacción científica e interpretación de datos.",
+      e1b: "Ponencias en foros nacionales e internacionales, cursos internacionales especializados y actividades de divulgación.",
+      e1c: "Taller de redacción de proyectos (grant writing), Immuno-Mexico 2024.",
+      e2t: "Máster en Ciencias de la Salud, Biomedicina",
+      e2d: "Una base sólida en investigación biomédica: modelos murinos de inflamación crónica, cultivo celular in vitro y citometría de flujo.",
+      e2a: "Análisis de literatura, búsqueda en bases de datos, interpretación de datos y software estadístico.",
+      e2b: "Comunicación oral en el 17.º Congreso Internacional de Inmunología.",
+      e2c: "Redacción colaborativa de revisiones, seminarios y cuidado de animales de laboratorio.",
+      toolTitle: "Caja de <em>herramientas</em>", toolIntro: "Técnicas y habilidades adquiridas en ocho años de investigación, dentro y fuera del laboratorio.",
+      g1: "Modelos in vivo", g1a: "Modelos murinos de infección", g1b: "Gripe", g1c: "Ratones transgénicos", g1d: "Ratones envejecidos", g1e: "Modelos de inflamación", g1f: "Cuidado animal",
+      g2: "Perfilado inmune", g2a: "Citometría de flujo multicolor", g2b: "Separación celular", g2c: "Inmunofenotipado", g2d: "Ensayos inmunológicos", g2e: "Cultivo celular", g2f: "Biología molecular",
+      g3: "Más allá del laboratorio", g3a: "Diseño experimental", g3b: "Análisis de datos y estadística", g3c: "Redacción científica", g3d: "Redacción de proyectos", g3e: "Mentoría", g3f: "Docencia",
+      scTitle: "Ciencia <em>compartida</em>", scIntro: "Traducir ideas complejas para públicos diversos forma parte de mi manera de hacer ciencia.",
+      sc1t: "Comunicación científica y clínica", sc1d: "Ponencias en reuniones institucionales, nacionales e internacionales, y textos claros para públicos especializados y generales.",
+      sc2t: "Enseñanza de inmunología y biología", sc2d: "Educadora científica de vocación: explicar cómo funciona el sistema inmune a estudiantes y a público no especializado.",
+      sc3t: "Mentoría", sc3d: "Acompaño a estudiantes en el laboratorio, del diseño experimental a la presentación de sus propios resultados.",
+      hl1k: "Comunicación oral", hl1v: "Congreso Internacional de Inmunología", hl2k: "Taller de redacción de proyectos",
+      ctTitle: "Hablemos de <em>memoria inmune</em>.",
+      ctText: "Abierta a colaboraciones, congresos, docencia y proyectos de divulgación sobre inflamación, infección e inmunidad.",
+      footer: "Inmunología · Stony Brook University"
+    },
+    ca: {
+      title: "Wendolaine Santiago Cruz · Immunologia",
+      brandSub: "PhD · Immunologia",
+      navAbout: "Sobre mi", navResearch: "Recerca", navCareer: "Trajectòria", navOutreach: "Divulgació", navContact: "Contacte",
+      badge: "Investigadora postdoctoral · Stony Brook University",
+      heroSub: "Immunòloga. Estudio com els limfòcits T de memòria <em>protegeixen el pulmó</em> després d'una infecció vírica.",
+      ctaResearch: "Veure la meva recerca", ctaContact: "Contacte",
+      ring: "Immunologia ✳ Recerca ✳ Comunicació científica ✳ Memòria immunitària ✳",
+      f1k: "Ara", f1v: "Postdoc, Stony Brook University",
+      f2k: "Enfocament", f2v: "Memòria dels limfòcits T CD4⁺ al pulmó",
+      f3k: "Formació", f3v: "Doctorat i màster, Universidad Veracruzana",
+      f4k: "També", f4v: "Divulgació científica i docència",
+      ticker: ["Immunitat adaptativa", "Memòria immunològica", "Limfòcits T residents", "Infeccions respiratòries", "Envelliment", "Inflamació", "Resposta a vacunes", "Immunologia translacional"],
+      aboutTitle: "Sobre mi",
+      aboutBig: "Soc investigadora postdoctoral, amb un gran interès en la <em>immunitat adaptativa</em> i, en particular, en la biologia dels limfòcits T CD4⁺ de memòria durant les infeccions víriques.",
+      about1: "La meva recerca vol entendre com es generen i es mantenen al pulmó els limfòcits T de memòria residents en teixit, i com contribueixen a la protecció a llarg termini.",
+      about2: "Soc doctora en Ciències Biomèdiques i tinc experiència amb models murins, citometria de flux, assajos immunològics i tècniques de biologia molecular. Valoro la col·laboració interdisciplinària, el rigor científic i la mentoria.",
+      pull: "«M'apassiona desxifrar els mecanismes immunitaris i convertir els resultats en coneixement útil per al disseny de vacunes i la immunoteràpia.»",
+      resTitle: "Línies de <em>recerca</em>",
+      resIntro: "Com recorden els limfòcits T, on viuen, com ens protegeixen i com canvia la resposta amb l'edat.",
+      r1t: "Memòria resident al pulmó", r1d: "Com els limfòcits T CD4 efectors esdevenen cèl·lules de memòria residents en teixit (TRM), com es mantenen al pulmó després de la infecció i com contribueixen a la immunitat protectora.",
+      r2t: "Limfòcits T CD4 citotòxics", r2d: "La biologia de les cèl·lules ThCTL i el seu paper davant dels virus respiratoris.",
+      r3t: "Grip i vacunes", r3d: "Models d'infecció per orientar el disseny de vacunes i la immunoteràpia.",
+      r4t: "Envelliment i inflamació", r4d: "La inflamació associada a l'envelliment i el seu impacte en la resposta dels limfòcits T, eix de la meva tesi doctoral en models murins envellits.",
+      r5t: "Perfilat immunitari en teixits", r5d: "Citometria de flux multicolor, separació cel·lular i fenotipatge amb ratolins transgènics.",
+      careerTitle: "La meva <em>trajectòria</em>", careerIntro: "Dels models d'inflamació a Veracruz (Mèxic) a la immunitat respiratòria a Nova York.",
+      present: "avui", now: "Actual",
+      j1t: "Investigadora postdoctoral en Immunologia",
+      j1d: "Investigo els mecanismes que porten els limfòcits T CD4 efectors cap a la memòria resident en teixit, i la immunitat protectora en les infeccions víriques respiratòries.",
+      j1a: "Dissenyo i dirigeixo projectes amb models murins, citometria de flux multicolor, separació cel·lular i perfilat immunològic.",
+      j1b: "Disseny experimental, interpretació de dades, comunicació científica i col·laboracions interdisciplinàries.",
+      j1c: "Mentoria d'estudiants i presentació de resultats en fòrums acadèmics i científics.",
+      e1t: "Doctorat en Ciències de la Salut, Biomedicina i Immunologia",
+      e1d: "Tesi sobre la inflamació associada a l'envelliment i el seu impacte en la resposta dels limfòcits T, amb models murins envellits amb inflamació aguda.",
+      e1a: "Immunologia experimental, redacció científica i interpretació de dades.",
+      e1b: "Ponències en fòrums nacionals i internacionals, cursos internacionals especialitzats i activitats de divulgació.",
+      e1c: "Taller de redacció de projectes (grant writing), Immuno-Mexico 2024.",
+      e2t: "Màster en Ciències de la Salut, Biomedicina",
+      e2d: "Una base sòlida en recerca biomèdica: models murins d'inflamació crònica, cultiu cel·lular in vitro i citometria de flux.",
+      e2a: "Anàlisi de literatura, cerca en bases de dades, interpretació de dades i programari estadístic.",
+      e2b: "Comunicació oral al 17è Congrés Internacional d'Immunologia.",
+      e2c: "Redacció col·laborativa de revisions, seminaris i cura d'animals de laboratori.",
+      toolTitle: "Caixa d'<em>eines</em>", toolIntro: "Tècniques i habilitats adquirides en vuit anys de recerca, dins i fora del laboratori.",
+      g1: "Models in vivo", g1a: "Models murins d'infecció", g1b: "Grip", g1c: "Ratolins transgènics", g1d: "Ratolins envellits", g1e: "Models d'inflamació", g1f: "Cura animal",
+      g2: "Perfilat immunitari", g2a: "Citometria de flux multicolor", g2b: "Separació cel·lular", g2c: "Immunofenotipatge", g2d: "Assajos immunològics", g2e: "Cultiu cel·lular", g2f: "Biologia molecular",
+      g3: "Més enllà del laboratori", g3a: "Disseny experimental", g3b: "Anàlisi de dades i estadística", g3c: "Redacció científica", g3d: "Redacció de projectes", g3e: "Mentoria", g3f: "Docència",
+      scTitle: "Ciència <em>compartida</em>", scIntro: "Traduir idees complexes per a públics diversos forma part de la meva manera de fer ciència.",
+      sc1t: "Comunicació científica i clínica", sc1d: "Ponències en reunions institucionals, nacionals i internacionals, i textos clars per a públics especialitzats i generals.",
+      sc2t: "Ensenyament d'immunologia i biologia", sc2d: "Educadora científica de vocació: explicar com funciona el sistema immunitari a estudiants i a públic no especialitzat.",
+      sc3t: "Mentoria", sc3d: "Acompanyo estudiants al laboratori, des del disseny experimental fins a la presentació dels seus propis resultats.",
+      hl1k: "Comunicació oral", hl1v: "Congrés Internacional d'Immunologia", hl2k: "Taller de redacció de projectes",
+      ctTitle: "Parlem de <em>memòria immunitària</em>.",
+      ctText: "Oberta a col·laboracions, congressos, docència i projectes de divulgació sobre inflamació, infecció i immunitat.",
+      footer: "Immunologia · Stony Brook University"
+    }
+  };
+
+  function setLang(lang) {
+    if (!I18N[lang]) lang = "en";
+    var t = I18N[lang];
+    document.documentElement.lang = lang;
+    document.title = t.title;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var v = t[el.getAttribute("data-i18n")]; if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+      var v = t[el.getAttribute("data-i18n-html")]; if (v != null) el.innerHTML = v;
+    });
+    document.querySelectorAll("[data-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
+    });
+    var items = t.ticker.concat(t.ticker);
+    document.getElementById("ticker").innerHTML = items.map(function (s) { return "<span>" + s + "</span>"; }).join("");
+    try { localStorage.setItem("wsc-lang", lang); } catch (e) {}
+  }
+
+  function initialLang() {
+    var q = new URLSearchParams(location.search).get("lang");
+    if (q && I18N[q]) return q;
+    try { var s = localStorage.getItem("wsc-lang"); if (s && I18N[s]) return s; } catch (e) {}
+    var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+    return I18N[nav] ? nav : "en";
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+  });
+  setLang(initialLang());
+
+  var menu = document.getElementById("menu");
+  menu.addEventListener("click", function () {
+    var open = document.body.classList.toggle("open");
+    menu.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.querySelectorAll("#links a").forEach(function (a) {
+    a.addEventListener("click", function () { document.body.classList.remove("open"); menu.setAttribute("aria-expanded", "false"); });
+  });
+
+  var header = document.getElementById("top");
+  window.addEventListener("scroll", function () { header.classList.toggle("scrolled", window.scrollY > 8); }, { passive: true });
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: .1, rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+  }
+</script>
+</body>
+</html>
