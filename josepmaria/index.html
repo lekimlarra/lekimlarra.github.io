@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Feliz cumpleaños, Josep Maria!</title>
+  <meta name="description" content="Una web de cumpleaños para Josep Maria Solias Aris: excavaciones, políticos, furgoneta, dieta y una nieta en camino.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏺</text></svg>">
+  <style>
+    :root {
+      --bg: #f6eddb;
+      --paper: #fffaf0;
+      --ink: #2b2018;
+      --muted: #6f6254;
+      --terra: #c1553b;
+      --terra-dark: #98402b;
+      --ochre: #d9a441;
+      --olive: #66763a;
+      --roman: #8e2b2b;
+      --stone: #8a8274;
+      --sea: #2f6f73;
+      --line: #e6d6b6;
+      --meander: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'%3E%3Cpath d='M0 14H24M18 14V3H5V9H11' fill='none' stroke='%23c1553b' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E");
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Lora", Georgia, serif; background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "Cinzel", Georgia, serif; line-height: 1.1; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+    .hand { font-family: "Caveat", cursive; }
+    .meander { height: 16px; background: var(--meander) repeat-x center; opacity: .85; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font: 700 1.02rem "Lora", serif; text-decoration: none;
+      background: var(--terra); color: #fff; border: 0; cursor: pointer;
+      padding: 14px 26px; border-radius: 12px;
+      box-shadow: 0 5px 0 var(--terra-dark); transition: transform .12s, box-shadow .12s, opacity .2s;
+      user-select: none; -webkit-user-select: none; touch-action: manipulation;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--terra-dark); }
+    .btn:active, .btn.held { transform: translateY(4px); box-shadow: 0 1px 0 var(--terra-dark); }
+    .btn.sea { background: var(--sea); box-shadow: 0 5px 0 #1e4d50; }
+    .btn.sea:hover { box-shadow: 0 7px 0 #1e4d50; }
+    .btn.sea:active, .btn.sea.held { box-shadow: 0 1px 0 #1e4d50; }
+    .btn.olive { background: var(--olive); box-shadow: 0 5px 0 #46521f; }
+    .btn.olive:hover { box-shadow: 0 7px 0 #46521f; }
+    .btn.olive:active, .btn.olive.held { box-shadow: 0 1px 0 #46521f; }
+    .btn.stone { background: #6c655a; box-shadow: 0 5px 0 #484339; }
+    .btn.stone:hover { box-shadow: 0 7px 0 #484339; }
+    .btn.stone:active, .btn.stone.held { box-shadow: 0 1px 0 #484339; }
+    .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    section { padding: 90px 0; position: relative; }
+    section.alt { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .section-title { text-align: center; margin-bottom: 36px; }
+    .section-title .num {
+      display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 50%;
+      background: var(--roman); color: #f8e7bd; font: 700 1.3rem "Cinzel", serif; margin-bottom: 10px;
+      box-shadow: 0 0 0 4px var(--paper), 0 0 0 6px var(--roman);
+    }
+    .section-title h2 { font-size: clamp(1.9rem, 5vw, 3rem); letter-spacing: .01em; }
+    .section-title p { color: var(--muted); max-width: 660px; margin: 12px auto 0; font-size: 1.05rem; }
+
+    /* ---------- Portada ---------- */
+    .hero {
+      min-height: 100vh; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 60px 20px 50px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(217,164,65,.30), transparent 42%),
+        radial-gradient(circle at 90% 85%, rgba(193,85,59,.20), transparent 45%),
+        radial-gradient(circle at 88% 12%, rgba(47,111,115,.14), transparent 36%);
+    }
+    .polaroid {
+      position: relative; display: inline-block; background: #fff; padding: 12px 12px 6px; margin-bottom: 30px;
+      box-shadow: 0 20px 36px -18px rgba(43,32,24,.55); transform: rotate(-2deg); transition: transform .4s;
+    }
+    .polaroid:hover { transform: rotate(0) scale(1.03); }
+    .polaroid img { display: block; width: clamp(230px, 34vw, 330px); height: auto; }
+    .polaroid figcaption { font-family: "Caveat", cursive; font-size: 1.6rem; padding-top: 4px; }
+    .polaroid::before {
+      content: ""; position: absolute; top: -12px; left: 50%; width: 100px; height: 26px;
+      transform: translateX(-50%) rotate(-3deg); background: rgba(217,164,65,.55);
+    }
+    .polaroid .ph { display: none; width: clamp(230px, 34vw, 330px); aspect-ratio: 4 / 5; place-items: center; background: #efe2c4; font-size: 5rem; }
+    .polaroid.nophoto img { display: none; }
+    .polaroid.nophoto .ph { display: grid; }
+    .hero .latin { font-family: "Cinzel", serif; letter-spacing: .28em; font-size: .85rem; color: var(--terra-dark); font-weight: 700; }
+    .hero h1 { font-size: clamp(2.3rem, 7vw, 4.8rem); margin: 10px 0 6px; }
+    .hero h1 span { color: var(--terra); display: block; }
+    .hero .kicker { font-size: 1.7rem; color: var(--sea); }
+    .hero p.lead { font-size: clamp(1.02rem, 2.2vw, 1.2rem); color: var(--muted); max-width: 640px; margin: 14px auto 24px; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 26px; max-width: 640px; }
+    .chip { background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: 600; font-size: .9rem; }
+    .hero .meander { width: min(420px, 80%); margin: 0 auto 22px; }
+
+    /* ---------- Ficha ---------- */
+    .ficha-sec { padding: 70px 0; }
+    .ficha-card {
+      max-width: 700px; margin: 0 auto; background: #fffdf6; border: 2px solid var(--terra); border-radius: 6px;
+      padding: 26px 28px 22px; position: relative; box-shadow: 8px 8px 0 rgba(193,85,59,.18);
+    }
+    .ficha-card::before { content: "FICHA DE CATALOGACIÓN · Nº 1"; position: absolute; top: -14px; left: 22px; background: var(--terra); color: #fff; font: 700 .75rem "Cinzel", serif; letter-spacing: .12em; padding: 4px 12px; }
+    .ficha-card h3 { font-size: 1.5rem; margin-bottom: 2px; }
+    .ficha-card h3 i { font-family: "Lora", serif; font-weight: 500; color: var(--muted); font-size: 1.05rem; }
+    .ficha-card dl { display: grid; grid-template-columns: 150px 1fr; gap: 8px 16px; margin-top: 14px; }
+    .ficha-card dt { font: 700 .72rem "Cinzel", serif; letter-spacing: .08em; text-transform: uppercase; color: var(--terra-dark); padding-top: 3px; }
+    .ficha-card dd { border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+
+    /* ---------- Excavación ---------- */
+    .dig-wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: 30px; max-width: 1000px; margin: 0 auto; align-items: start; }
+    .dig-board-wrap { display: grid; grid-template-columns: 26px 1fr; gap: 6px; }
+    .strata { display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; }
+    .strata div { display: grid; place-items: center; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 .66rem "Cinzel", serif; letter-spacing: .12em; color: #fff; text-align: center; }
+    .strata .med { flex: 3; background: var(--olive); }
+    .strata .rom { flex: 4; background: var(--roman); }
+    .dig-board {
+      container-type: inline-size; position: relative; aspect-ratio: 8 / 7; display: grid;
+      grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(7, 1fr);
+      border-radius: 10px; overflow: hidden; box-shadow: 0 24px 40px -28px rgba(43,32,24,.7); background: #d8c298; touch-action: manipulation;
+    }
+    .cell {
+      border: 0; padding: 0; position: relative; cursor: pointer; font: inherit; color: inherit;
+      background-color: var(--soil);
+      background-image:
+        radial-gradient(circle at 25% 30%, rgba(0,0,0,.20) 0 2px, transparent 3px),
+        radial-gradient(circle at 72% 66%, rgba(255,255,255,.16) 0 2px, transparent 3px),
+        radial-gradient(circle at 60% 20%, rgba(0,0,0,.12) 0 1.5px, transparent 2.5px);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.14), inset 0 2px 3px rgba(255,255,255,.2);
+      filter: brightness(var(--b, 1)); -webkit-tap-highlight-color: transparent;
+    }
+    .cell.med { --soil: #b38c60; --clean: #e8d6ae; }
+    .cell.rom { --soil: #96623f; --clean: #dfc397; }
+    .cell.row-sep { border-top: 2px dashed rgba(255,255,255,.55); }
+    .cell.aim:not(.dug) { outline: 2px solid #fff; outline-offset: -2px; filter: brightness(1.22); }
+    .cell.dug {
+      background-image: radial-gradient(circle at 40% 55%, rgba(0,0,0,.06) 0 2px, transparent 3px);
+      background-color: var(--clean); filter: none; cursor: default;
+      box-shadow: inset 0 3px 6px rgba(0,0,0,.18); animation: puff .35s ease-out;
+    }
+    @keyframes puff { from { transform: scale(1.18); filter: brightness(1.4); } }
+    .cell.dug.part { display: grid; place-items: center; font-size: 1.1rem; }
+    .cell.dug.part::after { content: "✨"; font-size: calc(100cqw / 8 * .45); animation: glint 1.2s ease-in-out infinite alternate; }
+    @keyframes glint { from { opacity: .35; transform: scale(.8); } to { opacity: 1; transform: scale(1.15); } }
+    .finds-layer { position: absolute; inset: 0; pointer-events: none; }
+    .find {
+      position: absolute; display: grid; place-items: center; line-height: 1; text-align: center;
+      font-size: calc(100cqw / 8 * var(--m, .8)); animation: findIn .6s cubic-bezier(.3,1.6,.5,1) both;
+      filter: drop-shadow(0 4px 3px rgba(0,0,0,.35));
+    }
+    @keyframes findIn { from { transform: scale(.2) rotate(-40deg); opacity: 0; } }
+    .find.mosaic { background: repeating-conic-gradient(#b5472f 0% 25%, #efe0b8 0% 50%) 50% / 25% 25%; border: 3px solid #2f6f73; border-radius: 4px; }
+    .find.mosaic span { background: #f6e9c8; border-radius: 50%; width: 60%; aspect-ratio: 1; display: grid; place-items: center; font-size: .62em; }
+    .find.broken { filter: grayscale(.55) drop-shadow(0 4px 3px rgba(0,0,0,.35)); }
+    .find.broken::after { content: "💥"; position: absolute; right: -4%; top: -8%; font-size: .5em; }
+    .dig-panel { display: flex; flex-direction: column; gap: 14px; }
+    .tools { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tool {
+      font: inherit; text-align: left; cursor: pointer; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px;
+      display: grid; gap: 2px; transition: border-color .15s, transform .15s; color: var(--ink);
+    }
+    .tool .e { font-size: 1.6rem; line-height: 1; }
+    .tool b { font-family: "Cinzel", serif; }
+    .tool small { color: var(--muted); font-size: .76rem; line-height: 1.25; }
+    .tool.active { border-color: var(--terra); background: #fff4ec; box-shadow: 0 5px 0 rgba(193,85,59,.25); transform: translateY(-2px); }
+    .stat-line { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; }
+    .stat-line b { font-family: "Cinzel", serif; font-size: 1.5rem; }
+    .bar { height: 10px; background: #ead9b8; border-radius: 99px; overflow: hidden; margin-top: 4px; }
+    .bar span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--ochre), var(--terra)); transition: width .3s; }
+    .album { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .slot { aspect-ratio: 1; display: grid; place-items: center; background: #efe2c4; border: 2px dashed #cfb98c; border-radius: 10px; font-size: 1.5rem; padding: 0; font-family: inherit; color: var(--stone); }
+    .slot.on { background: #fff; border: 2px solid var(--olive); cursor: pointer; animation: findIn .5s cubic-bezier(.3,1.6,.5,1); }
+    .slot.on.broken { border-color: var(--roman); filter: grayscale(.5); }
+    .ficha-find { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: 108px; font-size: .94rem; }
+    .ficha-find .era { display: inline-block; font: 700 .68rem "Cinzel", serif; letter-spacing: .1em; padding: 2px 9px; border-radius: 99px; color: #fff; background: var(--olive); margin-bottom: 4px; }
+    .ficha-find .era.Romano { background: var(--roman); }
+    .ficha-find .era.Contemporáneo { background: var(--sea); }
+    .ficha-find h4 { font-family: "Cinzel", serif; font-size: 1.05rem; }
+    .ficha-find .warn { color: var(--roman); font-weight: 600; }
+    .dig-msg { text-align: center; font-weight: 600; color: var(--muted); min-height: 3.2em; }
+    .dig-msg.big { color: var(--terra-dark); font-size: 1.1rem; }
+
+    /* ---------- Jubilación ---------- */
+    .retiro { max-width: 820px; margin: 0 auto; }
+    .career { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 14px; margin-bottom: 14px; }
+    .career-track { position: relative; height: 10px; border-radius: 99px; background: #ead9b8; margin: 22px 20px 8px; }
+    .career-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--ochre), var(--terra)); transition: width .6s; }
+    .career-walker { position: absolute; top: -26px; left: 0; font-size: 1.7rem; transform: translateX(-50%); transition: left .6s; }
+    .career-end { position: absolute; right: -22px; top: -26px; font-size: 1.7rem; }
+    .career-labels { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); font-weight: 600; padding: 0 6px; }
+    .rstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px; }
+    .rstat { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; position: relative; }
+    .rstat small { display: block; font: 700 .68rem "Cinzel", serif; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .rstat .v { font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+    .segs { display: flex; gap: 3px; margin-top: 6px; }
+    .segs i { flex: 1; height: 9px; border-radius: 3px; background: #ead9b8; transition: background .3s; }
+    .segs i.on { background: var(--c); }
+    .rstat.low .segs i.on { background: var(--roman); }
+    .rstat .delta { position: absolute; right: 12px; top: 6px; font-weight: 800; opacity: 0; }
+    .rstat.flash .delta { animation: deltaUp 1.1s ease-out; }
+    @keyframes deltaUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-22px); } }
+    .scenario { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 28px 28px 24px; box-shadow: 0 24px 40px -32px rgba(43,32,24,.6); min-height: 340px; }
+    .scenario .who { display: inline-block; font: 700 .72rem "Cinzel", serif; letter-spacing: .1em; background: #f1e4c4; border-radius: 99px; padding: 3px 12px; margin-bottom: 10px; color: var(--terra-dark); }
+    .scenario h3 { font-size: 1.5rem; margin-bottom: 8px; }
+    .scenario > p { color: var(--muted); margin-bottom: 16px; }
+    .choices { display: grid; gap: 10px; }
+    .choice {
+      font: 600 .98rem "Lora", serif; text-align: left; cursor: pointer; background: #fffaf0; color: var(--ink);
+      border: 2px solid var(--line); border-radius: 12px; padding: 12px 16px; transition: transform .12s, border-color .12s, background .12s;
+    }
+    .choice:hover:not(:disabled) { border-color: var(--terra); background: #fff4ec; transform: translateX(4px); }
+    .choice:disabled { cursor: default; opacity: .55; }
+    .choice.picked { opacity: 1; border-color: var(--terra); background: #fff4ec; }
+    .outcome { margin-top: 14px; padding: 12px 16px; background: #f4ecd2; border-left: 4px solid var(--olive); border-radius: 0 10px 10px 0; font-style: italic; }
+    .scenario .actions { margin-top: 16px; text-align: center; }
+    .scenario.center { text-align: center; display: grid; place-content: center; }
+    .scenario.center .big { font-size: 3.2rem; line-height: 1; margin-bottom: 8px; }
+    .scenario.center p { max-width: 520px; margin: 0 auto 16px; }
+
+    /* ---------- Maletero (tetris) ---------- */
+    .van-main { width: 252px; max-width: 100%; }
+    .van-wrap { display: grid; grid-template-columns: auto 230px; gap: 28px; justify-content: center; align-items: start; }
+    .van-screen { position: relative; border-radius: 16px; overflow: hidden; background: #2b2f36; border: 6px solid #5a606b; box-shadow: 0 24px 40px -28px rgba(43,32,24,.8), inset 0 0 0 2px #7b828f; }
+    #vanCanvas { display: block; width: 240px; max-width: 100%; height: auto; touch-action: manipulation; }
+    .overlay { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 16px; background: rgba(30,24,18,.72); color: #fff; transition: opacity .3s; }
+    .overlay.hidden { opacity: 0; pointer-events: none; }
+    .overlay h3 { font-size: 1.3rem; margin-bottom: 6px; }
+    .overlay p { font-size: .9rem; margin-bottom: 14px; }
+    .van-side { display: grid; gap: 12px; }
+    .box { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+    .box small { display: block; font: 700 .68rem "Cinzel", serif; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .box b { font-family: "Cinzel", serif; font-size: 1.35rem; }
+    #nextCanvas { display: block; width: 100px; height: 80px; margin: 4px auto 0; }
+    #nextName { text-align: center; font-size: .85rem; color: var(--muted); font-weight: 600; }
+    .van-progress { position: relative; height: 34px; border-radius: 99px; background: #ead9b8; margin-top: 8px; overflow: hidden; }
+    .van-progress span { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: linear-gradient(90deg, var(--ochre), var(--terra)); transition: width .4s; }
+    .van-progress i { position: absolute; left: 0; top: 2px; font-style: normal; font-size: 1.4rem; transition: left .4s; transform: scaleX(-1); }
+    .van-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+    .van-controls .btn { padding: 14px 6px; font-size: 1.25rem; touch-action: none; box-shadow: 0 4px 0 #46521f; }
+    .van-controls .wide { grid-column: span 3; font-size: 1rem; }
+    .van-msg { grid-column: 1 / -1; text-align: center; font-weight: 600; color: var(--muted); min-height: 1.6em; }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px; font-size: .78rem; }
+    .legend span { display: inline-flex; align-items: center; gap: 4px; }
+    .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+    /* ---------- Cachas ---------- */
+    .gym { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: start; }
+    .gym-fig { position: relative; background: linear-gradient(180deg, #cfe7e8 0 62%, #e9d8ae 62% 100%); border-radius: 18px; border: 1px solid var(--line); padding: 10px 6px 0; overflow: hidden; box-shadow: 0 24px 40px -30px rgba(43,32,24,.7); }
+    .gym-fig svg { display: block; width: 100%; height: auto; }
+    .gym-fig .pill { position: absolute; left: 10px; right: 10px; top: 10px; text-align: center; background: #fff; border: 2px solid var(--roman); color: var(--roman); font-weight: 700; font-size: .78rem; border-radius: 10px; padding: 3px 9px; transition: all .4s; }
+    .gym-fig .pill.cured { border-color: var(--olive); color: var(--olive); text-decoration: line-through; opacity: .8; }
+    .gym-fig .doc { position: absolute; right: 8px; top: 52px; width: 96px; background: #fff; border-radius: 12px 12px 12px 2px; padding: 5px 8px; font-size: .72rem; line-height: 1.3; font-weight: 600; box-shadow: 0 6px 12px -8px rgba(0,0,0,.5); }
+    .gym-fig .fx { position: absolute; font-size: 1.6rem; opacity: 0; pointer-events: none; }
+    .gym-fig .fx.show { animation: fxUp 1s ease-out; }
+    @keyframes fxUp { 0% { opacity: 1; transform: translateY(0) scale(.7); } 100% { opacity: 0; transform: translateY(-40px) scale(1.3); } }
+    .gym-fig .caption { text-align: center; font-family: "Caveat", cursive; font-size: 1.4rem; background: rgba(255,255,255,.7); margin: 0 -6px; padding: 2px 0; }
+    .gym-play { display: grid; gap: 14px; }
+    .gauge .stat-line b { font-size: 1.25rem; }
+    .gauge-track { position: relative; height: 16px; border-radius: 99px; background: linear-gradient(90deg, #5fa86b 0 33%, #e6c25a 33% 66%, #d65a4a 66% 100%); margin: 8px 0 4px; }
+    .gauge-pin { position: absolute; top: -6px; width: 6px; height: 28px; background: var(--ink); border-radius: 3px; transform: translateX(-50%); transition: left .5s; }
+    .gauge-labels { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); font-weight: 600; }
+    .week-dots { display: flex; gap: 5px; }
+    .week-dots i { flex: 1; height: 8px; border-radius: 4px; background: #ead9b8; }
+    .week-dots i.ok { background: var(--olive); }
+    .week-dots i.bad { background: var(--roman); }
+    .gym-q { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px 24px 20px; min-height: 270px; box-shadow: 0 24px 40px -32px rgba(43,32,24,.6); }
+    .gym-q .kind { display: inline-block; font: 700 .72rem "Cinzel", serif; letter-spacing: .1em; background: #f1e4c4; border-radius: 99px; padding: 3px 12px; color: var(--terra-dark); margin-bottom: 8px; }
+    .gym-q h3 { font-size: 1.3rem; margin-bottom: 14px; }
+    .gym-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .gopt { font: 600 .95rem "Lora", serif; cursor: pointer; background: #fffaf0; border: 2px solid var(--line); border-radius: 14px; padding: 14px 10px; display: grid; gap: 6px; place-items: center; text-align: center; color: var(--ink); transition: transform .12s, border-color .12s; }
+    .gopt .e { font-size: 2.4rem; line-height: 1; }
+    .gopt:hover:not(:disabled) { border-color: var(--terra); transform: translateY(-3px); }
+    .gopt:disabled { cursor: default; }
+    .gopt.good { border-color: var(--olive); background: #eef3dc; }
+    .gopt.bad { border-color: var(--roman); background: #f8e4de; }
+    .gopt:disabled:not(.good):not(.bad) { opacity: .5; }
+    .gym-msg { margin-top: 14px; font-style: italic; min-height: 3em; }
+    .gym-q.center { text-align: center; display: grid; place-content: center; }
+    .gym-q.center .big { font-size: 3rem; line-height: 1; }
+    .gym-q.center p { max-width: 460px; margin: 6px auto 16px; color: var(--muted); }
+
+    /* ---------- Diana ---------- */
+    .baby { max-width: 860px; margin: 0 auto; }
+    .nursery {
+      position: relative; border-radius: 20px; padding: 18px 14px 16px; overflow: hidden;
+      background: linear-gradient(180deg, #ffe9ef 0 55%, #f6dcc1 55% 100%); border: 1px solid #f1cdd6;
+      box-shadow: 0 24px 40px -30px rgba(43,32,24,.6);
+    }
+    .nursery::before { content: "🌙 ⭐ ☁️ ⭐ 🌙"; position: absolute; top: 10px; left: 0; right: 0; text-align: center; letter-spacing: .6em; opacity: .55; font-size: 1.1rem; }
+    .scene { display: grid; grid-template-columns: 1fr 1.3fr 1fr; align-items: end; gap: 6px; padding-top: 26px; }
+    .cg { text-align: center; position: relative; }
+    .cg .face { font-size: clamp(3rem, 9vw, 4.6rem); line-height: 1; transition: transform .25s, opacity .25s; display: block; }
+    .cg.busy .face { transform: translateY(-8px) rotate(-6deg); opacity: .6; }
+    .cg small { display: block; font-weight: 700; }
+    .cg .cool { height: 5px; width: 70%; margin: 3px auto 0; background: rgba(0,0,0,.1); border-radius: 3px; overflow: hidden; }
+    .cg .cool i { display: block; height: 100%; width: 0; background: var(--sea); }
+    .bubble { position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%); width: max-content; max-width: 210px; background: #fff; border-radius: 12px; padding: 6px 10px; font-size: .78rem; font-weight: 600; box-shadow: 0 6px 14px -8px rgba(0,0,0,.5); opacity: 0; transition: opacity .25s; pointer-events: none; z-index: 2; }
+    .bubble.show { opacity: 1; }
+    .diana { text-align: center; position: relative; }
+    .diana .baby-face { font-size: clamp(4.4rem, 13vw, 6.4rem); line-height: 1; display: inline-block; animation: wobble 1.6s ease-in-out infinite alternate; }
+    .diana.cry .baby-face { animation: shake .25s linear infinite; }
+    .diana.sleep .baby-face { animation: none; }
+    @keyframes wobble { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+    @keyframes shake { 0%,100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+    .diana .mood { position: absolute; right: 4%; top: -6px; font-size: 2rem; }
+    .diana .name { font-family: "Caveat", cursive; font-size: 1.5rem; }
+    .needs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0 12px; }
+    .need { font: 700 .88rem "Lora", serif; cursor: pointer; background: #fff; border: 2px solid #ecd2d9; border-radius: 14px; padding: 10px 6px 8px; text-align: center; color: var(--ink); touch-action: manipulation; transition: transform .1s, border-color .2s; }
+    .need:active { transform: scale(.95); }
+    .need .e { font-size: 1.9rem; line-height: 1.1; display: block; }
+    .need .lvl { height: 8px; border-radius: 99px; background: #f1e2e6; overflow: hidden; margin-top: 6px; }
+    .need .lvl i { display: block; height: 100%; width: 100%; background: #5fa86b; transition: background .2s; }
+    .need.low { border-color: var(--roman); animation: pulse .5s ease-in-out infinite alternate; }
+    .need.low .lvl i { background: var(--roman); }
+    @keyframes pulse { to { transform: scale(1.05); } }
+    .baby-hud { display: grid; grid-template-columns: 1.6fr 1fr; gap: 12px; align-items: center; }
+    .baby-hud .stat-line b { font-size: 1.1rem; }
+    .baby-msg { text-align: center; font-weight: 600; margin-top: 12px; min-height: 3em; }
+    .nursery .overlay { background: rgba(60,34,34,.82); border-radius: 20px; z-index: 5; }
+    .nursery .overlay p { max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    /* ---------- Final ---------- */
+    .tablet {
+      max-width: 700px; margin: 0 auto 50px; padding: 38px 24px 30px; text-align: center; border-radius: 14px 14px 6px 6px;
+      background: linear-gradient(135deg, #cfc3a6, #bdb094 50%, #d5cab0); border: 3px solid #8e836b;
+      box-shadow: inset 0 0 0 5px rgba(255,255,255,.18), inset 0 0 30px rgba(0,0,0,.18), 0 30px 50px -35px rgba(43,32,24,.7);
+      font-family: "Cinzel", serif; color: #3d3425; text-shadow: 0 1px 0 rgba(255,255,255,.45);
+    }
+    .tablet .l1 { font-size: clamp(1.5rem, 5.5vw, 2.6rem); font-weight: 800; letter-spacing: .08em; }
+    .tablet .l2 { font-size: clamp(1.05rem, 3.6vw, 1.6rem); font-weight: 700; margin: 12px 0 6px; letter-spacing: .06em; }
+    .tablet .l3 { font-size: clamp(.78rem, 2.4vw, 1rem); letter-spacing: .1em; margin-bottom: 10px; }
+    .tablet .l4 { font-size: clamp(.82rem, 2.6vw, 1.05rem); letter-spacing: .2em; margin-top: 14px; font-weight: 700; }
+    .tablet .meander { margin: 10px 0; opacity: .5; }
+    .tablet .es { display: none; font-family: "Lora", serif; font-style: italic; text-shadow: none; }
+    .tablet.translated .la { display: none; }
+    .tablet.translated .es { display: block; }
+    .tablet-btn { display: block; margin: -26px auto 46px; }
+    .note {
+      max-width: 660px; margin: 0 auto; background: #fff; border: 1px solid var(--line); border-radius: 18px;
+      padding: 44px 40px 36px; box-shadow: 0 30px 50px -35px rgba(43,32,24,.5); position: relative;
+    }
+    .note::before { content: "🏺"; position: absolute; top: -26px; left: 50%; transform: translateX(-50%); font-size: 2.6rem; }
+    .note p { font-size: 1.08rem; margin-bottom: 14px; }
+    .note .hand { font-size: 2rem; color: var(--terra-dark); line-height: 1.2; }
+    .note .sign { text-align: right; margin: 22px 0 0; }
+    .candle { text-align: center; margin-top: 34px; }
+    footer { text-align: center; color: var(--muted); padding: 20px 20px 46px; font-size: .95rem; }
+    footer a { color: var(--terra-dark); }
+
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 200; width: 100%; height: 100%; }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%); z-index: 210;
+      background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-weight: 700;
+      box-shadow: 0 14px 30px -14px rgba(0,0,0,.6); transition: transform .4s cubic-bezier(.3,1.5,.5,1);
+      width: max-content; max-width: calc(100% - 32px); text-align: center;
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 820px) {
+      .dig-wrap { grid-template-columns: 1fr; }
+      .gym { grid-template-columns: 1fr; }
+      .gym-fig { max-width: 320px; margin: 0 auto; width: 100%; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 66px 0; }
+      .ficha-card dl { grid-template-columns: 1fr; gap: 2px; }
+      .ficha-card dt { padding-top: 8px; }
+      .rstats { grid-template-columns: 1fr; gap: 8px; }
+      .scenario { padding: 22px 18px; }
+      .van-wrap { grid-template-columns: 1fr; justify-items: center; }
+      .van-main { width: 100%; max-width: 300px; }
+      .van-screen { width: 100%; }
+      #vanCanvas { width: 100%; }
+      .van-side { width: 100%; max-width: 300px; }
+      .needs { grid-template-columns: repeat(2, 1fr); }
+      .baby-hud { grid-template-columns: 1fr; }
+      .gym-opts { grid-template-columns: 1fr; }
+      .gopt { grid-template-columns: auto 1fr; text-align: left; place-items: center start; padding: 10px 14px; }
+      .gopt .e { font-size: 2rem; }
+      .note { padding: 40px 22px 30px; }
+      .scene { grid-template-columns: 1fr 1.2fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Portada -->
+  <header class="hero">
+    <div>
+      <figure class="polaroid">
+        <img src="img/josepmaria.jpg" alt="Josep Maria junto a Juana Mari, delante de una vidriera de colores" onerror="this.closest('.polaroid').classList.add('nophoto')">
+        <div class="ph" aria-hidden="true">🏺</div>
+        <figcaption>Josep Maria y Juana Mari</figcaption>
+      </figure>
+      <div class="meander" aria-hidden="true"></div>
+      <div class="latin">FELIX DIES NATALIS</div>
+      <h1>¡Feliz cumpleaños, <span>Josep Maria!</span></h1>
+      <span class="kicker hand">Moltes felicitats! 🎉</span>
+      <p class="lead">Arqueólogo, exdirector del museo de L'Hospitalet, creador de Kuanum junto a Juana Mari y futuro iaio. Hoy te toca a ti ser el hallazgo del día… y jugar un poco.</p>
+      <div class="chips">
+        <span class="chip">⛏️ Arqueología</span><span class="chip">🏛️ Museo</span><span class="chip">🎪 Kuanum</span><span class="chip">🚐 Furgoneta</span><span class="chip">💪 Cachas</span><span class="chip">👶 Diana en camino</span>
+      </div>
+      <a href="#ficha" class="btn" id="start">⛏️ ¡A excavar!</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Ficha -->
+    <section class="ficha-sec" id="ficha">
+      <div class="container">
+        <article class="ficha-card reveal">
+          <h3>Iosephus Maria Solias Aris <i>(Archaeologus hospitalensis)</i></h3>
+          <dl>
+            <dt>Descripción</dt><dd>Ejemplar de arqueólogo en excelente estado de conservación y con muchísimo carácter.</dd>
+            <dt>Hábitat</dt><dd>Yacimientos, museos, salas de reuniones interminables y furgonetas cargadas de ánforas.</dd>
+            <dt>Dieta</dt><dd>Café, vermuts de inauguración y, desde hace un tiempo, verdura y mucha disciplina.</dd>
+            <dt>Peligros</dt><dd>Concejales con discurso de 25 minutos, informes «para ayer» y carpetas voladoras del taller infantil.</dd>
+            <dt>Especialidad</dt><dd>Hacer que la historia le interese a todo el mundo, incluidos los políticos (¡sobre todo a ellos!).</dd>
+            <dt>Próxima fase</dt><dd>Iaio. Ya está en el programa. 👶</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- 1. Excavación -->
+    <section class="alt" id="excavacion">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">1</span>
+          <h2>Campaña de excavación ⛏️</h2>
+          <p>Tienes 28 jornadas de campaña y un yacimiento por abrir. Abajo, lo más antiguo (romano); arriba, lo medieval. El <b>pico</b> abre una zona de 3×3, pero rompe lo que toque; la <b>brocha</b> limpia una sola casilla, con mimo. Cuando veas un destello ✨, ¡cuidado, ahí hay algo!</p>
+        </div>
+        <div class="dig-wrap reveal">
+          <div class="dig-board-wrap">
+            <div class="strata"><div class="med">MEDIEVAL · s. XII–XV</div><div class="rom">ROMANO · s. I–III</div></div>
+            <div class="dig-board" id="digBoard"><div class="finds-layer" id="findsLayer"></div></div>
+          </div>
+          <div class="dig-panel">
+            <div class="tools">
+              <button class="tool active" data-tool="pico"><span class="e">⛏️</span><b>Pico</b><small>Zona 3×3 · ¡puede romper!</small></button>
+              <button class="tool" data-tool="brocha"><span class="e">🖌️</span><b>Brocha</b><small>1 casilla · con mimo</small></button>
+            </div>
+            <div>
+              <div class="stat-line"><span>Jornadas de campaña</span><b id="jornTxt">28</b></div>
+              <div class="bar"><span id="jornBar"></span></div>
+            </div>
+            <div class="album" id="album" aria-label="Hallazgos"></div>
+            <div class="ficha-find" id="fichaFind">Aquí aparecerá la ficha de cada hallazgo. Pulsa uno de la vitrina para volver a leerla.</div>
+            <button class="btn olive" id="digReset">🔁 Nueva excavación</button>
+          </div>
+        </div>
+        <p class="dig-msg reveal" id="digMsg" aria-live="polite" style="margin-top:18px"></p>
+      </div>
+    </section>
+
+    <!-- 2. Jubilación -->
+    <section id="jubilacion">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">2</span>
+          <h2>Operación jubilación 🏖️</h2>
+          <p>Diez situaciones entre el museo, el ayuntamiento y Kuanum separan a Josep Maria de su jubilación. Si se agota la paciencia, el presupuesto o el prestigio, no llegará. ¿Le ayudas a sobrevivir?</p>
+        </div>
+        <div class="retiro reveal">
+          <div class="career">
+            <div class="career-track"><div class="career-fill" id="careerFill"></div><span class="career-walker" id="careerWalker">🧑‍🏫</span><span class="career-end">🏖️</span></div>
+            <div class="career-labels"><span id="careerTxt">Primer día</span><span>Jubilación</span></div>
+          </div>
+          <div class="rstats" id="rstats"></div>
+          <div class="scenario center" id="scn"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Maletero -->
+    <section class="alt" id="maletero">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">3</span>
+          <h2>El maletero de Kuanum 🚐</h2>
+          <p>Hay taller mañana y la furgoneta está vacía. Encaja cajas azules, rojas y amarillas… y las piezas «romanas» de forma rara (ánforas, capiteles, un pilum). Completa 8 filas para cerrar el maletero antes de que se desborde.</p>
+        </div>
+        <div class="van-wrap reveal">
+          <div class="van-main">
+          <div class="van-screen">
+            <canvas id="vanCanvas" aria-label="Maletero de la furgoneta"></canvas>
+            <div class="overlay" id="vanOverlay">
+              <div>
+                <h3 id="vanOvTitle">🚐 ¡A cargar!</h3>
+                <p id="vanOvText">← → mover · ↑ girar · ↓ bajar · Espacio: soltar de golpe. En el móvil, usa los botones.</p>
+                <button class="btn" id="vanStart">📦 Empezar</button>
+              </div>
+            </div>
+          </div>
+          <div class="van-controls">
+              <button class="btn olive" id="bLeft" aria-label="Izquierda">◀</button>
+              <button class="btn olive" id="bRot" aria-label="Girar">⟳</button>
+              <button class="btn olive" id="bRight" aria-label="Derecha">▶</button>
+              <button class="btn stone" id="bDown" aria-label="Bajar">▼</button>
+              <button class="btn stone wide" id="bDrop" style="grid-column: span 2">⤓ Soltar</button>
+            </div>
+          </div>
+          <div class="van-side">
+            <div class="box"><small>Siguiente pieza</small><canvas id="nextCanvas"></canvas><div id="nextName">—</div></div>
+            <div class="box"><small>Filas cargadas</small><b id="vanLines">0 / 8</b>
+              <div class="van-progress"><span id="vanBar"></span><i id="vanTruck">🚐</i></div>
+            </div>
+            <div class="box"><small>Puntos</small><b id="vanScore">0</b></div>
+            <div class="legend"><span><i style="background:#3b82d9"></i>Azul</span><span><i style="background:#e0483c"></i>Roja</span><span><i style="background:#f2bc2d"></i>Amarilla</span><span>🏺 Ánfora</span><span>🏛️ Capitel</span><span>🗡️ Pilum</span></div>
+          </div>
+          <p class="van-msg" id="vanMsg" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Cachas -->
+    <section id="cachas">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">4</span>
+          <h2>Operación «Cachas» 💪</h2>
+          <p>Un día le dijeron que habría que medicarle de por vida por el azúcar. Él se puso serio con la dieta y el ejercicio… y se curó. Ahora le toca a Josep Maria revivirlo en diez semanas: cada decisión cuenta (y alguna trampa hay).</p>
+        </div>
+        <div class="gym reveal">
+          <div class="gym-fig">
+            <div class="pill" id="pill">💊 Receta: de por vida</div>
+            <div class="doc" id="doc">«Habrá que medicarle…»</div>
+            <svg viewBox="0 0 220 290" id="figSvg" role="img" aria-label="Josep Maria convertido en monigote que se va poniendo fuerte">
+              <defs><clipPath id="headClip"><circle cx="110" cy="70" r="38"/></clipPath></defs>
+              <ellipse cx="110" cy="276" rx="70" ry="8" fill="rgba(0,0,0,.15)"/>
+              <g id="legs"></g>
+              <path id="torso" fill="#8a9bb0" stroke="rgba(0,0,0,.25)" stroke-width="2"/>
+              <path id="pecs" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2" stroke-linecap="round"/>
+              <g id="arms"></g>
+              <rect x="98" y="100" width="24" height="16" rx="6" fill="#e0ac86"/>
+              <image href="img/cara.jpg" x="72" y="32" width="76" height="76" clip-path="url(#headClip)" preserveAspectRatio="xMidYMid slice"/>
+              <circle cx="110" cy="70" r="38" fill="none" stroke="#2b2018" stroke-width="3"/>
+            </svg>
+            <span class="fx" id="fx1" style="left:18%;top:42%">💦</span>
+            <span class="fx" id="fx2" style="right:14%;top:36%">💪</span>
+            <div class="caption" id="figCaption">Punto de partida</div>
+          </div>
+          <div class="gym-play">
+            <div class="gauge">
+              <div class="stat-line"><span>🩸 Azúcar en ayunas</span><b id="glucTxt">150 mg/dl</b></div>
+              <div class="gauge-track"><div class="gauge-pin" id="glucPin"></div></div>
+              <div class="gauge-labels"><span>70</span><span>objetivo: menos de 100</span><span>160</span></div>
+            </div>
+            <div><div class="stat-line"><span>💪 Musculatura</span><b id="muscTxt">10 %</b></div><div class="bar"><span id="muscBar" style="width:10%"></span></div></div>
+            <div class="week-dots" id="weekDots"></div>
+            <div class="gym-q center" id="gymQ"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Diana -->
+    <section class="alt" id="diana">
+      <div class="container">
+        <div class="section-title reveal">
+          <span class="num">5</span>
+          <h2>Simulacro de abuelos 👶</h2>
+          <p>Diana está a punto de llegar, así que toca ensayo general: Josep Maria y Juana Mari tienen que cuidarla 45 segundos sin que llore. Después de haber tenido 3 hijos esto debería ser pan comido… ¿o ya se les ha olvidado todo?</p>
+        </div>
+        <div class="baby reveal">
+          <div class="nursery" id="nursery">
+            <div class="scene">
+              <div class="cg" id="gpa"><div class="bubble" id="gpaBubble"></div><span class="face">👴</span><small>Josep Maria</small><div class="cool"><i></i></div></div>
+              <div class="diana" id="diana"><span class="mood" id="mood">😊</span><span class="baby-face" id="babyFace">👶</span><div class="name">Diana</div></div>
+              <div class="cg" id="gma"><div class="bubble" id="gmaBubble"></div><span class="face">👵</span><small>Juana Mari</small><div class="cool"><i></i></div></div>
+            </div>
+            <div class="needs" id="needs"></div>
+            <div class="baby-hud">
+              <div><div class="stat-line"><span>❤️ Felicidad de Diana</span><b id="happyTxt">70 %</b></div><div class="bar"><span id="happyBar" style="width:70%"></span></div></div>
+              <div class="stat-line"><span>⏱️ Quedan</span><b id="babyTime">45 s</b></div>
+            </div>
+            <div class="baby-msg" id="babyMsg" aria-live="polite"></div>
+            <div class="overlay" id="babyOverlay">
+              <div>
+                <h3 id="babyOvTitle">👶 Cuidar a Diana</h3>
+                <p id="babyOvText">Pulsa la necesidad que se esté vaciando: si se pone roja, ¡es urgente! Josep Maria y Juana Mari se turnan (cada uno necesita un respiro tras cada tarea). En el ordenador también valen las teclas 1, 2, 3 y 4.</p>
+                <button class="btn" id="babyStart">🍼 ¡Empezar!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Felicitación -->
+    <section id="felicitacion">
+      <div class="container">
+        <div class="tablet reveal" id="tablet">
+          <div class="la">
+            <div class="l1">FELIX DIES NATALIS</div>
+            <div class="meander" aria-hidden="true"></div>
+            <div class="l2">IOSEPHO MARIAE SOLIAS ARIS</div>
+            <div class="l3">ARCHAEOLOGO · MVSEI DIRECTORI · KVANVM CONDITORI</div>
+            <div class="l4">FAMILIA POSVIT</div>
+          </div>
+          <div class="es">
+            <div class="l1">FELIZ CUMPLEAÑOS</div>
+            <div class="meander" aria-hidden="true"></div>
+            <div class="l2">PARA JOSEP MARIA SOLIAS ARIS</div>
+            <div class="l3">Arqueólogo, director del museo y fundador de Kuanum</div>
+            <div class="l4">Lo dedica su familia</div>
+          </div>
+        </div>
+        <button class="btn olive tablet-btn" id="translateBtn">📜 Traducir del latín</button>
+        <article class="note reveal">
+          <p class="hand">¡Feliz cumpleaños, Josep Maria!</p>
+          <p>Que este año venga cargado de buenos hallazgos, de pocos discursos de concejales y de muchos talleres con Juana Mari en Kuanum, con la furgoneta siempre bien cargada y sin ninguna carpeta voladora.</p>
+          <p>Gracias por todo lo que haces y por cómo cuidas de los tuyos. Has demostrado que con constancia se consiguen cosas que parecían imposibles: te pusiste serio con la dieta y el ejercicio, te cuidaste, y eso nos hace muy felices.</p>
+          <p>Y ahora, que se acerca la etapa más bonita: Diana ya está a punto de llegar para ponerte a prueba como iaio. Seguro que lo harás como los 3 hijos que ya has criado: con cariño, con paciencia y con alguna historia romana de más.</p>
+          <p class="sign hand">Con todo el cariño de tu hija, tu yerno y toda la familia 🏺💛</p>
+        </article>
+        <div class="candle reveal"><button class="btn" id="blow">🎂 Soplar la vela</button></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Hecho con cariño para Josep Maria. · <a href="../">Volver al índice</a></footer>
+
+  <script>
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---------- Confeti y avisos ---------- */
+    const cv = document.getElementById("confetti");
+    const cx = cv.getContext("2d");
+    let pieces = [], confettiRunning = false;
+    function sizeConfetti() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; }
+    sizeConfetti(); addEventListener("resize", sizeConfetti);
+    function confetti(n = 140, x = innerWidth / 2, y = innerHeight / 3) {
+      if (reduceMotion) return;
+      const colors = ["#c1553b", "#d9a441", "#66763a", "#2f6f73", "#8e2b2b", "#f6e9c8", "#ffffff"];
+      for (let i = 0; i < n; i++) {
+        const a = Math.random() * Math.PI * 2, v = 4 + Math.random() * 9;
+        pieces.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+          w: 6 + Math.random() * 6, h: 8 + Math.random() * 8, c: colors[i % colors.length], life: 0 });
+      }
+      if (!confettiRunning) { confettiRunning = true; requestAnimationFrame(tickConfetti); }
+    }
+    function tickConfetti() {
+      const d = devicePixelRatio;
+      cx.clearRect(0, 0, cv.width, cv.height);
+      pieces.forEach((p) => {
+        p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life++;
+        cx.save(); cx.translate(p.x * d, p.y * d); cx.rotate(p.r);
+        cx.fillStyle = p.c; cx.globalAlpha = Math.max(0, 1 - p.life / 220);
+        cx.fillRect(-p.w * d / 2, -p.h * d / 2, p.w * d, p.h * d * Math.abs(Math.cos(p.r * 2)) + d);
+        cx.restore();
+      });
+      pieces = pieces.filter((p) => p.y < innerHeight + 40 && p.life < 220);
+      if (pieces.length) requestAnimationFrame(tickConfetti);
+      else { confettiRunning = false; cx.clearRect(0, 0, cv.width, cv.height); }
+    }
+    const confettiAt = (el, n) => { const r = el.getBoundingClientRect(); confetti(n, r.left + r.width / 2, r.top + r.height / 2); };
+    let toastTimer;
+    function toast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
+    }
+    addEventListener("load", () => setTimeout(() => confetti(160), 400));
+    // Bloquea un botón unos segundos tras terminar una partida, para no reiniciar sin querer
+    function lockButton(btn, label, secs = 3) {
+      btn.disabled = true;
+      let left = secs;
+      btn.textContent = `⏳ Un momento… ${left}`;
+      const iv = setInterval(() => {
+        left--;
+        if (left > 0) { btn.textContent = `⏳ Un momento… ${left}`; return; }
+        clearInterval(iv); btn.disabled = false; btn.textContent = label;
+      }, 1000);
+    }
+    const inView = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const shuffle = (arr) => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    /* =====================================================
+       1. Campaña de excavación
+       ===================================================== */
+    (() => {
+      const COLS = 8, ROWS = 7, MED_ROWS = 3, BUDGET = 28;
+      const FINDS = [
+        { id: "cuenco", name: "Cuenco de verde y manganeso", emoji: "🥣", era: "Medieval", w: 2, h: 1, layer: "med", s: .8, fact: "Cerámica medieval de «verd i manganès»: vidriada en verde con dibujos en morado oscuro. Servía para comer… y ahora para llenar vitrinas." },
+        { id: "llave", name: "Llave de hierro", emoji: "🗝️", era: "Medieval", w: 1, h: 1, layer: "med", s: .75, fact: "Una llave de hierro medieval. Si abre algo, seguro que es el almacén sin presupuesto." },
+        { id: "dinero", name: "Dinero medieval", emoji: "🪙", era: "Medieval", w: 1, h: 1, layer: "med", s: .75, fact: "Un dinero: calderilla de hace siglos. Aun así, más de lo que dan algunas subvenciones." },
+        { id: "flecha", name: "Punta de flecha", emoji: "🏹", era: "Medieval", w: 1, h: 1, layer: "med", s: .75, fact: "Punta de flecha de hierro. Alguien tuvo un mal día… o un pleno municipal." },
+        { id: "lata", name: "Lata de refresco de los 90", emoji: "🥫", era: "Contemporáneo", w: 1, h: 1, layer: "med", s: .75, fact: "¡Estrato contemporáneo! También hay que documentarla (y llevarla al contenedor amarillo)." },
+        { id: "mosaico", name: "Mosaico de teselas", emoji: "🐟", era: "Romano", w: 2, h: 2, layer: "rom", mosaic: true, fact: "¡Un mosaico! Seguro que hay una villa romana debajo… y que no se entere el promotor de las obras." },
+        { id: "gladius", name: "Gladius", emoji: "🗡️", era: "Romano", w: 3, h: 1, layer: "rom", s: 1.3, fact: "El gladius, la espada corta de los legionarios. Muy útil para cortar discursos de concejales." },
+        { id: "anfora", name: "Ánfora", emoji: "🏺", era: "Romano", w: 1, h: 2, layer: "rom", s: 1.15, fact: "Ánfora romana: el tupper del Imperio. Servía para transportar aceite, vino o salazones como el garum." },
+        { id: "denario", name: "Denario de plata", emoji: "🥈", era: "Romano", w: 1, h: 1, layer: "rom", s: .75, fact: "Moneda de plata de referencia en todo el Imperio, con la que se pagaba a las legiones." },
+        { id: "lucerna", name: "Lucerna", emoji: "🪔", era: "Romano", w: 1, h: 1, layer: "rom", s: .75, fact: "Lámpara de aceite de barro: la linterna de los romanos (sin pilas, pero con mucho humo)." },
+      ];
+      const board = document.getElementById("digBoard"), layer = document.getElementById("findsLayer");
+      const album = document.getElementById("album"), fichaEl = document.getElementById("fichaFind"), msg = document.getElementById("digMsg");
+      const jornTxt = document.getElementById("jornTxt"), jornBar = document.getElementById("jornBar"), resetBtn = document.getElementById("digReset");
+      let tool = "pico", grid = [], finds = [], jorn = BUDGET, over = false;
+
+      document.querySelectorAll(".tool").forEach((b) => b.addEventListener("click", () => {
+        tool = b.dataset.tool;
+        document.querySelectorAll(".tool").forEach((x) => x.classList.toggle("active", x === b));
+      }));
+
+      function place() {
+        for (let attempt = 0; attempt < 50; attempt++) {
+          const occ = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
+          const placed = [];
+          let ok = true;
+          for (const f of [...FINDS].sort((a, b) => b.w * b.h - a.w * a.h)) {
+            const [r0, r1] = f.layer === "med" ? [0, MED_ROWS] : [MED_ROWS, ROWS];
+            let done = false;
+            for (let t = 0; t < 200 && !done; t++) {
+              const flip = f.w !== f.h && !f.mosaic && Math.random() < .5;
+              const w = flip ? f.h : f.w, h = flip ? f.w : f.h;
+              const r = r0 + Math.floor(Math.random() * (r1 - r0 - h + 1)), c = Math.floor(Math.random() * (COLS - w + 1));
+              let free = true;
+              for (let i = 0; i < h && free; i++) for (let j = 0; j < w; j++) if (occ[r + i][c + j]) { free = false; break; }
+              if (!free) continue;
+              const obj = { ...f, r, c, pw: w, ph: h, size: w * h, dug: 0, complete: false, damaged: false };
+              for (let i = 0; i < h; i++) for (let j = 0; j < w; j++) occ[r + i][c + j] = obj;
+              placed.push(obj); done = true;
+            }
+            if (!done) { ok = false; break; }
+          }
+          if (ok) return { occ, placed };
+        }
+        throw new Error("no se pudo colocar");
+      }
+
+      function build() {
+        const { occ, placed } = place();
+        finds = placed;
+        board.querySelectorAll(".cell").forEach((x) => x.remove());
+        layer.innerHTML = "";
+        grid = [];
+        for (let r = 0; r < ROWS; r++) {
+          grid[r] = [];
+          for (let c = 0; c < COLS; c++) {
+            const el = document.createElement("button");
+            el.className = "cell " + (r < MED_ROWS ? "med" : "rom") + (r === MED_ROWS ? " row-sep" : "");
+            el.style.setProperty("--b", (.93 + Math.random() * .12).toFixed(2));
+            el.setAttribute("aria-label", `Casilla ${r + 1}-${c + 1}`);
+            el.dataset.r = r; el.dataset.c = c;
+            board.insertBefore(el, layer);
+            grid[r][c] = { el, find: occ[r][c], dug: false };
+          }
+        }
+        album.innerHTML = "";
+        FINDS.forEach((f) => {
+          const s = document.createElement("button");
+          s.className = "slot"; s.id = "slot-" + f.id; s.textContent = "❔"; s.disabled = true; s.setAttribute("aria-label", "Hallazgo pendiente");
+          album.appendChild(s);
+        });
+        jorn = BUDGET; over = false;
+        updateHud();
+        fichaEl.textContent = "Aquí aparecerá la ficha de cada hallazgo. Pulsa uno de la vitrina para volver a leerla.";
+        msg.className = "dig-msg reveal visible"; msg.textContent = `Hay ${FINDS.length} hallazgos por descubrir. ¡Mucho ojo con el pico!`;
+      }
+      function updateHud() {
+        jornTxt.textContent = jorn;
+        jornBar.style.width = (jorn / BUDGET) * 100 + "%";
+      }
+      function showFicha(f) {
+        fichaEl.innerHTML = `<span class="era ${f.era}">${f.era.toUpperCase()}</span><h4>${f.emoji} ${f.name}</h4><p>${f.fact}</p>` +
+          (f.damaged ? `<p class="warn">⚠️ Lo rompiste con el pico: toca restaurarlo (y justificarlo en el informe).</p>` : "");
+      }
+      function reveal(f) {
+        f.complete = true;
+        const el = document.createElement("div");
+        el.className = "find" + (f.mosaic ? " mosaic" : "") + (f.damaged ? " broken" : "");
+        el.style.cssText = `left:${f.c / COLS * 100}%;top:${f.r / ROWS * 100}%;width:${f.pw / COLS * 100}%;height:${f.ph / ROWS * 100}%;--m:${f.mosaic ? 1 : f.s}`;
+        el.innerHTML = f.mosaic ? `<span>${f.emoji}</span>` : f.emoji;
+        layer.appendChild(el);
+        const s = document.getElementById("slot-" + f.id);
+        s.textContent = f.emoji; s.disabled = false; s.classList.add("on"); s.classList.toggle("broken", f.damaged);
+        s.setAttribute("aria-label", f.name); s.onclick = () => showFicha(f);
+        showFicha(f);
+        msg.textContent = f.damaged ? `¡Ay! «${f.name}»: lo has encontrado, pero con el pico se ha roto.` : `¡Hallazgo! «${f.name}», intacto.`;
+        if (!f.damaged) confettiAt(s, 24);
+      }
+      function dig(r, c) {
+        if (over) return;
+        const targets = [];
+        const rad = tool === "pico" ? 1 : 0;
+        for (let i = -rad; i <= rad; i++) for (let j = -rad; j <= rad; j++) {
+          const rr = r + i, cc = c + j;
+          if (rr >= 0 && rr < ROWS && cc >= 0 && cc < COLS) targets.push(grid[rr][cc]);
+        }
+        const fresh = targets.filter((t) => !t.dug);
+        if (!fresh.length) return;
+        jorn--;
+        const touched = new Set();
+        targets.forEach((t) => { if (t.find && !t.find.complete && tool === "pico") t.find.damaged = true; });
+        fresh.forEach((t) => {
+          t.dug = true; t.el.classList.add("dug");
+          if (t.find) { t.find.dug++; touched.add(t.find); t.el.classList.add("part"); }
+        });
+        touched.forEach((f) => { if (f.dug === f.size && !f.complete) reveal(f); });
+        updateHud();
+        const done = finds.filter((f) => f.complete).length;
+        if (done === finds.length) return end(true);
+        if (jorn <= 0) return end(false);
+        if (touched.size && ![...touched].some((f) => f.complete)) msg.textContent = tool === "pico" ? "¡Hay algo ahí! Cuidado con el pico…" : "¡Un destello! Sigue limpiando alrededor con la brocha.";
+      }
+      function end(won) {
+        over = true;
+        const ok = finds.filter((f) => f.complete && !f.damaged).length, total = finds.length;
+        msg.className = "dig-msg big";
+        if (!won) {
+          const left = total - finds.filter((f) => f.complete).length;
+          msg.textContent = `⏳ Se acabó la subvención: quedan ${left} ${left === 1 ? "hallazgo" : "hallazgos"} bajo tierra. Habrá que pedir otra campaña (y otro concejal que la apruebe).`;
+        } else {
+          const rank = ok === total ? "🏆 ¡Director del museo! Todo intacto." : ok >= 7 ? "🎓 Arqueólogo de campo: casi todo intacto." : ok >= 4 ? "🔨 Ayudante entusiasta: mucho pico y poca brocha." : "🚜 Maquinista de obra pública: ¡tú sí que sabes de tuberías!";
+          msg.textContent = `Campaña terminada: ${ok} de ${total} hallazgos intactos y ${jorn} jornadas de sobra. ${rank}`;
+          if (ok >= 7) { confetti(220); toast("⛏️ ¡Campaña completada!"); }
+        }
+        lockButton(resetBtn, "🔁 Nueva excavación");
+      }
+      board.addEventListener("click", (e) => { const b = e.target.closest(".cell"); if (b) dig(+b.dataset.r, +b.dataset.c); });
+      const aim = (on, b) => {
+        if (tool !== "pico") return;
+        const r = +b.dataset.r, c = +b.dataset.c;
+        for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++) { const t = grid[r + i] && grid[r + i][c + j]; if (t) t.el.classList.toggle("aim", on); }
+      };
+      board.addEventListener("pointerover", (e) => { const b = e.target.closest(".cell"); if (b && e.pointerType === "mouse") aim(true, b); });
+      board.addEventListener("pointerout", (e) => { const b = e.target.closest(".cell"); if (b && e.pointerType === "mouse") aim(false, b); });
+      resetBtn.addEventListener("click", () => { if (!resetBtn.disabled) build(); });
+      build();
+    })();
+
+    /* =====================================================
+       2. Operación jubilación
+       ===================================================== */
+    // fx = [paciencia, presupuesto, prestigio]
+    const SITUATIONS = [
+      { who: "🏛️ Política", title: "El concejal y su discurso", text: "Inauguras una exposición. El concejal llega 40 minutos tarde y anuncia que dirá «unas palabras». Lleva doce folios.", choices: [
+        { t: "Sonreír y dejarle hablar", fx: [-2, 0, 2], out: "Habló de todo menos de la exposición, pero salió en la prensa." },
+        { t: "«Concejal, que se calienta el cava»", fx: [1, 0, -1], out: "Fue el discurso más corto de su carrera. Te mira raro, pero los invitados aplauden." },
+        { t: "Que Kuanum sirva ya el catering", fx: [0, 1, -1], out: "El hambre manda: nadie escuchó el discurso y Kuanum cobró unas horas extra." } ] },
+      { who: "🏛️ Política", title: "La foto del hallazgo", text: "Un político quiere salir en la foto con la pieza estrella… que lleva meses en un almacén sin presupuesto para restaurarla.", choices: [
+        { t: "Foto a cambio de partida para restaurar", fx: [-1, 2, 0], out: "Conseguiste el dinero. La foto salió torcida, pero la pieza quedó guapísima." },
+        { t: "Dejarle posar sin más", fx: [-1, 0, 1], out: "Salió sonriendo con el hallazgo al revés. Nadie lo notó." },
+        { t: "«Es tan frágil que no se puede ni respirar cerca»", fx: [1, 0, -1], out: "Se fue sin foto, y con cierto respeto por tu trabajo." } ] },
+      { who: "🏛️ Política", title: "«¿Esto es el museo de las piedras viejas?»", text: "Cambia el gobierno y el nuevo concejal de Cultura te saluda con esa frase. Con una sonrisa.", choices: [
+        { t: "Explicárselo todo con infinita paciencia", fx: [-2, 0, 2], out: "Dos horas después, ya sabe qué es un estrato. Casi lo entiende." },
+        { t: "Llevarle a un yacimiento con casco y barro", fx: [1, -1, 1], out: "Se manchó los zapatos y se enamoró de la arqueología. Casi." },
+        { t: "Mandarle un dossier de 300 páginas", fx: [1, 0, -1], out: "Seguro que lo lee. Seguro. Seguro." } ] },
+      { who: "🏛️ Política", title: "Recortes", text: "Comisión de presupuestos: recortan el del museo «porque lo antiguo no da votos».", choices: [
+        { t: "Defenderlo con datos (y gráficos)", fx: [-2, 1, 1], out: "Sacaste un gráfico de visitas por año. Mantuvieron casi todo." },
+        { t: "Montar con Kuanum un evento romano para llenar el museo", fx: [-1, 2, 0], out: "Cola hasta la puerta, centuriones incluidos. Los votos llegaron solos." },
+        { t: "Aceptar el recorte y suspirar", fx: [1, -2, 0], out: "Suspiraste tan hondo que se oyó en el pasillo." } ] },
+      { who: "🏛️ Política", title: "Se acabó la obra… o no", text: "Obras en un solar del barrio: aparece un muro romano. El promotor dice que son «unas piedras» y tiene prisa.", choices: [
+        { t: "Parar la obra con un informe arqueológico", fx: [-2, -1, 2], out: "Ahora tienes enemigos y un muro romano precioso." },
+        { t: "Negociar: documentar rápido y avanzar", fx: [-1, 1, 0], out: "Acuerdo imperfecto, pero el muro quedó bien registrado." },
+        { t: "Mirar hacia otro lado", fx: [1, 1, -3], out: "El muro se ha ido a una escombrera. Tu reputación, también." } ] },
+      { who: "🎪 Kuanum", title: "La carpeta voladora", text: "Un empleado de Kuanum entra cojeando: se le ha caído encima una carpeta (de las del taller infantil) y pide la baja.", choices: [
+        { t: "Darle la baja con todo el cariño", fx: [1, -2, 0], out: "Se fue a casa. Dicen que ya hace footing, pero oye…" },
+        { t: "Pedirle que enseñe el moratón", fx: [-1, 1, -1], out: "No hay moratón. Hay una carpeta con gomets y mucha cara dura." },
+        { t: "Ponerle a pegar gomets «sentado»", fx: [-1, 1, 0], out: "Pegó gomets a una velocidad de récord, sentadito y callado." } ] },
+      { who: "🎪 Kuanum", title: "No es mi función", text: "«Cargar la furgoneta no es mi función», dice un empleado por cuarta vez esta semana.", choices: [
+        { t: "Cargarla tú mismo", fx: [-2, 1, 0], out: "Cargaste cuarenta cajas y una ánfora enorme. La espalda te lo recordará." },
+        { t: "Llamar a Juana Mari", fx: [2, -1, 0], out: "Juana Mari sólo tuvo que mirarle. Las cajas volaron solas." },
+        { t: "Convertirlo en un concurso", fx: [0, -1, 1], out: "El premio era un denario de chocolate. Cargaron en tiempo récord." } ] },
+      { who: "🎪 Kuanum", title: "«Esperaba gladiadores de verdad»", text: "Un cliente de un taller se queja: esperaba gladiadores de verdad, con tigres y todo.", choices: [
+        { t: "Devolverle el dinero", fx: [1, -2, 0], out: "Se fue contento. Los tigres se quedaron sin trabajo, otra vez." },
+        { t: "Regalarle un casco de centurión", fx: [0, -1, 2], out: "Ha subido tres fotos y una reseña de cinco estrellas." },
+        { t: "Explicarle la diferencia entre historia y cine", fx: [-2, 0, 1], out: "Te escuchó con atención. Luego pidió el libro de reclamaciones." } ] },
+      { who: "🎪 Kuanum", title: "Sesenta niños para mañana", text: "Un colegio reserva un taller para 60 niños… para mañana. Juana Mari te mira.", choices: [
+        { t: "Aceptar e improvisar", fx: [-2, 2, 0], out: "Sesenta niños, cero cascos intactos. Fue un éxito." },
+        { t: "Aceptar sólo si pagan la urgencia", fx: [-1, 1, 0], out: "Pagaron la urgencia sin rechistar. Juana Mari sonrió." },
+        { t: "Decir que no", fx: [1, -1, -1], out: "El colegio se fue a la competencia, que hace talleres de globos." } ] },
+      { who: "🎪 Kuanum", title: "La furgoneta se estropea", text: "La furgoneta se avería camino de un evento. Lleva cuarenta ánforas de atrezzo.", choices: [
+        { t: "Llamar a la grúa", fx: [0, -2, 0], out: "La grúa llegó, la furgoneta salió, las ánforas ni se enteraron." },
+        { t: "Repartir las ánforas por los coches de la familia", fx: [-2, 1, 0], out: "Llegasteis sólo con un asa rota. Esas cosas pasan en arqueología." },
+        { t: "Esperar a que Juana Mari la arregle", fx: [1, -1, -1], out: "La arregló, pero llegasteis una hora tarde con muy buena cara." } ] },
+      { who: "🏺 Museo", title: "Vermut en domingo", text: "La asociación de vecinos pide abrir el museo los domingos «a la hora del vermut».", choices: [
+        { t: "Aceptar, sin más", fx: [-1, -1, 2], out: "Domingo lleno… y las vitrinas llenas de huellas de aceitunas." },
+        { t: "Vermut dentro del museo, con tapa romana", fx: [-1, 1, 1], out: "El garum de la tapa dividió opiniones, pero la cola era enorme." },
+        { t: "Decir que no", fx: [1, 0, -2], out: "Se enfadaron, pero sólo hasta el vermut del domingo siguiente." } ] },
+      { who: "🏺 Museo", title: "«Esto es romano, seguro»", text: "Un señor llega con una bolsa: «Encontré esto en mi jardín». Es un tapón de botella.", choices: [
+        { t: "Felicitarle con muchísimo cariño", fx: [-1, 0, 2], out: "Salió contentísimo. Volverá con más tapones." },
+        { t: "Catalogarlo como «cultura material contemporánea»", fx: [1, 0, 0], out: "Con su ficha y todo. El señor se sintió científico." },
+        { t: "«No es romano»", fx: [1, 0, -1], out: "Cierto, pero ya no volverá a donar nada." } ] },
+      { who: "🏺 Museo", title: "Informe para ayer", text: "Te piden un informe urgente para ayer sobre una excavación que lleva quince años.", choices: [
+        { t: "Escribirlo esa noche", fx: [-2, 0, 2], out: "Madrugaste, pero quedó impecable." },
+        { t: "Reciclar el de hace diez años cambiando la fecha", fx: [1, 0, -2], out: "Se notó. Había fotos de gente que ya no trabaja aquí." },
+        { t: "Contratar a una becaria con Kuanum", fx: [0, -1, 1], out: "La becaria hizo magia. Y un Excel precioso." } ] },
+      { who: "🏛️ Política", title: "Pleno de cinco horas", text: "Te invitan a un pleno municipal «para tomar nota». Duración estimada: cinco horas.", choices: [
+        { t: "Aguantar con un termo de café", fx: [-2, 0, 1], out: "Tomaste nota de todo… y de la lista de la compra." },
+        { t: "Escaparte con «una urgencia arqueológica»", fx: [1, 0, -1], out: "Nadie te creyó, pero la excusa fue memorable." },
+        { t: "Aprovechar para pedir presupuesto", fx: [-1, 1, 0], out: "A las cuatro horas, desesperados, dijeron que sí a todo." } ] },
+    ];
+    (() => {
+      const MAX = 10, ROUNDS = 10;
+      const STATS = [
+        { k: "p", emoji: "😮‍💨", name: "Paciencia", c: "#2f6f73" },
+        { k: "c", emoji: "💶", name: "Presupuesto", c: "#d9a441" },
+        { k: "r", emoji: "🏛️", name: "Prestigio", c: "#66763a" },
+      ];
+      const END = {
+        p: "😤 ¡Se acabó la paciencia! Le sueltas al concejal una charla de cuatro horas sobre cerámica. Te mandan a casa… pero no a jubilarte, sino a «reflexionar».",
+        c: "📉 Sin presupuesto: Kuanum se queda sin furgoneta, sin cátering y sin ánforas. Juana Mari te mira. No hay jubilación que valga.",
+        r: "🕳️ Sin prestigio: el concejal convierte el museo en un aparcamiento. Tu jubilación se celebra… en un aparcamiento.",
+      };
+      const statsEl = document.getElementById("rstats"), scn = document.getElementById("scn");
+      const fill = document.getElementById("careerFill"), walker = document.getElementById("careerWalker"), careerTxt = document.getElementById("careerTxt");
+      let vals, order, idx, busy;
+      const rows = {};
+      STATS.forEach((s) => {
+        const d = document.createElement("div");
+        d.className = "rstat"; d.style.setProperty("--c", s.c);
+        d.innerHTML = `<small>${s.name}</small><div class="v"><span>${s.emoji}</span><b></b></div><div class="segs">${"<i></i>".repeat(MAX)}</div><span class="delta"></span>`;
+        statsEl.appendChild(d); rows[s.k] = d;
+      });
+      function paintStats(deltas) {
+        STATS.forEach((s) => {
+          const row = rows[s.k], v = vals[s.k];
+          row.querySelector("b").textContent = v + " / " + MAX;
+          row.querySelectorAll(".segs i").forEach((i, n) => i.classList.toggle("on", n < v));
+          row.classList.toggle("low", v <= 2);
+          if (deltas && deltas[s.k]) {
+            const dl = row.querySelector(".delta"), d = deltas[s.k];
+            dl.textContent = (d > 0 ? "+" : "") + d; dl.style.color = d > 0 ? "#66763a" : "#8e2b2b";
+            row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash");
+          }
+        });
+      }
+      function paintCareer() {
+        const p = idx / ROUNDS;
+        fill.style.width = p * 100 + "%"; walker.style.left = p * 100 + "%";
+        careerTxt.textContent = idx === 0 ? "Primer día" : idx >= ROUNDS ? "¡Jubilado!" : `Situación ${idx + 1} de ${ROUNDS}`;
+      }
+      function intro() {
+        vals = { p: 5, c: 5, r: 5 }; idx = 0; paintStats(); paintCareer();
+        scn.className = "scenario center";
+        scn.innerHTML = `<div class="big">📜</div><h3>Tu último trienio</h3><p>Eres Josep Maria. Entre políticos, empleados de Kuanum y vecinos con tapones, solo te separan diez situaciones de la jubilación. Cada decisión cambia tu paciencia, tu presupuesto y tu prestigio: ninguna puede llegar a cero.</p><div><button class="btn" id="retStart">🏖️ ¡Rumbo a la jubilación!</button></div>`;
+        document.getElementById("retStart").addEventListener("click", start);
+      }
+      function start() {
+        vals = { p: 5, c: 5, r: 5 }; idx = 0; order = shuffle(SITUATIONS).slice(0, ROUNDS);
+        paintStats(); paintCareer(); ask();
+      }
+      function ask() {
+        const s = order[idx]; busy = false;
+        scn.className = "scenario";
+        scn.innerHTML = `<span class="who">${s.who}</span><h3>${s.title}</h3><p>${s.text}</p><div class="choices"></div><div class="outcome" hidden></div><div class="actions"></div>`;
+        const box = scn.querySelector(".choices");
+        shuffle(s.choices).forEach((ch) => {
+          const b = document.createElement("button");
+          b.className = "choice"; b.textContent = ch.t;
+          b.addEventListener("click", () => choose(ch, b));
+          box.appendChild(b);
+        });
+      }
+      function choose(ch, btn) {
+        if (busy) return; busy = true;
+        scn.querySelectorAll(".choice").forEach((b) => (b.disabled = true));
+        btn.classList.add("picked");
+        const d = { p: ch.fx[0], c: ch.fx[1], r: ch.fx[2] };
+        STATS.forEach((s) => (vals[s.k] = clamp(vals[s.k] + d[s.k], 0, MAX)));
+        paintStats(d);
+        idx++; paintCareer();
+        const out = scn.querySelector(".outcome"); out.hidden = false; out.textContent = ch.out;
+        const dead = STATS.find((s) => vals[s.k] <= 0);
+        const act = scn.querySelector(".actions"), nb = document.createElement("button");
+        nb.className = "btn olive";
+        if (dead) { nb.textContent = "Ver final"; nb.addEventListener("click", () => lose(dead.k)); }
+        else if (idx >= ROUNDS) { nb.textContent = "🎉 ¡A jubilarse!"; nb.addEventListener("click", win); }
+        else { nb.textContent = "Siguiente situación →"; nb.addEventListener("click", ask); }
+        act.appendChild(nb);
+      }
+      function lose(k) {
+        scn.className = "scenario center";
+        scn.innerHTML = `<div class="big">💥</div><h3>Jubilación aplazada</h3><p>${END[k]}</p><div><button class="btn" id="retAgain">🔁 Reintentar</button></div>`;
+        lockButton(document.getElementById("retAgain"), "🔁 Reintentar");
+        document.getElementById("retAgain").addEventListener("click", (e) => { if (!e.currentTarget.disabled) start(); });
+      }
+      function win() {
+        scn.className = "scenario center";
+        scn.innerHTML = `<div class="big">🏖️</div><h3>¡Jubilación conseguida!</h3><p>Has sobrevivido a concejales, carpetas voladoras y vermuts de domingo. Juana Mari ya tiene preparado el siguiente plan: una nieta, Diana, que va a ser más difícil que cualquier pleno municipal. 😄</p><div><button class="btn" id="retAgain">🔁 Otra carrera</button></div>`;
+        confetti(240); toast("🏖️ ¡Jubilación conseguida!");
+        lockButton(document.getElementById("retAgain"), "🔁 Otra carrera");
+        document.getElementById("retAgain").addEventListener("click", (e) => { if (!e.currentTarget.disabled) start(); });
+      }
+      intro();
+    })();
+
+    /* =====================================================
+       3. El maletero de Kuanum (tetris)
+       ===================================================== */
+    (() => {
+      const TC = 10, TR = 18, CS = 24, GOAL = 8;
+      const cv = document.getElementById("vanCanvas"), ctx = cv.getContext("2d");
+      const nv = document.getElementById("nextCanvas"), nctx = nv.getContext("2d");
+      cv.width = TC * CS * 2; cv.height = TR * CS * 2; ctx.scale(2, 2);
+      nv.width = 200; nv.height = 160; nctx.scale(2, 2);
+      const overlay = document.getElementById("vanOverlay"), ovTitle = document.getElementById("vanOvTitle"), ovText = document.getElementById("vanOvText");
+      const startBtn = document.getElementById("vanStart"), msg = document.getElementById("vanMsg");
+      const linesTxt = document.getElementById("vanLines"), scoreTxt = document.getElementById("vanScore"), nextName = document.getElementById("nextName");
+      const bar = document.getElementById("vanBar"), truck = document.getElementById("vanTruck");
+
+      const COLORS = {
+        azul: { b: "#3b82d9", d: "#27579a", n: "Caja azul" },
+        roja: { b: "#e0483c", d: "#9d2d25", n: "Caja roja" },
+        amarilla: { b: "#f2bc2d", d: "#b98712", n: "Caja amarilla" },
+      };
+      const BOXES = [
+        [[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]], [[0, 1, 1], [1, 1, 0]], [[1, 1, 0], [0, 1, 1]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]],
+      ];
+      const SPECIALS = [
+        { n: "Ánfora", shape: [[0, 1, 0], [1, 2, 1], [0, 1, 0]], icon: "🏺", b: "#cf7a4f", d: "#8c4a2b" },
+        { n: "Capitel", shape: [[1, 0, 1], [1, 2, 1]], icon: "🏛️", b: "#c4b79c", d: "#80745d" },
+        { n: "Pilum", shape: [[1, 1, 2, 1, 1]], icon: "🗡️", b: "#9aa3ae", d: "#5b636d" },
+      ];
+      const rot = (m) => m[0].map((_, i) => m.map((r) => r[i]).reverse());
+      function newPiece() {
+        let shape, style, name;
+        if (Math.random() < .3) { const s = pick(SPECIALS); shape = s.shape; style = { b: s.b, d: s.d, icon: s.icon }; name = s.n; }
+        else { const k = pick(Object.keys(COLORS)), c = COLORS[k]; shape = pick(BOXES); style = { b: c.b, d: c.d, icon: null, box: true }; name = c.n; }
+        return { shape: shape.map((r) => [...r]), style, name, x: 0, y: 0 };
+      }
+      let board, cur, next, state = "idle", lines = 0, score = 0, level = 1, lastDrop = 0, speed = 800, visible = true;
+
+      function collide(shape, x, y) {
+        for (let r = 0; r < shape.length; r++) for (let c = 0; c < shape[r].length; c++) {
+          if (!shape[r][c]) continue;
+          const nx = x + c, ny = y + r;
+          if (nx < 0 || nx >= TC || ny >= TR) return true;
+          if (ny >= 0 && board[ny][nx]) return true;
+        }
+        return false;
+      }
+      function spawn() {
+        cur = next || newPiece(); next = newPiece();
+        cur.x = Math.floor((TC - cur.shape[0].length) / 2); cur.y = 0;
+        nextName.textContent = next.name; drawNext();
+        if (collide(cur.shape, cur.x, cur.y)) return gameOver();
+      }
+      function reset() {
+        board = Array.from({ length: TR }, () => Array(TC).fill(null));
+        lines = 0; score = 0; level = 1; speed = 800; next = null;
+        ui(); spawn(); lastDrop = performance.now();
+      }
+      function ui() {
+        linesTxt.textContent = `${lines} / ${GOAL}`; scoreTxt.textContent = score;
+        const p = Math.min(1, lines / GOAL) * 100;
+        bar.style.width = p + "%"; truck.style.left = `calc(${p}% - ${p / 100 * 36}px + 2px)`;
+      }
+      function move(dx) { if (state === "playing" && !collide(cur.shape, cur.x + dx, cur.y)) { cur.x += dx; draw(); } }
+      function rotate() {
+        if (state !== "playing") return;
+        const ns = rot(cur.shape);
+        for (const dx of [0, -1, 1, -2, 2]) if (!collide(ns, cur.x + dx, cur.y)) { cur.shape = ns; cur.x += dx; draw(); return; }
+      }
+      function step() {
+        if (!collide(cur.shape, cur.x, cur.y + 1)) { cur.y++; return true; }
+        lock(); return false;
+      }
+      function soft() { if (state !== "playing") return; if (step()) score += 1; ui(); lastDrop = performance.now(); draw(); }
+      function hard() {
+        if (state !== "playing") return;
+        let d = 0; while (!collide(cur.shape, cur.x, cur.y + 1)) { cur.y++; d++; }
+        score += d * 2; lock(); ui(); lastDrop = performance.now(); draw();
+      }
+      function lock() {
+        cur.shape.forEach((row, r) => row.forEach((v, c) => { if (v && cur.y + r >= 0) board[cur.y + r][cur.x + c] = { b: cur.style.b, d: cur.style.d, icon: v === 2 ? cur.style.icon : null, box: !!cur.style.box }; }));
+        let cleared = 0;
+        for (let r = TR - 1; r >= 0; r--) if (board[r].every(Boolean)) { board.splice(r, 1); board.unshift(Array(TC).fill(null)); cleared++; r++; }
+        if (cleared) {
+          lines += cleared; score += [0, 100, 300, 500, 800][cleared] * level;
+          level = 1 + Math.floor(lines / 2); speed = Math.max(220, 800 - (level - 1) * 90);
+          msg.textContent = cleared > 1 ? `¡${cleared} filas de golpe! La furgoneta casi se cierra sola.` : "¡Fila cargada! 📦";
+          ui();
+          if (lines >= GOAL) return win();
+        }
+        spawn();
+      }
+      function gameOver() {
+        state = "over"; showOverlay("💥 ¡Maletero desbordado!", `Se han quedado ${3 + Math.floor(Math.random() * 6)} ánforas en el almacén. Llevabas ${lines} de ${GOAL} filas.`, "🔁 Reintentar");
+      }
+      function win() {
+        state = "won"; confetti(240); toast("🚐 ¡Furgoneta cargada!");
+        showOverlay("🎉 ¡Furgoneta cargada!", `Ocho filas bien apretadas y ni un ánfora rota (de momento). ${score} puntos. Juana Mari te mira con orgullo.`, "🔁 Otra carga");
+      }
+      function showOverlay(t, p, label) {
+        ovTitle.textContent = t; ovText.textContent = p; overlay.classList.remove("hidden"); lockButton(startBtn, label); draw();
+      }
+      startBtn.addEventListener("click", () => {
+        if (startBtn.disabled) return;
+        if (state === "paused") { state = "playing"; lastDrop = performance.now(); }
+        else { reset(); state = "playing"; }
+        overlay.classList.add("hidden"); msg.textContent = "";
+      });
+
+      function drawCell(c, x0, y0, s, obj, ghost) {
+        c.globalAlpha = ghost ? .28 : 1;
+        c.fillStyle = obj.b; c.fillRect(x0, y0, s, s);
+        c.fillStyle = "rgba(255,255,255,.28)"; c.fillRect(x0, y0, s, 3); c.fillRect(x0, y0, 3, s);
+        c.fillStyle = "rgba(0,0,0,.2)"; c.fillRect(x0, y0 + s - 3, s, 3); c.fillRect(x0 + s - 3, y0, 3, s);
+        if (obj.box) { c.fillStyle = "rgba(255,255,255,.3)"; c.fillRect(x0, y0 + s * .42, s, s * .16); }
+        c.strokeStyle = obj.d; c.lineWidth = 1; c.strokeRect(x0 + .5, y0 + .5, s - 1, s - 1);
+        if (obj.icon && !ghost) { c.font = `${s * .72}px system-ui, sans-serif`; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(obj.icon, x0 + s / 2, y0 + s / 2 + 1); }
+        c.globalAlpha = 1;
+      }
+      function draw() {
+        ctx.fillStyle = "#2b2f36"; ctx.fillRect(0, 0, TC * CS, TR * CS);
+        ctx.strokeStyle = "rgba(255,255,255,.06)"; ctx.lineWidth = 1;
+        for (let i = 1; i < TC; i++) { ctx.beginPath(); ctx.moveTo(i * CS + .5, 0); ctx.lineTo(i * CS + .5, TR * CS); ctx.stroke(); }
+        for (let i = 1; i < TR; i++) { ctx.beginPath(); ctx.moveTo(0, i * CS + .5); ctx.lineTo(TC * CS, i * CS + .5); ctx.stroke(); }
+        if (!board) return;
+        board.forEach((row, r) => row.forEach((v, c) => { if (v) drawCell(ctx, c * CS, r * CS, CS, v); }));
+        if (cur && (state === "playing" || state === "paused")) {
+          let gy = cur.y; while (!collide(cur.shape, cur.x, gy + 1)) gy++;
+          cur.shape.forEach((row, r) => row.forEach((v, c) => {
+            if (!v) return;
+            drawCell(ctx, (cur.x + c) * CS, (gy + r) * CS, CS, cur.style, true);
+          }));
+          cur.shape.forEach((row, r) => row.forEach((v, c) => {
+            if (!v) return;
+            drawCell(ctx, (cur.x + c) * CS, (cur.y + r) * CS, CS, { ...cur.style, icon: v === 2 ? cur.style.icon : null });
+          }));
+        }
+      }
+      function drawNext() {
+        nctx.clearRect(0, 0, 100, 80);
+        const s = 18, w = next.shape[0].length * s, h = next.shape.length * s;
+        const ox = (100 - w) / 2, oy = (80 - h) / 2;
+        next.shape.forEach((row, r) => row.forEach((v, c) => { if (v) drawCell(nctx, ox + c * s, oy + r * s, s, { ...next.style, icon: v === 2 ? next.style.icon : null }); }));
+      }
+      function loop(t) {
+        requestAnimationFrame(loop);
+        if (state === "playing") {
+          if (!visible) { state = "paused"; showPause(); }
+          else if (t - lastDrop > speed) { lastDrop = t; step(); ui(); draw(); }
+        }
+        if (state === "playing") draw();
+      }
+      function showPause() {
+        ovTitle.textContent = "⏸️ En pausa"; ovText.textContent = "Has salido de la furgoneta un momento. ¿Seguimos?";
+        startBtn.textContent = "▶️ Continuar"; overlay.classList.remove("hidden");
+      }
+      new IntersectionObserver((e) => { visible = e[0].isIntersecting; }, { threshold: .25 }).observe(cv);
+      addEventListener("keydown", (e) => {
+        if (state !== "playing" || !visible) return;
+        const k = e.key;
+        if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " "].includes(k)) e.preventDefault();
+        if (k === "ArrowLeft") move(-1); else if (k === "ArrowRight") move(1); else if (k === "ArrowUp") rotate();
+        else if (k === "ArrowDown") soft(); else if (k === " ") hard();
+      });
+      function holdRepeat(btn, fn, repeat) {
+        let t1, t2;
+        const stop = () => { clearTimeout(t1); clearInterval(t2); btn.classList.remove("held"); };
+        btn.addEventListener("pointerdown", (e) => { e.preventDefault(); fn(); btn.classList.add("held"); if (repeat) { t1 = setTimeout(() => { t2 = setInterval(fn, 90); }, 240); } });
+        ["pointerup", "pointercancel", "pointerleave"].forEach((ev) => btn.addEventListener(ev, stop));
+        btn.addEventListener("contextmenu", (e) => e.preventDefault());
+      }
+      holdRepeat(document.getElementById("bLeft"), () => move(-1), true);
+      holdRepeat(document.getElementById("bRight"), () => move(1), true);
+      holdRepeat(document.getElementById("bDown"), soft, true);
+      holdRepeat(document.getElementById("bRot"), rotate, false);
+      holdRepeat(document.getElementById("bDrop"), hard, false);
+      draw(); requestAnimationFrame(loop);
+    })();
+
+    /* =====================================================
+       4. Operación «Cachas»
+       ===================================================== */
+    // a = decisión sana, b = decisión que no lo es
+    const RONDAS = [
+      { k: "🍽️ Desayuno", q: "¿Con qué empiezas el día?", a: { e: "🥣", t: "Avena con frutos secos y café solo", m: "Energía que dura toda la mañana." }, b: { e: "🥐", t: "Cruasán y café con dos azucarillos", m: "Un subidón y, al rato, un bajón de los de caerse de sueño." } },
+      { k: "🏃 Ejercicio", q: "Después de comer…", a: { e: "🚶", t: "Paseo rápido de 45 minutos", m: "Un buen paseo después de comer es medicina." }, b: { e: "🛋️", t: "Siesta de dos horas con manta", m: "La siesta de 2 horas se convirtió en la de 4." } },
+      { k: "🍽️ Comida", q: "Es hora de comer…", a: { e: "🥗", t: "Ensalada con legumbres y pollo", m: "Fibra, proteína y cero remordimientos." }, b: { e: "🍔", t: "Hamburguesa con patatas", m: "Rica, sí. Pero el azúcar ha subido como la espuma." } },
+      { k: "🥤 Bebida", q: "Tienes sed…", a: { e: "💧", t: "Agua (con limón si te pones fino)", m: "Hidratación sin azúcar." }, b: { e: "🥤", t: "Refresco bien frío", m: "Doce cucharadas de azúcar camufladas en una lata." } },
+      { k: "🏃 Ejercicio", q: "Vives en un segundo piso…", a: { e: "🪜", t: "Subir por las escaleras", m: "Cada escalón suma. Los gemelos lo notan." }, b: { e: "🛗", t: "Coger el ascensor", m: "Es un segundo piso. Mejor no hablar de esto." } },
+      { k: "🍊 Merienda (¡con trampa!)", q: "Se te antoja algo…", a: { e: "🥜", t: "Un puñado de almendras", m: "Grasas buenas, proteína y saciedad." }, b: { e: "🧃", t: "Zumo «sin azúcares añadidos»", m: "Aunque sea natural, un zumo lleva mucho azúcar. Trampa." } },
+      { k: "🏃 Ejercicio", q: "Tienes la tarde libre…", a: { e: "🏋️", t: "Sesión de pesas en el gimnasio", m: "¡Se nota! Los bíceps empiezan a hablar." }, b: { e: "📺", t: "Maratón de series", m: "Cuatro temporadas y cero pasos." } },
+      { k: "🍽️ Cena", q: "Para cenar…", a: { e: "🐟", t: "Pescado a la plancha con verduras", m: "Ligera y completa, sin pesadez nocturna." }, b: { e: "🍕", t: "Pizza familiar (entera)", m: "Eso era para cuatro. Eras tú solo." } },
+      { k: "🍰 Postre", q: "Hay pastel de la inauguración…", a: { e: "🍎", t: "Una manzana", m: "Crujiente y sin culpa." }, b: { e: "🍰", t: "Un trozo de pastel (y otro)", m: "Los pasteles de inauguración son una trampa política." } },
+      { k: "🏃 Ejercicio", q: "Tienes que ir a por el pan…", a: { e: "🚴", t: "Ir en bici (por el camino largo)", m: "Una buena pedaleada de camino al horno." }, b: { e: "🚗", t: "Ir en coche, a 200 m", m: "Aparcar costó más que ir a pie." } },
+      { k: "🍊 Merienda (¡con trampa!)", q: "Buscas un tentempié sano…", a: { e: "🍊", t: "Una naranja entera", m: "Con su fibra, que ya viene de serie." }, b: { e: "🍫", t: "Barrita «fitness» con sirope", m: "«Fitness» en el envoltorio, azúcar en el interior." } },
+      { k: "🏃 Ejercicio", q: "Suena el despertador…", a: { e: "🧘", t: "Estiramientos y plancha", m: "Ahora sí: ¡columna de acero!" }, b: { e: "😴", t: "«Mañana empiezo»", m: "El mañana más vago de la historia." } },
+      { k: "🎩 Cena de gala", q: "Cena con políticos (hoy no te libras)…", a: { e: "🐟", t: "Solo pescado y ensalada, y paseo después", m: "Sobreviviste a la cena, al postre y al discurso." }, b: { e: "🍷", t: "Pan, vino, postre… y repetir", m: "Hubo tres brindis y un discurso de cuarenta minutos." } },
+    ];
+    (() => {
+      const N = 10, G0 = 150, GMIN = 72;
+      const gq = document.getElementById("gymQ"), dots = document.getElementById("weekDots");
+      const glucTxt = document.getElementById("glucTxt"), glucPin = document.getElementById("glucPin");
+      const muscTxt = document.getElementById("muscTxt"), muscBar = document.getElementById("muscBar");
+      const pill = document.getElementById("pill"), doc = document.getElementById("doc"), cap = document.getElementById("figCaption");
+      const fx1 = document.getElementById("fx1"), fx2 = document.getElementById("fx2");
+      const svgNS = "http://www.w3.org/2000/svg";
+      const torso = document.getElementById("torso"), pecs = document.getElementById("pecs"), arms = document.getElementById("arms"), legs = document.getElementById("legs");
+      let g, m, shown = .1, rounds, idx, mistakes, busy;
+
+      // --- monigote: se dibuja según la musculatura m (0..1) ---
+      const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+      const mix = (a, b, t) => { const A = hex(a), B = hex(b); return "#" + A.map((v, i) => Math.round(lerp(v, B[i], t)).toString(16).padStart(2, "0")).join(""); };
+      const mk = (tag, attrs) => { const e = document.createElementNS(svgNS, tag); Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v)); return e; };
+      function drawFigure(t) {
+        const sw = lerp(52, 98, t), sx0 = 110 - sw / 2, sx1 = 110 + sw / 2;
+        const ww = lerp(88, 42, t), ctrl = lerp(56, sw / 2 + 4, t);
+        const shirt = mix("#8a9bb0", "#e8643a", clamp(t * 1.4, 0, 1));
+        torso.setAttribute("fill", shirt);
+        torso.setAttribute("d", `M${sx0} 112 Q${110 - ctrl} 160 ${110 - ww / 2} 190 L${110 + ww / 2} 190 Q${110 + ctrl} 160 ${sx1} 112 Z`);
+        pecs.setAttribute("d", t > .35 ? `M${110 - sw * .3} 132 Q110 ${142 + t * 6} ${110 + sw * .3} 132 M110 122 V150` : "");
+        pecs.style.opacity = clamp((t - .3) * 2, 0, 1);
+        const skin = "#e0ac86", sleeve = mix(shirt, skin, clamp((t - .25) / .25, 0, 1)), aw = lerp(11, 25, t);
+        arms.innerHTML = "";
+        [-1, 1].forEach((d) => {
+          const S = { x: d < 0 ? sx0 + 6 : sx1 - 6, y: 124 };
+          const flex = clamp((t - .35) / .5, 0, 1);
+          const E = { x: lerp(S.x + d * 6, S.x + d * (26 + t * 12), flex), y: lerp(168, 150, flex) };
+          const H = { x: lerp(S.x + d * 9, S.x + d * (30 + t * 10), flex), y: lerp(208, 112 - t * 8, flex) };
+          arms.appendChild(mk("polyline", { points: `${S.x},${S.y} ${E.x},${E.y} ${H.x},${H.y}`, fill: "none", stroke: sleeve, "stroke-width": aw, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+          if (t > .45) arms.appendChild(mk("circle", { cx: (S.x + E.x) / 2 + d * 3, cy: (S.y + E.y) / 2 + 3, r: lerp(0, 17, (t - .45) / .55), fill: skin, stroke: "rgba(0,0,0,.15)" }));
+          arms.appendChild(mk("circle", { cx: H.x, cy: H.y, r: aw * .55, fill: skin }));
+        });
+        legs.innerHTML = "";
+        const lw = lerp(17, 28, t);
+        [-1, 1].forEach((d) => {
+          legs.appendChild(mk("line", { x1: 110 + d * 16, y1: 188, x2: 110 + d * lerp(20, 26, t), y2: 258, stroke: "#34425b", "stroke-width": lw, "stroke-linecap": "round" }));
+          legs.appendChild(mk("ellipse", { cx: 110 + d * lerp(22, 30, t), cy: 266, rx: 17, ry: 7, fill: "#2b2018" }));
+        });
+      }
+      const ease = () => { shown += (m - shown) * .12; drawFigure(shown); if (Math.abs(m - shown) > .003) requestAnimationFrame(ease); };
+      const figCaption = (t) => t < .2 ? "Punto de partida" : t < .4 ? "Se empieza a notar…" : t < .6 ? "¡Ya hay hombros!" : t < .8 ? "Pectorales a la vista" : "¡Cachas total!";
+
+      function paint(good) {
+        glucTxt.textContent = Math.round(g) + " mg/dl";
+        glucPin.style.left = clamp(((g - 70) / 90) * 100, 2, 98) + "%";
+        muscTxt.textContent = Math.round(m * 100) + " %"; muscBar.style.width = m * 100 + "%";
+        cap.textContent = figCaption(m);
+        requestAnimationFrame(ease);
+        if (good !== undefined) { const f = good ? fx2 : fx1; f.classList.remove("show"); void f.offsetWidth; f.classList.add("show"); }
+        if (g <= 100) { pill.textContent = "💊 Receta en revisión…"; }
+      }
+      function intro() {
+        g = G0; m = .1; shown = .1; idx = 0; mistakes = 0;
+        dots.innerHTML = "<i></i>".repeat(N);
+        pill.textContent = "💊 Receta: de por vida"; pill.classList.remove("cured"); doc.textContent = "«Habrá que medicarle…»";
+        paint();
+        gq.className = "gym-q center";
+        gq.innerHTML = `<div class="big">🏋️</div><h3>Diez semanas para cambiarlo todo</h3><p>Cada semana tomas una decisión: dos opciones, una sana y otra… tentadora (a veces disfrazada). Si el azúcar baja de 100 y los músculos suben, el médico te quitará la receta.</p><div><button class="btn olive" id="gymStart">💪 ¡A por ello!</button></div>`;
+        document.getElementById("gymStart").addEventListener("click", start);
+      }
+      function start() {
+        g = G0; m = .1; idx = 0; mistakes = 0; rounds = shuffle(RONDAS).slice(0, N);
+        dots.innerHTML = "<i></i>".repeat(N);
+        pill.textContent = "💊 Receta: de por vida"; pill.classList.remove("cured"); doc.textContent = "«Habrá que medicarle…»";
+        paint(); ask();
+      }
+      function ask() {
+        const r = rounds[idx]; busy = false;
+        gq.className = "gym-q";
+        gq.innerHTML = `<span class="kind">Semana ${idx + 1} de ${N} · ${r.k}</span><h3>${r.q}</h3><div class="gym-opts"></div><div class="gym-msg"></div>`;
+        const box = gq.querySelector(".gym-opts");
+        shuffle([{ ...r.a, good: true }, { ...r.b, good: false }]).forEach((o) => {
+          const b = document.createElement("button");
+          b.className = "gopt"; b.innerHTML = `<span class="e">${o.e}</span><span>${o.t}</span>`;
+          b.addEventListener("click", () => choose(o, b));
+          box.appendChild(b);
+        });
+      }
+      function choose(o, btn) {
+        if (busy) return; busy = true;
+        gq.querySelectorAll(".gopt").forEach((x) => (x.disabled = true));
+        btn.classList.add(o.good ? "good" : "bad");
+        if (o.good) { g = Math.max(GMIN, g - 9); m = clamp(m + .1, 0, 1); }
+        else { g += 8; m = clamp(m - .04, 0, 1); mistakes++; }
+        dots.children[idx].classList.add(o.good ? "ok" : "bad");
+        gq.querySelector(".gym-msg").textContent = (o.good ? "✅ " : "⚠️ ") + o.m;
+        doc.textContent = o.good ? pick(["«Muy bien, siga así.»", "«Esos números mejoran…»", "«¡Qué buen aspecto!»"]) : pick(["«Mmm… eso no.»", "«No me haga esa cara.»", "«Vamos a repasar…»"]);
+        paint(o.good); idx++;
+        setTimeout(() => { if (idx >= N) finish(); else ask(); }, 1900);
+      }
+      function finish() {
+        const ok = g <= 100 && m >= .5;
+        gq.className = "gym-q center";
+        if (ok) {
+          pill.textContent = "💊 Receta anulada ✅"; pill.classList.add("cured"); doc.textContent = "«¡Tire la receta!»";
+          gq.innerHTML = `<div class="big">🏅</div><h3>${mistakes === 0 ? "¡Perfecto!" : "¡Alta médica!"}</h3><p>${mistakes === 0 ? "Diez semanas sin un solo fallo." : `Solo ${mistakes} ${mistakes === 1 ? "tropiezo" : "tropiezos"} en diez semanas.`} El azúcar baja a ${Math.round(g)} mg/dl, los bíceps están a tope y el médico quita la receta: dieta y ejercicio mandan. ¡Ejemplo para toda la familia!</p><div><button class="btn olive" id="gymAgain">🔁 Otra vez</button></div>`;
+          confetti(260); toast("💪 ¡Receta anulada!");
+        } else {
+          gq.innerHTML = `<div class="big">🩺</div><h3>Casi… el médico pide otra revisión</h3><p>Azúcar en ${Math.round(g)} mg/dl con ${mistakes} tropiezos. Otra ronda de dieta y ejercicio y lo conseguimos. ¡Tú puedes!</p><div><button class="btn olive" id="gymAgain">🔁 Otra vez</button></div>`;
+        }
+        const b = document.getElementById("gymAgain");
+        lockButton(b, "🔁 Otra vez");
+        b.addEventListener("click", () => { if (!b.disabled) start(); });
+      }
+      drawFigure(.1);
+      intro();
+    })();
+
+    /* =====================================================
+       5. Simulacro de abuelos
+       ===================================================== */
+    (() => {
+      const TIME = 45;
+      const NEEDS = [
+        { k: "hambre", e: "🍼", n: "Biberón", best: "gma" },
+        { k: "panal", e: "🧷", n: "Pañal", best: "gma" },
+        { k: "juego", e: "🪙", n: "Jugar", best: "gpa" },
+        { k: "sueno", e: "😴", n: "Nana", best: "gpa" },
+      ];
+      const SAY = {
+        hambre: { gpa: "Josep Maria mide la temperatura del biberón… con un calibre.", gma: "Juana Mari le da el biberón sin derramar ni una gota." },
+        panal: { gpa: "Josep Maria cambia el pañal… tras consultar el manual como si fuera un yacimiento.", gma: "Juana Mari lo cambia en 8 segundos. Récord." },
+        juego: { gpa: "Josep Maria le enseña un denario: «¡Mira, 2.000 años!»", gma: "Juana Mari le hace cosquillas y le canta." },
+        sueno: { gpa: "Josep Maria le cuenta cómo se excava por capas. Diana bosteza.", gma: "Juana Mari le canta una nana, pero Diana quería la de las capas." },
+      };
+      const wrap = document.getElementById("needs"), nursery = document.getElementById("nursery"), diana = document.getElementById("diana");
+      const babyFace = document.getElementById("babyFace"), moodEl = document.getElementById("mood");
+      const happyTxt = document.getElementById("happyTxt"), happyBar = document.getElementById("happyBar"), timeTxt = document.getElementById("babyTime"), msg = document.getElementById("babyMsg");
+      const overlay = document.getElementById("babyOverlay"), ovTitle = document.getElementById("babyOvTitle"), ovText = document.getElementById("babyOvText"), startBtn = document.getElementById("babyStart");
+      const cgs = { gpa: { el: document.getElementById("gpa"), bub: document.getElementById("gpaBubble"), until: 0, bt: 0 }, gma: { el: document.getElementById("gma"), bub: document.getElementById("gmaBubble"), until: 0, bt: 0 } };
+      const COOL = 1400;
+      const btns = {}, lv = {};
+      NEEDS.forEach((n, i) => {
+        const b = document.createElement("button");
+        b.className = "need"; b.innerHTML = `<span class="e">${n.e}</span>${n.n}<div class="lvl"><i></i></div>`;
+        b.setAttribute("aria-label", n.n);
+        b.addEventListener("pointerdown", (e) => { e.preventDefault(); act(n); });
+        wrap.appendChild(b); btns[n.k] = b;
+      });
+      let state = "idle", vals = {}, rates = {}, happy = 70, left = TIME, last = 0, visible = true;
+      function act(n) {
+        if (state !== "playing") return;
+        const now = performance.now();
+        const free = ["gpa", "gma"].filter((w) => cgs[w].until <= now);
+        if (!free.length) { msg.textContent = "¡Los dos abuelos están ocupados! Un momento…"; return; }
+        const who = free.includes(n.best) ? n.best : free[0];
+        const boost = who === n.best ? 60 : 38;
+        vals[n.k] = Math.min(100, vals[n.k] + boost);
+        const cg = cgs[who]; cg.until = now + COOL; cg.el.classList.add("busy");
+        cg.bub.textContent = SAY[n.k][who]; cg.bub.classList.add("show");
+        clearTimeout(cg.bt); cg.bt = setTimeout(() => cg.bub.classList.remove("show"), 2100);
+        setTimeout(() => cg.el.classList.remove("busy"), COOL - 200);
+        msg.textContent = who === n.best ? "¡Se nota la experiencia!" : "Mmm… no era lo suyo, pero ayuda.";
+      }
+      function begin() {
+        NEEDS.forEach((n) => { vals[n.k] = 78; rates[n.k] = rnd(5.5, 8.5); });
+        happy = 70; left = TIME; last = performance.now(); state = "playing";
+        diana.classList.remove("sleep", "cry"); babyFace.textContent = "👶";
+        overlay.classList.add("hidden"); msg.textContent = "¡Atiende lo que se vacíe antes que lo demás!";
+      }
+      startBtn.addEventListener("click", () => {
+        if (startBtn.disabled) return;
+        if (state === "paused") { state = "playing"; last = performance.now(); overlay.classList.add("hidden"); } else begin();
+      });
+      addEventListener("keydown", (e) => {
+        if (state !== "playing" || !visible) return;
+        const i = "1234".indexOf(e.key); if (i >= 0) act(NEEDS[i]);
+      });
+      function finish(won) {
+        state = won ? "won" : "lost";
+        diana.classList.remove("cry"); diana.classList.toggle("sleep", won);
+        babyFace.textContent = won ? "😴" : "😭"; moodEl.textContent = won ? "💤" : "😭";
+        if (won) {
+          confetti(240); toast("👶 ¡Diana duerme, abuelos aprobados!");
+          ovTitle.textContent = "😴 ¡Diana se ha dormido!";
+          ovText.textContent = "Después de haber tenido 3 hijos, ya se sabía: abuelos aprobados con sobresaliente. Diana duerme abrazada a una pequeña ánfora de peluche. 🏺";
+        } else {
+          ovTitle.textContent = "😭 ¡Diana llora a pleno pulmón!";
+          ovText.textContent = "Después de haber tenido 3 hijos, ¿se os ha olvidado todo? Los vecinos preguntan si hay obras (de pico y pala). ¡Otro intento!";
+        }
+        overlay.classList.remove("hidden"); lockButton(startBtn, won ? "🔁 Otra vez" : "🔁 Reintentar");
+      }
+      function loop(t) {
+        requestAnimationFrame(loop);
+        if (state !== "playing") return;
+        if (!visible) { state = "paused"; ovTitle.textContent = "⏸️ En pausa"; ovText.textContent = "Diana espera (dormida, por ahora). ¿Seguimos?"; startBtn.textContent = "▶️ Continuar"; overlay.classList.remove("hidden"); return; }
+        const dt = Math.min(.1, (t - last) / 1000); last = t;
+        left -= dt;
+        const ramp = 1 + (TIME - left) / 70;
+        let low = 0;
+        NEEDS.forEach((n) => {
+          vals[n.k] = Math.max(0, vals[n.k] - rates[n.k] * ramp * dt);
+          const v = vals[n.k], isLow = v < 25; if (isLow) low++;
+          btns[n.k].classList.toggle("low", isLow);
+          const i = btns[n.k].querySelector(".lvl i"); i.style.width = v + "%";
+        });
+        happy = clamp(happy + (low === 0 ? 5 : -6 * low) * dt, 0, 100);
+        happyTxt.textContent = Math.round(happy) + " %"; happyBar.style.width = happy + "%";
+        timeTxt.textContent = Math.max(0, Math.ceil(left)) + " s";
+        diana.classList.toggle("cry", low > 0);
+        babyFace.textContent = low > 0 ? "😢" : "👶";
+        moodEl.textContent = happy > 66 ? "😊" : happy > 33 ? "😐" : "😢";
+        ["gpa", "gma"].forEach((w) => { const p = clamp((cgs[w].until - t) / COOL, 0, 1); cgs[w].el.querySelector(".cool i").style.width = p * 100 + "%"; });
+        if (happy <= 0) finish(false); else if (left <= 0) finish(true);
+      }
+      new IntersectionObserver((e) => { visible = e[0].isIntersecting; }, { threshold: .25 }).observe(nursery);
+      requestAnimationFrame(loop);
+    })();
+
+    /* =====================================================
+       Final
+       ===================================================== */
+    (() => {
+      const tablet = document.getElementById("tablet"), tb = document.getElementById("translateBtn");
+      tb.addEventListener("click", () => {
+        const t = tablet.classList.toggle("translated");
+        tb.textContent = t ? "📜 Ver el latín" : "📜 Traducir del latín";
+        if (t) confettiAt(tablet, 60);
+      });
+      document.getElementById("blow").addEventListener("click", (e) => {
+        confetti(300); confettiAt(e.currentTarget, 120);
+        toast("🎂 ¡Que cumplas muchos más, Josep Maria! Moltes felicitats!");
+      });
+    })();
+
+    /* ---------- Aparición al hacer scroll ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    document.getElementById("start").addEventListener("click", (e) => confettiAt(e.currentTarget, 50));
+  </script>
+</body>
+</html>
