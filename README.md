@@ -11,6 +11,7 @@ Pequeñas webs hechas con cariño, una carpeta por persona:
 - `/marc/` — cumpleaños de Marc (obra de estructura metálica, viaje por mundos de ciencia ficción y WOD de CrossFit). La foto va en `marc/img/marc.jpg`.
 - `/wendolaine/` — portfolio profesional de Wendolaine Santiago Cruz (inmunología), en inglés, castellano y catalán. Estilo inspirado en scienceforchange.eu.
 - `/marina/` — cumpleaños de Marina (Ofrenda de Flores del Pilar, montaña rusa y persecución a Guille).
-- `404.html` — redirige `/Julia`, `/Ángela`, `/Irene`, `/Sonia`, `/Marina`, `/Berta`, `/Marc`, `/Brage`, `/Wendolaine`, etc. a su carpeta en minúsculas.
+- `/josepmaria/` — cumpleaños de Josep Maria Solias Aris (excavación arqueológica, operación jubilación, tetris del maletero de Kuanum, dieta y ejercicio con su cara en el monigote, y simulacro de abuelos con Diana). Fotos en `josepmaria/img/` (`josepmaria.jpg` para la portada y `cara.jpg` para el monigote).
+- `404.html` — redirige `/Julia`, `/Ángela`, `/Irene`, `/Sonia`, `/Marina`, `/Berta`, `/Marc`, `/Brage`, `/Wendolaine`, `/JosepMaria`, etc. a su carpeta en minúsculas.
 
 Cada web es un `index.html` autónomo con sus fotos en `img/`. La de Sonia incluye en `sonia/lib/` d3-geo, d3-array, topojson-client y world-atlas (licencia ISC; datos de Natural Earth, dominio público).
